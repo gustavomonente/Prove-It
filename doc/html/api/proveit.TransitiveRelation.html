@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TransitiveRelation &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TransitivityException" href="proveit.TransitivityException.html" />
+    <link rel="prev" title="TransRelUpdater" href="proveit.TransRelUpdater.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="transitiverelation">
+<h1>TransitiveRelation<a class="headerlink" href="#transitiverelation" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.TransitiveRelation">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.</code><code class="sig-name descname">TransitiveRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operator</span></em>, <em class="sig-param"><span class="n">lhs</span></em>, <em class="sig-param"><span class="n">rhs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">proveit.relation.relation.Relation</span></code></p>
+<p>Base class for generic transitive relations.  Examples
+are &lt;, &lt;=, &gt;, &gt;= as well as subset, subseteq, superset,
+and superseteq relations.  proveit.logic.Equals is a special
+TransitiveRelation which is also symmetric (x=y means that y=x).</p>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.EquivalenceClass" title="proveit.TransitiveRelation.EquivalenceClass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EquivalenceClass</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.StrongRelationClass" title="proveit.TransitiveRelation.StrongRelationClass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StrongRelationClass</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.WeakRelationClass" title="proveit.TransitiveRelation.WeakRelationClass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeakRelationClass</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.apply_transitivities" title="proveit.TransitiveRelation.apply_transitivities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_transitivities</span></code></a>(chain[, assumptions])</p></td>
+<td><p>Apply transitvity rules on a list of relations in the given chain to proof the relation over the chain end points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.apply_transitivity" title="proveit.TransitiveRelation.apply_transitivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_transitivity</span></code></a>(self, other[, assumptions])</p></td>
+<td><p>Apply transitivity to derive a new relation from  ‘self’ and ‘other’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.conclude" title="proveit.TransitiveRelation.conclude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude</span></code></a>(self, assumptions)</p></td>
+<td><p>Try to conclude the TransitivityRelation using other TransitivityRelations or Equals that are known to be true via transitivity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.conclude_via_transitivity" title="proveit.TransitiveRelation.conclude_via_transitivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_transitivity</span></code></a>(self[, assumptions])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.insertion_point" title="proveit.TransitiveRelation.insertion_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insertion_point</span></code></a>(sorted_items, item_to_insert)</p></td>
+<td><p>Return the position to insert the “item to insert” into the sorted items to maintain the sorted order (according to the TransitivityRelation class cls).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.known_relations_from_left" title="proveit.TransitiveRelation.known_relations_from_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">known_relations_from_left</span></code></a>(expr, assumptions_set)</p></td>
+<td><p>Yield (Judgment, right-hand-side) pairs for this transitive relationship (or equality) that involve the given expression on the left side and are known to be true under the given assumptions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.known_relations_from_right" title="proveit.TransitiveRelation.known_relations_from_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">known_relations_from_right</span></code></a>(expr, assumptions_set)</p></td>
+<td><p>Yield (Judgment, left-hand-side) pairs for this transitivie relationship (or equality) that involve the given expression on the right side and are known to be true under the given assumptions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.mergesort" title="proveit.TransitiveRelation.mergesort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mergesort</span></code></a>(item_iterators[, assumptions, …])</p></td>
+<td><p>Return the proven Sequence, a judgment for an expression of type cls.SequenceClass(), representing the sorted sequence according to the cls.mergesorted_items method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.mergesorted_items" title="proveit.TransitiveRelation.mergesorted_items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mergesorted_items</span></code></a>(item_iterators[, …])</p></td>
+<td><p>Given a list of Expression item iterators, with each generator yielding items in sorted order, yield every item (from all the generators) in sorted order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.side_effects" title="proveit.TransitiveRelation.side_effects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">side_effects</span></code></a>(self, judgment)</p></td>
+<td><p>Automatically derive the reversed form of transitive relations as side effects (e.g., y &gt; x from x &lt; y).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.sort" title="proveit.TransitiveRelation.sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort</span></code></a>(items[, reorder, assumptions])</p></td>
+<td><p>Return the proven total ordering (conjunction of relations presented in the total ordering style) representing the sorted  sequence according to the cls.sorted_items method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.TransitiveRelation.sorted_items" title="proveit.TransitiveRelation.sorted_items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_items</span></code></a>(items[, reorder, assumptions])</p></td>
+<td><p>Return the given items in sorted order with respect to this TransitivityRelation class (cls) under the given assumptions using known transitive relations.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.EquivalenceClass">
+<em class="property">static </em><code class="sig-name descname">EquivalenceClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.EquivalenceClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.EquivalenceClass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.StrongRelationClass">
+<em class="property">static </em><code class="sig-name descname">StrongRelationClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.StrongRelationClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.StrongRelationClass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.WeakRelationClass">
+<em class="property">static </em><code class="sig-name descname">WeakRelationClass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.WeakRelationClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.WeakRelationClass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.apply_transitivities">
+<em class="property">static </em><code class="sig-name descname">apply_transitivities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chain</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.apply_transitivities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.apply_transitivities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply transitvity rules on a list of relations in the given chain
+to proof the relation over the chain end points.
+Each element of the chain must be a Judgment object that represents
+a proven relation for which transitivity rules may be applied via
+an ‘apply_transitivity’ method (such as a Judgment for a proven
+Equals statement).  The chain must “connect” in the sense that any
+two neighbors in the chain can be joined vie apply_transitivity.
+The transitivity rule will be applied left to right.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.apply_transitivity">
+<code class="sig-name descname">apply_transitivity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">other</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.apply_transitivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.apply_transitivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply transitivity to derive a new relation from 
+‘self’ and ‘other’.
+For example, from self:a&lt;b, other:b=c, derive a&lt;c.
+This must be implemented for the different types of transitive
+relations.  This default version handles the case where
+‘other’ is an Equals expression.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.conclude">
+<code class="sig-name descname">conclude</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.conclude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.conclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to conclude the TransitivityRelation using other
+TransitivityRelations or Equals that are known to be true via transitivity.
+For example, if a&lt;b, b=c, and c&lt;=d are known
+truths (under the given assumptions), we can conclude that
+a&lt;d (under these assumptions).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.conclude_via_transitivity">
+<code class="sig-name descname">conclude_via_transitivity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.conclude_via_transitivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.conclude_via_transitivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.insertion_point">
+<em class="property">classmethod </em><code class="sig-name descname">insertion_point</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sorted_items</span></em>, <em class="sig-param"><span class="n">item_to_insert</span></em>, <em class="sig-param"><span class="n">equiv_group_pos</span><span class="o">=</span><span class="default_value">'any'</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">requirements</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.insertion_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.insertion_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position to insert the “item to insert” into the
+sorted items to maintain the sorted order (according to
+the TransitivityRelation class cls).  The sorted_items should
+be provably sorted, with relations between consecutive items
+that are Judgments.</p>
+<p>If equiv_group_pos is ‘first’, the insertion point will be one
+that would place he “item to insert” prior to any equivalent
+items; if equiv_group_pos is ‘last’, the insertion point will be
+one that would place the “item to insert” after any equivalent
+items.  If it is ‘first&amp;last’, both insertion points are
+returned as a tuple pair (first, last).
+The default of equiv_group_pos=’any’ will result in
+an arbitrary position relative to equivalent items.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.known_relations_from_left">
+<em class="property">classmethod </em><code class="sig-name descname">known_relations_from_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">assumptions_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.known_relations_from_left"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.known_relations_from_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield (Judgment, right-hand-side) pairs for this
+transitive relationship (or equality) that involve the given expression on
+the left side and are known to be true under the given assumptions.
+Equality relations will always be yielded first.
+Strong relations will be yielded next.
+Weak relations will only be yielded if this is a weak
+relation class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.known_relations_from_right">
+<em class="property">classmethod </em><code class="sig-name descname">known_relations_from_right</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">assumptions_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.known_relations_from_right"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.known_relations_from_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield (Judgment, left-hand-side) pairs for this
+transitivie relationship (or equality) that involve the given expression on
+the right side and are known to be true under the given assumptions.
+Equality relations will always be yielded first.
+Strong relations will be yielded next.
+Weak relations will only be yielded if this is a weak
+relation class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.mergesort">
+<em class="property">classmethod </em><code class="sig-name descname">mergesort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item_iterators</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip_exact_reps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">skip_equiv_reps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">requirements</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.mergesort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.mergesort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the proven Sequence, a judgment for an expression
+of type cls.SequenceClass(), representing the sorted sequence
+according to the cls.mergesorted_items method.
+Weak relations (e.g., &lt;=) are only considered when calling
+this method on a weak relation class (otherwise, only
+equality and strong relations are used in the sorting).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.mergesorted_items">
+<em class="property">classmethod </em><code class="sig-name descname">mergesorted_items</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item_iterators</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip_exact_reps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">skip_equiv_reps</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">requirements</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.mergesorted_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.mergesorted_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of Expression item iterators, with each generator
+yielding items in sorted order, yield every item (from all the
+generators) in sorted order.  If skip_exact_reps is True,
+only yield the first of an ‘item’ that is repeated
+exactly (equal Expressions).  If skip_equiv_reps is True,
+only yield the first of an ‘item’ that is repeated via
+a known equivalence.  Passes back requirements (if provided)
+that are the specific merger relations.
+Weak relations (e.g., &lt;=) are only considered when calling
+this method on a weak relation class (otherwise, only
+equality and strong relations are used in the sorting).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.side_effects">
+<code class="sig-name descname">side_effects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">judgment</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.side_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.side_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically derive the reversed form of transitive
+relations as side effects (e.g., y &gt; x from x &lt; y).
+Also, store known left sides and known right sides
+in class member dictionaries: known_left_sides, known_right_sides
+whilc will enable transitivity searches.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.sort">
+<em class="property">classmethod </em><code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">reorder</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the proven total ordering (conjunction of relations
+presented in the total ordering style) representing the sorted 
+sequence according to the cls.sorted_items method.
+Weak relations (e.g., &lt;=) are only considered when calling
+this method on a weak relation class (otherwise, only
+equality and strong relations are used in the sorting).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.TransitiveRelation.sorted_items">
+<em class="property">classmethod </em><code class="sig-name descname">sorted_items</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">reorder</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/relation/transitivity.html#TransitiveRelation.sorted_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.TransitiveRelation.sorted_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the given items in sorted order with respect to this
+TransitivityRelation class (cls) under the given assumptions
+using known transitive relations.
+If reorder is False, raise a TransitivityException if the
+items are not in sorted order as provided.
+Weak relations (e.g., &lt;=) are only considered when calling
+this method on a weak relation class (otherwise, only
+equality and strong relations are used in the sorting).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.TransRelUpdater.html" title="previous chapter">TransRelUpdater</a></li>
+      <li>Next: <a href="proveit.TransitivityException.html" title="next chapter">TransitivityException</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.TransitiveRelation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

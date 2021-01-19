@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Or &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PowerSet" href="proveit.logic.PowerSet.html" />
+    <link rel="prev" title="NotSubsetEq" href="proveit.logic.NotSubsetEq.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="or">
+<h1>Or<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.logic.Or">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.logic.</code><code class="sig-name descname">Or</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="proveit.Operation.html#proveit.Operation" title="proveit._core_.expression.operation.operation.Operation"><code class="docutils literal notranslate"><span class="pre">proveit.Operation</span></code></a></p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.trivial_disjunctions" title="proveit.logic.Or.trivial_disjunctions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trivial_disjunctions</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.affirm_via_contradiction" title="proveit.logic.Or.affirm_via_contradiction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">affirm_via_contradiction</span></code></a>(self, conclusion[, …])</p></td>
+<td><p>From (A or B), derive the conclusion provided that the negated conclusion implies not(A) and not(B), and the conclusion is a Boolean.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.associate" title="proveit.logic.Or.associate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">associate</span></code></a>(self, start_idx, length[, assumptions])</p></td>
+<td><p>From self, derive and return a form in which operands in the range [start_idx, start_idx+length) are grouped together.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.associated" title="proveit.logic.Or.associated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">associated</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘association’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.association" title="proveit.logic.Or.association"><code class="xref py py-obj docutils literal notranslate"><span class="pre">association</span></code></a>(self, start_idx, length[, …])</p></td>
+<td><p>Given Boolean operands, deduce that this expression is equal to a form in which operands in the range [start_idx, start_idx+length) are grouped together.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.auto_reduction" title="proveit.logic.Or.auto_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">auto_reduction</span></code></a>(self[, assumptions])</p></td>
+<td><p>Automatically reduce “Or() = FALSE” and “Or(a) = a”.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.commutation" title="proveit.logic.Or.commutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commutation</span></code></a>(self[, init_idx, final_idx, …])</p></td>
+<td><p>Given Boolean operands, deduce that this expression is equal to a form in which the operand at index init_idx has been moved to final_idx.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.commute" title="proveit.logic.Or.commute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commute</span></code></a>(self[, init_idx, final_idx, assumptions])</p></td>
+<td><p>From self, derive and return a form in which the operand at index init_idx has been moved to final_idx.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.commuted" title="proveit.logic.Or.commuted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commuted</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘commutation’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude" title="proveit.logic.Or.conclude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude</span></code></a>(self[, assumptions])</p></td>
+<td><p>Try to automatically conclude this disjunction.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_negation" title="proveit.logic.Or.conclude_negation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_negation</span></code></a>(self, assumptions)</p></td>
+<td><p>Attempt to conclude the negation of this expression under the given assumptions, using automation specific to the type of expression being negated.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_both" title="proveit.logic.Or.conclude_via_both"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_both</span></code></a>(self, assumptions)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_demorgans" title="proveit.logic.Or.conclude_via_demorgans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_demorgans</span></code></a>(self[, assumptions])</p></td>
+<td><p># created by JML 6/28/19 From A and B and C conclude Not(Not(A) or Not(B) or Not(C))</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_example" title="proveit.logic.Or.conclude_via_example"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_example</span></code></a>(self, true_operand[, …])</p></td>
+<td><p>From one true operand, conclude that this ‘or’ expression is true.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_left" title="proveit.logic.Or.conclude_via_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_left</span></code></a>(self, assumptions)</p></td>
+<td><p>From A being (or assumed) True, conclude that (A V B) is True.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_only_left" title="proveit.logic.Or.conclude_via_only_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_only_left</span></code></a>(self, assumptions)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_only_right" title="proveit.logic.Or.conclude_via_only_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_only_right</span></code></a>(self, assumptions)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_permutation" title="proveit.logic.Or.conclude_via_permutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_permutation</span></code></a>(self, …[, …])</p></td>
+<td><p>From some true (or assumed true) but permutated version of this ‘or’ expression, conclude that this ‘or’ expression is true. For example, let this_or = A V B V C V D and let perm_of_this_or = S <a href="#id1"><span class="problematic" id="id2">|</span></a>- B V A V C V D. From perm_of_this_or, conclude this_or, using the following: this_or.conclude_via_permuation(perm_of_this_or, assumptions = S), which will return S <a href="#id3"><span class="problematic" id="id4">|</span></a>– A V B V C V D.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.conclude_via_some" title="proveit.logic.Or.conclude_via_some"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conclude_via_some</span></code></a>(self, subset_disjunction)</p></td>
+<td><p>From some true (or assumed true) disjunctive subset of the operands, conclude that this ‘or’ expression is true. This is similar to the conclude_via_example method above. For example, we might have a disjunction such as:     example_disj = A V B V C V D, where we know (or assume) that B V D is true. We could call     example_disj.conclude_via_some(B V D, assumptions=[B V D]), which will return     {B V D} <a href="#id5"><span class="problematic" id="id6">|</span></a>– A V B V C V D.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_in_bool" title="proveit.logic.Or.deduce_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_in_bool</span></code></a>(self[, assumptions])</p></td>
+<td><p>Attempt to deduce, then return, that this ‘or’ expression is in the set of BOOLEANS.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_left_in_bool" title="proveit.logic.Or.deduce_left_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_left_in_bool</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce A in Boolean from (A or B) in Boolean.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_not_left_if_neither" title="proveit.logic.Or.deduce_not_left_if_neither"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_not_left_if_neither</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce not(A) assuming not(A or B) where self is (A or B).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_not_right_if_neither" title="proveit.logic.Or.deduce_not_right_if_neither"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_not_right_if_neither</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce not(B) assuming not(A or B) where self is (A or B).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_part_in_bool" title="proveit.logic.Or.deduce_part_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_part_in_bool</span></code></a>(self, index_or_expr[, …])</p></td>
+<td><p>Deduce X in Boolean from (A or B or .</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_parts_in_bool" title="proveit.logic.Or.deduce_parts_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_parts_in_bool</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce A in Boolean, B in Boolean, …, Z in Boolean from (A or B or .</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.deduce_right_in_bool" title="proveit.logic.Or.deduce_right_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_right_in_bool</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce B in Boolean from (A or B) in Boolean.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.deny_via_contradiction" title="proveit.logic.Or.deny_via_contradiction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deny_via_contradiction</span></code></a>(self, conclusion[, …])</p></td>
+<td><p>From (A or B), derive the negated conclusion provided that the conclusion implies both not(A) and not(B), and the conclusion is a Boolean.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_common_conclusion" title="proveit.logic.Or.derive_common_conclusion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_common_conclusion</span></code></a>(self, conclusion[, …])</p></td>
+<td><p>From (A or B) derive and return the provided conclusion C assuming A=&gt;C, B=&gt;C, A,B,C in BOOLEANS.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_contradiction" title="proveit.logic.Or.derive_contradiction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_contradiction</span></code></a>(self[, assumptions])</p></td>
+<td><p>From (A or B), and assuming not(A) and not(B), derive and return FALSE.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_in_bool" title="proveit.logic.Or.derive_in_bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_in_bool</span></code></a>(self[, assumptions])</p></td>
+<td><p>From (A or B or .</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_left_if_not_right" title="proveit.logic.Or.derive_left_if_not_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_left_if_not_right</span></code></a>(self[, assumptions])</p></td>
+<td><p>From (A or B) derive and return A assuming in_bool(A), Not(B).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_right_if_not_left" title="proveit.logic.Or.derive_right_if_not_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_right_if_not_left</span></code></a>(self[, assumptions])</p></td>
+<td><p>From (A or B) derive and return B assuming Not(A), in_bool(B).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_via_dilemma" title="proveit.logic.Or.derive_via_dilemma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_via_dilemma</span></code></a>(self, conclusion[, …])</p></td>
+<td><p>If the conclusion is also an Or operation with the same number of operands as self, try derive_via_multi_dilemma.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_via_multi_dilemma" title="proveit.logic.Or.derive_via_multi_dilemma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_via_multi_dilemma</span></code></a>(self, conclusion[, …])</p></td>
+<td><p>From (A or B) as self, and assuming A =&gt; C, B =&gt; D, and A, B, C, and D are Boolean, derive and return the conclusion, C or D.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.derive_via_singular_dilemma" title="proveit.logic.Or.derive_via_singular_dilemma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_via_singular_dilemma</span></code></a>(self, conclusion)</p></td>
+<td><p>From (A or B) as self, and assuming A =&gt; C, B =&gt; C, and A and B are Boolean, derive and return the conclusion, C.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.disassociate" title="proveit.logic.Or.disassociate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disassociate</span></code></a>(self, idx[, assumptions])</p></td>
+<td><p>From self, derive and return a form in which the operand at the given index is ungrouped.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.disassociated" title="proveit.logic.Or.disassociated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disassociated</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘disassociation’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.disassociation" title="proveit.logic.Or.disassociation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disassociation</span></code></a>(self, idx[, assumptions])</p></td>
+<td><p>Given Boolean operands, deduce that this expression is equal to a form in which the operand at index idx is no longer grouped together.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.evaluation" title="proveit.logic.Or.evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a>(self[, assumptions, automation, …])</p></td>
+<td><p>Attempt to determine whether this disjunction evaluates to true or false under the given assumptions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.group_commutation" title="proveit.logic.Or.group_commutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_commutation</span></code></a>(self, init_idx, final_idx, …)</p></td>
+<td><p>Given Boolean operands, deduce that this expression is equal to a form in which the operands at indices [init_idx, init_idx+length) have been moved to [final_idx, final_idx+length). It will do this by performing association first. If disassociate is True, it will be disassociated afterward. For example, the call Or(A,B,C,D).group_commutation(0, 1, length=2,                          assumptions=in_bool(A,B,C,D)) will conceptually follow the steps: (1) associates 2 elements (i.e. length = 2) starting at index 0     to obtain (A V B) V C V D (2) removes the element to be commuted to obtain C V D (3) inserts the element to be commuted at the desire index 1 to     obtain C V (A V B) V D (4) then disassociates to obtain C V A V B V D (5) eventually producing the output:     {A in Bool, …, D in Bool} <a href="#id7"><span class="problematic" id="id8">|</span></a>-     (A V B V C V D) = (C V A V B V D).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.group_commute" title="proveit.logic.Or.group_commute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_commute</span></code></a>(self, init_idx, final_idx, length)</p></td>
+<td><p>Given self, deduce and return a form in which the operands at indices [init_idx, init_idx+length) have been moved to [final_idx.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.group_commuted" title="proveit.logic.Or.group_commuted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_commuted</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘group_commutation’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.in_bool_side_effects" title="proveit.logic.Or.in_bool_side_effects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">in_bool_side_effects</span></code></a>(self, judgment)</p></td>
+<td><p>From (A or B or .</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.negation_side_effects" title="proveit.logic.Or.negation_side_effects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negation_side_effects</span></code></a>(self, judgment)</p></td>
+<td><p>Side-effect derivations to attempt automatically for Not(A or B or .</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.logic.Or.side_effects" title="proveit.logic.Or.side_effects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">side_effects</span></code></a>(self, judgment)</p></td>
+<td><p>Side-effect derivations to attempt automatically.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.logic.Or.unary_reduction" title="proveit.logic.Or.unary_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unary_reduction</span></code></a>(self[, assumptions])</p></td>
+<td><p>For the degenerate case of Or(A), where A is Boolean, derive and return <a href="#id9"><span class="problematic" id="id10">|</span></a>–[V](A) = A. For example, calling     Or(A).unary_reduction([in_bool(A)]) will return:     {A in Bool} <a href="#id11"><span class="problematic" id="id12">|</span></a>– [V](A) = A.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="proveit.logic.Or.trivial_disjunctions">
+<code class="sig-name descname">trivial_disjunctions</code><em class="property"> = {}</em><a class="headerlink" href="#proveit.logic.Or.trivial_disjunctions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.logic.Or.affirm_via_contradiction">
+<code class="sig-name descname">affirm_via_contradiction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.affirm_via_contradiction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.affirm_via_contradiction" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B), derive the conclusion provided that the negated
+conclusion implies not(A) and not(B), and the conclusion is a Boolean.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.associate">
+<code class="sig-name descname">associate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.associate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.associate" title="Permalink to this definition">¶</a></dt>
+<dd><p>From self, derive and return a form in which operands in the
+range [start_idx, start_idx+length) are grouped together.
+For example, from (A or B or … or Y or Z) derive
+(A or B … or (L or … or M) or … or Y or Z).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.associated">
+<code class="sig-name descname">associated</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.logic.Or.associated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘association’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.association">
+<code class="sig-name descname">association</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.association"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.association" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given Boolean operands, deduce that this expression is equal to a form in which operands in the
+range [start_idx, start_idx+length) are grouped together.
+For example, (A or B or … or Y or Z) = (A or B … or (L or … or M) or … or Y or Z)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.auto_reduction">
+<code class="sig-name descname">auto_reduction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.auto_reduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.auto_reduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically reduce “Or() = FALSE” and “Or(a) = a”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.commutation">
+<code class="sig-name descname">commutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">final_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.commutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.commutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given Boolean operands, deduce that this expression is equal to a form in which the operand
+at index init_idx has been moved to final_idx.
+For example, (A or B or … or Y or Z) = (A or … or Y or B or Z)
+via init_idx = 1 and final_idx = -2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.commute">
+<code class="sig-name descname">commute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">final_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.commute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.commute" title="Permalink to this definition">¶</a></dt>
+<dd><p>From self, derive and return a form in which the operand
+at index init_idx has been moved to final_idx.
+For example, given (A or B or … or Y or Z) derive (A or … or Y or B or Z)
+via init_idx = 1 and final_idx = -2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.commuted">
+<code class="sig-name descname">commuted</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.logic.Or.commuted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘commutation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude">
+<code class="sig-name descname">conclude</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to automatically conclude this disjunction.  If any of its
+operands have pre-existing proofs, it will be proven via the or_if_any
+theorem.  Otherwise, a reduction proof will be attempted
+(evaluating the operands).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_negation">
+<code class="sig-name descname">conclude_negation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_negation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_negation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to conclude the negation of this expression under the given
+assumptions, using automation specific to the type of expression being negated.
+Return the Judgment if successful, or raise an exception.
+This is called by the <cite>prove</cite> method of the negated expression
+when no existing proof for the negation was found.
+The <cite>prove</cite> method has a mechanism to prevent infinite recursion,
+so there are no worries regarding cyclic attempts to conclude an expression.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_both">
+<code class="sig-name descname">conclude_via_both</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_both"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_both" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_demorgans">
+<code class="sig-name descname">conclude_via_demorgans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_demorgans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_demorgans" title="Permalink to this definition">¶</a></dt>
+<dd><p># created by JML 6/28/19
+From A and B and C conclude Not(Not(A) or Not(B) or Not(C))</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_example">
+<code class="sig-name descname">conclude_via_example</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">true_operand</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_example"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_example" title="Permalink to this definition">¶</a></dt>
+<dd><p>From one true operand, conclude that this ‘or’ expression is true.
+Requires all of the operands to be in the set of BOOLEANS.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_left">
+<code class="sig-name descname">conclude_via_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_left"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>From A being (or assumed) True, conclude that (A V B) is True.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_only_left">
+<code class="sig-name descname">conclude_via_only_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_only_left"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_only_left" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_only_right">
+<code class="sig-name descname">conclude_via_only_right</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_only_right"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_only_right" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_permutation">
+<code class="sig-name descname">conclude_via_permutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">permuted_disjunction</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_permutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_permutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>From some true (or assumed true) but permutated version of this
+‘or’ expression, conclude that this ‘or’ expression is true.
+For example, let this_or = A V B V C V D
+and let perm_of_this_or = S <a href="#id13"><span class="problematic" id="id14">|</span></a>- B V A V C V D.
+From perm_of_this_or, conclude this_or, using the following:
+this_or.conclude_via_permuation(perm_of_this_or, assumptions = S),
+which will return S <a href="#id15"><span class="problematic" id="id16">|</span></a>– A V B V C V D.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.conclude_via_some">
+<code class="sig-name descname">conclude_via_some</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">subset_disjunction</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.conclude_via_some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.conclude_via_some" title="Permalink to this definition">¶</a></dt>
+<dd><p>From some true (or assumed true) disjunctive subset of the
+operands, conclude that this ‘or’ expression is true. This is
+similar to the conclude_via_example method above. For example,
+we might have a disjunction such as:</p>
+<blockquote>
+<div><p>example_disj = A V B V C V D,</p>
+</div></blockquote>
+<dl class="simple">
+<dt>where we know (or assume) that B V D is true. We could call</dt><dd><p>example_disj.conclude_via_some(B V D, assumptions=[B V D]),</p>
+</dd>
+<dt>which will return</dt><dd><p>{B V D} <a href="#id17"><span class="problematic" id="id18">|</span></a>– A V B V C V D</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_in_bool">
+<code class="sig-name descname">deduce_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to deduce, then return, that this ‘or’ expression is in the set of BOOLEANS.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_left_in_bool">
+<code class="sig-name descname">deduce_left_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_left_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_left_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce A in Boolean from (A or B) in Boolean.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_not_left_if_neither">
+<code class="sig-name descname">deduce_not_left_if_neither</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_not_left_if_neither"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_not_left_if_neither" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce not(A) assuming not(A or B) where self is (A or B).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_not_right_if_neither">
+<code class="sig-name descname">deduce_not_right_if_neither</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_not_right_if_neither"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_not_right_if_neither" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce not(B) assuming not(A or B) where self is (A or B).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_part_in_bool">
+<code class="sig-name descname">deduce_part_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index_or_expr</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_part_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_part_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce X in Boolean from (A or B or .. or X or .. or Z) in Boolean
+provided X by expression or index number.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_parts_in_bool">
+<code class="sig-name descname">deduce_parts_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_parts_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_parts_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce A in Boolean, B in Boolean, …, Z in Boolean
+from (A or B or … or Z) in Boolean.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deduce_right_in_bool">
+<code class="sig-name descname">deduce_right_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deduce_right_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deduce_right_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce B in Boolean from (A or B) in Boolean.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.deny_via_contradiction">
+<code class="sig-name descname">deny_via_contradiction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.deny_via_contradiction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.deny_via_contradiction" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B), derive the negated conclusion provided that the
+conclusion implies both not(A) and not(B), and the conclusion is a Boolean.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_common_conclusion">
+<code class="sig-name descname">derive_common_conclusion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_common_conclusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_common_conclusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B) derive and return the provided conclusion C assuming A=&gt;C, B=&gt;C, A,B,C in BOOLEANS.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_contradiction">
+<code class="sig-name descname">derive_contradiction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_contradiction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_contradiction" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B), and assuming not(A) and not(B), derive and return FALSE.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_in_bool">
+<code class="sig-name descname">derive_in_bool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_in_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_in_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B or … or Z) derive [(A or B or … or Z) in Boolean].</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_left_if_not_right">
+<code class="sig-name descname">derive_left_if_not_right</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_left_if_not_right"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_left_if_not_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B) derive and return A assuming in_bool(A), Not(B).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_right_if_not_left">
+<code class="sig-name descname">derive_right_if_not_left</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_right_if_not_left"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_right_if_not_left" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B) derive and return B assuming Not(A), in_bool(B).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_via_dilemma">
+<code class="sig-name descname">derive_via_dilemma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_via_dilemma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_via_dilemma" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the conclusion is also an Or operation with the same number of operands as
+self, try derive_via_multi_dilemma.  Otherwise, or if that fails, try
+derive_via_singular_dilemma.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_via_multi_dilemma">
+<code class="sig-name descname">derive_via_multi_dilemma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_via_multi_dilemma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_via_multi_dilemma" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B) as self, and assuming A =&gt; C, B =&gt; D, and A, B, C, and D are Boolean,
+derive and return the conclusion, C or D.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.derive_via_singular_dilemma">
+<code class="sig-name descname">derive_via_singular_dilemma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">conclusion</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.derive_via_singular_dilemma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.derive_via_singular_dilemma" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B) as self, and assuming A =&gt; C, B =&gt; C, and A and B are Boolean,
+derive and return the conclusion, C.  Self is (A or B).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.disassociate">
+<code class="sig-name descname">disassociate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.disassociate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.disassociate" title="Permalink to this definition">¶</a></dt>
+<dd><p>From self, derive and return a form in which the operand
+at the given index is ungrouped.
+For example, from (A or B … or (L or … or M) or … or Y or Z)
+derive (A or B or … or Y or Z).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.disassociated">
+<code class="sig-name descname">disassociated</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.logic.Or.disassociated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘disassociation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.disassociation">
+<code class="sig-name descname">disassociation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.disassociation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.disassociation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given Boolean operands, deduce that this expression is equal to a form in which the operand
+at index idx is no longer grouped together.
+For example, (A or B … or (L or … or M) or … or Y or Z) = (A or B or … or Y or Z)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.evaluation">
+<code class="sig-name descname">evaluation</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">assumptions=None</em>, <em class="sig-param">\*</em>, <em class="sig-param">automation=True</em>, <em class="sig-param">minimal_automation=False</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.evaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to determine whether this disjunction evaluates
+to true or false under the given assumptions.  If automation
+is false, it will only succeed if the evaluation is already
+known.  If automation and minimal_automation are True, it will
+only rely upon known evaluations of the operands to determine
+whether to try to prove or disprove the disjunction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.group_commutation">
+<code class="sig-name descname">group_commutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span></em>, <em class="sig-param"><span class="n">final_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">disassociate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.group_commutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.group_commutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given Boolean operands, deduce that this expression is equal
+to a form in which the operands at indices
+[init_idx, init_idx+length) have been moved to
+[final_idx, final_idx+length). It will do this by performing
+association first. If disassociate is True, it will be
+disassociated afterward. For example, the call
+Or(A,B,C,D).group_commutation(0, 1, length=2,</p>
+<blockquote>
+<div><p>assumptions=in_bool(A,B,C,D))</p>
+</div></blockquote>
+<p>will conceptually follow the steps:
+(1) associates 2 elements (i.e. length = 2) starting at index 0</p>
+<blockquote>
+<div><p>to obtain (A V B) V C V D</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>removes the element to be commuted to obtain C V D</p></li>
+<li><p>inserts the element to be commuted at the desire index 1 to
+obtain C V (A V B) V D</p></li>
+<li><p>then disassociates to obtain C V A V B V D</p></li>
+<li><p>eventually producing the output:
+{A in Bool, …, D in Bool} <a href="#id19"><span class="problematic" id="id20">|</span></a>-
+(A V B V C V D) = (C V A V B V D)</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.group_commute">
+<code class="sig-name descname">group_commute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span></em>, <em class="sig-param"><span class="n">final_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">disassociate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.group_commute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.group_commute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given self, deduce and return a form in which the operands
+at indices [init_idx, init_idx+length) have been moved to [final_idx. final_idx+length).
+It will do this by performing association first.  If disassocate is True, it
+will be disassociated afterwards.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.group_commuted">
+<code class="sig-name descname">group_commuted</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.logic.Or.group_commuted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘group_commutation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.in_bool_side_effects">
+<code class="sig-name descname">in_bool_side_effects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">judgment</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.in_bool_side_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.in_bool_side_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>From (A or B or .. or Z) in Boolean deduce (A in Boolean), (B in Boolean), …
+(Z in Boolean).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.negation_side_effects">
+<code class="sig-name descname">negation_side_effects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">judgment</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.negation_side_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.negation_side_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Side-effect derivations to attempt automatically for Not(A or B or .. or .. Z).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.side_effects">
+<code class="sig-name descname">side_effects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">judgment</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.side_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.side_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Side-effect derivations to attempt automatically.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.logic.Or.unary_reduction">
+<code class="sig-name descname">unary_reduction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/logic/booleans/disjunction/or_op.html#Or.unary_reduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.logic.Or.unary_reduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>For the degenerate case of Or(A), where A is Boolean, derive
+and return <a href="#id21"><span class="problematic" id="id22">|</span></a>–[V](A) = A. For example, calling</p>
+<blockquote>
+<div><p>Or(A).unary_reduction([in_bool(A)])</p>
+</div></blockquote>
+<dl class="simple">
+<dt>will return:</dt><dd><p>{A in Bool} <a href="#id23"><span class="problematic" id="id24">|</span></a>– [V](A) = A</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.logic.NotSubsetEq.html" title="previous chapter">NotSubsetEq</a></li>
+      <li>Next: <a href="proveit.logic.PowerSet.html" title="next chapter">PowerSet</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.logic.Or.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

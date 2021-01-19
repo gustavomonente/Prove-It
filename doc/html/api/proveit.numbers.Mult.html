@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mult &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neg" href="proveit.numbers.Neg.html" />
+    <link rel="prev" title="ModAbs" href="proveit.numbers.ModAbs.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mult">
+<h1>Mult<a class="headerlink" href="#mult" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.numbers.Mult">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.numbers.</code><code class="sig-name descname">Mult</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="proveit.Operation.html#proveit.Operation" title="proveit._core_.expression.operation.operation.Operation"><code class="docutils literal notranslate"><span class="pre">proveit.Operation</span></code></a></p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.multiplied_numerals" title="proveit.numbers.Mult.multiplied_numerals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiplied_numerals</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.associated" title="proveit.numbers.Mult.associated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">associated</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘association’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.association" title="proveit.numbers.Mult.association"><code class="xref py py-obj docutils literal notranslate"><span class="pre">association</span></code></a>(self, start_idx, length[, …])</p></td>
+<td><p>Given numerical operands, deduce that this expression is equal to a form in which operands in the range [start_idx, start_idx+length) are grouped together.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.cancelation" title="proveit.numbers.Mult.cancelation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cancelation</span></code></a>(self, term_to_cancel[, assumptions])</p></td>
+<td><p>Deduce and return an equality between self and a form in which the given factor has been canceled in a numerator (or factor) and denominator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.cancelations" title="proveit.numbers.Mult.cancelations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cancelations</span></code></a>(self[, assumptions])</p></td>
+<td><p>Deduce and return an equality between self and a form in which all simple division cancellations are performed across the factors of this multiplication.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.combined_exponents" title="proveit.numbers.Mult.combined_exponents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_exponents</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘exponent_combination’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.commutation" title="proveit.numbers.Mult.commutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commutation</span></code></a>(self[, init_idx, final_idx, …])</p></td>
+<td><p>Given numerical operands, deduce that this expression is equal to a form in which the operand at index init_idx has been moved to final_idx.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.commuted" title="proveit.numbers.Mult.commuted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commuted</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘commutation’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.conversion_to_addition" title="proveit.numbers.Mult.conversion_to_addition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversion_to_addition</span></code></a>(self[, assumptions])</p></td>
+<td><p>From multiplication by an integer as the first factor, derive and return the equivalence of this multiplication to a repeated addition; for example, 3*c = c + c + c.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.deduce_divided_by" title="proveit.numbers.Mult.deduce_divided_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_divided_by</span></code></a>(self, divisor[, assumptions])</p></td>
+<td><p>Deduce that the product represented by Mult(a,b) is divisible by the mult_factor a or b. For example,    Mult(a, b).deduce_divided_by(a) returns <a href="#id1"><span class="problematic" id="id2">|</span></a>- Divides(a, Mult(a,b)), that is <a href="#id3"><span class="problematic" id="id4">|</span></a>- a|ab, (assuming complex a≠0 and integer b). Later: possibly consider an Equals(divisor,self.lhs) case?.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.deduce_in_number_set" title="proveit.numbers.Mult.deduce_in_number_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deduce_in_number_set</span></code></a>(self, number_set[, …])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.deep_eliminated_ones" title="proveit.numbers.Mult.deep_eliminated_ones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deep_eliminated_ones</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘deep_one_eliminations’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.deep_one_eliminations" title="proveit.numbers.Mult.deep_one_eliminations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deep_one_eliminations</span></code></a>(self[, assumptions])</p></td>
+<td><p>Eliminate ones from direct factors as well as grouped factors and in fraction factors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.disassociated" title="proveit.numbers.Mult.disassociated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disassociated</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘disassociation’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.disassociation" title="proveit.numbers.Mult.disassociation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disassociation</span></code></a>(self, idx[, assumptions])</p></td>
+<td><p>Given numerical operands, deduce that this expression is equal to a form in which the operand at index idx is no longer grouped together.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.distributed" title="proveit.numbers.Mult.distributed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distributed</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘distribution’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.distribution" title="proveit.numbers.Mult.distribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distribution</span></code></a>(self[, idx, assumptions])</p></td>
+<td><p>Distribute through the operand at the given index. Returns the equality that equates self to this new version. Examples:     <span class="math notranslate nohighlight">\(a (b + c + a) d = a b d + a c d + a a d\)</span>     <span class="math notranslate nohighlight">\(a (b - c) d = a b d - a c d\)</span>     <span class="math notranslate nohighlight">\(a \left(\sum_x f(x)\right c = \sum_x a f(x) c\)</span> Give any assumptions necessary to prove that the operands are in the Complex numbers so that the associative and commutation theorems are applicable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.do_reduced_evaluation" title="proveit.numbers.Mult.do_reduced_evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_reduced_evaluation</span></code></a>(self[, assumptions])</p></td>
+<td><p>Derive and return this multiplication expression equated with an irreducible value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.do_reduced_simplification" title="proveit.numbers.Mult.do_reduced_simplification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_reduced_simplification</span></code></a>(self[, assumptions])</p></td>
+<td><p>Derive and return this multiplication expression equated with a simpler form.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.exponent_combination" title="proveit.numbers.Mult.exponent_combination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exponent_combination</span></code></a>(self[, start_idx, …])</p></td>
+<td><p>Equates $a^b a^c$ to $a^{b+c}$, $a^b a^{-c}$ to $a^{b-c}$, $a^b a$ to $a^{b+1}, $a a^b$ to $a^{1+b}, or $a^c b^c$ to $(a b)^c$.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.factorization" title="proveit.numbers.Mult.factorization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorization</span></code></a>(self, the_factor[, pull, …])</p></td>
+<td><p>Factor out “the_factor” from this product, pulling it either to the “left” or “right”.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.factorized" title="proveit.numbers.Mult.factorized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorized</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘factorization’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.group_commutation" title="proveit.numbers.Mult.group_commutation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_commutation</span></code></a>(self, init_idx, final_idx, …)</p></td>
+<td><p>Given numerical operands, deduce that this expression is equal to a form in which the operands at indices [init_idx, init_idx+length) have been moved to [final_idx.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.group_commuted" title="proveit.numbers.Mult.group_commuted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_commuted</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘group_commutation’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.index" title="proveit.numbers.Mult.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>(self, the_factor[, also_return_num])</p></td>
+<td><p>Return the starting index of the_factor, which may be a single  operand, a list of consecutive operands, or a Mult expression  that represents the product of the list of consecutive operands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.neg_simplification" title="proveit.numbers.Mult.neg_simplification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neg_simplification</span></code></a>(self, idx[, assumptions])</p></td>
+<td><p>Equivalence method that derives a simplification in which a specific negated factor, at the given index, is factored out. For example:     w*(-x)*y*z = -(w*x*y*z).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.neg_simplifications" title="proveit.numbers.Mult.neg_simplifications"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neg_simplifications</span></code></a>(self[, assumptions])</p></td>
+<td><p>Equivalence method that derives a simplification in which negated factors are factored out. For example:     (-w)*(-x)*y*(-z) = -(w*x*y*z).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.not_equal" title="proveit.numbers.Mult.not_equal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">not_equal</span></code></a>(self, rhs[, assumptions])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.one_elimination" title="proveit.numbers.Mult.one_elimination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_elimination</span></code></a>(self, idx[, assumptions])</p></td>
+<td><p>Equivalence method that derives a simplification in which a single factor of one, at the given index, is eliminated. For example:     x*y*1*z = x*y*z.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.numbers.Mult.one_eliminations" title="proveit.numbers.Mult.one_eliminations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_eliminations</span></code></a>(self[, assumptions])</p></td>
+<td><p>Equivalence method that derives a simplification in which factors of one are eliminated. For example:     x*1*y*1*z*1 = x*y*z.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.numbers.Mult.pull" title="proveit.numbers.Mult.pull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull</span></code></a>(self[, start_idx, end_idx, direction, …])</p></td>
+<td><p>Pull a subset of consecutive operands, self.operands[start_idx:end_idx], to one side or another.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="proveit.numbers.Mult.multiplied_numerals">
+<code class="sig-name descname">multiplied_numerals</code><em class="property"> = {}</em><a class="headerlink" href="#proveit.numbers.Mult.multiplied_numerals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.numbers.Mult.associated">
+<code class="sig-name descname">associated</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.associated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘association’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.association">
+<code class="sig-name descname">association</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.association"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.association" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given numerical operands, deduce that this expression is equal to a form in which operands in the
+range [start_idx, start_idx+length) are grouped together.
+For example, (a + b + … + y + z) = (a + b … + (l + … + m) + … + y + z)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.cancelation">
+<code class="sig-name descname">cancelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">term_to_cancel</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.cancelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.cancelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce and return an equality between self and a form in which
+the given factor has been canceled in a numerator (or factor)
+and denominator.  For example,
+[a*b*c*(1/b)].cancelation(b) would return
+a*b*c*(1/b) = a*c</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.cancelations">
+<code class="sig-name descname">cancelations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.cancelations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.cancelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce and return an equality between self and a form in which
+all simple division cancellations are performed across the
+factors of this multiplication.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.combined_exponents">
+<code class="sig-name descname">combined_exponents</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.combined_exponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘exponent_combination’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.commutation">
+<code class="sig-name descname">commutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">final_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.commutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.commutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given numerical operands, deduce that this expression is equal to a form in which the operand
+at index init_idx has been moved to final_idx.
+For example, (a + b + … + y + z) = (a + … + y + b + z)
+via init_idx = 1 and final_idx = -2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.commuted">
+<code class="sig-name descname">commuted</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.commuted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘commutation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.conversion_to_addition">
+<code class="sig-name descname">conversion_to_addition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.conversion_to_addition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.conversion_to_addition" title="Permalink to this definition">¶</a></dt>
+<dd><p>From multiplication by an integer as the first factor,
+derive and return the equivalence of this multiplication
+to a repeated addition; for example, 3*c = c + c + c.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.deduce_divided_by">
+<code class="sig-name descname">deduce_divided_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">divisor</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.deduce_divided_by"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.deduce_divided_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deduce that the product represented by Mult(a,b) is divisible
+by the mult_factor a or b. For example,</p>
+<blockquote>
+<div><p>Mult(a, b).deduce_divided_by(a)</p>
+</div></blockquote>
+<p>returns <a href="#id5"><span class="problematic" id="id6">|</span></a>- Divides(a, Mult(a,b)), that is <a href="#id7"><span class="problematic" id="id8">|</span></a>- a|ab, (assuming
+complex a≠0 and integer b).
+Later: possibly consider an Equals(divisor,self.lhs) case?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.deduce_in_number_set">
+<code class="sig-name descname">deduce_in_number_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">number_set</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.deduce_in_number_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.deduce_in_number_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.deep_eliminated_ones">
+<code class="sig-name descname">deep_eliminated_ones</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.deep_eliminated_ones" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘deep_one_eliminations’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.deep_one_eliminations">
+<code class="sig-name descname">deep_one_eliminations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.deep_one_eliminations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.deep_one_eliminations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eliminate ones from direct factors as well as grouped
+factors and in fraction factors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.disassociated">
+<code class="sig-name descname">disassociated</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.disassociated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘disassociation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.disassociation">
+<code class="sig-name descname">disassociation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.disassociation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.disassociation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given numerical operands, deduce that this expression is equal to a form in which the operand
+at index idx is no longer grouped together.
+For example, (a + b … + (l + … + m) + … + y+ z) = (a + b + … + y + z)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.distributed">
+<code class="sig-name descname">distributed</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.distributed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘distribution’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.distribution">
+<code class="sig-name descname">distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distribute through the operand at the given index.
+Returns the equality that equates self to this new version.
+Examples:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(a (b + c + a) d = a b d + a c d + a a d\)</span>
+<span class="math notranslate nohighlight">\(a (b - c) d = a b d - a c d\)</span>
+<span class="math notranslate nohighlight">\(a \left(\sum_x f(x)\right c = \sum_x a f(x) c\)</span></p>
+</div></blockquote>
+<p>Give any assumptions necessary to prove that the operands are in the Complex numbers so that
+the associative and commutation theorems are applicable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.do_reduced_evaluation">
+<code class="sig-name descname">do_reduced_evaluation</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">assumptions=None</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.do_reduced_evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.do_reduced_evaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive and return this multiplication expression equated with an irreducible value.
+Handle the trivial case of a zero factor or do pairwise evaluation
+after simplifying negations and eliminating one factors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.do_reduced_simplification">
+<code class="sig-name descname">do_reduced_simplification</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">assumptions=None</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.do_reduced_simplification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.do_reduced_simplification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive and return this multiplication expression equated with a simpler form.
+Deals with disassociating any nested multiplications,simplifying negations, and
+factors of one, in that order.
+do_reduced_evaluation deals with factors of 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.exponent_combination">
+<code class="sig-name descname">exponent_combination</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">end_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.exponent_combination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.exponent_combination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equates $a^b a^c$ to $a^{b+c}$, $a^b a^{-c}$ to $a^{b-c}$,
+$a^b a$ to $a^{b+1}, $a a^b$ to $a^{1+b}, or
+$a^c b^c$ to $(a b)^c$.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.factorization">
+<code class="sig-name descname">factorization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">the_factor</span></em>, <em class="sig-param"><span class="n">pull</span><span class="o">=</span><span class="default_value">'left'</span></em>, <em class="sig-param"><span class="n">group_factor</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">group_remainder</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.factorization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor out “the_factor” from this product, pulling it either to the “left” or “right”.
+If “the_factor” is a product, this may factor out a subset of the operands as
+long as they are next to each other (use commute to make this happen).  If
+there are multiple occurrences, the first occurrence is used.  If group_factor is
+True and the_factor is a product, these operands are grouped together as a sub-product.
+If group_remainder is True and there are multiple remaining operands (those not in
+“the_factor”), then these remaining operands are grouped together as a sub-product.
+Returns the equality that equates self to this new version.
+Give any assumptions necessary to prove that the operands are in the Complex numbers so that
+the associative and commutation theorems are applicable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.factorized">
+<code class="sig-name descname">factorized</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.factorized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘factorization’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.group_commutation">
+<code class="sig-name descname">group_commutation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">init_idx</span></em>, <em class="sig-param"><span class="n">final_idx</span></em>, <em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">disassociate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.group_commutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.group_commutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given numerical operands, deduce that this expression is equal to a form in which the operands
+at indices [init_idx, init_idx+length) have been moved to [final_idx. final_idx+length).
+It will do this by performing association first.  If disassocate is True, it
+will be disassociated afterwards.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.group_commuted">
+<code class="sig-name descname">group_commuted</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.numbers.Mult.group_commuted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘group_commutation’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.index">
+<code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">the_factor</span></em>, <em class="sig-param"><span class="n">also_return_num</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the starting index of the_factor, which may be a single 
+operand, a list of consecutive operands, or a Mult expression 
+that represents the product of the list of consecutive operands.
+If also_return_num is True, return a tuple of the index and 
+number of operands for the_factor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.neg_simplification">
+<code class="sig-name descname">neg_simplification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.neg_simplification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.neg_simplification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalence method that derives a simplification in which
+a specific negated factor, at the given index, is factored out.
+For example:</p>
+<blockquote>
+<div><p>w*(-x)*y*z = -(w*x*y*z)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.neg_simplifications">
+<code class="sig-name descname">neg_simplifications</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.neg_simplifications"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.neg_simplifications" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalence method that derives a simplification in which
+negated factors are factored out.  For example:</p>
+<blockquote>
+<div><p>(-w)*(-x)*y*(-z) = -(w*x*y*z)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.not_equal">
+<code class="sig-name descname">not_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">rhs</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.not_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.not_equal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.one_elimination">
+<code class="sig-name descname">one_elimination</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.one_elimination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.one_elimination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalence method that derives a simplification in which
+a single factor of one, at the given index, is eliminated.
+For example:</p>
+<blockquote>
+<div><p>x*y*1*z = x*y*z</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.one_eliminations">
+<code class="sig-name descname">one_eliminations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.one_eliminations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.one_eliminations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalence method that derives a simplification in which
+factors of one are eliminated.  For example:</p>
+<blockquote>
+<div><p>x*1*y*1*z*1 = x*y*z</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.numbers.Mult.pull">
+<code class="sig-name descname">pull</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">end_idx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">direction</span><span class="o">=</span><span class="default_value">'left'</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/numbers/multiplication/mult.html#Mult.pull"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.numbers.Mult.pull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pull a subset of consecutive operands, self.operands[start_idx:end_idx],
+to one side or another. Returns the equality that equates self to
+this new version.  Give any assumptions necessary to prove that the
+operands are in the Complex numbers so that the commutation theorem is applicable.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.numbers.ModAbs.html" title="previous chapter">ModAbs</a></li>
+      <li>Next: <a href="proveit.numbers.Neg.html" title="next chapter">Neg</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.numbers.Mult.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

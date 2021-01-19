@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>proveit.numbers.ordering.less_eq &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for proveit.numbers.ordering.less_eq</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">USE_DEFAULTS</span><span class="p">,</span> <span class="n">as_expression</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">Equals</span>
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<span class="kn">from</span> <span class="nn">.number_ordering_relation</span> <span class="k">import</span> <span class="n">NumberOrderingRelation</span>
+
+<div class="viewcode-block" id="LessEq"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq">[docs]</a><span class="k">class</span> <span class="nc">LessEq</span><span class="p">(</span><span class="n">NumberOrderingRelation</span><span class="p">):</span>
+    <span class="c1"># operator of the LessEq operation.</span>
+    <span class="n">_operator_</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">(</span>
+        <span class="n">string_format</span><span class="o">=</span><span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span>
+        <span class="n">latex_format</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\leq&#39;</span><span class="p">,</span>
+        <span class="n">theory</span><span class="o">=</span><span class="vm">__file__</span><span class="p">)</span>
+
+    <span class="c1"># map left-hand-sides to &quot;&lt;=&quot; Judgments</span>
+    <span class="c1">#   (populated in TransitivityRelation.derive_side_effects)</span>
+    <span class="n">known_left_sides</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="c1"># map right-hand-sides to &quot;&lt;=&quot; Judgments</span>
+    <span class="c1">#   (populated in TransitivityRelation.derive_side_effects)</span>
+    <span class="n">known_right_sides</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create an expression representing a &lt;= b.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">NumberOrderingRelation</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">LessEq</span><span class="o">.</span><span class="n">_operator_</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="LessEq.reversed_operator_str"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.reversed_operator_str">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">reversed_operator_str</span><span class="p">(</span><span class="n">formatType</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Reversing &#39;&lt;=&#39; gives &#39;&gt;=&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s1">&#39;\geq&#39;</span> <span class="k">if</span> <span class="n">formatType</span><span class="o">==</span><span class="s1">&#39;latex&#39;</span> <span class="k">else</span> <span class="s1">&#39;&gt;=&#39;</span> </div>
+
+<div class="viewcode-block" id="LessEq.remake_constructor"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.remake_constructor">[docs]</a>    <span class="k">def</span> <span class="nf">remake_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_reversed</span><span class="p">():</span>
+            <span class="c1"># Use the &#39;greater_eq&#39; function if it is reversed.</span>
+            <span class="k">return</span> <span class="s1">&#39;greater_eq&#39;</span>
+        <span class="c1"># Use the default.</span>
+        <span class="k">return</span> <span class="n">Operation</span><span class="o">.</span><span class="n">remake_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="LessEq.conclude_via_equality"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.conclude_via_equality">[docs]</a>    <span class="k">def</span> <span class="nf">conclude_via_equality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">relax_equal_to_less_eq</span>
+        <span class="k">return</span> <span class="n">relax_equal_to_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]},</span>
+            <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="LessEq.deduce_in_bool"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.deduce_in_bool">[docs]</a>    <span class="k">def</span> <span class="nf">deduce_in_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="nb">frozenset</span><span class="p">()):</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_than_equals_is_bool</span>
+        <span class="n">is_bool_stmt</span> <span class="o">=</span> <span class="n">less_than_equals_is_bool</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">is_bool_stmt</span><span class="o">.</span><span class="n">inner_expr</span><span class="p">()</span><span class="o">.</span><span class="n">element</span><span class="o">.</span><span class="n">with_matching_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.unfold"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.unfold">[docs]</a>    <span class="k">def</span> <span class="nf">unfold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="nb">frozenset</span><span class="p">()):</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_than_equals_def</span>
+        <span class="n">unfolded</span> <span class="o">=</span> <span class="n">less_than_equals_def</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">unfolded</span><span class="o">.</span><span class="n">inner_expr</span><span class="p">()</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="LessEq.apply_transitivity"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.apply_transitivity">[docs]</a>    <span class="k">def</span> <span class="nf">apply_transitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Apply a transitivity rule to derive from this x&lt;=y expression</span>
+<span class="sd">        and something of the form y&lt;z, y&lt;=z, z&gt;y, z&gt;=y, or y=z to</span>
+<span class="sd">        obtain x&lt;z or x&lt;=z as appropriate.  In the special case</span>
+<span class="sd">        of x&lt;=y and y&lt;=x (or x&gt;=y), derive x=z.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="p">(</span><span class="n">transitivity_less_eq_less</span><span class="p">,</span> <span class="n">transitivity_less_less_eq</span><span class="p">,</span>
+                       <span class="n">transitivity_less_eq_less_eq</span><span class="p">,</span> <span class="n">symmetric_less_eq</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">.less</span> <span class="k">import</span> <span class="n">Less</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="n">as_expression</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Equals</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">NumberOrderingRelation</span><span class="o">.</span><span class="n">apply_transitivity</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>  <span class="c1"># handles this special case</span>
+        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
+            <span class="c1"># x &lt;= y and y &lt;= x implies that x=y</span>
+            <span class="k">return</span> <span class="n">symmetric_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Less</span><span class="p">):</span>
+                <span class="n">new_rel</span> <span class="o">=</span> <span class="n">transitivity_less_eq_less</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> 
+                    <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">LessEq</span><span class="p">):</span>
+                <span class="n">new_rel</span> <span class="o">=</span> <span class="n">transitivity_less_eq_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> 
+                    <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Less</span><span class="p">):</span>
+                <span class="n">new_rel</span> <span class="o">=</span> <span class="n">transitivity_less_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> 
+                    <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">LessEq</span><span class="p">):</span>
+                <span class="n">new_rel</span> <span class="o">=</span> <span class="n">transitivity_less_eq_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">other</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> 
+                    <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot perform transitivity with </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.derive_negated"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.derive_negated">[docs]</a>    <span class="k">def</span> <span class="nf">derive_negated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="nb">frozenset</span><span class="p">()):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        From a &lt;= b, derive and return -b &lt;= -a.</span>
+<span class="sd">        Assumptions may be required to prove that a, and b are in Real.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">negated_less_eq</span>
+        <span class="n">new_rel</span> <span class="o">=</span> <span class="n">negated_less_eq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.derive_shifted"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.derive_shifted">[docs]</a>    <span class="k">def</span> <span class="nf">derive_shifted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">,</span> <span class="n">addend_side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
+            <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        From a &lt;= b, derive and return a + c &lt;= b + c</span>
+<span class="sd">        where c is the given &#39;addend&#39;.</span>
+<span class="sd">        Assumptions may be required to prove that a, b, and c are in</span>
+<span class="sd">        Real.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_eq_shift_add_right</span><span class="p">,</span> <span class="n">less_eq_shift_add_left</span>  <span class="c1"># , less_than_subtract</span>
+        <span class="k">if</span> <span class="n">addend_side</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">less_eq_shift_add_right</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">addend</span><span class="p">},</span> 
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">addend_side</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">less_eq_shift_add_left</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">addend</span><span class="p">},</span> 
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Unrecognized addend side (should be &#39;left&#39; or &#39;right&#39;): &quot;</span> <span class="o">+</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">addend_side</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="LessEq.add_left"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.add_left">[docs]</a>    <span class="k">def</span> <span class="nf">add_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        From a &lt;= b, derive and return a + c &lt;= b given c &lt;= 0 </span>
+<span class="sd">        Or from a &gt;= b, derive and return a + c &gt;= b given 0 &lt;= c </span>
+<span class="sd">        (and a, b, c are all Real) where c is the given &#39;addend&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_style</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;reversed&#39;</span><span class="p">:</span>
+            <span class="c1"># Left and right are reversed.</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_right</span><span class="p">(</span><span class="n">addend</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_eq_add_left</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">less_eq_add_left</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">addend</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.add_right"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.add_right">[docs]</a>    <span class="k">def</span> <span class="nf">add_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        From a &lt;= b, derive and return a &lt;= b + c given 0 &lt;= c </span>
+<span class="sd">        Or from a &gt;= b, derive and return a &gt;= b + c given c &lt;= 0 </span>
+<span class="sd">        (and a, b, c are all Real) where c is the given &#39;addend&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_style</span><span class="p">(</span><span class="s1">&#39;direction&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;reversed&#39;</span><span class="p">:</span>
+            <span class="c1"># Left and right are reversed.</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_left</span><span class="p">(</span><span class="n">addend</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_eq_add_right</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">less_eq_add_right</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">addend</span><span class="p">},</span> 
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.add"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        From a &lt;= b, derive and return a + c &lt;= b + d given c &lt;= d</span>
+<span class="sd">        (and a, b, c, d are all Real).  c and d are determined from the</span>
+<span class="sd">        given &#39;relation&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">less_eq_add_both</span>
+        <span class="kn">from</span> <span class="nn">.less</span> <span class="k">import</span> <span class="n">Less</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">relation</span><span class="p">,</span> <span class="n">Less</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">relation</span><span class="p">,</span> <span class="n">LessEq</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Less.add &#39;relation&#39; must be of type Less or &quot;</span>
+                             <span class="s2">&quot;LessEq, not </span><span class="si">%s</span><span class="s2">&quot;</span>
+                             <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">relation</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span>
+        <span class="n">_c</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">lower</span>
+        <span class="n">_d</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">upper</span>
+        <span class="n">new_rel</span> <span class="o">=</span> <span class="n">less_eq_add_both</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">_c</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">_d</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="LessEq.left_mult_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.left_mult_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">left_mult_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Multiply both sides of the relation by the &#39;multiplier&#39;</span>
+<span class="sd">        on the left.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">greater_eq</span><span class="p">,</span> <span class="n">zero</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.multiplication</span> <span class="k">import</span> <span class="p">(</span>
+            <span class="n">left_mult_pos_lesseq</span><span class="p">,</span> <span class="n">left_mult_neg_lesseq</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">greater_eq</span><span class="p">(</span><span class="n">multiplier</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">left_mult_pos_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">multiplier</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">left_mult_neg_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot &#39;left_mult_both_sides&#39; a LessEq relation without &quot;</span>
+                <span class="s2">&quot;knowing the multiplier&#39;s relation with zero.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.right_mult_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.right_mult_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">right_mult_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                              <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Multiply both sides of the relation by the &#39;multiplier&#39;</span>
+<span class="sd">        on the right.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">zero</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.multiplication</span> <span class="k">import</span> <span class="p">(</span>
+            <span class="n">right_mult_pos_lesseq</span><span class="p">,</span> <span class="n">right_mult_neg_lesseq</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">right_mult_pos_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">multiplier</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">right_mult_neg_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">multiplier</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot &#39;right_mult_both_sides&#39; a LessEq relation without &quot;</span>
+                <span class="s2">&quot;knowing the multiplier&#39;s relation with zero.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.divide_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.divide_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">divide_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divisor</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Divide both sides of the relation by the &#39;divisor&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">Less</span><span class="p">,</span> <span class="n">zero</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.division</span> <span class="k">import</span> <span class="p">(</span>
+            <span class="n">div_pos_lesseq</span><span class="p">,</span> <span class="n">div_neg_lesseq</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Less</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">div_pos_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Less</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">div_neg_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot &#39;divide&#39; a LessEq relation without &quot;</span>
+                            <span class="s2">&quot;knowing whether the divisor is greater than &quot;</span>
+                            <span class="s2">&quot;or less than zero.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.left_add_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.left_add_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">left_add_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add to both sides of the relation by the &#39;addend&#39; on the left.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.addition</span> <span class="k">import</span> <span class="n">weak_bound_by_right_term</span>
+        <span class="n">new_rel</span> <span class="o">=</span> <span class="n">weak_bound_by_right_term</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">addend</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+            <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+            <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.right_add_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.right_add_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">right_add_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addend</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add to both sides of the relation by the &#39;addend&#39; on the right.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.addition</span> <span class="k">import</span> <span class="n">weak_bound_by_left_term</span>
+        <span class="n">new_rel</span> <span class="o">=</span> <span class="n">weak_bound_by_left_term</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">addend</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+            <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+            <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LessEq.exponentiate_both_sides"><a class="viewcode-back" href="../../../../api/proveit.numbers.LessEq.html#proveit.numbers.LessEq.exponentiate_both_sides">[docs]</a>    <span class="k">def</span> <span class="nf">exponentiate_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exponent</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">assumptions</span><span class="o">=</span><span class="n">USE_DEFAULTS</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Exponentiate both sides of the relation by the &#39;exponent&#39;.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">Less</span><span class="p">,</span> <span class="n">zero</span>
+        <span class="kn">from</span> <span class="nn">proveit.numbers.exponentiation</span> <span class="k">import</span> <span class="p">(</span>
+            <span class="n">exp_pos_lesseq</span><span class="p">,</span> <span class="n">exp_nonneg_lesseq</span><span class="p">,</span>
+            <span class="n">exp_neg_lesseq</span><span class="p">,</span> <span class="n">exp_nonpos_lesseq</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Less</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">exp_pos_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Less</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">exp_neg_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">exp_nonneg_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">exponent</span><span class="p">,</span> <span class="n">zero</span><span class="p">)</span><span class="o">.</span><span class="n">proven</span><span class="p">(</span><span class="n">assumptions</span><span class="p">):</span>
+            <span class="n">new_rel</span> <span class="o">=</span> <span class="n">exp_nonpos_lesseq</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">},</span>
+                <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>  <span class="o">.</span><span class="n">_simplify_both_sides</span><span class="p">(</span>
+                <span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot &#39;exponentiate&#39; a Less relation without &quot;</span>
+                            <span class="s2">&quot;knowing the exponent&#39;s relation with zero&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_rel</span><span class="o">.</span><span class="n">with_mimicked_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="greater_eq"><a class="viewcode-back" href="../../../../api/proveit.numbers.greater_eq.html#proveit.numbers.greater_eq">[docs]</a><span class="k">def</span> <span class="nf">greater_eq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Return an expression representing a &gt;= b, internally represented </span>
+<span class="sd">    as b &lt;= a but with a style that reverses the direction.    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">LessEq</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">with_styles</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;reversed&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.var_range.html">var_range</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  <li><a href="../../../proveit.html">proveit</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Judgment &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Label" href="proveit.Label.html" />
+    <link rel="prev" title="InvalidAssumptions" href="proveit.InvalidAssumptions.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="judgment">
+<h1>Judgment<a class="headerlink" href="#judgment" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.Judgment">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.</code><code class="sig-name descname">Judgment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.has_been_proven" title="proveit.Judgment.has_been_proven"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_been_proven</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.in_progress_to_derive_sideeffects" title="proveit.Judgment.in_progress_to_derive_sideeffects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">in_progress_to_derive_sideeffects</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.lookup_dict" title="proveit.Judgment.lookup_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup_dict</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.presumed_theorems_and_theories" title="proveit.Judgment.presumed_theorems_and_theories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">presumed_theorems_and_theories</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.presuming_exclusions" title="proveit.Judgment.presuming_exclusions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">presuming_exclusions</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.presuming_theorem_and_theory_exclusions" title="proveit.Judgment.presuming_theorem_and_theory_exclusions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">presuming_theorem_and_theory_exclusions</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.qed_in_progress" title="proveit.Judgment.qed_in_progress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qed_in_progress</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.sideeffect_processed" title="proveit.Judgment.sideeffect_processed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sideeffect_processed</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.theorem_being_proven" title="proveit.Judgment.theorem_being_proven"><code class="xref py py-obj docutils literal notranslate"><span class="pre">theorem_being_proven</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.as_impl" title="proveit.Judgment.as_impl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_impl</span></code></a>(self, hypothesis)</p></td>
+<td><p>Abbreviation for as_implication.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.as_implication" title="proveit.Judgment.as_implication"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_implication</span></code></a>(self, hypothesis)</p></td>
+<td><p>Performs a “deduction” derivation step, forming an implication statement with the given hypothesis and self.expr as the conclusion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.as_theorem_or_axiom" title="proveit.Judgment.as_theorem_or_axiom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_theorem_or_axiom</span></code></a>(self)</p></td>
+<td><p>Assuming this Judgment represents a Theorem or Axiom, return the Theorem or Axiom object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.begin_proof" title="proveit.Judgment.begin_proof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">begin_proof</span></code></a>(self, theorem)</p></td>
+<td><p>Begin a proof for a theorem.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.derive_side_effects" title="proveit.Judgment.derive_side_effects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">derive_side_effects</span></code></a>(self, assumptions)</p></td>
+<td><p>Derive any side-effects that are obvious consequences arising  from this truth.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.eliminate" title="proveit.Judgment.eliminate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eliminate</span></code></a>(self, \*skolem_constants[, …])</p></td>
+<td><p>Performs a Skolem constant elimination derivation step on this Judgment (KT), where this KT has the form S <a href="#id1"><span class="problematic" id="id2">|</span></a>– alpha and the set S of assumptions includes one or more assumptions involving one or more Skolem constants sk1, …, skn specified by skolem_constants, where the Skolem constant-related assumptions were previously generated using the Exists.choose(sk1, …, skn) method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.evaluation" title="proveit.Judgment.evaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluation</span></code></a>(self[, assumptions])</p></td>
+<td><p>Calling evaluation on a Judgment results in deriving that its expression is equal to TRUE, under the assumptions of the  Judgment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.find_judgment" title="proveit.Judgment.find_judgment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_judgment</span></code></a>(expression, assumptions_set)</p></td>
+<td><p>Try to find a Judgment for this expression that applies to the given set of assumptions (its assumptions are a subset of the given assumptions).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.forget_judgments" title="proveit.Judgment.forget_judgments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forget_judgments</span></code></a>()</p></td>
+<td><p>Forget all Judgment’s and all Assumption proof objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.generalize" title="proveit.Judgment.generalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generalize</span></code></a>(self, forall_var_or_vars_or_var_lists)</p></td>
+<td><p>Performs a generalization derivation step.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.inner_expr" title="proveit.Judgment.inner_expr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inner_expr</span></code></a>(self)</p></td>
+<td><p>Return an InnerExpr object to wrap the Judgment and access any inner sub-expression (including assumptions or inner expressions of assumptions) for the purpose of replacing the inner expression, changing its style, or relabeling variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.instantiate" title="proveit.Judgment.instantiate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instantiate</span></code></a>(self[, repl_map, …])</p></td>
+<td><p>Performs an instantiation derivation step to be proven under the  given assumptions, in addition to the assumptions of the  Judgment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.is_sufficient" title="proveit.Judgment.is_sufficient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_sufficient</span></code></a>(self, assumptions)</p></td>
+<td><p>Return True iff the given assumptions satisfy the Judgment; the Judgment is usable and requires a subset of the given  assumptions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.is_usable" title="proveit.Judgment.is_usable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_usable</span></code></a>(self)</p></td>
+<td><p>Returns True iff this Judgment has a “usable” proof.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.latex" title="proveit.Judgment.latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">latex</span></code></a>(self[, perform_usability_check])</p></td>
+<td><p>Display the turnstile notation to show that the judgment on the right derives from the set of assumptions on the left.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.order_of_appearance" title="proveit.Judgment.order_of_appearance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_of_appearance</span></code></a>(self, sub_expressions)</p></td>
+<td><p>Yields the given sub-Expressions in the order in which they appear in this Judgment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.print_dependents" title="proveit.Judgment.print_dependents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_dependents</span></code></a>(self)</p></td>
+<td><p>Provided that this Judgment is known to represent a theorem or  axiom, print all theorems that are known to depend on it  directly or indirectly.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.print_requirements" title="proveit.Judgment.print_requirements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_requirements</span></code></a>(self)</p></td>
+<td><p>Provided that this Judgment is known to represent a proven theorem, print the set of axioms that are required directly or  indirectly inits proof as well as any required theorems that are unproven (if it has not yet been proven completely).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.proof" title="proveit.Judgment.proof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proof</span></code></a>(self)</p></td>
+<td><p>Returns the most up-to-date proof of this Judgment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.raise_unusable_proof" title="proveit.Judgment.raise_unusable_proof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_unusable_proof</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Judgment.string" title="proveit.Judgment.string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">string</span></code></a>(self[, perform_usability_check])</p></td>
+<td><p>Display the turnstile notation to show that the judgment on the right derives from the set of assumptions on the left.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Judgment.with_matching_styles" title="proveit.Judgment.with_matching_styles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_matching_styles</span></code></a>(self, expr, assumptions)</p></td>
+<td><p>Return the Judgement expression with the styles matching those of the given expression and assumptions.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="proveit.Judgment.has_been_proven">
+<code class="sig-name descname">has_been_proven</code><em class="property"> = None</em><a class="headerlink" href="#proveit.Judgment.has_been_proven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.in_progress_to_derive_sideeffects">
+<code class="sig-name descname">in_progress_to_derive_sideeffects</code><em class="property"> = {}</em><a class="headerlink" href="#proveit.Judgment.in_progress_to_derive_sideeffects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.lookup_dict">
+<code class="sig-name descname">lookup_dict</code><em class="property"> = {not(FALSE) = TRUE: {|- not(FALSE) = TRUE}, forall_{x, y | x = y} (y = x): {|- forall_{x, y | x = y} (y = x)}, TRUE = not(FALSE): {|- TRUE = not(FALSE)}, forall_{A | A = TRUE} A: {|- forall_{A | A = TRUE} A}, not(FALSE): {|- not(FALSE)}, forall_{A | not(A)} (A != TRUE): {|- forall_{A | not(A)} (A != TRUE)}, FALSE != TRUE: {|- FALSE != TRUE}, forall_{x, y | x != y} (y != x): {|- forall_{x, y | x != y} (y != x)}, TRUE != FALSE: {|- TRUE != FALSE}, forall_{A in BOOLEAN | A != FALSE} A: {|- forall_{A in BOOLEAN | A != FALSE} A}, TRUE: {|- TRUE}, forall_{x} (x = x): {|- forall_{x} (x = x)}, TRUE = TRUE: {|- TRUE = TRUE}, forall_{A | A} (A in BOOLEAN): {|- forall_{A | A} (A in BOOLEAN)}, forall_{A | not(A)} (A in BOOLEAN): {|- forall_{A | not(A)} (A in BOOLEAN)}, TRUE in BOOLEAN: {|- TRUE in BOOLEAN}, forall_{A in BOOLEAN} (A or not(A)): {|- forall_{A in BOOLEAN} (A or not(A))}, forall_{A | (A = TRUE) or (A = FALSE)} (A in BOOLEAN): {|- forall_{A | (A = TRUE) or (A = FALSE)} (A in BOOLEAN)}, forall_{A in BOOLEAN} ((A = TRUE) or (A = FALSE)): {|- forall_{A in BOOLEAN} ((A = TRUE) or (A = FALSE))}, TRUE or not(TRUE): {|- TRUE or not(TRUE)}, forall_{x, y | x != y} not(x = y): {|- forall_{x, y | x != y} not(x = y)}, not(TRUE = FALSE): {|- not(TRUE = FALSE)}, forall_{A | not(A)} (A = FALSE): {|- forall_{A | not(A)} (A = FALSE)}, (TRUE = FALSE) = FALSE: {|- (TRUE = FALSE) = FALSE}, FALSE = (TRUE = FALSE): {|- FALSE = (TRUE = FALSE)}, forall_{A | A = FALSE} not(A): {|- forall_{A | A = FALSE} not(A)}, forall_{A | A} (A = TRUE): {|- forall_{A | A} (A = TRUE)}, not(TRUE = FALSE) = TRUE: {|- not(TRUE = FALSE) = TRUE}, TRUE = not(TRUE = FALSE): {|- TRUE = not(TRUE = FALSE)}, forall_{P, x, y | P(y), x = y} P(x): {|- forall_{P, x, y | P(y), x = y} P(x)}, forall_{P, x | P(TRUE), x} P(x): {|- forall_{P, x | P(TRUE), x} P(x)}, forall_{P, x | P(x), x} P(TRUE): {|- forall_{P, x | P(x), x} P(TRUE)}, forall_{P, x | P(FALSE), not(x)} P(x): {|- forall_{P, x | P(FALSE), not(x)} P(x)}, forall_{P, x | P(x), not(x)} P(FALSE): {|- forall_{P, x | P(x), not(x)} P(FALSE)}, not(TRUE = FALSE) in BOOLEAN: {|- not(TRUE = FALSE) in BOOLEAN}, forall_{A | not(A) in BOOLEAN} (A in BOOLEAN): {|- forall_{A | not(A) in BOOLEAN} (A in BOOLEAN)}, (TRUE = FALSE) in BOOLEAN: {|- (TRUE = FALSE) in BOOLEAN}, (TRUE = FALSE) or not(TRUE = FALSE): {|- (TRUE = FALSE) or not(TRUE = FALSE)}, not(TRUE = FALSE) or not(not(TRUE = FALSE)): {|- not(TRUE = FALSE) or not(not(TRUE = FALSE))}, forall_{x, y | not(x = y)} (x != y): {|- forall_{x, y | not(x = y)} (x != y)}, not(FALSE = TRUE): {|- not(FALSE = TRUE)}, (FALSE = TRUE) = FALSE: {|- (FALSE = TRUE) = FALSE}, FALSE = (FALSE = TRUE): {|- FALSE = (FALSE = TRUE)}, not(FALSE = TRUE) = TRUE: {|- not(FALSE = TRUE) = TRUE}, TRUE = not(FALSE = TRUE): {|- TRUE = not(FALSE = TRUE)}, not(FALSE = TRUE) in BOOLEAN: {|- not(FALSE = TRUE) in BOOLEAN}, (FALSE = TRUE) in BOOLEAN: {|- (FALSE = TRUE) in BOOLEAN}, (FALSE = TRUE) or not(FALSE = TRUE): {|- (FALSE = TRUE) or not(FALSE = TRUE)}, not(FALSE = TRUE) or not(not(FALSE = TRUE)): {|- not(FALSE = TRUE) or not(not(FALSE = TRUE))}, not(FALSE) in BOOLEAN: {|- not(FALSE) in BOOLEAN}, FALSE in BOOLEAN: {|- FALSE in BOOLEAN}, FALSE or not(FALSE): {|- FALSE or not(FALSE)}, not(FALSE) or not(not(FALSE)): {|- not(FALSE) or not(not(FALSE))}, not(TRUE) = FALSE: {|- not(TRUE) = FALSE}, FALSE = not(TRUE): {|- FALSE = not(TRUE)}, not(not(TRUE)): {|- not(not(TRUE))}, not(TRUE) != TRUE: {|- not(TRUE) != TRUE}, TRUE != not(TRUE): {|- TRUE != not(TRUE)}, not(TRUE = not(TRUE)): {|- not(TRUE = not(TRUE))}, (TRUE = not(TRUE)) = FALSE: {|- (TRUE = not(TRUE)) = FALSE}, FALSE = (TRUE = not(TRUE)): {|- FALSE = (TRUE = not(TRUE))}, not(TRUE = not(TRUE)) = TRUE: {|- not(TRUE = not(TRUE)) = TRUE}, TRUE = not(TRUE = not(TRUE)): {|- TRUE = not(TRUE = not(TRUE))}, not(TRUE = not(TRUE)) in BOOLEAN: {|- not(TRUE = not(TRUE)) in BOOLEAN}, (TRUE = not(TRUE)) in BOOLEAN: {|- (TRUE = not(TRUE)) in BOOLEAN}, (TRUE = not(TRUE)) or not(TRUE = not(TRUE)): {|- (TRUE = not(TRUE)) or not(TRUE = not(TRUE))}, not(TRUE = not(TRUE)) or not(not(TRUE = not(TRUE))): {|- not(TRUE = not(TRUE)) or not(not(TRUE = not(TRUE)))}, not(not(TRUE) = TRUE): {|- not(not(TRUE) = TRUE)}, (not(TRUE) = TRUE) = FALSE: {|- (not(TRUE) = TRUE) = FALSE}, FALSE = (not(TRUE) = TRUE): {|- FALSE = (not(TRUE) = TRUE)}, not(not(TRUE) = TRUE) = TRUE: {|- not(not(TRUE) = TRUE) = TRUE}, TRUE = not(not(TRUE) = TRUE): {|- TRUE = not(not(TRUE) = TRUE)}, not(not(TRUE) = TRUE) in BOOLEAN: {|- not(not(TRUE) = TRUE) in BOOLEAN}, (not(TRUE) = TRUE) in BOOLEAN: {|- (not(TRUE) = TRUE) in BOOLEAN}, (not(TRUE) = TRUE) or not(not(TRUE) = TRUE): {|- (not(TRUE) = TRUE) or not(not(TRUE) = TRUE)}, not(not(TRUE) = TRUE) or not(not(not(TRUE) = TRUE)): {|- not(not(TRUE) = TRUE) or not(not(not(TRUE) = TRUE))}, forall_{A | not(not(A))} A: {|- forall_{A | not(not(A))} A}, not(not(TRUE)) = TRUE: {|- not(not(TRUE)) = TRUE}, TRUE = not(not(TRUE)): {|- TRUE = not(not(TRUE))}, not(not(TRUE)) in BOOLEAN: {|- not(not(TRUE)) in BOOLEAN}, not(TRUE) in BOOLEAN: {|- not(TRUE) in BOOLEAN}, not(TRUE) or not(not(TRUE)): {|- not(TRUE) or not(not(TRUE))}, not(not(TRUE)) or not(not(not(TRUE))): {|- not(not(TRUE)) or not(not(not(TRUE)))}, TRUE =&gt; TRUE: {|- TRUE =&gt; TRUE}, FALSE =&gt; TRUE: {|- FALSE =&gt; TRUE}, FALSE =&gt; FALSE: {|- FALSE =&gt; FALSE}, forall_{A in BOOLEAN | not(A) =&gt; FALSE} A: {|- forall_{A in BOOLEAN | not(A) =&gt; FALSE} A}, forall_{A in BOOLEAN | A =&gt; FALSE} not(A): {|- forall_{A in BOOLEAN | A =&gt; FALSE} not(A)}, forall_{A | A =&gt; FALSE} (A != TRUE): {|- forall_{A | A =&gt; FALSE} (A != TRUE)}, BOOLEAN = {TRUE, FALSE}: {|- BOOLEAN = {TRUE, FALSE}}, {TRUE, FALSE} = BOOLEAN: {|- {TRUE, FALSE} = BOOLEAN}, FALSE = FALSE: {|- FALSE = FALSE}, NaturalPos proper_subset Natural: {|- NaturalPos proper_subset Natural}, forall_{A, B | A proper_subset B} (A subset_eq B): {|- forall_{A, B | A proper_subset B} (A subset_eq B)}, NaturalPos subset_eq Natural: {|- NaturalPos subset_eq Natural}, Natural proper_subset Integer: {|- Natural proper_subset Integer}, Natural subset_eq Integer: {|- Natural subset_eq Integer}, NaturalPos proper_subset Integer: {|- NaturalPos proper_subset Integer}, NaturalPos subset_eq Integer: {|- NaturalPos subset_eq Integer}, Natural proper_subset Rational: {|- Natural proper_subset Rational}, Natural subset_eq Rational: {|- Natural subset_eq Rational}, Natural proper_subset RationalNonNeg: {|- Natural proper_subset RationalNonNeg}, Natural subset_eq RationalNonNeg: {|- Natural subset_eq RationalNonNeg}, NaturalPos proper_subset RationalPos: {|- NaturalPos proper_subset RationalPos}, NaturalPos subset_eq RationalPos: {|- NaturalPos subset_eq RationalPos}, NaturalPos proper_subset RationalNonZero: {|- NaturalPos proper_subset RationalNonZero}, NaturalPos subset_eq RationalNonZero: {|- NaturalPos subset_eq RationalNonZero}, RationalNonZero proper_subset Rational: {|- RationalNonZero proper_subset Rational}, RationalNonZero subset_eq Rational: {|- RationalNonZero subset_eq Rational}, RationalPos proper_subset Rational: {|- RationalPos proper_subset Rational}, RationalPos subset_eq Rational: {|- RationalPos subset_eq Rational}, RationalNeg proper_subset Rational: {|- RationalNeg proper_subset Rational}, RationalNeg subset_eq Rational: {|- RationalNeg subset_eq Rational}, RationalNonNeg proper_subset Rational: {|- RationalNonNeg proper_subset Rational}, RationalNonNeg subset_eq Rational: {|- RationalNonNeg subset_eq Rational}, RationalPos proper_subset RationalNonZero: {|- RationalPos proper_subset RationalNonZero}, RationalPos subset_eq RationalNonZero: {|- RationalPos subset_eq RationalNonZero}, RationalNeg proper_subset RationalNonZero: {|- RationalNeg proper_subset RationalNonZero}, RationalNeg subset_eq RationalNonZero: {|- RationalNeg subset_eq RationalNonZero}, RationalPos proper_subset RationalNonNeg: {|- RationalPos proper_subset RationalNonNeg}, RationalPos subset_eq RationalNonNeg: {|- RationalPos subset_eq RationalNonNeg}, 0 in Rational: {|- 0 in Rational}, RealPos proper_subset Real: {|- RealPos proper_subset Real}, RealPos subset_eq Real: {|- RealPos subset_eq Real}, RealNeg proper_subset Real: {|- RealNeg proper_subset Real}, RealNeg subset_eq Real: {|- RealNeg subset_eq Real}, RealNonNeg proper_subset Real: {|- RealNonNeg proper_subset Real}, RealNonNeg subset_eq Real: {|- RealNonNeg subset_eq Real}, Rational proper_subset Real: {|- Rational proper_subset Real}, Rational subset_eq Real: {|- Rational subset_eq Real}, Integer proper_subset Real: {|- Integer proper_subset Real}, Integer subset_eq Real: {|- Integer subset_eq Real}, Natural proper_subset Real: {|- Natural proper_subset Real}, Natural subset_eq Real: {|- Natural subset_eq Real}, NaturalPos proper_subset Real: {|- NaturalPos proper_subset Real}, NaturalPos subset_eq Real: {|- NaturalPos subset_eq Real}, NaturalPos proper_subset RealPos: {|- NaturalPos proper_subset RealPos}, NaturalPos subset_eq RealPos: {|- NaturalPos subset_eq RealPos}, Natural proper_subset RealNonNeg: {|- Natural proper_subset RealNonNeg}, Natural subset_eq RealNonNeg: {|- Natural subset_eq RealNonNeg}, NaturalPos proper_subset RealNonNeg: {|- NaturalPos proper_subset RealNonNeg}, NaturalPos subset_eq RealNonNeg: {|- NaturalPos subset_eq RealNonNeg}, RealPos proper_subset RealNonNeg: {|- RealPos proper_subset RealNonNeg}, RealPos subset_eq RealNonNeg: {|- RealPos subset_eq RealNonNeg}, _c proper_subset _b: {{_c proper_subset _b} |- _c proper_subset _b}, forall_{A, B | A proper_subset B} [forall_{x in A} (x in B)]: {|- forall_{A, B | A proper_subset B} [forall_{x in A} (x in B)]}, 0 in Real: {|- 0 in Real}, Real proper_subset Complex: {|- Real proper_subset Complex}, Real subset_eq Complex: {|- Real subset_eq Complex}, Integer proper_subset Complex: {|- Integer proper_subset Complex}, Integer subset_eq Complex: {|- Integer subset_eq Complex}, Natural proper_subset Complex: {|- Natural proper_subset Complex}, Natural subset_eq Complex: {|- Natural subset_eq Complex}, 0 in Complex: {|- 0 in Complex}, 0 in Natural: {|- 0 in Natural}, forall_{n in Natural} (n &gt;= 0): {|- forall_{n in Natural} (n &gt;= 0)}, 0 &lt;= 0: {|- 0 &lt;= 0}, 0 in Integer: {|- 0 in Integer}, Integer proper_subset Rational: {|- Integer proper_subset Rational}, Integer subset_eq Rational: {|- Integer subset_eq Rational}, 0 &lt; 1: {|- 0 &lt; 1}, forall_{x, y | x &lt; y} (x &lt;= y): {|- forall_{x, y | x &lt; y} (x &lt;= y)}, 0 &lt;= 1: {|- 0 &lt;= 1}, 1 &lt; 2: {|- 1 &lt; 2}, 1 &lt;= 2: {|- 1 &lt;= 2}, 2 &lt; 3: {|- 2 &lt; 3}, 2 &lt;= 3: {|- 2 &lt;= 3}, 3 &lt; 4: {|- 3 &lt; 4}, 3 &lt;= 4: {|- 3 &lt;= 4}, 4 &lt; 5: {|- 4 &lt; 5}, 4 &lt;= 5: {|- 4 &lt;= 5}, 5 &lt; 6: {|- 5 &lt; 6}, 5 &lt;= 6: {|- 5 &lt;= 6}, 6 &lt; 7: {|- 6 &lt; 7}, 6 &lt;= 7: {|- 6 &lt;= 7}, 7 &lt; 8: {|- 7 &lt; 8}, 7 &lt;= 8: {|- 7 &lt;= 8}, 8 &lt; 9: {|- 8 &lt; 9}, 8 &lt;= 9: {|- 8 &lt;= 9}, 1 in Natural: {|- 1 in Natural}, 1 in Integer: {|- 1 in Integer}, 1 in Rational: {|- 1 in Rational}, 1 in Real: {|- 1 in Real}, 1 in Complex: {|- 1 in Complex}, 2 in Natural: {|- 2 in Natural}, 0 &lt;= 2: {|- 0 &lt;= 2}, 2 in Integer: {|- 2 in Integer}, 2 in Rational: {|- 2 in Rational}, 2 in Real: {|- 2 in Real}, 2 in Complex: {|- 2 in Complex}, 3 in Natural: {|- 3 in Natural}, 0 &lt;= 3: {|- 0 &lt;= 3}, 3 in Integer: {|- 3 in Integer}, 3 in Rational: {|- 3 in Rational}, 3 in Real: {|- 3 in Real}, 3 in Complex: {|- 3 in Complex}, 4 in Natural: {|- 4 in Natural}, 0 &lt;= 4: {|- 0 &lt;= 4}, 4 in Integer: {|- 4 in Integer}, 4 in Rational: {|- 4 in Rational}, 4 in Real: {|- 4 in Real}, 4 in Complex: {|- 4 in Complex}, 5 in Natural: {|- 5 in Natural}, 0 &lt;= 5: {|- 0 &lt;= 5}, 5 in Integer: {|- 5 in Integer}, 5 in Rational: {|- 5 in Rational}, 5 in Real: {|- 5 in Real}, 5 in Complex: {|- 5 in Complex}, 6 in Natural: {|- 6 in Natural}, 0 &lt;= 6: {|- 0 &lt;= 6}, 6 in Integer: {|- 6 in Integer}, 6 in Rational: {|- 6 in Rational}, 6 in Real: {|- 6 in Real}, 6 in Complex: {|- 6 in Complex}, 7 in Natural: {|- 7 in Natural}, 0 &lt;= 7: {|- 0 &lt;= 7}, 7 in Integer: {|- 7 in Integer}, 7 in Rational: {|- 7 in Rational}, 7 in Real: {|- 7 in Real}, 7 in Complex: {|- 7 in Complex}, 8 in Natural: {|- 8 in Natural}, 0 &lt;= 8: {|- 0 &lt;= 8}, 8 in Integer: {|- 8 in Integer}, 8 in Rational: {|- 8 in Rational}, 8 in Real: {|- 8 in Real}, 8 in Complex: {|- 8 in Complex}, 9 in Natural: {|- 9 in Natural}, 0 &lt;= 9: {|- 0 &lt;= 9}, 9 in Integer: {|- 9 in Integer}, 9 in Rational: {|- 9 in Rational}, 9 in Real: {|- 9 in Real}, 9 in Complex: {|- 9 in Complex}, 1 in NaturalPos: {|- 1 in NaturalPos}, forall_{n in NaturalPos} (n &gt;= 1): {|- forall_{n in NaturalPos} (n &gt;= 1)}, 1 &lt;= 1: {|- 1 &lt;= 1}, forall_{n in NaturalPos} (n != 0): {|- forall_{n in NaturalPos} (n != 0)}, 1 != 0: {|- 1 != 0}, 0 != 1: {|- 0 != 1}, not(0 = 1): {|- not(0 = 1)}, (0 = 1) = FALSE: {|- (0 = 1) = FALSE}, FALSE = (0 = 1): {|- FALSE = (0 = 1)}, not(0 = 1) = TRUE: {|- not(0 = 1) = TRUE}, TRUE = not(0 = 1): {|- TRUE = not(0 = 1)}, not(0 = 1) in BOOLEAN: {|- not(0 = 1) in BOOLEAN}, (0 = 1) in BOOLEAN: {|- (0 = 1) in BOOLEAN}, (0 = 1) or not(0 = 1): {|- (0 = 1) or not(0 = 1)}, not(0 = 1) or not(not(0 = 1)): {|- not(0 = 1) or not(not(0 = 1))}, not(1 = 0): {|- not(1 = 0)}, (1 = 0) = FALSE: {|- (1 = 0) = FALSE}, FALSE = (1 = 0): {|- FALSE = (1 = 0)}, not(1 = 0) = TRUE: {|- not(1 = 0) = TRUE}, TRUE = not(1 = 0): {|- TRUE = not(1 = 0)}, not(1 = 0) in BOOLEAN: {|- not(1 = 0) in BOOLEAN}, (1 = 0) in BOOLEAN: {|- (1 = 0) in BOOLEAN}, (1 = 0) or not(1 = 0): {|- (1 = 0) or not(1 = 0)}, not(1 = 0) or not(not(1 = 0)): {|- not(1 = 0) or not(not(1 = 0))}, 2 in NaturalPos: {|- 2 in NaturalPos}, 2 != 0: {|- 2 != 0}, 0 != 2: {|- 0 != 2}, not(0 = 2): {|- not(0 = 2)}, (0 = 2) = FALSE: {|- (0 = 2) = FALSE}, FALSE = (0 = 2): {|- FALSE = (0 = 2)}, not(0 = 2) = TRUE: {|- not(0 = 2) = TRUE}, TRUE = not(0 = 2): {|- TRUE = not(0 = 2)}, not(0 = 2) in BOOLEAN: {|- not(0 = 2) in BOOLEAN}, (0 = 2) in BOOLEAN: {|- (0 = 2) in BOOLEAN}, (0 = 2) or not(0 = 2): {|- (0 = 2) or not(0 = 2)}, not(0 = 2) or not(not(0 = 2)): {|- not(0 = 2) or not(not(0 = 2))}, not(2 = 0): {|- not(2 = 0)}, (2 = 0) = FALSE: {|- (2 = 0) = FALSE}, FALSE = (2 = 0): {|- FALSE = (2 = 0)}, not(2 = 0) = TRUE: {|- not(2 = 0) = TRUE}, TRUE = not(2 = 0): {|- TRUE = not(2 = 0)}, not(2 = 0) in BOOLEAN: {|- not(2 = 0) in BOOLEAN}, (2 = 0) in BOOLEAN: {|- (2 = 0) in BOOLEAN}, (2 = 0) or not(2 = 0): {|- (2 = 0) or not(2 = 0)}, not(2 = 0) or not(not(2 = 0)): {|- not(2 = 0) or not(not(2 = 0))}, 3 in NaturalPos: {|- 3 in NaturalPos}, 1 &lt;= 3: {|- 1 &lt;= 3}, 3 != 0: {|- 3 != 0}, 0 != 3: {|- 0 != 3}, not(0 = 3): {|- not(0 = 3)}, (0 = 3) = FALSE: {|- (0 = 3) = FALSE}, FALSE = (0 = 3): {|- FALSE = (0 = 3)}, not(0 = 3) = TRUE: {|- not(0 = 3) = TRUE}, TRUE = not(0 = 3): {|- TRUE = not(0 = 3)}, not(0 = 3) in BOOLEAN: {|- not(0 = 3) in BOOLEAN}, (0 = 3) in BOOLEAN: {|- (0 = 3) in BOOLEAN}, (0 = 3) or not(0 = 3): {|- (0 = 3) or not(0 = 3)}, not(0 = 3) or not(not(0 = 3)): {|- not(0 = 3) or not(not(0 = 3))}, not(3 = 0): {|- not(3 = 0)}, (3 = 0) = FALSE: {|- (3 = 0) = FALSE}, FALSE = (3 = 0): {|- FALSE = (3 = 0)}, not(3 = 0) = TRUE: {|- not(3 = 0) = TRUE}, TRUE = not(3 = 0): {|- TRUE = not(3 = 0)}, not(3 = 0) in BOOLEAN: {|- not(3 = 0) in BOOLEAN}, (3 = 0) in BOOLEAN: {|- (3 = 0) in BOOLEAN}, (3 = 0) or not(3 = 0): {|- (3 = 0) or not(3 = 0)}, not(3 = 0) or not(not(3 = 0)): {|- not(3 = 0) or not(not(3 = 0))}, 4 in NaturalPos: {|- 4 in NaturalPos}, 1 &lt;= 4: {|- 1 &lt;= 4}, 4 != 0: {|- 4 != 0}, 0 != 4: {|- 0 != 4}, not(0 = 4): {|- not(0 = 4)}, (0 = 4) = FALSE: {|- (0 = 4) = FALSE}, FALSE = (0 = 4): {|- FALSE = (0 = 4)}, not(0 = 4) = TRUE: {|- not(0 = 4) = TRUE}, TRUE = not(0 = 4): {|- TRUE = not(0 = 4)}, not(0 = 4) in BOOLEAN: {|- not(0 = 4) in BOOLEAN}, (0 = 4) in BOOLEAN: {|- (0 = 4) in BOOLEAN}, (0 = 4) or not(0 = 4): {|- (0 = 4) or not(0 = 4)}, not(0 = 4) or not(not(0 = 4)): {|- not(0 = 4) or not(not(0 = 4))}, not(4 = 0): {|- not(4 = 0)}, (4 = 0) = FALSE: {|- (4 = 0) = FALSE}, FALSE = (4 = 0): {|- FALSE = (4 = 0)}, not(4 = 0) = TRUE: {|- not(4 = 0) = TRUE}, TRUE = not(4 = 0): {|- TRUE = not(4 = 0)}, not(4 = 0) in BOOLEAN: {|- not(4 = 0) in BOOLEAN}, (4 = 0) in BOOLEAN: {|- (4 = 0) in BOOLEAN}, (4 = 0) or not(4 = 0): {|- (4 = 0) or not(4 = 0)}, not(4 = 0) or not(not(4 = 0)): {|- not(4 = 0) or not(not(4 = 0))}, 5 in NaturalPos: {|- 5 in NaturalPos}, 1 &lt;= 5: {|- 1 &lt;= 5}, 5 != 0: {|- 5 != 0}, 0 != 5: {|- 0 != 5}, not(0 = 5): {|- not(0 = 5)}, (0 = 5) = FALSE: {|- (0 = 5) = FALSE}, FALSE = (0 = 5): {|- FALSE = (0 = 5)}, not(0 = 5) = TRUE: {|- not(0 = 5) = TRUE}, TRUE = not(0 = 5): {|- TRUE = not(0 = 5)}, not(0 = 5) in BOOLEAN: {|- not(0 = 5) in BOOLEAN}, (0 = 5) in BOOLEAN: {|- (0 = 5) in BOOLEAN}, (0 = 5) or not(0 = 5): {|- (0 = 5) or not(0 = 5)}, not(0 = 5) or not(not(0 = 5)): {|- not(0 = 5) or not(not(0 = 5))}, not(5 = 0): {|- not(5 = 0)}, (5 = 0) = FALSE: {|- (5 = 0) = FALSE}, FALSE = (5 = 0): {|- FALSE = (5 = 0)}, not(5 = 0) = TRUE: {|- not(5 = 0) = TRUE}, TRUE = not(5 = 0): {|- TRUE = not(5 = 0)}, not(5 = 0) in BOOLEAN: {|- not(5 = 0) in BOOLEAN}, (5 = 0) in BOOLEAN: {|- (5 = 0) in BOOLEAN}, (5 = 0) or not(5 = 0): {|- (5 = 0) or not(5 = 0)}, not(5 = 0) or not(not(5 = 0)): {|- not(5 = 0) or not(not(5 = 0))}, 6 in NaturalPos: {|- 6 in NaturalPos}, 1 &lt;= 6: {|- 1 &lt;= 6}, 6 != 0: {|- 6 != 0}, 0 != 6: {|- 0 != 6}, not(0 = 6): {|- not(0 = 6)}, (0 = 6) = FALSE: {|- (0 = 6) = FALSE}, FALSE = (0 = 6): {|- FALSE = (0 = 6)}, not(0 = 6) = TRUE: {|- not(0 = 6) = TRUE}, TRUE = not(0 = 6): {|- TRUE = not(0 = 6)}, not(0 = 6) in BOOLEAN: {|- not(0 = 6) in BOOLEAN}, (0 = 6) in BOOLEAN: {|- (0 = 6) in BOOLEAN}, (0 = 6) or not(0 = 6): {|- (0 = 6) or not(0 = 6)}, not(0 = 6) or not(not(0 = 6)): {|- not(0 = 6) or not(not(0 = 6))}, not(6 = 0): {|- not(6 = 0)}, (6 = 0) = FALSE: {|- (6 = 0) = FALSE}, FALSE = (6 = 0): {|- FALSE = (6 = 0)}, not(6 = 0) = TRUE: {|- not(6 = 0) = TRUE}, TRUE = not(6 = 0): {|- TRUE = not(6 = 0)}, not(6 = 0) in BOOLEAN: {|- not(6 = 0) in BOOLEAN}, (6 = 0) in BOOLEAN: {|- (6 = 0) in BOOLEAN}, (6 = 0) or not(6 = 0): {|- (6 = 0) or not(6 = 0)}, not(6 = 0) or not(not(6 = 0)): {|- not(6 = 0) or not(not(6 = 0))}, 7 in NaturalPos: {|- 7 in NaturalPos}, 1 &lt;= 7: {|- 1 &lt;= 7}, 7 != 0: {|- 7 != 0}, 0 != 7: {|- 0 != 7}, not(0 = 7): {|- not(0 = 7)}, (0 = 7) = FALSE: {|- (0 = 7) = FALSE}, FALSE = (0 = 7): {|- FALSE = (0 = 7)}, not(0 = 7) = TRUE: {|- not(0 = 7) = TRUE}, TRUE = not(0 = 7): {|- TRUE = not(0 = 7)}, not(0 = 7) in BOOLEAN: {|- not(0 = 7) in BOOLEAN}, (0 = 7) in BOOLEAN: {|- (0 = 7) in BOOLEAN}, (0 = 7) or not(0 = 7): {|- (0 = 7) or not(0 = 7)}, not(0 = 7) or not(not(0 = 7)): {|- not(0 = 7) or not(not(0 = 7))}, not(7 = 0): {|- not(7 = 0)}, (7 = 0) = FALSE: {|- (7 = 0) = FALSE}, FALSE = (7 = 0): {|- FALSE = (7 = 0)}, not(7 = 0) = TRUE: {|- not(7 = 0) = TRUE}, TRUE = not(7 = 0): {|- TRUE = not(7 = 0)}, not(7 = 0) in BOOLEAN: {|- not(7 = 0) in BOOLEAN}, (7 = 0) in BOOLEAN: {|- (7 = 0) in BOOLEAN}, (7 = 0) or not(7 = 0): {|- (7 = 0) or not(7 = 0)}, not(7 = 0) or not(not(7 = 0)): {|- not(7 = 0) or not(not(7 = 0))}, 8 in NaturalPos: {|- 8 in NaturalPos}, 1 &lt;= 8: {|- 1 &lt;= 8}, 8 != 0: {|- 8 != 0}, 0 != 8: {|- 0 != 8}, not(0 = 8): {|- not(0 = 8)}, (0 = 8) = FALSE: {|- (0 = 8) = FALSE}, FALSE = (0 = 8): {|- FALSE = (0 = 8)}, not(0 = 8) = TRUE: {|- not(0 = 8) = TRUE}, TRUE = not(0 = 8): {|- TRUE = not(0 = 8)}, not(0 = 8) in BOOLEAN: {|- not(0 = 8) in BOOLEAN}, (0 = 8) in BOOLEAN: {|- (0 = 8) in BOOLEAN}, (0 = 8) or not(0 = 8): {|- (0 = 8) or not(0 = 8)}, not(0 = 8) or not(not(0 = 8)): {|- not(0 = 8) or not(not(0 = 8))}, not(8 = 0): {|- not(8 = 0)}, (8 = 0) = FALSE: {|- (8 = 0) = FALSE}, FALSE = (8 = 0): {|- FALSE = (8 = 0)}, not(8 = 0) = TRUE: {|- not(8 = 0) = TRUE}, TRUE = not(8 = 0): {|- TRUE = not(8 = 0)}, not(8 = 0) in BOOLEAN: {|- not(8 = 0) in BOOLEAN}, (8 = 0) in BOOLEAN: {|- (8 = 0) in BOOLEAN}, (8 = 0) or not(8 = 0): {|- (8 = 0) or not(8 = 0)}, not(8 = 0) or not(not(8 = 0)): {|- not(8 = 0) or not(not(8 = 0))}, 9 in NaturalPos: {|- 9 in NaturalPos}, 1 &lt;= 9: {|- 1 &lt;= 9}, 9 != 0: {|- 9 != 0}, 0 != 9: {|- 0 != 9}, not(0 = 9): {|- not(0 = 9)}, (0 = 9) = FALSE: {|- (0 = 9) = FALSE}, FALSE = (0 = 9): {|- FALSE = (0 = 9)}, not(0 = 9) = TRUE: {|- not(0 = 9) = TRUE}, TRUE = not(0 = 9): {|- TRUE = not(0 = 9)}, not(0 = 9) in BOOLEAN: {|- not(0 = 9) in BOOLEAN}, (0 = 9) in BOOLEAN: {|- (0 = 9) in BOOLEAN}, (0 = 9) or not(0 = 9): {|- (0 = 9) or not(0 = 9)}, not(0 = 9) or not(not(0 = 9)): {|- not(0 = 9) or not(not(0 = 9))}, not(9 = 0): {|- not(9 = 0)}, (9 = 0) = FALSE: {|- (9 = 0) = FALSE}, FALSE = (9 = 0): {|- FALSE = (9 = 0)}, not(9 = 0) = TRUE: {|- not(9 = 0) = TRUE}, TRUE = not(9 = 0): {|- TRUE = not(9 = 0)}, not(9 = 0) in BOOLEAN: {|- not(9 = 0) in BOOLEAN}, (9 = 0) in BOOLEAN: {|- (9 = 0) in BOOLEAN}, (9 = 0) or not(9 = 0): {|- (9 = 0) or not(9 = 0)}, not(9 = 0) or not(not(9 = 0)): {|- not(9 = 0) or not(not(9 = 0))}, (-0) = 0: {|- (-0) = 0}, 0 = (-0): {|- 0 = (-0)}}</em><a class="headerlink" href="#proveit.Judgment.lookup_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.presumed_theorems_and_theories">
+<code class="sig-name descname">presumed_theorems_and_theories</code><em class="property"> = None</em><a class="headerlink" href="#proveit.Judgment.presumed_theorems_and_theories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.presuming_exclusions">
+<code class="sig-name descname">presuming_exclusions</code><em class="property"> = None</em><a class="headerlink" href="#proveit.Judgment.presuming_exclusions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.presuming_theorem_and_theory_exclusions">
+<code class="sig-name descname">presuming_theorem_and_theory_exclusions</code><em class="property"> = None</em><a class="headerlink" href="#proveit.Judgment.presuming_theorem_and_theory_exclusions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.qed_in_progress">
+<code class="sig-name descname">qed_in_progress</code><em class="property"> = False</em><a class="headerlink" href="#proveit.Judgment.qed_in_progress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.sideeffect_processed">
+<code class="sig-name descname">sideeffect_processed</code><em class="property"> = {(RationalPos subset_eq RationalNonZero, ()), ((0 = 3) in BOOLEAN, ()), (Natural subset_eq Real, ()), (3 in Natural, ()), (not(0 = 4) in BOOLEAN, ()), (RealNonNeg subset_eq Real, ()), (1 in Real, ()), (Natural subset_eq RationalNonNeg, ()), (not(not(TRUE) = TRUE) in BOOLEAN, ()), (not(8 = 0) = TRUE, ()), (forall_{x, y | x = y} (y = x), ()), (7 in Complex, ()), (1 != 0, ()), (not(0 = 4) or not(not(0 = 4)), ()), ((FALSE = TRUE) or not(FALSE = TRUE), ()), (FALSE = (not(TRUE) = TRUE), ()), (0 != 5, ()), (0 in Natural, ()), (FALSE = (6 = 0), ()), (forall_{n in NaturalPos} (n &gt;= 1), ()), (RationalNonNeg subset_eq Rational, ()), (6 in NaturalPos, ()), (not(TRUE = FALSE), ()), (not(4 = 0), ()), (NaturalPos proper_subset RationalNonZero, ()), (FALSE = (7 = 0), ()), (4 in NaturalPos, ()), (RationalNeg proper_subset RationalNonZero, ()), (FALSE = (0 = 2), ()), (not(1 = 0), ()), ((0 = 3) or not(0 = 3), ()), (9 != 0, ()), (not(2 = 0) in BOOLEAN, ()), (5 != 0, ()), (forall_{A | A = FALSE} not(A), ()), (forall_{x, y | not(x = y)} (x != y), ()), (3 != 0, ()), ((4 = 0) or not(4 = 0), ()), (5 in Natural, ()), (not(0 = 6), ()), (7 in NaturalPos, ()), (not(0 = 3) or not(not(0 = 3)), ()), (RationalNeg proper_subset Rational, ()), (TRUE = not(0 = 8), ()), (not(0 = 8), ()), ((0 = 1) = FALSE, ()), ((2 = 0) in BOOLEAN, ()), (not(0 = 1) = TRUE, ()), (not(0 = 3) = TRUE, ()), (2 &lt; 3, ()), (FALSE = (3 = 0), ()), ((0 = 7) = FALSE, ()), (FALSE or not(FALSE), ()), (7 in Real, ()), ((7 = 0) = FALSE, ()), (FALSE = (0 = 9), ()), (not(not(TRUE) = TRUE) = TRUE, ()), (forall_{A, B | A proper_subset B} (A subset_eq B), ()), (1 in Complex, ()), (NaturalPos subset_eq RealNonNeg, ()), ((0 = 5) or not(0 = 5), ()), ((not(TRUE) = TRUE) or not(not(TRUE) = TRUE), ()), (6 &lt; 7, ()), (1 &lt;= 7, ()), ((7 = 0) in BOOLEAN, ()), (RationalPos proper_subset Rational, ()), (Natural proper_subset Integer, ()), (Integer proper_subset Rational, ()), (5 &lt;= 6, ()), (not(0 = 4), ()), (forall_{A | A} (A in BOOLEAN), ()), (not(FALSE), ()), (TRUE = not(not(TRUE) = TRUE), ()), (Real proper_subset Complex, ()), (not(8 = 0), ()), (FALSE = (1 = 0), ()), ((TRUE = not(TRUE)) = FALSE, ()), (0 = (-0), ()), (not(8 = 0) or not(not(8 = 0)), ()), (FALSE != TRUE, ()), (forall_{A | not(not(A))} A, ()), (TRUE = not(not(TRUE)), ()), (not(TRUE = FALSE) = TRUE, ()), (9 in Real, ()), (not(4 = 0) = TRUE, ()), (2 in NaturalPos, ()), (Natural subset_eq Rational, ()), (forall_{x, y | x != y} not(x = y), ()), (0 != 6, ()), (not(TRUE = FALSE) or not(not(TRUE = FALSE)), ()), (TRUE =&gt; TRUE, ()), (Integer subset_eq Real, ()), (not(0 = 2) in BOOLEAN, ()), (TRUE = not(FALSE = TRUE), ()), (Natural subset_eq Complex, ()), ((0 = 3) = FALSE, ()), ((0 = 5) in BOOLEAN, ()), (5 in Rational, ()), (forall_{A in BOOLEAN | A =&gt; FALSE} not(A), ()), ((0 = 4) in BOOLEAN, ()), (Natural subset_eq Integer, ()), (5 in Integer, ()), (RealPos proper_subset RealNonNeg, ()), (TRUE = not(5 = 0), ()), (not(6 = 0) = TRUE, ()), (6 in Natural, ()), (TRUE = not(4 = 0), ()), (not(TRUE = not(TRUE)) = TRUE, ()), ((6 = 0) = FALSE, ()), (not(2 = 0) or not(not(2 = 0)), ()), (6 in Complex, ()), (Rational subset_eq Real, ()), (forall_{P, x | P(x), x} P(TRUE), ()), (not(7 = 0) in BOOLEAN, ()), (not(0 = 5) = TRUE, ()), (not(0 = 5) in BOOLEAN, ()), (TRUE = not(0 = 9), ()), (FALSE = (0 = 8), ()), ((0 = 2) in BOOLEAN, ()), (FALSE in BOOLEAN, ()), (3 &lt;= 4, ()), (FALSE = (0 = 5), ()), ((5 = 0) in BOOLEAN, ()), ((6 = 0) in BOOLEAN, ()), (RationalPos subset_eq RationalNonNeg, ()), ((3 = 0) in BOOLEAN, ()), (Integer proper_subset Complex, ()), (Natural proper_subset RationalNonNeg, ()), (6 &lt;= 7, ()), (not(0 = 7) = TRUE, ()), (not(TRUE = FALSE) in BOOLEAN, ()), (TRUE = not(0 = 6), ()), (3 in NaturalPos, ()), (forall_{x} (x = x), ()), (1 in Natural, ()), (TRUE = not(9 = 0), ()), (not(1 = 0) in BOOLEAN, ()), (5 in NaturalPos, ()), (4 &lt; 5, ()), ((0 = 1) in BOOLEAN, ()), (not(5 = 0) in BOOLEAN, ()), (0 in Real, ()), ((0 = 2) or not(0 = 2), ()), (not(0 = 3) in BOOLEAN, ()), (0 != 4, ()), ((0 = 5) = FALSE, ()), (Natural subset_eq RealNonNeg, ()), (forall_{A in BOOLEAN} (A or not(A)), ()), (NaturalPos subset_eq Natural, ()), (TRUE != FALSE, ()), (forall_{A | not(A)} (A != TRUE), ()), ((9 = 0) or not(9 = 0), ()), ((0 = 6) = FALSE, ()), (forall_{A in BOOLEAN | A != FALSE} A, ()), ((FALSE = TRUE) in BOOLEAN, ()), (not(0 = 5), ()), (0 &lt;= 4, ()), ((0 = 9) = FALSE, ()), (8 in NaturalPos, ()), (9 in NaturalPos, ()), (1 in Rational, ()), (4 in Natural, ()), (not(0 = 6) in BOOLEAN, ()), (0 != 3, ()), (RationalPos proper_subset RationalNonNeg, ()), (forall_{A | A} (A = TRUE), ()), (FALSE = (0 = 4), ()), ((5 = 0) or not(5 = 0), ()), (0 &lt;= 3, ()), ((9 = 0) = FALSE, ()), (not(0 = 1) in BOOLEAN, ()), (not(8 = 0) in BOOLEAN, ()), (not(0 = 1) or not(not(0 = 1)), ()), (forall_{A in BOOLEAN} ((A = TRUE) or (A = FALSE)), ()), (Natural proper_subset Real, ()), (8 in Real, ()), (6 in Rational, ()), ((0 = 4) or not(0 = 4), ()), (RealNonNeg proper_subset Real, ()), ((4 = 0) = FALSE, ()), (1 &lt;= 9, ()), (2 in Complex, ()), (TRUE = not(7 = 0), ()), (1 &lt; 2, ()), (5 in Real, ()), (not(1 = 0) = TRUE, ()), (forall_{x, y | x != y} (y != x), ()), (1 &lt;= 1, ()), (not(0 = 5) or not(not(0 = 5)), ()), (RationalNeg subset_eq RationalNonZero, ()), (not(0 = 6) = TRUE, ()), (8 &lt;= 9, ()), (8 in Natural, ()), (0 != 2, ()), (FALSE = (FALSE = TRUE), ()), (1 &lt;= 2, ()), (FALSE =&gt; FALSE, ()), (not(not(TRUE) = TRUE), ()), (0 in Integer, ()), (not(5 = 0), ()), (not(4 = 0) in BOOLEAN, ()), (Integer proper_subset Real, ()), (not(not(TRUE)) in BOOLEAN, ()), (4 &lt;= 5, ()), (4 in Real, ()), (9 in Rational, ()), (not(0 = 4) = TRUE, ()), ((-0) = 0, ()), (forall_{A | not(A) in BOOLEAN} (A in BOOLEAN), ()), ((4 = 0) in BOOLEAN, ()), (NaturalPos subset_eq RationalNonZero, ()), (TRUE in BOOLEAN, ()), (7 in Integer, ()), (0 != 9, ()), (BOOLEAN = {TRUE, FALSE}, ()), (NaturalPos proper_subset RationalPos, ()), (TRUE = not(FALSE), ()), (7 != 0, ()), ({TRUE, FALSE} = BOOLEAN, ()), (not(0 = 9) or not(not(0 = 9)), ()), (4 in Rational, ()), ((0 = 7) or not(0 = 7), ()), ((TRUE = FALSE) in BOOLEAN, ()), (RationalNonZero proper_subset Rational, ()), (not(FALSE = TRUE) in BOOLEAN, ()), (not(not(TRUE)) = TRUE, ()), ((8 = 0) in BOOLEAN, ()), ((0 = 9) or not(0 = 9), ()), (not(0 = 2) or not(not(0 = 2)), ()), (RealPos proper_subset Real, ()), (6 != 0, ()), (TRUE = not(TRUE = not(TRUE)), ()), (0 &lt; 1, ()), (not(2 = 0), ()), (FALSE = (TRUE = not(TRUE)), ()), ((0 = 6) in BOOLEAN, ()), (TRUE = not(0 = 7), ()), (3 in Rational, ()), (0 in Complex, ()), ((2 = 0) = FALSE, ()), (not(1 = 0) or not(not(1 = 0)), ()), (not(7 = 0) = TRUE, ()), (5 &lt; 6, ()), (forall_{x, y | x &lt; y} (x &lt;= y), ()), (forall_{P, x, y | P(y), x = y} P(x), ()), (1 in Integer, ()), (1 &lt;= 5, ()), (2 in Rational, ()), (8 in Rational, ()), (NaturalPos proper_subset Integer, ()), (5 in Complex, ()), ((1 = 0) = FALSE, ()), (Real subset_eq Complex, ()), (TRUE = not(8 = 0), ()), (RationalPos subset_eq Rational, ()), ((TRUE = not(TRUE)) in BOOLEAN, ()), (Integer subset_eq Rational, ()), (not(5 = 0) or not(not(5 = 0)), ()), (not(FALSE = TRUE) or not(not(FALSE = TRUE)), ()), (FALSE =&gt; TRUE, ()), (not(TRUE) = FALSE, ()), (TRUE = not(0 = 1), ()), (8 in Integer, ()), (not(0 = 7) or not(not(0 = 7)), ()), (not(6 = 0) or not(not(6 = 0)), ()), (FALSE = (8 = 0), ()), (RationalPos proper_subset RationalNonZero, ()), (2 in Real, ()), (not(0 = 9), ()), (forall_{P, x | P(x), not(x)} P(FALSE), ()), (1 &lt;= 3, ()), ((0 = 8) or not(0 = 8), ()), (TRUE = TRUE, ()), (0 != 7, ()), (not(not(TRUE)) or not(not(not(TRUE))), ()), (FALSE = (5 = 0), ()), ((1 = 0) or not(1 = 0), ()), ((TRUE = FALSE) = FALSE, ()), (Natural proper_subset Complex, ()), (7 &lt;= 8, ()), (not(5 = 0) = TRUE, ()), ((8 = 0) or not(8 = 0), ()), (9 in Natural, ()), (3 in Complex, ()), (8 in Complex, ()), (TRUE, ()), (RealPos subset_eq RealNonNeg, ()), (8 != 0, ()), (0 &lt;= 5, ()), (not(9 = 0) or not(not(9 = 0)), ()), (not(0 = 8) = TRUE, ()), (3 &lt; 4, ()), (not(TRUE) in BOOLEAN, ()), ((2 = 0) or not(2 = 0), ()), ((0 = 4) = FALSE, ()), (not(TRUE = not(TRUE)) or not(not(TRUE = not(TRUE))), ()), (Natural proper_subset Rational, ()), (not(0 = 2) = TRUE, ()), (not(3 = 0) or not(not(3 = 0)), ()), (not(FALSE) or not(not(FALSE)), ()), (NaturalPos subset_eq RationalPos, ()), (Rational proper_subset Real, ()), (1 &lt;= 6, ()), (NaturalPos subset_eq Real, ()), (not(TRUE) != TRUE, ()), (TRUE or not(TRUE), ()), (4 in Complex, ()), ((1 = 0) in BOOLEAN, ()), (forall_{A | A =&gt; FALSE} (A != TRUE), ()), (forall_{A | not(A)} (A in BOOLEAN), ()), ((0 = 2) = FALSE, ()), (FALSE = (9 = 0), ()), (6 in Real, ()), (NaturalPos proper_subset RealPos, ()), (not(0 = 9) in BOOLEAN, ()), (9 in Integer, ()), (not(6 = 0), ()), (TRUE = not(6 = 0), ()), (forall_{A, B | A proper_subset B} [forall_{x in A} (x in B)], ()), (Natural proper_subset RealNonNeg, ()), (2 != 0, ()), (1 in NaturalPos, ()), (RationalNonNeg proper_subset Rational, ()), (0 != 8, ()), (0 &lt;= 2, ()), (TRUE = not(0 = 5), ()), (1 &lt;= 4, ()), ((9 = 0) in BOOLEAN, ()), (not(FALSE = TRUE) = TRUE, ()), (forall_{P, x | P(FALSE), not(x)} P(x), ()), (RationalNeg subset_eq Rational, ()), (forall_{A | (A = TRUE) or (A = FALSE)} (A in BOOLEAN), ()), (RealNeg proper_subset Real, ()), (not(not(TRUE)), ()), (not(FALSE = TRUE), ()), (not(0 = 8) in BOOLEAN, ()), (NaturalPos subset_eq Integer, ()), (3 in Integer, ()), (TRUE = not(0 = 4), ()), (0 in Rational, ()), (4 in Integer, ()), (TRUE = not(1 = 0), ()), ((0 = 8) in BOOLEAN, ()), (RealPos subset_eq Real, ()), (not(0 = 7) in BOOLEAN, ()), (7 in Natural, ()), (0 &lt;= 8, ()), (6 in Integer, ()), ((0 = 6) or not(0 = 6), ()), ((0 = 1) or not(0 = 1), ()), (0 &lt;= 7, ()), (not(TRUE = not(TRUE)), ()), ((7 = 0) or not(7 = 0), ()), (0 != 1, ()), (TRUE = not(0 = 3), ()), (7 in Rational, ()), (forall_{A | A = TRUE} A, ()), (FALSE = FALSE, ()), (Integer subset_eq Complex, ()), (not(9 = 0), ()), (NaturalPos proper_subset Real, ()), (TRUE = not(0 = 2), ()), (forall_{n in NaturalPos} (n != 0), ()), ((6 = 0) or not(6 = 0), ()), (TRUE != not(TRUE), ()), (TRUE = not(3 = 0), ()), (FALSE = (4 = 0), ()), (9 in Complex, ()), (RealNeg subset_eq Real, ()), (not(3 = 0), ()), (not(0 = 9) = TRUE, ()), (not(not(TRUE) = TRUE) or not(not(not(TRUE) = TRUE)), ()), (not(4 = 0) or not(not(4 = 0)), ()), (8 &lt; 9, ()), (FALSE = (0 = 3), ()), (TRUE = not(TRUE = FALSE), ()), (not(0 = 1), ()), (FALSE = (0 = 7), ()), ((3 = 0) or not(3 = 0), ()), (2 in Natural, ()), ((not(TRUE) = TRUE) = FALSE, ()), (FALSE = (0 = 6), ()), (not(TRUE = not(TRUE)) in BOOLEAN, ()), (not(2 = 0) = TRUE, ()), (NaturalPos subset_eq RealPos, ()), (not(3 = 0) = TRUE, ()), (not(9 = 0) = TRUE, ()), ((FALSE = TRUE) = FALSE, ()), (7 &lt; 8, ()), (forall_{A in BOOLEAN | not(A) =&gt; FALSE} A, ()), (FALSE = (2 = 0), ()), (NaturalPos proper_subset Natural, ()), ((0 = 8) = FALSE, ()), (not(FALSE) in BOOLEAN, ()), ((0 = 7) in BOOLEAN, ()), (FALSE = (TRUE = FALSE), ()), (0 &lt;= 0, ()), (2 &lt;= 3, ()), ((not(TRUE) = TRUE) in BOOLEAN, ()), (not(TRUE) or not(not(TRUE)), ()), ((5 = 0) = FALSE, ()), ((8 = 0) = FALSE, ()), (FALSE = not(TRUE), ()), (0 &lt;= 6, ()), (forall_{P, x | P(TRUE), x} P(x), ()), ((TRUE = not(TRUE)) or not(TRUE = not(TRUE)), ()), (forall_{n in Natural} (n &gt;= 0), ()), ((0 = 9) in BOOLEAN, ()), (not(0 = 8) or not(not(0 = 8)), ()), (not(0 = 3), ()), (not(FALSE) = TRUE, ()), (not(7 = 0) or not(not(7 = 0)), ()), (4 != 0, ()), (3 in Real, ()), (0 &lt;= 1, ()), (0 &lt;= 9, ()), (not(7 = 0), ()), (NaturalPos proper_subset RealNonNeg, ()), (not(0 = 7), ()), (forall_{A | not(A)} (A = FALSE), ()), (not(3 = 0) in BOOLEAN, ()), (not(9 = 0) in BOOLEAN, ()), (not(0 = 2), ()), (TRUE = not(2 = 0), ()), (not(6 = 0) in BOOLEAN, ()), (FALSE = (0 = 1), ()), ((TRUE = FALSE) or not(TRUE = FALSE), ()), ((3 = 0) = FALSE, ()), (1 &lt;= 8, ()), (RationalNonZero subset_eq Rational, ()), (2 in Integer, ()), (not(0 = 6) or not(not(0 = 6)), ())}</em><a class="headerlink" href="#proveit.Judgment.sideeffect_processed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="proveit.Judgment.theorem_being_proven">
+<code class="sig-name descname">theorem_being_proven</code><em class="property"> = None</em><a class="headerlink" href="#proveit.Judgment.theorem_being_proven" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.Judgment.as_impl">
+<code class="sig-name descname">as_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">hypothesis</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.as_impl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.as_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abbreviation for as_implication.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.as_implication">
+<code class="sig-name descname">as_implication</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">hypothesis</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.as_implication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.as_implication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a “deduction” derivation step, forming an implication
+statement with the given hypothesis and self.expr
+as the conclusion.  The hypothesis is removed from the set of
+the conclusion statement’s assumptions for the implication
+statement’s assumptions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.as_theorem_or_axiom">
+<code class="sig-name descname">as_theorem_or_axiom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.as_theorem_or_axiom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.as_theorem_or_axiom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assuming this Judgment represents a Theorem or Axiom, return
+the Theorem or Axiom object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.begin_proof">
+<code class="sig-name descname">begin_proof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">theorem</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.begin_proof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.begin_proof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin a proof for a theorem.  Only use other theorems that are 
+in the presuming list of theorems/packages or theorems that are 
+required, directly or indirectly, in proofs of theorems that are
+explicitly listed (these are implicitly presumed).  If there 
+exists any presumed theorem that has a direct or indirect 
+dependence upon this theorem then a CircularLogic exception is
+raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.derive_side_effects">
+<code class="sig-name descname">derive_side_effects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.derive_side_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.derive_side_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive any side-effects that are obvious consequences arising 
+from this truth.  Called after the corresponding Proof is 
+complete.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.eliminate">
+<code class="sig-name descname">eliminate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">\*skolem_constants</em>, <em class="sig-param">assumptions=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.eliminate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.eliminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a Skolem constant elimination derivation step on this
+Judgment (KT), where this KT has the form S <a href="#id3"><span class="problematic" id="id4">|</span></a>– alpha and the
+set S of assumptions includes one or more assumptions involving
+one or more Skolem constants sk1, …, skn specified by
+skolem_constants, where the Skolem constant-related assumptions
+were previously generated using the Exists.choose(sk1, …, skn)
+method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.evaluation">
+<code class="sig-name descname">evaluation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.evaluation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.evaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calling evaluation on a Judgment results in deriving that its
+expression is equal to TRUE, under the assumptions of the 
+Judgment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.find_judgment">
+<em class="property">static </em><code class="sig-name descname">find_judgment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expression</span></em>, <em class="sig-param"><span class="n">assumptions_set</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.find_judgment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.find_judgment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to find a Judgment for this expression that applies to
+the given set of assumptions (its assumptions are a subset
+of the given assumptions).  Return None if there is no match.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.forget_judgments">
+<em class="property">static </em><code class="sig-name descname">forget_judgments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.forget_judgments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.forget_judgments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forget all Judgment’s and all Assumption proof objects.  This is
+used for demonstration purposes in the tutorial, but should not 
+generally be needed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.generalize">
+<code class="sig-name descname">generalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">forall_var_or_vars_or_var_lists</span></em>, <em class="sig-param"><span class="n">domain_lists</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">domain</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">conditions</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.generalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.generalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a generalization derivation step.  Returns the
+proven generalized Judgment.  Can introduce any number of
+nested Forall operations to wrap the original statement,
+corresponding to the number of given forall_var_lists and 
+domains.  A single variable list or single variable and a single
+domain may be provided to introduce a single Forall wrapper.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.inner_expr">
+<code class="sig-name descname">inner_expr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.inner_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.inner_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an InnerExpr object to wrap the Judgment and
+access any inner sub-expression (including assumptions or
+inner expressions of assumptions) for the purpose of
+replacing the inner expression, changing its style,
+or relabeling variables.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.instantiate">
+<code class="sig-name descname">instantiate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">repl_map=None</em>, <em class="sig-param">\*</em>, <em class="sig-param">num_forall_eliminations=None</em>, <em class="sig-param">assumptions=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.instantiate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.instantiate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs an instantiation derivation step to be proven under the 
+given assumptions, in addition to the assumptions of the 
+Judgment.  This may instantiate Variables that are universally 
+quantified immediately to the right of the Judgment turnstile
+according to the “replacement” map (repl_map), eliminating the 
+quantifier as the corresponding variables are instantiated.
+It may eliminate any number of nested Forall operations, 
+instantiating the instance Variables according to repl_map, 
+going to the depth for which the instance variables occur as 
+keys in repl_map or according to num_forall_eliminations if it
+is specified.</p>
+<p>For Variables that map to Variables in the replacement map,
+this is handled as a relabeling across both sides of the
+turnstile as well as “internal” Lambda map parameters.
+For Variables that map to non-Variables, the replacement only
+occurs within an eliminated quantifier and will not penetrate 
+into internal Lambda maps that use that Variable as a parameter.</p>
+<p>Replacements are made simultaneously.  For example, the 
+{x:y, y:x} mapping will swap x and y variables.</p>
+<p>Returns the proven instantiated Judgment, or throws an exception
+if the proof fails.  For the proof to succeed, all conditions of
+eliminated Forall operations, after replacements are made, must
+be proven.  Furthermore, there may be additional requirements 
+when iterated parameters are instantiated (see Lambda.apply for
+details).  Automation mayb be used in attempting to prove these 
+requirements provided proveit.defaults.automation=True.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.is_sufficient">
+<code class="sig-name descname">is_sufficient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.is_sufficient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.is_sufficient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True iff the given assumptions satisfy the Judgment;
+the Judgment is usable and requires a subset of the given 
+assumptions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.is_usable">
+<code class="sig-name descname">is_usable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.is_usable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.is_usable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True iff this Judgment has a “usable” proof.  Proofs
+may be unusable when proving a theorem that is restricted with
+respect to which theorems may be used (to avoid circular logic).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.latex">
+<code class="sig-name descname">latex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">perform_usability_check</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.latex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the turnstile notation to show that the judgment
+on the right derives from the set of assumptions on the left.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.order_of_appearance">
+<code class="sig-name descname">order_of_appearance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">sub_expressions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.order_of_appearance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.order_of_appearance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields the given sub-Expressions in the order in which they
+appear in this Judgment.  There may be repeats.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.print_dependents">
+<code class="sig-name descname">print_dependents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.print_dependents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.print_dependents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provided that this Judgment is known to represent a theorem or 
+axiom, print all theorems that are known to depend on it 
+directly or indirectly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.print_requirements">
+<code class="sig-name descname">print_requirements</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.print_requirements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.print_requirements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provided that this Judgment is known to represent a proven
+theorem, print the set of axioms that are required directly or 
+indirectly inits proof as well as any required theorems that are
+unproven (if it has not yet been proven completely).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.proof">
+<code class="sig-name descname">proof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.proof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.proof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the most up-to-date proof of this Judgment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.raise_unusable_proof">
+<code class="sig-name descname">raise_unusable_proof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.raise_unusable_proof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.raise_unusable_proof" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.string">
+<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">perform_usability_check</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the turnstile notation to show that the judgment
+on the right derives from the set of assumptions on the left.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Judgment.with_matching_styles">
+<code class="sig-name descname">with_matching_styles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">assumptions</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/judgment.html#Judgment.with_matching_styles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Judgment.with_matching_styles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Judgement expression with the styles matching
+those of the given expression and assumptions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.InvalidAssumptions.html" title="previous chapter">InvalidAssumptions</a></li>
+      <li>Next: <a href="proveit.Label.html" title="next chapter">Label</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.Judgment.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

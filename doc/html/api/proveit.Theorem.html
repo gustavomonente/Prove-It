@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theorem &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Theory" href="proveit.Theory.html" />
+    <link rel="prev" title="StyleOptions" href="proveit.StyleOptions.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="theorem">
+<h1>Theorem<a class="headerlink" href="#theorem" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.Theorem">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.</code><code class="sig-name descname">Theorem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr</span></em>, <em class="sig-param"><span class="n">theory</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="proveit.Proof.html#proveit.Proof" title="proveit._core_.proof.Proof"><code class="docutils literal notranslate"><span class="pre">proveit.Proof</span></code></a></p>
+<p class="rubric">Attributes Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.all_theorems" title="proveit.Theorem.all_theorems"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_theorems</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.all_dependents" title="proveit.Theorem.all_dependents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_dependents</span></code></a>(self)</p></td>
+<td><p>Returns the set of theorems that are known to depend upon this theorem directly or indirectly.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.all_requirements" title="proveit.Theorem.all_requirements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_requirements</span></code></a>(self)</p></td>
+<td><p>Returns the set of axioms that are required (directly or indirectly) by the theorem.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.all_used_theorem_names" title="proveit.Theorem.all_used_theorem_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_used_theorem_names</span></code></a>(self)</p></td>
+<td><p>Returns the set of theorems used to prove the given theorem, directly or indirectly.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.direct_dependents" title="proveit.Theorem.direct_dependents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">direct_dependents</span></code></a>(self)</p></td>
+<td><p>Returns the theorems that depend directly upon this axioms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.get_link" title="proveit.Theorem.get_link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_link</span></code></a>(self)</p></td>
+<td><p>Return the HTML link to the theorem proof file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.get_presumptions_and_exclusions" title="proveit.Theorem.get_presumptions_and_exclusions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_presumptions_and_exclusions</span></code></a>(self)</p></td>
+<td><p>Return the set of theorems and theories that are explicitly presumed by this theorem, and a set of exclusions (e.g., you could presume the proveit.logic theory but exclude proveit.logic.equality).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.has_proof" title="proveit.Theorem.has_proof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_proof</span></code></a>(self)</p></td>
+<td><p>Returns true if and only if this theorem has a recorded proof.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.is_conjecture" title="proveit.Theorem.is_conjecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_conjecture</span></code></a>(self)</p></td>
+<td><p>A “Theorem” that is not fully proven is a “conjecture”.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.is_fully_proven" title="proveit.Theorem.is_fully_proven"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_fully_proven</span></code></a>(self)</p></td>
+<td><p>Returns true if and only if this theorem is fully proven (it has a recorded proof and all dependent theorems are fully proven, all the way to axioms which don’t require proofs).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.remove_proof" title="proveit.Theorem.remove_proof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_proof</span></code></a>(self)</p></td>
+<td><p>Remove the proof for the given theorem and all obsolete dependency links.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.step_type" title="proveit.Theorem.step_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_type</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.theorem_name_and_containing_theories" title="proveit.Theorem.theorem_name_and_containing_theories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">theorem_name_and_containing_theories</span></code></a>(self)</p></td>
+<td><p>Yields all containing theory names and the full theorem name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.Theorem.update_usability" title="proveit.Theorem.update_usability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_usability</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.Theorem.used_theorems" title="proveit.Theorem.used_theorems"><code class="xref py py-obj docutils literal notranslate"><span class="pre">used_theorems</span></code></a>(self)</p></td>
+<td><p>Returns the set of names of axioms that are used directly (not via other theorems) in this proof.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes Documentation</p>
+<dl class="py attribute">
+<dt id="proveit.Theorem.all_theorems">
+<code class="sig-name descname">all_theorems</code><em class="property"> = [proveit.logic.equality.equals_reversal, proveit.logic.booleans.negation.untrue_from_negation, proveit.logic.equality.not_equals_symmetry, proveit.logic.booleans.from_not_false, proveit.logic.booleans.in_bool_if_true, proveit.logic.booleans.in_bool_if_false, proveit.logic.booleans.unfold_is_bool, proveit.logic.booleans.fold_is_bool, proveit.logic.booleans.unfold_is_bool_explicit, proveit.logic.equality.unfold_not_equals, proveit.logic.booleans.negation.negation_intro, proveit.logic.equality.sub_left_side_into, proveit.logic.equality.substitute_truth, proveit.logic.equality.substitute_in_true, proveit.logic.equality.substitute_falsehood, proveit.logic.equality.substitute_in_false, proveit.logic.equality.fold_not_equals, proveit.logic.booleans.negation.double_negation_elim, proveit.logic.booleans.negation.not_false, proveit.logic.booleans.implication.true_implies_true, proveit.logic.booleans.implication.false_implies_true, proveit.logic.booleans.implication.not_true_via_contradiction, proveit.logic.booleans.implication.false_implies_false, proveit.logic.booleans.true_eq_true, proveit.logic.booleans.false_eq_false, proveit.logic.booleans.true_not_false, proveit.logic.booleans.true_is_bool, proveit.logic.booleans.false_is_bool, proveit.logic.sets.inclusion.relax_proper_subset, proveit.numbers.number_sets.natural_numbers.nat_pos_within_nat, proveit.numbers.number_sets.integers.nat_within_int, proveit.numbers.number_sets.integers.nat_pos_within_int, proveit.numbers.number_sets.rational_numbers.nat_within_rational, proveit.numbers.number_sets.rational_numbers.nat_within_rational_non_neg, proveit.numbers.number_sets.rational_numbers.nat_pos_in_rational_pos, proveit.numbers.number_sets.rational_numbers.nat_pos_in_rational_non_zero, proveit.numbers.number_sets.rational_numbers.rational_non_zero_in_rational, proveit.numbers.number_sets.rational_numbers.rational_pos_within_rational, proveit.numbers.number_sets.rational_numbers.rational_neg_within_rational, proveit.numbers.number_sets.rational_numbers.rational_non_neg_within_rational, proveit.numbers.number_sets.rational_numbers.rational_pos_in_rational_non_zero, proveit.numbers.number_sets.rational_numbers.rational_neg_in_rational_non_zero, proveit.numbers.number_sets.rational_numbers.rational_pos_within_rational_non_neg, proveit.numbers.number_sets.real_numbers.real_pos_within_real, proveit.numbers.number_sets.real_numbers.real_neg_within_real, proveit.numbers.number_sets.real_numbers.real_non_neg_within_real, proveit.numbers.number_sets.real_numbers.rational_within_real, proveit.numbers.number_sets.real_numbers.int_within_real, proveit.numbers.number_sets.real_numbers.nat_within_real, proveit.numbers.number_sets.real_numbers.nat_pos_within_real, proveit.numbers.number_sets.real_numbers.nat_pos_within_real_pos, proveit.numbers.number_sets.real_numbers.nat_within_real_non_neg, proveit.numbers.number_sets.real_numbers.nat_pos_within_real_non_neg, proveit.numbers.number_sets.real_numbers.real_pos_within_real_non_neg, proveit.numbers.number_sets.real_numbers.rational_within_real, proveit.logic.sets.inclusion.superset_membership_from_proper_subset, proveit.numbers.number_sets.complex_numbers.real_within_complex, proveit.numbers.number_sets.complex_numbers.int_within_complex, proveit.numbers.number_sets.complex_numbers.nat_within_complex, proveit.numbers.number_sets.complex_numbers.real_within_complex, proveit.numbers.number_sets.rational_numbers.zero_is_rational, proveit.numbers.number_sets.natural_numbers.natural_lower_bound, proveit.numbers.number_sets.rational_numbers.int_within_rational, proveit.numbers.ordering.relax_less, proveit.numbers.numerals.decimals.less_0_1, proveit.numbers.numerals.decimals.less_1_2, proveit.numbers.numerals.decimals.less_2_3, proveit.numbers.numerals.decimals.less_3_4, proveit.numbers.numerals.decimals.less_4_5, proveit.numbers.numerals.decimals.less_5_6, proveit.numbers.numerals.decimals.less_6_7, proveit.numbers.numerals.decimals.less_7_8, proveit.numbers.numerals.decimals.less_8_9, proveit.numbers.numerals.decimals.nat1, proveit.numbers.numerals.decimals.nat2, proveit.numbers.numerals.decimals.nat3, proveit.numbers.numerals.decimals.nat4, proveit.numbers.numerals.decimals.nat5, proveit.numbers.numerals.decimals.nat6, proveit.numbers.numerals.decimals.nat7, proveit.numbers.numerals.decimals.nat8, proveit.numbers.numerals.decimals.nat9, proveit.numbers.number_sets.natural_numbers.natural_pos_lower_bound, proveit.numbers.number_sets.natural_numbers.non_zero_if_is_nat_pos, proveit.numbers.numerals.decimals.posnat1, proveit.numbers.numerals.decimals.posnat2, proveit.numbers.numerals.decimals.posnat3, proveit.numbers.numerals.decimals.posnat4, proveit.numbers.numerals.decimals.posnat5, proveit.numbers.numerals.decimals.posnat6, proveit.numbers.numerals.decimals.posnat7, proveit.numbers.numerals.decimals.posnat8, proveit.numbers.numerals.decimals.posnat9, proveit.numbers.negation.negated_zero]</em><a class="headerlink" href="#proveit.Theorem.all_theorems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.Theorem.all_dependents">
+<code class="sig-name descname">all_dependents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.all_dependents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.all_dependents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of theorems that are known to depend upon this
+theorem directly or indirectly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.all_requirements">
+<code class="sig-name descname">all_requirements</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.all_requirements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.all_requirements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of axioms that are required (directly or indirectly)
+by the theorem.  Also, if the given theorem is not completely proven,
+return the set of unproven theorems that are required (directly or
+indirectly).  Returns this axiom set and theorem set as a tuple.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.all_used_theorem_names">
+<code class="sig-name descname">all_used_theorem_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.all_used_theorem_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.all_used_theorem_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of theorems used to prove the given theorem, directly
+or indirectly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.direct_dependents">
+<code class="sig-name descname">direct_dependents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.direct_dependents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.direct_dependents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the theorems that depend directly upon this axioms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.get_link">
+<code class="sig-name descname">get_link</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.get_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.get_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the HTML link to the theorem proof file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.get_presumptions_and_exclusions">
+<code class="sig-name descname">get_presumptions_and_exclusions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.get_presumptions_and_exclusions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.get_presumptions_and_exclusions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the set of theorems and theories that are explicitly
+presumed by this theorem, and a set of exclusions (e.g.,
+you could presume the proveit.logic theory but exclude
+proveit.logic.equality).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.has_proof">
+<code class="sig-name descname">has_proof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.has_proof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.has_proof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if and only if this theorem has a recorded proof.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.is_conjecture">
+<code class="sig-name descname">is_conjecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.is_conjecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.is_conjecture" title="Permalink to this definition">¶</a></dt>
+<dd><p>A “Theorem” that is not fully proven is a “conjecture”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.is_fully_proven">
+<code class="sig-name descname">is_fully_proven</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.is_fully_proven"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.is_fully_proven" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if and only if this theorem is fully proven
+(it has a recorded proof and all dependent theorems are fully
+proven, all the way to axioms which don’t require proofs).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.remove_proof">
+<code class="sig-name descname">remove_proof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.remove_proof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.remove_proof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the proof for the given theorem and all obsolete dependency
+links.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.step_type">
+<code class="sig-name descname">step_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.step_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.step_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.theorem_name_and_containing_theories">
+<code class="sig-name descname">theorem_name_and_containing_theories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.theorem_name_and_containing_theories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.theorem_name_and_containing_theories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all containing theory names and the full theorem name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.update_usability">
+<em class="property">static </em><code class="sig-name descname">update_usability</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.update_usability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.update_usability" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="proveit.Theorem.used_theorems">
+<code class="sig-name descname">used_theorems</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/proof.html#Theorem.used_theorems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.Theorem.used_theorems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the set of names of axioms that are used directly (not via other theorems) in this proof.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprRange.html">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.StyleOptions.html" title="previous chapter">StyleOptions</a></li>
+      <li>Next: <a href="proveit.Theory.html" title="next chapter">Theory</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.Theorem.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

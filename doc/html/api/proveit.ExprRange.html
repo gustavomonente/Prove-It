@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExprRange &#8212; Prove-It 0.3 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ExprTuple" href="proveit.ExprTuple.html" />
+    <link rel="prev" title="ExprArray" href="proveit.ExprArray.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="exprrange">
+<h1>ExprRange<a class="headerlink" href="#exprrange" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="proveit.ExprRange">
+<em class="property">class </em><code class="sig-prename descclassname">proveit.</code><code class="sig-name descname">ExprRange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em>, <em class="sig-param"><span class="n">body</span></em>, <em class="sig-param"><span class="n">start_index</span></em>, <em class="sig-param"><span class="n">end_index</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">parameterization</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lambda_map</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="proveit.Expression.html#proveit.Expression" title="proveit._core_.expression.expr.Expression"><code class="docutils literal notranslate"><span class="pre">proveit.Expression</span></code></a></p>
+<p>An ExprRange expression represents a range of “element” expressions
+within a containing ExprTuple.  It represents this as a Lambda to
+map each valid index value to a corresponding element, along with a
+start and end index value.  The represented element sequence
+corresponds to index values going from the start to the end in
+increments of 1, ranging over index values.</p>
+<p>For example,
+1/i + … + 1/j
+is internall represented by an Add operation with the following as
+its “operands”:
+(1/i, …, 1/j).
+These “operands” are represented by an ExprTuple with a single
+“entry” which is an ExprRange whose <cite>lambda_map</cite> is “k <a href="#id1"><span class="problematic" id="id2">|</span></a>-&gt; 1/k”,
+<cite>start_index</cite> is “i”, and <cite>end_index</cite> is “j”.  An ExprTuple “entry”
+may generally either be a singuler element or an ExprRange that
+represents multiple elements.</p>
+<p class="rubric">Methods Summary</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.end_indices" title="proveit.ExprRange.end_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_indices</span></code></a>(self)</p></td>
+<td><p>Return a list of ending indices, one for each nested ExprRange. For example,     (x_{m, i_{m}}, …, x_{m, j_{m}}, ……,      x_{n, i_{n}}, …, x_{n, j_{n}}). has end indices (n, j_n).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.first" title="proveit.ExprRange.first"><code class="xref py py-obj docutils literal notranslate"><span class="pre">first</span></code></a>(self)</p></td>
+<td><p>Return the first instance of the range (and store for future use).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.formatted" title="proveit.ExprRange.formatted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">formatted</span></code></a>(self, format_type[, fence, …])</p></td>
+<td><p>Returns a formatted version of the expression for the given format_type (‘string’ or ‘latex’).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.get_instance" title="proveit.ExprRange.get_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_instance</span></code></a>(self, index[, assumptions, …])</p></td>
+<td><p>Return the range instance with the given Lambda map index as an Expression, using the given assumptions as needed to interpret the index expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.innermost_body" title="proveit.ExprRange.innermost_body"><code class="xref py py-obj docutils literal notranslate"><span class="pre">innermost_body</span></code></a>(self)</p></td>
+<td><p>Return the innermost body of a nested ExprRange.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.last" title="proveit.ExprRange.last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last</span></code></a>(self)</p></td>
+<td><p>Return the last instance of the range (and store for future use).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.latex" title="proveit.ExprRange.latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">latex</span></code></a>(self, \*\*kwargs)</p></td>
+<td><p>Return a latex-formatted representation of the Expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.literal_int_extent" title="proveit.ExprRange.literal_int_extent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">literal_int_extent</span></code></a>(self)</p></td>
+<td><p>If the start and end indices of this ExprRange are literal integers, return the literal number of elements of the ExprRange. For the case of nested ExprRange’s, all of the start and end indices must be integers and the result will be the multiplied extent. For example:     a_{1,1}, …, a_{1,3}, ……, a_{4,1}, …, a_{4,3} has a literal_int_extent of 12.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.mapped_range" title="proveit.ExprRange.mapped_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapped_range</span></code></a>(self, body_map_fn)</p></td>
+<td><p>Generate an ExprRange with the same external structure as this range but converts the innermost by applying the ‘body_map_fn’ to it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.nested_range_depth" title="proveit.ExprRange.nested_range_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nested_range_depth</span></code></a>(self)</p></td>
+<td><p>Return the depth of nested ranges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.parameters" title="proveit.ExprRange.parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code></a>(self)</p></td>
+<td><p>Return a list of parameters, one for each nested ExprRange.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.partition" title="proveit.ExprRange.partition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">partition</span></code></a>(self, before_split_idx[, assumptions])</p></td>
+<td><p>Return the equation between this range within an ExprTuple and a split version in the following manner:     (f(self.start_index), …, f(self.end_index)) =     (f(self.start_index), …, f(before_split_index),      f(before_split_index+1), …, f(self.end_index)) where f represents the self.lambda_map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.partitioned" title="proveit.ExprRange.partitioned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">partitioned</span></code></a>(expr, \*args, \*\*kwargs)</p></td>
+<td><p>Return an equivalent form of this expression derived via ‘partition’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.remake_arguments" title="proveit.ExprRange.remake_arguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remake_arguments</span></code></a>(self)</p></td>
+<td><p>Yield the argument values or (name, value) pairs that could be used to recreate the ExprRange.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.remake_with_style_calls" title="proveit.ExprRange.remake_with_style_calls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remake_with_style_calls</span></code></a>(self)</p></td>
+<td><p>In order to reconstruct this Expression to have the same styles, what “with…” method calls are most appropriate?  Return a tuple of strings with the calls to make.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.shift_equivalence" title="proveit.ExprRange.shift_equivalence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift_equivalence</span></code></a>(self, \*[, old_shift, …])</p></td>
+<td><p>Return the equation between this range within an ExprTuple and a shifted version in the following manner:     (f(self.start_index+old_shift), …, f(self.end_index+old_shift)) =     (f(new_start+new_shift), …, f(new_start+new_shift)) where f is adapted from self.lambda_map according to ‘old_shift’. If any of the ‘new’ parameters are unspecified, we attempt to deduce them from the other parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.start_indices" title="proveit.ExprRange.start_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_indices</span></code></a>(self)</p></td>
+<td><p>Return a list of starting indices, one for each nested ExprRange. For example,     (x_{m, i_{m}}, …, x_{m, j_{m}}, ……,      x_{n, i_{n}}, …, x_{n, j_{n}}). has start indices (m, i_m).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.string" title="proveit.ExprRange.string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">string</span></code></a>(self, \*\*kwargs)</p></td>
+<td><p>Return a string representation of the Expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.style_options" title="proveit.ExprRange.style_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">style_options</span></code></a>(self)</p></td>
+<td><p>Return a StyleOptions object that indicates the possible styles and values that is available to determine how this Expression may be presented.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.with_default_parameterization_style" title="proveit.ExprRange.with_default_parameterization_style"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_default_parameterization_style</span></code></a>(self)</p></td>
+<td><p>The default is to use an ‘implicit’ parameterization for string formatting (see ‘with_implicit_parameterization’) and and ‘explicit’ parameterization for LaTeX formatting (see ‘with_explicit_parameterization’).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#proveit.ExprRange.with_explicit_parameterization" title="proveit.ExprRange.with_explicit_parameterization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_explicit_parameterization</span></code></a>(self)</p></td>
+<td><p>The ‘parameterization’:’explicit’ style shows the parameterization of the ExprRange explicitly.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#proveit.ExprRange.with_implicit_parameterization" title="proveit.ExprRange.with_implicit_parameterization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_implicit_parameterization</span></code></a>(self)</p></td>
+<td><p>The ‘parameterization’:’implicit’ style does not show the parameterization of the ExprRange explicitly and such that the parameterization may be ambiguous but is more compact.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt id="proveit.ExprRange.end_indices">
+<code class="sig-name descname">end_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.end_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.end_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of ending indices, one for each nested
+ExprRange.  For example,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>(x_{m, i_{m}}, …, x_{m, j_{m}}, ……,</dt><dd><p>x_{n, i_{n}}, …, x_{n, j_{n}}).</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>has end indices (n, j_n).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.first">
+<code class="sig-name descname">first</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.first"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first instance of the range
+(and store for future use).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.formatted">
+<code class="sig-name descname">formatted</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">format_type</em>, <em class="sig-param">fence=False</em>, <em class="sig-param">sub_fence=True</em>, <em class="sig-param">operator=None</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.formatted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.formatted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted version of the expression for the given format_type
+(‘string’ or ‘latex’).  In the keyword arguments, fence=True indicates
+that parenthesis around the sub-expression may be necessary to avoid
+ambiguity.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.get_instance">
+<code class="sig-name descname">get_instance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">requirements</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">equality_repl_requirements</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.get_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.get_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the range instance with the given Lambda map
+index as an Expression, using the given assumptions as
+needed to interpret the index expression.  Required
+truths, proven under the given assumptions, that
+were used to make this interpretation will be
+appended to the given ‘requirements’ (if provided).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.innermost_body">
+<code class="sig-name descname">innermost_body</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.innermost_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.innermost_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the innermost body of a nested ExprRange.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.last">
+<code class="sig-name descname">last</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.last"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last instance of the range
+(and store for future use).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.latex">
+<code class="sig-name descname">latex</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.latex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.latex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a latex-formatted representation of the Expression.  The kwargs can contain formatting
+directives (such as ‘fence’ used to indicate when a sub-expression should be wrapped in
+parentheses if there can be ambiguity in the order of operations).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.literal_int_extent">
+<code class="sig-name descname">literal_int_extent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.literal_int_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.literal_int_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the start and end indices of this ExprRange are literal integers,
+return the literal number of elements of the ExprRange.  For the
+case of nested ExprRange’s, all of the start and end indices must
+be integers and the result will be the multiplied extent.  For
+example:</p>
+<blockquote>
+<div><p>a_{1,1}, …, a_{1,3}, ……, a_{4,1}, …, a_{4,3}</p>
+</div></blockquote>
+<p>has a literal_int_extent of 12.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.mapped_range">
+<code class="sig-name descname">mapped_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">body_map_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.mapped_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.mapped_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an ExprRange with the same external structure
+as this range but converts the innermost by applying the
+‘body_map_fn’ to it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.nested_range_depth">
+<code class="sig-name descname">nested_range_depth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.nested_range_depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.nested_range_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the depth of nested ranges.  For example, if this
+is a simple range with no nesting, return 1.
+If this is a range of simple ranges, return 2.
+If this is a range of ranges of simple ranges, return 3.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.parameters">
+<code class="sig-name descname">parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of parameters, one for each nested
+ExprRange.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.partition">
+<code class="sig-name descname">partition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">before_split_idx</span></em>, <em class="sig-param"><span class="n">assumptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.partition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the equation between this range within an ExprTuple
+and a split version in the following manner:</p>
+<blockquote>
+<div><p>(f(self.start_index), …, f(self.end_index)) =
+(f(self.start_index), …, f(before_split_index),</p>
+<blockquote>
+<div><p>f(before_split_index+1), …, f(self.end_index))</p>
+</div></blockquote>
+</div></blockquote>
+<p>where f represents the self.lambda_map.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.partitioned">
+<code class="sig-name descname">partitioned</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#proveit.ExprRange.partitioned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an equivalent form of this expression derived via ‘partition’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.remake_arguments">
+<code class="sig-name descname">remake_arguments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.remake_arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.remake_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield the argument values or (name, value) pairs
+that could be used to recreate the ExprRange.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.remake_with_style_calls">
+<code class="sig-name descname">remake_with_style_calls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.remake_with_style_calls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.remake_with_style_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>In order to reconstruct this Expression to have the same styles,
+what “with…” method calls are most appropriate?  Return a
+tuple of strings with the calls to make.  The default for the
+Operation class is to include appropriate ‘with_wrapping_at’
+and ‘with_justification’ calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.shift_equivalence">
+<code class="sig-name descname">shift_equivalence</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">\*</em>, <em class="sig-param">old_shift=None</em>, <em class="sig-param">new_start=None</em>, <em class="sig-param">new_end=None</em>, <em class="sig-param">new_shift=None</em>, <em class="sig-param">assumptions=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.shift_equivalence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.shift_equivalence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the equation between this range within an ExprTuple
+and a shifted version in the following manner:</p>
+<blockquote>
+<div><p>(f(self.start_index+old_shift), …, f(self.end_index+old_shift)) =
+(f(new_start+new_shift), …, f(new_start+new_shift))</p>
+</div></blockquote>
+<p>where f is adapted from self.lambda_map according to ‘old_shift’.
+If any of the ‘new’ parameters are unspecified, we attempt
+to deduce them from the other parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.start_indices">
+<code class="sig-name descname">start_indices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.start_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.start_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of starting indices, one for each nested
+ExprRange.  For example,</p>
+<blockquote>
+<div><dl class="simple">
+<dt>(x_{m, i_{m}}, …, x_{m, j_{m}}, ……,</dt><dd><p>x_{n, i_{n}}, …, x_{n, j_{n}}).</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>has start indices (m, i_m).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.string">
+<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representation of the Expression.  The kwargs can contain formatting
+directives (such as ‘fence’ used to indicate when a sub-expression should be wrapped in
+parentheses if there can be ambiguity in the order of operations).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.style_options">
+<code class="sig-name descname">style_options</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.style_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.style_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a StyleOptions object that indicates the possible
+styles and values that is available to determine how
+this Expression may be presented.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.with_default_parameterization_style">
+<code class="sig-name descname">with_default_parameterization_style</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.with_default_parameterization_style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.with_default_parameterization_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default is to use an ‘implicit’ parameterization for
+string formatting (see ‘with_implicit_parameterization’) and
+and ‘explicit’ parameterization for LaTeX formatting
+(see ‘with_explicit_parameterization’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.with_explicit_parameterization">
+<code class="sig-name descname">with_explicit_parameterization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.with_explicit_parameterization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.with_explicit_parameterization" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ‘parameterization’:’explicit’ style shows the
+parameterization of the ExprRange explicitly.  For example,
+x_{1+1}, ..x_{k+1}.., x_{n+1}).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="proveit.ExprRange.with_implicit_parameterization">
+<code class="sig-name descname">with_implicit_parameterization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/proveit/_core_/expression/composite/expr_range.html#ExprRange.with_implicit_parameterization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#proveit.ExprRange.with_implicit_parameterization" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ‘parameterization’:’implicit’ style does not show the
+parameterization of the ExprRange explicitly and such that the
+parameterization may be ambiguous but is more compact.
+For example, x_{1+1}, …, x_{n+1} could be
+x_{1+1}, ..x_{k+1}.., x_{n+1}
+or could be
+x_{1+1}, ..x_{k}.., x_{n+1}.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Prove-It</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expression.html">as_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.as_expressions.html">as_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.attempt_to_simplify.html">attempt_to_simplify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.bundle.html">bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.composite_expression.html">composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.expression_depth.html">expression_depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.extract_var_tuple_indices.html">extract_var_tuple_indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.free_vars.html">free_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced.html">maybe_fenced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_latex.html">maybe_fenced_latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.maybe_fenced_string.html">maybe_fenced_string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.possibly_free_var_ranges.html">possibly_free_var_ranges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.reset.html">reset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_default_or_dummy_var.html">safe_default_or_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_var.html">safe_dummy_var</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.safe_dummy_vars.html">safe_dummy_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.single_or_composite_expression.html">single_or_composite_expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.total_ordering.html">total_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.traverse_inner_expressions.html">traverse_inner_expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.unbundle.html">unbundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.used_vars.html">used_vars</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.var_range.html">var_range</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proveit.ArgumentExtractionError.html">ArgumentExtractionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Assumption.html">Assumption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Axiom.html">Axiom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Composite.html">Composite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Conditional.html">Conditional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ConditionalSet.html">ConditionalSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Deduction.html">Deduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DisallowedParameterRelabeling.html">DisallowedParameterRelabeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.DuplicateLiteralError.html">DuplicateLiteralError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprArray.html">ExprArray</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ExprRange</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTuple.html">ExprTuple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ExprTupleError.html">ExprTupleError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Expression.html">Expression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Function.html">Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Generalization.html">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.GeneralizationFailure.html">GeneralizationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ImproperReplacement.html">ImproperReplacement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.IndexedVar.html">IndexedVar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InnerExpr.html">InnerExpr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InstantiationFailure.html">InstantiationFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.InvalidAssumptions.html">InvalidAssumptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Judgment.html">Judgment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Label.html">Label</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Lambda.html">Lambda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.LambdaApplicationError.html">LambdaApplicationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Literal.html">Literal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.MakeNotImplemented.html">MakeNotImplemented</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonens.html">ModusPonens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ModusPonensFailure.html">ModusPonensFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.NamedExprs.html">NamedExprs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Operation.html">Operation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationError.html">OperationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.OperationOverInstances.html">OperationOverInstances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ParameterCollisionError.html">ParameterCollisionError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Proof.html">Proof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.ProofFailure.html">ProofFailure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.RangeInstanceError.html">RangeInstanceError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.StyleOptions.html">StyleOptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theorem.html">Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryException.html">TheoryException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TheoryPackage.html">TheoryPackage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransRelUpdater.html">TransRelUpdater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitiveRelation.html">TransitiveRelation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.TransitivityException.html">TransitivityException</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.UnusableProof.html">UnusableProof</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.Variable.html">Variable</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.core_expr_types.Len.html">Len</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.compose.html">compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.conclude_via_implication.html">conclude_via_implication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.default_simplification.html">default_simplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.evaluate_truth.html">evaluate_truth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.in_bool.html">in_bool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.is_irreducible_value.html">is_irreducible_value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_proper_superset.html">not_proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.not_superset_eq.html">not_superset_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.proper_superset.html">proper_superset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.reduce_operands.html">reduce_operands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.superset_eq.html">superset_eq</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.And.html">And</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.BooleanSet.html">BooleanSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Difference.html">Difference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Disjoint.html">Disjoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Distinct.html">Distinct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Equals.html">Equals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.EvaluationError.html">EvaluationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Exists.html">Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.FalseLiteral.html">FalseLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Forall.html">Forall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Iff.html">Iff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Implies.html">Implies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.InSet.html">InSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Intersect.html">Intersect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IntersectAll.html">IntersectAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.IrreducibleValue.html">IrreducibleValue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Membership.html">Membership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Nonmembership.html">Nonmembership</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Not.html">Not</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotEquals.html">NotEquals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotExists.html">NotExists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotInSet.html">NotInSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotProperSubset.html">NotProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.NotSubsetEq.html">NotSubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Or.html">Or</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.PowerSet.html">PowerSet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.ProperSubset.html">ProperSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Set.html">Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetEquiv.html">SetEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetNotEquiv.html">SetNotEquiv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SetOfAll.html">SetOfAll</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SimplificationError.html">SimplificationError</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.StrictSubset.html">StrictSubset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetEq.html">SubsetEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.SubsetProper.html">SubsetProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.TrueLiteral.html">TrueLiteral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.Union.html">Union</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.logic.UnionAll.html">UnionAll</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_composition.html">const_shift_composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.const_shift_decomposition.html">const_shift_decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_add.html">dist_add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.dist_subtract.html">dist_subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.frac.html">frac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater.html">greater</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.greater_eq.html">greater_eq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.is_literal_int.html">is_literal_int</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.num.html">num</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.number_ordering.html">number_ordering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.sqrt.html">sqrt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.subtract.html">subtract</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Abs.html">Abs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Add.html">Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Ceil.html">Ceil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DecimalSequence.html">DecimalSequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Div.html">Div</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Divides.html">Divides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.DividesProper.html">DividesProper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Exp.html">Exp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Floor.html">Floor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.GCD.html">GCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Integrate.html">Integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Interval.html">Interval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCC.html">IntervalCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalCO.html">IntervalCO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOC.html">IntervalOC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.IntervalOO.html">IntervalOO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Less.html">Less</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.LessEq.html">LessEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Max.html">Max</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Min.html">Min</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mod.html">Mod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.ModAbs.html">ModAbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Mult.html">Mult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Neg.html">Neg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Numeral.html">Numeral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Prod.html">Prod</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.RealInterval.html">RealInterval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Round.html">Round</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proveit.numbers.Sum.html">Sum</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="proveit.ExprArray.html" title="previous chapter">ExprArray</a></li>
+      <li>Next: <a href="proveit.ExprTuple.html" title="next chapter">ExprTuple</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Wayne Witzel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/proveit.ExprRange.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
