@@ -1,0 +1,1 @@
+\forall_{\varepsilon \in \{1 \ldots 2^{t - 1} - 2\}}~\left(\{\varepsilon + 1 \ldots 2^{t - 1}\} \subseteq \mathbb{Z}\right)

@@ -1,0 +1,1 @@
+\left(\sum_{l=\varepsilon + 1}^{2^{t - 1}} \left|\alpha_{l}\right|^{2}, \sum_{l=\varepsilon + 1}^{2^{t - 1}} \frac{1}{4 \cdot \left(l - \left(2^{t} \cdot \delta\right)\right)^{2}}\right)

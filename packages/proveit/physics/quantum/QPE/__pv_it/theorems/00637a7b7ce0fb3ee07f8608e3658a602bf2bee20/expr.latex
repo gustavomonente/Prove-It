@@ -1,0 +1,1 @@
+\left(l \mapsto \left\{\frac{1}{l - \left(2^{t} \cdot \delta\right)} \textrm{ if } l \in \{\varepsilon + 1 \ldots 2^{t - 1}\}\right..\right)

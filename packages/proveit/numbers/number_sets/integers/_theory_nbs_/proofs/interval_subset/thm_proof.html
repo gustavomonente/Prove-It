@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.numbers.number_sets.integers.interval_subset theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.numbers.number_sets.integers.interval_subset-theorem">Proof of <a class="ProveItLink" href="../../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">numbers</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">number_sets</a>.<a class="ProveItLink" href="../../theory.html">integers</a>.<a class="ProveItLink" href="../../theorems.html#interval_subset">interval_subset</a> theorem<a class="anchor-link" href="#Proof-of-proveit.numbers.number_sets.integers.interval_subset-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> interval_subset
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="interval_subset">interval_subset:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/fbe361aab849fccc18023a1644d2bc940918f8900/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW4AAAAXBAMAAADZ1rgBAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAABFFJREFU
+WMPNV21oU1cYfpqPprm5SQtO5gaDUD9+DQkVhzB1lf0QBoP0z9b9kIbiJ37gD7U4+6PMqSmD7cLA
+lQ3hzsAYRZpsMqYgGu0Pv7YRFDYRdIUpglUppT+2to697/m4uTc3SVNmxg7k5OY57/PmOee8533P
+BZrd4htqDoW77Cro7VIdb9UpL7qdAowndcZDS/3YWLGuS6bELGCCf9xrjmxjiJZ7Cvj25VoWG/3Q
+73Uc9i6RlF3ATf79uDm6E7Qu5n56+KOWxdWGoHKbk+NjwAh9RYeao/s2lO65F6Q7NCvHzSQSFOdm
+oTm6Dyvd/Hf1dcdPDAwMpBfUzc543OhA/Mbo6BfNkR3dr/5KrHk93dEnVkPrnUip8QfAn9nsYHN0
+B1JKd6J/uX9Hzc6VwGX5HLG8U4mu73rV7+/zK30FRRkHtgHDTvw88xi+lfYSuyvD7VlVvZrWxom4
+lRJW/rHxl28zjuBTJ3m86RrYR59NVmLKH9yv4DNbUe4Db8OYcMbGPZZ5+dW6bPwoLx28xzdka/Nz
+bsyhIcKL/B1N4pKN6UoVkSJ2y42n5oqjGOVn4zUE/ani65LIgYLyIzlAoFygJj2WF8nFhTWliGWe
+tn26w8e1+cWkGxM00Vpof3oPiyxtzPs2Rda9HcyNZspeT1DIBGcRSaIKY1BT+ijOSpHymHc7aTnv
+nB9FDFtOoVJ3dKelzO+XPFh501g3NqU5fYd8mXCZPGgZXZ/c9bBlCPk0/AxjRlNId3TiPXrIrXrI
+s51eZYsjw7PNdU4iJPcxVXTpFqbGurQyX12CoghM0Fxx0kqk57yCFaV03l0c3flmJwVaEZf8xXce
+sSlN2Uyf4a0EHgyz58CHIgccCHcoKCGz61fpsm6BG790K/PNMlMQRWLKk3MuOZ/McGxWtOcUyk4+
+ueJNjfkC9sWsSt1zdMbPKwqdS5wlz8FUmOfclozTGaUzkRZQB3KCctpEWbcw7RE62PzMxwIkisQE
+TWU6nQf34igf1wnVGX/Twxsw1jrJOlHw6Ca/h0y3saB+hN8yRUVZT592CoqWQiAjIjKY4R8iOhl6
+P5vNJlG8gS8d3QI3H0Cbn/kEkqIw6UmEqq47udd5SpGM7g4x/vOtcpExtr/j1m30rzy5wm0sHr7p
+/KC/W1E4qOMU0nmr7S59tdssoF1skYBaxf//UMJ1R7c0zR2DNg9MKorAlCdPna/ddHEMX2uozutx
+QzttsfrexYgdse9Qn+hGasQmaAtM9hUMyqVT682mwEkqVmzOE38KpkhM0Nz3qo5GdLva5QZ0mzpL
+hvq/34CeQnhPkfpo1y27pyAgcBD8uv2nRxlHt8TpIrkLbC5qhc0UielhEf+WvH/Xbou8f2vKmBcq
++HoEOL5189awXqvKxd6qfG9A3fedl6rcnRZ432HKsAeSqcfdV7RFX9O5XMUW+355dsH3y7hXXNzX
+N6D7HGWc7H/xrvovWur/I+UfMMhOtLeFCJsAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/1803e750c0455d7c1321077ffaf9380ecb8f80c60/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

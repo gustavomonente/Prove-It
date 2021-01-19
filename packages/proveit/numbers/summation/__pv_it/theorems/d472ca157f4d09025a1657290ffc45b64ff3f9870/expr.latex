@@ -1,0 +1,1 @@
+\forall_{a, b, S}~\left(\left[\forall_{k \in S}~\left(a(k) \leq b(k)\right)\right] \Rightarrow \left(\sum_{l \in S}~a(l) \leq \sum_{l \in S}~b(l)\right)\right)

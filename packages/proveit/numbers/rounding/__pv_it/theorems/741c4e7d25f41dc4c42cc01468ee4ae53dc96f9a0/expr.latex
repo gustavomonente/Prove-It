@@ -1,0 +1,1 @@
+\left(x \mapsto \left\{\lceil \lfloor x\rfloor\rceil = \lfloor x\rfloor \textrm{ if } x \in \mathbb{R}\right..\right)

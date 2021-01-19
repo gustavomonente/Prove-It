@@ -1,0 +1,1 @@
+\left(\left(f, i, j\right) \mapsto \left\{\begin{array}{c} \begin{array}{l} \left(f(i), \ldots, f(j + 1)\right) =  \\ \left(f(i), \ldots, f(j), f(j + 1)\right) \end{array} \end{array} \textrm{ if } |\left(f(i), \ldots, f(j)\right)| \in \mathbb{N}\right..\right)

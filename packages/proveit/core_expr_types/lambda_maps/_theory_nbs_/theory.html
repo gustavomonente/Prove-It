@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Theory of proveit.core_expr_types.lambda_maps</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../index.html"><img src="../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Theory-of-proveit.core_expr_types.lambda_maps">Theory of <a class="ProveItLink" href="../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../_theory_nbs_/theory.html">core_expr_types</a>.lambda_maps<a class="anchor-link" href="#Theory-of-proveit.core_expr_types.lambda_maps">&#182;</a></h1><p>Theory related to <strong>Lambda</strong> types of Prove-It expressions.  A <strong>Lambda</strong> has <em>parameter(s)</em> and a <em>body</em> and represents a mapping of the <em>parameter(s)</em> to the <em>body</em>.  For example, $(x, y) \mapsto x + y$ represents a mapping of $x$ and $y$ into $x + y$; the application of this mapping to the arguments $5$ and $2$ yields $5+2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="o">%</span><span class="k">theory</span> # toggles between interactive and static modes
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>Local content of this theory</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table><tr>
+<th><a class="ProveItLink" href="common.html">common expressions</a></th>
+<th><a class="ProveItLink" href="axioms.html">axioms</a></th>
+<th><a class="ProveItLink" href="theorems.html">theorems</a></th>
+<th><a class="ProveItLink" href="demonstrations.html">demonstrations</a></th>
+</tr></table>
+<h3>Sub-theories</h3>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>All axioms contained within this theory</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#lambda_substitution">proveit.core_expr_types.lambda_maps.lambda_substitution</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/058df6ee4b3e9d6c37f0b5855c521119f598f6320/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlEAAABMCAMAAAB6dRKAAAAANlBMVEX///8oKCgNDQ0QEBCIiIhm
+Zma6urrMzMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAABRfbn9AAAAAXRSTlMAQObYZgAA
+DKNJREFUeNrtXYuypCgMdVcQVB7y/z87vlBeQhqwl6ltquba5djpCAcSQg50XYVC1F5omRRMul/5
+W8rsNfZ4gKCOeKIwWgsvEoKWXzv9RYUK54bcIECrIWpuQsavfK+wfgjc5Q0hahTPg9fyjj2cJfRm
+hcLnOvpVVOW8ymUcMqTInjWNKDE+/9f6vrdFlNWqmU3GZ4zw7N6sbCbmAv3eUUVfRQ6iuoW2jKhZ
+ySiixOWjLaxWvS6z6RVwxd2blc3EUqDfO6roax6iBkUaRtTUd1FEzbq/ztU6rsRGFauBDe7N2kWg
+bP3eUuW85iGqW5Z2EUUiQ9TxvnpoErxWrY5zoCLGF6cHrM/W7y1VzmsYUVNKgUHxZhEVG6KO95WC
+bWUeq7nlY8CLqyc+2KeHXP1eU+W4hhFFkuZgGVtF1KxEClGdmrYyilp1irBhX/oRY+vmjAVGfYnL
+FpAgAHaMY4T49DVVjuuD1UvaXamGRhGFo98/3pcS0EgMHxZNO6uQfXPo199ZFLCrBi2CIUGDQ95+
+h1iMYjScmLb+hb+mynE1EIVHo6gEpJiaGkWUik6DjvcdcM58KeKmcHOMJNZN1m/NibfqIhjnmB9D
+wipDx3+SkrjaRpLdPfmOKsf10TPnS9xtndyGbwRRXKE0orrt3VG9mJ8Z8r3q4byJ94YdD62GnGa0
+JNzVlFRqR87+3e+oclyf53ps6YdPWq4RRNH418/3FfJA1QuIusKr5829Ydk5cGU1oyUBjKhjyovG
+76mSQNRMRbxl1dgkolR8Wn2+77x05IzSMowobGXm+UnT6k3Uusn2iYKunJxmNCUMSEs3JFl+FL09
+3a0eJ/w9VQbX6uHFKql2XZyWbwNRPOEA6vedZnp8YiM5TUNH43Mg48kl4pn3yLrJdkeGLsfCV14z
+3hJEp5jnmT/VRKfdqC+p4nnmlkuf9lqRY/baQBRWHIQorh3TbaZPts9EJGbV15NrzbpSsVHpg31z
+WqtJjrQTRndm1/Th+hT5cEuY2eWQY5Fs/XnzARhUFf/Dp6oc1zCiGGDBiziTqjYQNSoGQtQ1x+9X
+BJ7j9xj/qvGk1wHv/j4o5yajCJGZosF8cLx+a6TPH86HTAmT7sZpQz1QJE6nDqSKr8CHqhzXMKIo
+xK9wUuyaQBRLuFH3+0p29+RJMpZE1P0kR9508l7lEFPgpg89Doky+g8xxchpgmGBMvw9Vc5rGFGg
+Nl1sl78JRA1qAiLqGnnm9RcHeY9R88TCf64n+eD5amdEmNNuke5Nq5J0M4LC9SIQ0zlvpleKiWmC
+v6FK2Urx4bLI5hAllPgQUatt4AgbiCKbdSNbaNj8w80nA0P4EX8fJyts6gblZzwqutc7g6QOBB5i
+5ww8HZ0Vm/mf8PdUKctmOV1z2hyipoRjHn1fbfVCIrg16es8KUdGmzxT7ayboQIKrkYeSi8gDXRV
+hn9RlWkuRtRgR6SaQFSvEh4gGp9cWoLU0QKhlFv7HkW+6/HVrGDZTlawVuW8orysYO2aqeYQpVR5
+VqbM7ci/Ulrs5msBUXMtitev/CeltzJaWkDUoD5IbSww+P/3wug7chdrstcCoqSCZ6gI8UNGftd9
+h2FLral6C4gSCpxGhugPFyXO5iuQwlb4oAVEYfB2CTxiHi+W6BvzI577di8qk0PbnN4Y4u0RYUNU
+DW6lRlSOrAmKKBbL/dIO1h7DYVNflkjlCviMvGmzSV9T5nOfMlqD+YhaHETV4FZqROXIWhSQlzZh
+gMt+JvQspVw3W8Bnycgum/QlZTJmKbyvjyhkhTg3RNXgVmpE5chaFGws5tGw1Vm9ei1MlbL6HAGf
+kDc9NulLyuTMe8f6dk96iKrBrbz8qAxZIxBRIwaEFc71+qE0aOoKeCRvojkAfa3xu8rkIIrX3wBH
+WtGf/eUrcCsvRGXIGhWCKQ7IRde/K0rz0T0BT+RNjh+/+7YyWbG5sTr1nVsR6jMLtZhbec/1PpfV
+K5ATP8bt6FG9mo22UGQuuWZ4Lq4AI+PTVsRtbZ9N+pYyWYiSin0BUXBupUgiypWFhayCKKIGAKLO
+3HGmVuu7Z9tlciYNAScujFiOjSHu/YDDJn1NGQNRT3zSkDBUGVFDAFEWtxLFFMJJRDk8TYFQarhS
+IMcVg/I8T37LyaNEuZzJW8BFmTTIm45ENNm93mWTvqZM5qZPS31EMc+JNLmVxBqqyIg3xVFPo4hi
+dwKqzdME7B1BJ0g6c08hiNKsyaXTrKIshpsp4Ooz18d//7EJSMoePj026VvK5CEK1fbN58kceeej
+GwW4lYwLvOU+roO6WNGCWXyMMnK2LVkAqw0ao0jKNFqI2gf+YyuavEY0BPiIclLbByd27bJJX1Mm
+D1GzqhzHJ/YYdbyiwa3UDtzE550ZwCXacCQ2d3Adtdd/PGr1LFlyUthI4V5NIA0hSlboWZbV2yUe
+5Oy8RrwEXJTJ4cnqETeW67BJ31PmyY+iZaN9IaLOnndxK0+l7zR/TjiZkXbJ036UIWuHlAEKGg57
+gzzzKRXstTzzzQwd+0fkNqIWcFEmHz1zj3XrsEnfUyYzs2eqvC9VyDM3uJWn0nf1cbJaPUk+QBQ3
+/E+MjdF2IzrxzHhUP4EQdc7xqbzAqxsRwtq8aZRawE2ZNMibVgfwKDYem/Q1ZTIRJdQ3EKVnvKfS
+DJuIWmGmozEQRHUGQgwmuBwf3CoIolhy7U+YDEmGkQ5aXMNChDTpcSYNAZoy+ZTp7p0T4bNJ31Im
+E1FSkW8gSuqm3pUm4x6n3D5viJqlHulBiJI3bPpbeUE3wlPI8QSswpAk6uxVGNNvvt4VENrzntGU
+SQY2FTE2aV1lMhFFKkekBn8VJqA0tcaobiCnEgSCKEvaMb9kO9GyoyGncALkHvDkfNBZKXbnHh2M
+NOk9oymTwJXiBJu0rjKZiGKq7kKMjCPqVFpc0JHHKrpI4T6IqLNP7lzMbh27F5mJqPRIfe/fYk2V
+L84kiDTpP3NSJqHZLFE2aW1lcnPuVd3Jnp/NElL6cqGH8YhR0ixEXZ2Ue0bQiHAC3jAdlrMy7oK6
+QLrb4/wIGBWEskmrKJONqLpHOfgZdw9tePpRUNscqPJFamY4n/fDs3iwp2PAG4pkpPRiib6RiCtb
+ygoupm32dddhsJcVXCfKFahzcW2HIrfA59p/WXj8mQBas+5XKpW+bkCKWl5LC8wFDmBX0R9JtF4Z
+66YGT82xqwiAAfpDVLuIWqx5eAuIYgCW+s/q1URUXatnb4TSyE4ayS+L3/mgFSFQ1TNn7e2k0Y0q
+OWlByXjUqwzQXApoYwRQjaiq8SjS4G4/NJ18IJOgS8ajCic0Oe/3ji60dBexujFzZ9uKJhCF0q/I
+wYh66dzMrPNo3tGlNGTOVFXOnrBbrwlEkXT4IJnC+biuV63iPl9efUuXwt1YK68UO3tetrGfOWCy
+B8xmee/czCcKKHr+wbd0KSCAHm3Oa2rjbEbfBqKW9LfHBYSoF8/NfOBg8Eeov6dLAQG0+rzZ3Yy+
+DUSJtGuOFQhRNzVMIISKMstcATcFNM4A9c/wLNYlrEououpGi7mzzt8GooZ09kGSCmvlma/jwzqy
+T9u4lke6NAT453dGGaD+GZ6lujypkouovuoMlDo2tJHT0HqV/gHQnuf6hLOdJU95NunyEhA6vzPG
+APXP8CzW5UmVTETNdR1zt+kaQRROpz5/xgC9R7RM0qU/JN6EvRgD9OkMz3xdHlXJRFRdBujsmpdG
+EDWkQyQpR8pClDGw5yEqYBluREUYoE9neBbo8qhKE+Qq5NqOVk6+7vs06CA7aZjnZha04i0gdH5n
+hAH6dIZnvi7PqmQiqq7RW/quTUSh9NLeCDknVJMuj0s+MfwSEDq/M8IA9c/wLNblUZXcbQ9qZnHM
+nnFpBVFd8WzPYoDiTRrbqXSfkC7vT1pA8PzOCAM0cIanr8tnJ3g+qpKHqLrLxL6T1wyi0onkXS/S
+iNL4EUJK5zx7COnyfugSkDq/02GA+md4BnT56ATPR1WyEMUrhzdp1yqiAMuXoJ1dC0mX3kOfnt/Z
+dZEzPMtO8HRVyULUUnWtMTBvbAZREPu+AHafLiRdeg99cH7nXg9d7AzPshM8XVWyNnbtq+bC9oFT
+SptBVMKo7W5gT5KIKiNd+g/Bz++8bPfTGZ6lJ3i6qmQgqvIO+SHXtiFE8fQgxcc0oopIl6UUUOAZ
+nnVUyUAUrWrzglt6NoSojgJoe88TlVcZoLkU0MYIoLJuTildurYRdS2ExV4Cdb+SWyqfhjYE27we
+ovZSFusgALcR/05szDZStC5DzRsjxwMElbRFeyls7uFHofqLAOpZFHmAoPsDAaWvfTbWYOYAAAAA
+SUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

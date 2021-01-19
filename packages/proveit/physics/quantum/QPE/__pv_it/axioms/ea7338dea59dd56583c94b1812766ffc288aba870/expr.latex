@@ -1,0 +1,5 @@
+\left(k \mapsto \left\{\hspace{2em} \Qcircuit@C=1em @R=.7em{
+& \lstick{\lvert \psi_{k} \rangle} & \qw & \qw & \multigate{1}{I}   \\ 
+  & \lstick{\lvert 0 \rangle} & \gate{H} & \control \qw \qwx[1] & \ghost{I} & \qw & \rstick{\lvert \psi_{k + 1} \rangle} \qw   \\ 
+  & \lstick{\lvert u \rangle} & \qw & \gate{U^{2^{k}}} & \rstick{\lvert u \rangle} \qw 
+} \hspace{2em} \textrm{ if } k \in \mathbb{N}^+\right..\right)

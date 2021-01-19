@@ -1,0 +1,1 @@
+(\lnot B_{1}) \land \ldots \land (\lnot B_{i - 1}) \land (\lnot C_{1}) \land \ldots \land (\lnot C_{i}) \land \left[\forall_{A_{i}, \ldots, A_{j}}~\left(A_{i} \lor \ldots \lor A_{j}\right)\right] \land \left(A \lor D\right)

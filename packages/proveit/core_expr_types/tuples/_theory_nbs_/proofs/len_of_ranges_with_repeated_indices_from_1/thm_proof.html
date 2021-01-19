@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.core_expr_types.tuples.len_of_ranges_with_repeated_indices_from_1 theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../index.html"><img src="../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.core_expr_types.tuples.len_of_ranges_with_repeated_indices_from_1-theorem">Proof of <a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">core_expr_types</a>.<a class="ProveItLink" href="../../theory.html">tuples</a>.<a class="ProveItLink" href="../../theorems.html#len_of_ranges_with_repeated_indices_from_1">len_of_ranges_with_repeated_indices_from_1</a> theorem<a class="anchor-link" href="#Proof-of-proveit.core_expr_types.tuples.len_of_ranges_with_repeated_indices_from_1-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> len_of_ranges_with_repeated_indices_from_1
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="len_of_ranges_with_repeated_indices_from_1">len_of_ranges_with_repeated_indices_from_1:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/498b74179f292d4ad58d56f7f63d17ab7aa8905d0/expr.html"><img src="data:image/png;base64,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
+tpH4X3kwowAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/7060decd684fdea3b2ab41d8ff73b77fc96369850/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

@@ -1,0 +1,1 @@
+\left(P \mapsto \left(\begin{array}{c} \begin{array}{l} (\lnot \left[\exists_{x_{1}, \ldots, x_{n}}~P(x_{1}, \ldots, x_{n})\right]) \Rightarrow  \\ \left[\nexists_{y_{1}, \ldots, y_{n}}~P(y_{1}, \ldots, y_{n})\right] \end{array} \end{array}\right)\right)

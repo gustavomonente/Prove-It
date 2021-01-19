@@ -1,0 +1,1 @@
+\forall_{\varepsilon \in \mathbb{N}^+}~\left(P_{\rm fail}(\varepsilon) = \left(1 - P_{\rm success}(\varepsilon)\right)\right)

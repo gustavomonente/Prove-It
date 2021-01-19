@@ -1,0 +1,1 @@
+\left[\forall_{k \in \{m \ldots n\}}~\left(a(k) \leq b(k)\right)\right] \Rightarrow \left(\left(\sum_{l=m}^{n} a(l)\right) \leq \left(\sum_{l=m}^{n} b(l)\right)\right)

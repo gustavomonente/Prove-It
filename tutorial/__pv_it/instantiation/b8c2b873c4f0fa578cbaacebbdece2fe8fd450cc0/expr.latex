@@ -1,0 +1,1 @@
+A_{1} \land \ldots \land A_{j} \land \left[\left(C_{i}, \ldots, C_{j}\right) \mapsto \left(C_{i} \lor \ldots \lor C_{j}\right)\right]

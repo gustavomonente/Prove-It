@@ -1,0 +1,1 @@
+\left(\forall_{k \in S}~\left(a(k) < b(k)\right), \sum_{l \in S}~a(l) < \sum_{l \in S}~b(l)\right)

@@ -1,0 +1,7 @@
+proveit.logic.equality.sub_right_side_into
+proveit.logic.sets.inclusion.superset_membership_from_proper_subset
+proveit.numbers.addition.subtraction.add_cancel_basic
+proveit.numbers.addition.weak_bound_by_left_term
+proveit.numbers.negation.real_closure
+proveit.numbers.number_sets.complex_numbers.real_within_complex
+proveit.numbers.rounding.floor_of_real_is_real

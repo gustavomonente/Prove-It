@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.numbers.multiplication.leftward_commutation theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../index.html"><img src="../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.numbers.multiplication.leftward_commutation-theorem">Proof of <a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">numbers</a>.<a class="ProveItLink" href="../../theory.html">multiplication</a>.<a class="ProveItLink" href="../../theorems.html#leftward_commutation">leftward_commutation</a> theorem<a class="anchor-link" href="#Proof-of-proveit.numbers.multiplication.leftward_commutation-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> leftward_commutation
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="leftward_commutation">leftward_commutation:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/b016957d47f146cfaf9b4c397de89876606f15350/expr.html"><img src="data:image/png;base64,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
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/eaab82b29a81cdbba0f3f3d1e7a724a3bf13a91b0/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

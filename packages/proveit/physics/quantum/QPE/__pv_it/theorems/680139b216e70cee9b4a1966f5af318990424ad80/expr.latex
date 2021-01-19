@@ -1,0 +1,1 @@
+P_{\rm success}(\varepsilon) \geq \left(\sum_{l=-\varepsilon}^{\varepsilon} Pr_{m}[m = \left(b \oplus l\right)]\right)

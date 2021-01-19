@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.logic.sets.inclusion.refined_nonmembership theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.logic.sets.inclusion.refined_nonmembership-theorem">Proof of <a class="ProveItLink" href="../../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">logic</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">sets</a>.<a class="ProveItLink" href="../../theory.html">inclusion</a>.<a class="ProveItLink" href="../../theorems.html#refined_nonmembership">refined_nonmembership</a> theorem<a class="anchor-link" href="#Proof-of-proveit.logic.sets.inclusion.refined_nonmembership-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> refined_nonmembership
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="refined_nonmembership">refined_nonmembership:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/c66aca9c3462afc3b2b99fcb811d15706f2ab4c50/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAAAXCAMAAAA2s/OGAAAAV1BMVEX///9jY2MJCQkNDQ0rKysP
+Dw8WFhYkJCRlZWUoKCgtLS0/Pz9RUVEvLy8QEBCIiIhmZma6urrMzMxUVFQiIiJERETc3Nzu7u6q
+qqp2dnaYmJgyMjIAAACXTERdAAAAAXRSTlMAQObYZgAAAxFJREFUWMPdWNmy5CAIzex7cENE/f/v
+HDWxo9nn3qqZnutDqtvAEfAImGF4I0O9FUcG609fm+NXzuZnePz3/pn9JDzfUL03OTuns6fs6nSg
+Z3Y02NPXQu7pxDlI2WFbI2Xxmf30Yvhj5voQ571jaDZy2dpnHOZkQz2az59M2JDdiThr0ZjFmPKw
+5qkz0bF1CoEG3ImDHyBWQof8I2Iehv8xN+XZW5iZSwDaSihUrOeP5kO4GpIGF2t+5ayvSwlqY9L+
+lhgFC43H1NlYuCd7CYOncjhZTGk3vIGh4WnJqADbLJ3MUhEexzVji6GPiY+t7X4sIRmHCxM36sSF
+KvoWjBWny5kpgXDaPU4ZRtp+9Z2CkW2wsaI6UzMWLEWURGwrqiiWukg3Ha3qCrtm5QyGHP/66c/k
+xjl2ebluPTWGED5+SI+wqqtCCB2rrCqFhn2XnplMm8tN2X4R7u5oVV9Nn8B4dPYHncqNC8diR9NS
+FHcKxiQ/hs5RG9rGQkEXNIp5Y2AhB4NQoNWRo1Xd9YtvYBacfHQUH8q11C0m913tuFtEZ3FTT4A0
+c/bQS8SSy6LRlBE84BKHlMt1GIw8crSqiz6drGEanNBKb+S6ZOQolYxJ+XEkYEoy/Yl3fWs0JaOk
+33jmkwzEholFBExzSwj+mLoPde4dXcMsOCRajI1cUx5SFNyAcdXfG6fVUdXF2jEIXvOegmDGJhVg
+EbGxYWK0h44u6rLP+DswM44yiN+/IcKh3IN6pAEIRH/7IP1eUt/+x1io79KPOd2EORb+ISmorLPE
+aFpSNs7lg60OHG3U+1K4hXngJJ5qOpG7agH9O0ZjTDi7+mxOsZyClQuExcno8hx5mGZsLOzifUcb
+9RRYvxjXwqxxWJHelbvZ1KO9bLt43VBgKTwWo/GpQqXgsom5HqGcapZLRPGSgWnX0VY9U4drw9DB
+bHDwayVqL3fPHbq+dVE4f+9uzOx0RjfGCudLDgi88OIN198LLvbc2euZlzm6wrHiNZ9Srpf3F9z2
+N2aOV7JYxyUyy//jq5V4LYD+G1b+BjXXRiLOG9UlAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/f7e0862ded9af59125dafb6781f5eb0015fea6700/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Theorem Dependencies</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Theorem-Dependencies">Theorem Dependencies<a class="anchor-link" href="#Theorem-Dependencies">&#182;</a></h1><h2 id="proveit.numbers.number_sets.natural_numbers.non_zero_if_is_nat_pos"><a class="ProveItLink" href="../../../_theory_nbs_/theory.html">proveit.numbers.number_sets.natural_numbers</a>.<a class="ProveItLink" href="../../../_theorems_.html#non_zero_if_is_nat_pos">non_zero_if_is_nat_pos</a><a class="anchor-link" href="#proveit.numbers.number_sets.natural_numbers.non_zero_if_is_nat_pos">&#182;</a></h2><p><strong><em>see <a class="ProveItLink" href="../../../_theory_nbs_/proofs/non_zero_if_is_nat_pos/thm_proof.html">proof</a></em></strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Automation is not needed when querying dependencies:</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">automation</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># This will speed things up.</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">inline_pngs</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Makes files smaller.</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers.number_sets.natural_numbers</span> <span class="k">import</span> <span class="n">non_zero_if_is_nat_pos</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">dependencies</span> non_zero_if_is_nat_pos
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>Unproven conjectures required (directly or indirectly) to prove non_zero_if_is_nat_pos</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../rational_numbers/_theory_nbs_/proofs/zero_is_rational/thm_proof.html">proveit.numbers.number_sets.rational_numbers.zero_is_rational</a></dt><dd><a class="ProveItLink" href="../../../../rational_numbers/__pv_it/theorems/93fd2316b3658ee876c06b14a9f64eb8499621810/expr.html"><img src="../../../../rational_numbers/__pv_it/theorems/93fd2316b3658ee876c06b14a9f64eb8499621810/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../real_numbers/_theory_nbs_/proofs/nat_pos_within_real_pos/thm_proof.html">proveit.numbers.number_sets.real_numbers.nat_pos_within_real_pos</a></dt><dd><a class="ProveItLink" href="../../../../real_numbers/__pv_it/theorems/77dfb1aba260e7db4c014d254feb15519844c04e0/expr.html"><img src="../../../../real_numbers/__pv_it/theorems/77dfb1aba260e7db4c014d254feb15519844c04e0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../real_numbers/_theory_nbs_/proofs/rational_within_real/thm_proof.html">proveit.numbers.number_sets.real_numbers.rational_within_real</a></dt><dd><a class="ProveItLink" href="../../../../real_numbers/__pv_it/theorems/85bdd7b2985ab2cf6bbf95f9b1dbf16c5f73731f0/expr.html"><img src="../../../../real_numbers/__pv_it/theorems/85bdd7b2985ab2cf6bbf95f9b1dbf16c5f73731f0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../real_numbers/_theory_nbs_/proofs/real_pos_within_real/thm_proof.html">proveit.numbers.number_sets.real_numbers.real_pos_within_real</a></dt><dd><a class="ProveItLink" href="../../../../real_numbers/__pv_it/theorems/efffa4c2fbda03b8f58a882317c91113fb86f8ba0/expr.html"><img src="../../../../real_numbers/__pv_it/theorems/efffa4c2fbda03b8f58a882317c91113fb86f8ba0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../ordering/_theory_nbs_/proofs/less_is_not_eq/thm_proof.html">proveit.numbers.ordering.less_is_not_eq</a></dt><dd><a class="ProveItLink" href="../../../../../ordering/__pv_it/theorems/8199e4865514206e73185f50fdfeab2e27bb9a6c0/expr.html"><img src="../../../../../ordering/__pv_it/theorems/8199e4865514206e73185f50fdfeab2e27bb9a6c0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../ordering/_theory_nbs_/proofs/positive_if_real_pos/thm_proof.html">proveit.numbers.ordering.positive_if_real_pos</a></dt><dd><a class="ProveItLink" href="../../../../../ordering/__pv_it/theorems/0b7dfe14c2a9a8793a25a98bd2cdb19adfd942130/expr.html"><img src="../../../../../ordering/__pv_it/theorems/0b7dfe14c2a9a8793a25a98bd2cdb19adfd942130/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+</dl>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>Axioms required (directly or indirectly) to prove non_zero_if_is_nat_pos</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/booleans/_theory_nbs_/axioms.html#eq_true_elim">proveit.logic.booleans.eq_true_elim</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/booleans/__pv_it/axioms/ed8b0a27c515b8c85261606f0835dadd8c8b34f70/expr.html"><img src="../../../../../../logic/booleans/__pv_it/axioms/ed8b0a27c515b8c85261606f0835dadd8c8b34f70/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/booleans/_theory_nbs_/axioms.html#eq_true_intro">proveit.logic.booleans.eq_true_intro</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/booleans/__pv_it/axioms/3a99d3cb7c410f4636cdc59f7b36cdf6997b37680/expr.html"><img src="../../../../../../logic/booleans/__pv_it/axioms/3a99d3cb7c410f4636cdc59f7b36cdf6997b37680/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/equality/_theory_nbs_/axioms.html#equals_symmetry">proveit.logic.equality.equals_symmetry</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/equality/__pv_it/axioms/34996bbbceac0f69a08b78cc992f42a548486c1c0/expr.html"><img src="../../../../../../logic/equality/__pv_it/axioms/34996bbbceac0f69a08b78cc992f42a548486c1c0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/equality/_theory_nbs_/axioms.html#equals_transitivity">proveit.logic.equality.equals_transitivity</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/equality/__pv_it/axioms/fe5ecb4839370106d7aa598ff8e51b95c71757a70/expr.html"><img src="../../../../../../logic/equality/__pv_it/axioms/fe5ecb4839370106d7aa598ff8e51b95c71757a70/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/equality/_theory_nbs_/axioms.html#not_equals_def">proveit.logic.equality.not_equals_def</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/equality/__pv_it/axioms/15f4bc0dbe6f9cb8363f313a4b59eb995eddacaf0/expr.html"><img src="../../../../../../logic/equality/__pv_it/axioms/15f4bc0dbe6f9cb8363f313a4b59eb995eddacaf0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/equality/_theory_nbs_/axioms.html#substitution">proveit.logic.equality.substitution</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/equality/__pv_it/axioms/fb5aa0007e656f471030da411c3555b23b265d8f0/expr.html"><img src="../../../../../../logic/equality/__pv_it/axioms/fb5aa0007e656f471030da411c3555b23b265d8f0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/sets/inclusion/_theory_nbs_/axioms.html#proper_subset_def">proveit.logic.sets.inclusion.proper_subset_def</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/sets/inclusion/__pv_it/axioms/e95bfa29563f2d409f4f144fe6c68968590429550/expr.html"><img src="../../../../../../logic/sets/inclusion/__pv_it/axioms/e95bfa29563f2d409f4f144fe6c68968590429550/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../logic/sets/inclusion/_theory_nbs_/axioms.html#subset_eq_def">proveit.logic.sets.inclusion.subset_eq_def</a></dt><dd><a class="ProveItLink" href="../../../../../../logic/sets/inclusion/__pv_it/axioms/d7449297494a795000bc445b03cbe0385e2bd3490/expr.html"><img src="../../../../../../logic/sets/inclusion/__pv_it/axioms/d7449297494a795000bc445b03cbe0385e2bd3490/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+</dl>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>Theorems/conjectures that depend directly on non_zero_if_is_nat_pos</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dl>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../exponentiation/_theory_nbs_/proofs/sqrt2_is_not_rational/thm_proof.html">proveit.numbers.exponentiation.sqrt2_is_not_rational</a></dt><dd><a class="ProveItLink" href="../../../../../exponentiation/__pv_it/theorems/9372fddc16eaf34233f04d96d6016085e1bb227a0/expr.html"><img src="../../../../../exponentiation/__pv_it/theorems/9372fddc16eaf34233f04d96d6016085e1bb227a0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/_theory_nbs_/proofs/delta_is_real/thm_proof.html">proveit.physics.quantum.QPE.delta_is_real</a></dt><dd><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/__pv_it/theorems/d00927e3f5ef10f4b1b4f73f42e30fdff8f126540/expr.html"><img src="../../../../../../physics/quantum/QPE/__pv_it/theorems/d00927e3f5ef10f4b1b4f73f42e30fdff8f126540/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/_theory_nbs_/proofs/mod_add_closure/thm_proof.html">proveit.physics.quantum.QPE.mod_add_closure</a></dt><dd><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/__pv_it/theorems/5f9882192abb35a110d0b3a1f5d365708d6c504e0/expr.html"><img src="../../../../../../physics/quantum/QPE/__pv_it/theorems/5f9882192abb35a110d0b3a1f5d365708d6c504e0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/_theory_nbs_/proofs/scaled_delta_in_interval/thm_proof.html">proveit.physics.quantum.QPE.scaled_delta_in_interval</a></dt><dd><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/__pv_it/theorems/c2d1bf1a1961ff085bafa1c9cf9a6b65c0d2030c0/expr.html"><img src="../../../../../../physics/quantum/QPE/__pv_it/theorems/c2d1bf1a1961ff085bafa1c9cf9a6b65c0d2030c0/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/_theory_nbs_/proofs/two_pow_t_not_zero/thm_proof.html">proveit.physics.quantum.QPE.two_pow_t_not_zero</a></dt><dd><a class="ProveItLink" href="../../../../../../physics/quantum/QPE/__pv_it/theorems/076a0c485f2bd4d9d3bc331ff4d4baae3d13dba70/expr.html"><img src="../../../../../../physics/quantum/QPE/__pv_it/theorems/076a0c485f2bd4d9d3bc331ff4d4baae3d13dba70/expr.png" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+</dl>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

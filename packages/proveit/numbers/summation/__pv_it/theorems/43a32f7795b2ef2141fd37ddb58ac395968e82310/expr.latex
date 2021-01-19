@@ -1,0 +1,1 @@
+\left(\left(P, Q\right) \mapsto \left(\left[\forall_{x~|~Q(x)}~\left(P(x) \in \mathbb{N}\right)\right] \Rightarrow \left(\sum_{x~|~Q(x)}~P(x) \in \mathbb{N}\right)\right)\right)

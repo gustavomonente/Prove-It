@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Common expressions for the theory of proveit.numbers.summation</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../index.html"><img src="../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Common-expressions-for-the-theory-of-proveit.numbers.summation">Common expressions for the theory of <a class="ProveItLink" href="theory.html">proveit.numbers.summation</a><a class="anchor-link" href="#Common-expressions-for-the-theory-of-proveit.numbers.summation">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Prepare this notebook for defining the common expressions of a theory:</span>
+<span class="o">%</span><span class="k">common_expressions_notebook</span> # Keep this at the top following &#39;import proveit&#39;.
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">Function</span>
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">k</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">begin</span> common
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Defining common sub-expressions for theory &#39;proveit.numbers.summation&#39;
+Subsequent end-of-cell assignments will define common sub-expressions
+%end_common will finalize the definitions
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ak</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="ak">ak:</strong> <a class="ProveItLink" href="../__pv_it/common/9df04aa86ed13def1123d4c0a3df4d6504170cc70/common_expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAUBAMAAAD4luk4AAAAMFBMVEX///9UVFSqqqrMzMwiIiJE
+RESYmJgyMjK6urru7u4QEBCIiIh2dnZmZmbc3NwAAABRgo0vAAAAAXRSTlMAQObYZgAAAPBJREFU
+GNNjYICCZ1BajwEOOAMYOKMcgAzGB3AxdiCT/QJIsgAulgvE/Aog1mm4mB8Q908AsWbBhPhARh2B
+mNIA5N65vZKBG2RULYPaPQYGHiCz6wH7BwbWBKDpn7hffGNgYCtg4FzGwBvAwAI0nunnTk6gFJMD
+A+9PBpYNDFxAQ3jXgs1j/sDAFcAw3wAsxiIdDRWbf4BBnwGsd37De6AMA4cDw3wFBnGmByA78oHs
+A2A7WDewOfKAHSDKwG8AFOM9wMApvfnhDpAGhiAG7ttAn7AbIPsNAqaghAEEIMKAFRZsSGEFDFM0
+SaSwz2NgAACvdjglLqDfnwAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">al</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="al">al:</strong> <a class="ProveItLink" href="../__pv_it/common/c805528dd6eb4447137929f0be9f02b51ee5b4f60/common_expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAUBAMAAACHR/vJAAAAMFBMVEX///9UVFSqqqrMzMwiIiJE
+RESYmJgyMjK6urru7u4QEBCIiIh2dnZmZmbc3NwAAABRgo0vAAAAAXRSTlMAQObYZgAAANdJREFU
+GNNVkDtuwkAQhj8bG1g/aFPQcALiG8RcIJgbcAGDj5A6NVVSuEOK0lhKE6Vyn4aGihSmobaEhKBj
+vCIrM9K/s/tp5wk3OzTHGGMqwZ9GVmVAT65LVGZAKtrCrwHPok94+38PYtFRIl/E/+0+8DfQrSEQ
+/1r1atw5WInADLUmTHBG4BVgx4QXnAJPYp+kcqfGS8gjDX7QIC95RIfMFPRj8hEPdtUkPQU6qVt0
+J4Eud36HsEQNv/bfzVfSUhqL2q2Lre6Goz2cqzfRGl8WZHBrhQu4AuK5MPvzCwNeAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bk</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="bk">bk:</strong> <a class="ProveItLink" href="../__pv_it/common/af02c0524fcb3b644c8162566711613cbe69b4610/common_expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAUBAMAAAD1iJl/AAAAMFBMVEX////MzMyYmJjc3NyIiIhU
+VFR2dna6urqqqqpmZmYyMjIiIiIQEBBERETu7u4AAACIO4EmAAAAAXRSTlMAQObYZgAAAO9JREFU
+GNNdkDEPwUAUx/8oWvTOR2hi6qSxGBnMJqukEZul30DDF2iig00Xg62Jb2CzGQwGQ3eSikkM4l3d
+kXjJ+98v79373+UBn2jJc07JzrHQg4SiQ1IJhDgSWETCfRJbAcaU04RkqwBXygllIZZA4x6w7i2h
+CZsNZgugFIA9k9QxLTJ+aO07kI+gv8C7VXLWX31GHT2GESF1a2Rg7DOv3E38ZuqLUnVwlCVuYZWI
+wdTrUAPlGNxjOwj7JlLfzeyLlhmIlzEEr1PJcMHCUXYbJ2gh/b9SlzvZQsVFgf0tjRWYjoRsOR86
+/Pd+i24AbxAZOoIkUYDnAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bl</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="bl">bl:</strong> <a class="ProveItLink" href="../__pv_it/common/8f6fbe105a59d4ecd3e51d0d53d42be2455341620/common_expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAUBAMAAACDsiv0AAAAMFBMVEX////MzMyYmJjc3NyIiIhU
+VFR2dna6urqqqqpmZmYyMjIiIiIQEBBERETu7u4AAACIO4EmAAAAAXRSTlMAQObYZgAAAOZJREFU
+GNNjYIAAIxDRDMR8dzaAyAsMLPsFWA2ATK4JIALI0mfgWwBk8jcACU0gnsvAkAKk6h8Aic1AfISB
+4Q2QygZiZqAZzB+B2goYGJa6zGBgAZrB9IGBgW0CA9+vB+8NeBUYGFgvAMUWMHD8Y+B34AaayePA
+wMCxgYFzAcP7BB6gPnmglYwfQNbXN4D4PgxgPr8Cw/wHIPVX+RgY2Dcw8BfwHWIAmfeJDWweqwLv
+BJA9DN+fMDBwJjDwTUkCq2PQTAC6RwDq3c0Q6jWUC/YPA8Q/YMAL8jnEv2AADA+4KCK8lBkYAEKE
+MYlEG2zIAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">end</span> common
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>These common expressions may now be imported from the theory package: proveit.numbers.summation
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

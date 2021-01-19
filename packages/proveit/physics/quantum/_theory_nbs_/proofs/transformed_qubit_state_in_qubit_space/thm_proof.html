@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.physics.quantum.transformed_qubit_state_in_qubit_space theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../index.html"><img src="../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.physics.quantum.transformed_qubit_state_in_qubit_space-theorem">Proof of <a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">physics</a>.<a class="ProveItLink" href="../../theory.html">quantum</a>.<a class="ProveItLink" href="../../theorems.html#transformed_qubit_state_in_qubit_space">transformed_qubit_state_in_qubit_space</a> theorem<a class="anchor-link" href="#Proof-of-proveit.physics.quantum.transformed_qubit_state_in_qubit_space-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> transformed_qubit_state_in_qubit_space
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="transformed_qubit_state_in_qubit_space">transformed_qubit_state_in_qubit_space:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/7dc0b262ed363340956e6ef7b5725aeeebf56b720/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAAAcBAMAAABBrR1nAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAABJFJREFU
+SMfNV2+IFGUYf253ZndndmbPD32UWi38UFGTEajosRQWVOBAmX6wbonklCK2BC8q5Ei4dtNwqbCg
+4oYTDrlEDyriSnG5IM0uWjFBo2y5StDK7sCsLq7reZ53ZvadmW3WBSVfeJmZZ37vvL/3+T8A///4
+dLsD184wqqnG5aP7+qsd7/BwJ+B0Vf0LEnij9L/YHl3q/LxqsSM6Be0iKLxk91Whk+vQF7KzAF9e
+PTpLcWr1yKb/afR0HqfDdNiLvoul0xYSGhoeFvaC1jezAzLzU758cwR527aZ5ywMLbxNWEznCxKf
+j6XTFhIOFfryObxexOvipnx/GLj2b9gzZ4FJeG2a6bxFtwOxdNpCQqNrDHiLHO2wQqKZD+LMFAq+
+t+BBWI1PLzAdcjtjLJZOW0hoDDkUvQDddAQpyPQFLo2X+7fR9WQXAlOW+vMnr+DTMqZjHhsdfTPe
+ldtCQuM4TsKvwcPrNenFjyINvOQGnkVq1/Nd8/OkxkUisv4slyPZR52syJHVCiK7Li9pPvfgvBHn
+VzZqokCS4SVv3JoXLosu5LLRiw/JX1njMJ2NAJXwBhlYJ9NhiLprCh675Ek3TB6y1/+TV39DY9So
+6mQL/ooyzldxPoMzyRvXzGfTGJ9nAgGm1e6W9+y1mc49oAdKRnZn3+M5OCDTERCkr3gepFhwGBQM
+6AfQ+lWuOsv9FWeFY+rEPcU+7BizCjrTR/zaCwrNCtAZKjCdNCS8jKUfvLOur3fUX7yVLh0BOYLJ
+wREgSloZMPDVzagoUXVG/BVbcF6H55rD62v8Xcgwh1626vUXcJB0YINM54CgY9TTnuTU+CiY7wAc
+BP2cTEdAtuONC4LuKmQhY5Gh0JRcdXJ+0v1B0DF+x+vnQtSd9+k0U8b5VAvtaI1H8GHiriW2Qulo
+9YfkmyOOTEdA5pgOgyC3EBd315lOSVQdX8cwKIxlTDfjnBwD4D6+X+DhTjAdb6feqqhZlSfICk+n
+CzmSfnOa9LhiX6BmEQTtAe8iEWHWO2YK9AGsTFpJVJ2sn2E2CVemwphilWWd29nOZ/yKJgLmJtSZ
+0ghGFrxfojD9FWAPST8ep6/P/xGgQ5AEnuq0C6IUUaJMYVZBIeVjCCu+ERYJARpN2yh2GttFJ4GV
+omD6GbVnp/Ne2ZGy1W7frnj2deVyOf/22hYVnSDJATYNg3Qb9GnKo2S9oigJakPOIGQXY9BVxMji
+4VVkyp+EZjfd76W3nhu22N6qZS4dk/ip06oIyuQwRUKIDkGMIqh1N3KzY9RifQbwKK5EmlR1FN9Y
+XQVRJMJDd3sV5agoEsExJfU7Q0bDAIOYaittmGjV76gloMBkEGpqr4OpUq3xJlx1TL8cJGtCX5FK
+n49J7fqsRGfk64ljADvodt+FQbtl+3XvJMcOgZKvT2KlVp7iFu554KqT9NOySrFTie64P67QmcVI
+N5hAt2jbDUZAt7gdaVPyJLdfkVGJ7ZjtK9ScZsTlUFAN0ebUjP0j+fZK9coKb6xLzpK1Om6vRa6+
+DDr9bf+zxtmG8t/DBx3TSTr0n7UVrq3xL+JTP7/AfX2nAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/82fb37759e90cfb741d23111a64cb3faf2e331310/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

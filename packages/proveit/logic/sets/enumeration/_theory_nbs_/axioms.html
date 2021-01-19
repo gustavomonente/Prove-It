@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Axioms for the theory of proveit.logic.sets.enumeration</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../index.html"><img src="../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Axioms-for-the-theory-of-proveit.logic.sets.enumeration">Axioms for the theory of <a class="ProveItLink" href="theory.html">proveit.logic.sets.enumeration</a><a class="anchor-link" href="#Axioms-for-the-theory-of-proveit.logic.sets.enumeration">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Prepare this notebook for defining the axioms of a theory:</span>
+<span class="o">%</span><span class="k">axioms_notebook</span> # Keep this at the top following &#39;import proveit&#39;.
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">Forall</span><span class="p">,</span> <span class="n">Equals</span><span class="p">,</span> <span class="n">InSet</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">EmptySet</span>
+<span class="kn">from</span> <span class="nn">proveit.core_expr_types</span> <span class="k">import</span> <span class="n">y_1_to_n</span>
+<span class="kn">from</span> <span class="nn">proveit.logic.sets</span> <span class="k">import</span> <span class="n">x_equals_any_y</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">Natural</span>
+<span class="o">%</span><span class="k">begin</span> axioms
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Defining axioms for theory &#39;proveit.logic.sets.enumeration&#39;
+Subsequent end-of-cell assignments will define axioms
+%end_axioms will finalize the definitions
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Membership in an enumeration is the same as being equal to any of the contents of the enumeration:</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">enum_set_def</span> <span class="o">=</span> <span class="n">Forall</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Forall</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">),</span> 
+                              <span class="n">Equals</span><span class="p">(</span><span class="n">InSet</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Set</span><span class="p">(</span><span class="n">y_1_to_n</span><span class="p">)),</span> 
+                                     <span class="n">x_equals_any_y</span><span class="p">)</span><span class="o">.</span><span class="n">with_wrapping_at</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span>
+                   <span class="n">domain</span><span class="o">=</span><span class="n">Natural</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="enum_set_def">enum_set_def:</strong> <a class="ProveItLink" href="../__pv_it/axioms/c7ea2c7ee6f092568d3abec90cc25cca617e2e5e0/axiom_expr.html"><img src="data:image/png;base64,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
+Q2J1NQsZAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Define the empty set as an enumerated set with no elements.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">empty_set_def</span> <span class="o">=</span> <span class="n">Equals</span><span class="p">(</span><span class="n">EmptySet</span><span class="p">,</span> <span class="n">Set</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="empty_set_def">empty_set_def:</strong> <a class="ProveItLink" href="../__pv_it/axioms/a5415422708e4dbe31497d99a61b1310c2cc3e830/axiom_expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAAVBAMAAADlb+D4AAAAMFBMVEX////MzMwQEBDu7u66urpm
+ZmaYmJhUVFQiIiLc3NwyMjKIiIh2dnaqqqpEREQAAABVi3StAAAAAXRSTlMAQObYZgAAANRJREFU
+KM9jYGBg4GPAAKkJDKKbQQze0+cwJK0OAAknASBxmmEXhmw+iGBdwMDA2cDwfAO67AkQwdPAwMAW
+wNDSgFOWbwNL8GecskwJrM4fccryX+Bg+IJdVgEkO4/hL4i9CgwCwLJVIILtA1A2YRtYFhnwKoKp
+pSB7F6ObzPhiAphm72bg2LyAGd1VLBC9y4EKzh5g/ICwtwAsXgezl+25ANsDnG5m6GDgcsDpX4Yb
+k08z4JY95jYBj+wFzLhnOASXxQbg8YsVcIHThgMOWYarkHQFANuAQxxgY/+kAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#</span>
+<span class="c1"># might need an axiom here:</span>
+<span class="c1"># if 2 enum sets are SetEquiv then they are equal</span>
+<span class="c1"># see some hard-copy notes/comments from project meeting 2/07/2020</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">end</span> axioms
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>These axioms may now be imported from the theory package: proveit.logic.sets.enumeration
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

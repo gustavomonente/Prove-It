@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Show the Proof</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Show-the-Proof">Show the Proof<a class="anchor-link" href="#Show-the-Proof">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Automation is not needed when only showing a stored proof:</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">automation</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># This will speed things up.</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">inline_pngs</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Makes files smaller.</span>
+<span class="o">%</span><span class="k">show_proof</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table><tr><th>&nbsp;</th><th>step type</th><th>requirements</th><th>statement</th></tr>
+<tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step0">0</a></td><td>generalizaton</td><td><a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step1">1</a></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/2bd5812116805831135f1a949ae0e425f21169040/expr.html"><img src="../../theorems/2bd5812116805831135f1a949ae0e425f21169040/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step1">1</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step2">2</a>, <a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step3">3</a>, <a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step4">4</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.html"><img src="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.html"><img src="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../7711eb894cff0488e5bda94e31a739f8183e8a090/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/458621bff6342e362dd551440bebbe789e1a36680/expr.html"><img src="../../theorems/458621bff6342e362dd551440bebbe789e1a36680/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.html"><img src="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.html"><img src="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step2">2</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../_theory_nbs_/proofs/unfold_subset_eq/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/0460b4d524fce3cf0601ed706f203efe4d72eccf0/expr.html"><img src="../../theorems/0460b4d524fce3cf0601ed706f203efe4d72eccf0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../_theory_nbs_/proofs/unfold_subset_eq/thm_proof.html">proveit.logic.sets.inclusion.unfold_subset_eq</a></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step3">3</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step5">5</a>, <a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step6">6</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.html"><img src="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../9d51fabb1c2761e74702f2061f4ebeb9030f9eb90/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/e95a006f2b74a09b90987eb3cf94c9d5b15f5eda0/expr.html"><img src="../../theorems/e95a006f2b74a09b90987eb3cf94c9d5b15f5eda0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../theorems/e95a006f2b74a09b90987eb3cf94c9d5b15f5eda0/expr.html"><img src="../../theorems/e95a006f2b74a09b90987eb3cf94c9d5b15f5eda0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../theorems/a3a04bf4cb89df5819dabc5220826f5db76ef2c50/expr.html"><img src="../../theorems/a3a04bf4cb89df5819dabc5220826f5db76ef2c50/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step4">4</a></td><td>assumption</td><td></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.html"><img src="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../c23194a4294c58db0c106ab6515d82290675bb3d0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.html"><img src="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step5">5</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../../../booleans/conjunction/_theory_nbs_/proofs/left_from_and/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../../../../booleans/conjunction/__pv_it/theorems/1e44c5c80040c76413fdfe295b4c6dfd83f450d20/expr.html"><img src="../../../../../booleans/conjunction/__pv_it/theorems/1e44c5c80040c76413fdfe295b4c6dfd83f450d20/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../../../booleans/conjunction/_theory_nbs_/proofs/left_from_and/thm_proof.html">proveit.logic.booleans.conjunction.left_from_and</a></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step6">6</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step7">7</a>, <a href="#proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step8">8</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.html"><img src="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../115fd7f3705084e2b7f9ae2f41cd930ac76630e60/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/990ad913bfe108c5b921cb343b8df2f124281bd00/expr.html"><img src="../../theorems/990ad913bfe108c5b921cb343b8df2f124281bd00/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step7">7</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../_theory_nbs_/proofs/unfold_proper_subset/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/51ea507e92b7ef8e248193ef1fa53c2a22544b2f0/expr.html"><img src="../../theorems/51ea507e92b7ef8e248193ef1fa53c2a22544b2f0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../_theory_nbs_/proofs/unfold_proper_subset/thm_proof.html">proveit.logic.sets.inclusion.unfold_proper_subset</a></td></tr><tr><td><a name="proveit.logic.sets.inclusion._proof_superset_membership_from_proper_subset.c88966e9f2c3c4682517f0dd62b6b4bfe85fd5640_step8">8</a></td><td>assumption</td><td></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.html"><img src="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../e64bf149be3fb147f8d0d7ccb1b9bbcd2c32384f0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.html"><img src="../../theorems/6aba98c32035862320afc34f929d47e5e7151b7d0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

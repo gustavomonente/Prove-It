@@ -1,0 +1,1 @@
+\left(x_{1, 1}, \ldots, x_{1, n}, \ldots\ldots, x_{m, 1}, \ldots, x_{m, n}\right) \mapsto \left(\left(\left(1 \cdot 1 \cdot x_{1, 1}\right) + \ldots + \left(1 \cdot n \cdot x_{n, 1}\right)\right) \cdot \ldots \cdot \left(\left(m \cdot 1 \cdot x_{1, m}\right) + \ldots + \left(m \cdot n \cdot x_{n, m}\right)\right)\right)

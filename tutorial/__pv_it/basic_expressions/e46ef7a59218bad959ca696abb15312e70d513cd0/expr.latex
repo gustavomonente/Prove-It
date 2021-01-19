@@ -1,0 +1,1 @@
+\left(\begin{array}{l} |\left(a_{i}, \ldots, a_{j - 1}, a_{j}\right)| = |\left(i, \ldots, j\right)|,  \\ \left(\left(j - 1\right) + 1\right) = j, \left(i, \ldots, j - 1, j\right) = \left(i, \ldots, j\right) \end{array}\right)

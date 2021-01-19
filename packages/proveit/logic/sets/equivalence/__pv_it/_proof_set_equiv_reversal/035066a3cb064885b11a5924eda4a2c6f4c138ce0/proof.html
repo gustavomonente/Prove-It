@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Show the Proof</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Show-the-Proof">Show the Proof<a class="anchor-link" href="#Show-the-Proof">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Automation is not needed when only showing a stored proof:</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">automation</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># This will speed things up.</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">inline_pngs</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Makes files smaller.</span>
+<span class="o">%</span><span class="k">show_proof</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table><tr><th>&nbsp;</th><th>step type</th><th>requirements</th><th>statement</th></tr>
+<tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step0">0</a></td><td>generalizaton</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step1">1</a></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/8fe4d9a627f3c6a30cbc432c5bebedc01c98e92b0/expr.html"><img src="../../theorems/8fe4d9a627f3c6a30cbc432c5bebedc01c98e92b0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step1">1</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step2">2</a>, <a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step3">3</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../04a81471e1aed6187803711d1a7fbf86b46905a60/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/07a6129a233e88507cb7ef017cf96709090486840/expr.html"><img src="../../theorems/07a6129a233e88507cb7ef017cf96709090486840/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step2">2</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../_theory_nbs_/proofs/set_equiv_fold/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/03a99f67936f74839877367df9fe0513558edfba0/expr.html"><img src="../../theorems/03a99f67936f74839877367df9fe0513558edfba0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../_theory_nbs_/proofs/set_equiv_fold/thm_proof.html">proveit.logic.sets.equivalence.set_equiv_fold</a></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step3">3</a></td><td>generalizaton</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step4">4</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../93af54e280fce2a7ae5df1e2450cbd859a84d4aa0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../7e25b96f63d4553e16ff3923b5fef0be76362fc00/expr.html"><img src="../7e25b96f63d4553e16ff3923b5fef0be76362fc00/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step4">4</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step5">5</a>, <a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step6">6</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../a3cccb48103add2f594cb3f45faeba5cb3b4c4880/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../e3d60f9915cb8bff1451c6c9e9c1e4b57b61c1900/expr.html"><img src="../e3d60f9915cb8bff1451c6c9e9c1e4b57b61c1900/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.html"><img src="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.html"><img src="../../theorems/5f054c7bcf30cd149db2c9cc7f9d8bc46ddfda8a0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/0f21cbfd5644a1cae6781c1d58354abc2ffbc9000/expr.html"><img src="../../../../../../__pv_it/common/0f21cbfd5644a1cae6781c1d58354abc2ffbc9000/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../theorems/458621bff6342e362dd551440bebbe789e1a36680/expr.html"><img src="../../theorems/458621bff6342e362dd551440bebbe789e1a36680/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step5">5</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../../../equality/_theory_nbs_/proofs/equals_reversal/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../../../../equality/__pv_it/theorems/dc152814dc196fecb1397c6db676c4086227b8ad0/expr.html"><img src="../../../../../equality/__pv_it/theorems/dc152814dc196fecb1397c6db676c4086227b8ad0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../../../equality/_theory_nbs_/proofs/equals_reversal/thm_proof.html">proveit.logic.equality.equals_reversal</a></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step6">6</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step7">7</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../50cbc88537e6a79470539561880e215fa53de9260/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/75a73a709393522269084322f7a2e91e97fb6c3d0/expr.html"><img src="../../theorems/75a73a709393522269084322f7a2e91e97fb6c3d0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.html"><img src="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.html"><img src="../../../../../../__pv_it/common/a2581dc5df71d9a30bad37de14965fa5fec97a240/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step7">7</a></td><td>instantiation</td><td><a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step8">8</a>, <a href="#proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step9">9</a></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../e079d74f9fc025afcbd16e0770985e1ba0f89aff0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/fed46afb5297061258a1c88f858d9c54708bb74a0/expr.html"><img src="../../theorems/fed46afb5297061258a1c88f858d9c54708bb74a0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style="text-align:left"><span style="font-size:20px;"><a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.html"><img src="../../../../../../__pv_it/common/e4aad701f7f5516d8e7f0d805d518bf02c13322a0/expr.png" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a> : <a class="ProveItLink" href="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.html"><img src="../../../../../../__pv_it/common/4eca3b30dcf58a58494e201d1b7886d8643a617b0/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step8">8</a></td><td>theorem</td><td></td><td><span style="font-size:20px;"> <a class="ProveItLink" href="../../../_theory_nbs_/proofs/set_equiv_unfold/thm_proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/3a484cdf0e40e7752d28c7101862178d5ee4a5e60/expr.html"><img src="../../theorems/3a484cdf0e40e7752d28c7101862178d5ee4a5e60/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+<tr><td>&nbsp;</td><td colspan=4 style-"text-align:left"><a class="ProveItLink" href="../../../_theory_nbs_/proofs/set_equiv_unfold/thm_proof.html">proveit.logic.sets.equivalence.set_equiv_unfold</a></td></tr><tr><td><a name="proveit.logic.sets.equivalence._proof_set_equiv_reversal.035066a3cb064885b11a5924eda4a2c6f4c138ce0_step9">9</a></td><td>assumption</td><td></td><td><span style="font-size:20px;"><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="../de266b539531f8aa950880f33d5dfa054d09a3490/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.html"><img src="../../theorems/4c7b25a3b66576c9a827a2728e2c8be0e4a0f2280/expr.png" style="display:inline;vertical-align:middle;" /></a></span></td></tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

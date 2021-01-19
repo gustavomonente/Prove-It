@@ -1,0 +1,3124 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Chapter 2.a.ii.  Lambda with an indeterminate number of parameters</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../index.html"><img src="../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Chapter-2.a.ii.--Lambda-with-an-indeterminate-number-of-parameters">Chapter 2.a.ii.  Lambda with an indeterminate number of parameters<a class="anchor-link" href="#Chapter-2.a.ii.--Lambda-with-an-indeterminate-number-of-parameters">&#182;</a></h1><p>The previous chapter discussed <strong>Lambda</strong> expressions with a fixed number of parameters.  In this chapter, we will discuss <strong>Lambda</strong> expressions with an unspecified number of parameters.  This is done by using an <strong>ExprRange</strong> of <strong>IndexedVar</strong> expressions in the <strong>ExprTuple</strong> of parameters.  For example $(x_1, ..., x_n) \mapsto (x_1 + ... + x_n)$.  In this new theory, we revisit creation of <strong>Lambda</strong> expressions (abstraction), <em>relabeling</em> its parameters while retaining its meaning (alpha conversion), and <em>applying</em> the <strong>Lambda</strong> function to operators (beta reduction).  As a reminder, the beta reduction rule plays an important role in the <strong>Instantiation</strong> derivation rule, critical for constructing <strong>Prove-It</strong> proofs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="o">%</span><span class="k">begin</span> lambda_indeterminate_params
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-Lambda-expressions-(abstraction)-with-an-indeterminate-number-of-parameters">Creating Lambda expressions (abstraction) with an indeterminate number of parameters<a class="anchor-link" href="#Creating-Lambda-expressions-(abstraction)-with-an-indeterminate-number-of-parameters">&#182;</a></h2><p>We can make a <strong>Lambda</strong> expression with an indeterminate number of parameters by composing parameter entries from an <code>ExprRange</code> of <code>IndexedVar</code> expressions, such as $x_1, ..., x_n$.  It is important to recognize that although the number of parameters may not be a specific integer value, this number is tied to expressions in a consistent manner.  In the example of $x_1, ..., x_n$, there are $n$ parameters in this range and this same $n$ may be used elsewhere in the expression.  In the following example, we construct a lambda function that takes $2 n$ arguments and produces the dot product between the first $n$ and the last $n$ of these.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">Lambda</span><span class="p">,</span> <span class="n">ExprTuple</span><span class="p">,</span> <span class="n">ExprRange</span><span class="p">,</span> <span class="n">IndexedVar</span>
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="kn">from</span> <span class="nn">proveit.core_expr_types</span> <span class="k">import</span> <span class="n">Len</span>
+<span class="kn">from</span> <span class="nn">proveit.core_expr_types</span> <span class="k">import</span> <span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">InSet</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">Natural</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mult</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda</span> <span class="o">=</span> \
+    <span class="n">Lambda</span><span class="p">((</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">),</span> 
+           <span class="n">Add</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+                                 <span class="n">IndexedVar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="dot_prod_lambda">dot_prod_lambda:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/13b626523c6438b9954ae5bd60934a0c4145fdfe0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAAUCAMAAAAHk+xjAAAANlBMVEX///8oKCgNDQ3MzMxUVFR2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADtE0dfAAAAAXRSTlMAQObYZgAA
+A4xJREFUaN7VWuGitRoQda9SVNT7v+ylIsOQaN/vy4+z55TWrDWjIUUIIasiX27jWt7XSm2R/MQf
+eU6tlZU15EK+3briOFupbZK7X+S1OQuO1WnM68fTKufSnlZqm+Ryfw9acxYcq8NQE/l663lZPyu1
+VXLob+RPEaIrXsiCY7UbYv18WuWAH+eBNCu1VXLo74W0vpAFx8oYqyDfbzPDgwdvASu1XXLgrz2t
+r2TBsdIGP6VLzruV8Z43DJcbCMknc2odZLWDBEDv8gcXHjBYVuoDyQmP/fRyWh9lIRUGx0oby7Gu
+lr2u74ITsc+3tGZZBiGw4k+YqRN8q/XgA8CZacYTOQIvp9QnkhOU1fxyWlFKT8PgWGlDjEdXnfl+
+k4TpGk+nqaYm+BDog9lIJuN4WSo9eABhlASeVsIXb0SfUgskyxvKo3g5rQil+La5C4NjpY2BuWuu
+fqwmrRKNODg/GDUbr/QAAECjbuD++88M2rZd0+Ap9V6y3OY8Zeev352IYf/pigY/egVKKVCPkkKj
+oI3hkn31Y7Uz+JYdt0wPRO2TVnvwABJpFXC+YcJb3ARpzUgWXZ4y3V6+W1FK4WK5uwmDn1ZbmUC/
+2rQ6CDUpynn4LLbXDj7Ue3AAAT5LFGE6S5IswkWSccrsR0X4PoS5MDhW2jgn61EeUzCX1UH3IRQb
+NO4QTBFLZ/9UptUBBPipJRPcugmWTEWSccq/WjLdhzAXBn/JdKyK2TaSZXP7zaeCq5xHRnzIh1gl
+NwimVniXkKkz3VSthwvAx9+P9y7goARP6ANATnJ0Y0SUoT8sSTktibTGlEKJGKmgj2OljYOs7DjX
+j0NKwdtZ2KnK1fWrwF+Hjk4QotO82QBB9i7TttZ68AE8fHNXUjwnNJho/d+E5HChElOO/UUlNaMF
+vwKjBCXipEAfx8oY2LaVUzDKsuobtYHug4ZG56e50cMB4OMTWVjRc5uHmVkhpBz5+83mIZCYIOX3
+cax2A9tkdk9AfdkuQfyIaWYIwUbqn+9mU41YvYcLAOC/stU/omlFKUf+5ONts+iKmBKUiJOCYQZb
+/WQJB8o6ia3jxzZV0ZYeMvZNzeG9AueF/nfhDR4uAB//wYsyKzUjObiJEMq/eTEXUQISE6RAmOGL
+udwL3KIX9qr0PNMzAm3xgAFgEUmPj6ev0VGPyx9+jY6HwbGyxsc/elH/80cv6q/86MWx2o3/ACqj
+NcomKa7uAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is useful to make the distinction between parameter entries (which may be ExprRange or IndexedVar expressions) and parameter variables (which may only be Variable types).  In the <code>dot_prod_lambda</code> example, the parameter entries are $x_1, ..., x_n$ and $y_1, ..., y_n$ but the variables are $x$ and $y$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">parameters</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/2cd2a7f36b470bc4b64cb9a5f78ed0b7feedbf830/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMcAAAAUBAMAAADLgTR0AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAblJREFU
+OMu1lT9Lw0AYxp+0aZs2SdvN0W6u3cTNpeDWCn4A3UWCHWqnFpHq4FB10UIxn0DEVdRQkAoO5hNI
+BhUHhSqCIA7ev6Shtdcp73D33vF78tzlTe6ArItIY4M299F6IOaR5ixiE8MGzHbEJpgHNC9qk1vg
+NWoPZBZRJ11/86lqScERwqhbeHZkhQgB8TauyEzR3NVsKOeTNZwIIq5W0JAJOMDDtNEiM078V/WU
+k+ZkDSOG45e0jUuZgAEiTzaxQtYJna5JnawRRBBOwsK3TMABHsqAmgA5S24iiGGUHeVDKmBAYNKi
+/Wx+mgklzO5MXQw7SFWkAgoInmCk8EmngZQj03DCLLkJUZgL6AWpCQUETwq/QLa2eoN3vpMH+gnR
+xvgJJ5x420LO4cghyq5MwADOI13EEtCr9bsuN9H2CaAVSLPtJ3tOQMyhJJBe7dSTCTjAeGTyoWOF
+7X79n1cVpMs4UnykM03Q8fm78AGZpJri+D8SZNkBdtYYErONL6mAAYInBySu/Uccf1owxk+XfpCp
+BVRdhmiubkkFDBC8PXppmePfyejFSRG1diAXDAHotB5RX7+PwB9tW6NDGXTd5wAAAABJRU5ErkJg
+gg==
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">parameter_vars</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="../packages/proveit/__pv_it/common/4abfcdcaafe6ad83c2ed27be2700d58c6f9aaa1b0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAUBAMAAAAEg8LyAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAP9JREFU
+GNNjYOC7wIAG2B4AidMMGEAPiNdhCp9iYOCdgCnMXMDA8QBTmCeA4QUDFrCEoRJIHi96UlwA5h+f
+zsAXw8BgybAXqMeAt51jAVjYwJWB/QMDwy2GNqANB5j/sICt4EuYxcC9gYEhgyEEqBrMBNvFEM7A
+DzROHiTMAGaCAcsfBnkBkHAbiAdiggHnAoZSIOUBspLtQD0D+wGwMLcCwyYGkJWWDAz+CfsZ3jLw
+/AKpVmD5C6QmA9UzHCo/PhcYjB1ADTzqlf+AwguRPM92AGo6A08DUlAxA7EWw3kHcFAx7IMJHwfi
+XobtkIBFRAMoltwrQU4FqcSMNN4HDAD7TDyPVbLVsgAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that parameter variables must be unique (rather than parameter entries).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">ParameterCollisionError</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">Lambda</span><span class="p">((</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">Mult</span><span class="p">(</span><span class="n">x_1_to_n</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expected an ParameterCollisionError error.&quot;</span>
+<span class="k">except</span> <span class="n">ParameterCollisionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Parameter variables must be unique.  (x_{1}, ..x_{_a}.., x_{n}, x) does not satisfy this criterion.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">Lambda</span><span class="p">((</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)),</span> <span class="n">Mult</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)))</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expected an ParameterCollisionError error.&quot;</span>
+<span class="k">except</span> <span class="n">ParameterCollisionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Parameter variables must be unique.  (x_{n}, x_{m}) does not satisfy this criterion.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Also, none of the parameter variables may occur as free variables within any parameter index.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">Lambda</span><span class="p">((</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)),</span> <span class="n">Mult</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)))</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expected an ParameterCollisionError error.&quot;</span>
+<span class="k">except</span> <span class="n">ParameterCollisionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Parameter variables may not occur as free variables in parameter indices.  (x_{n}, y_{x}) does not satisfy this criterion.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Parameters are not restricted to occurrences where the ranges matches.  Any ambiguity must be resolved when the <strong>Lambda</strong> expression is applied, however.  Also, relabeling will not be allowed as we shall see in the next section.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inconsistent_dot_prod</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">),</span> <span class="n">Add</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+                                                                           <span class="n">IndexedVar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="inconsistent_dot_prod">inconsistent_dot_prod:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/2e47b8bcd61a7a5ac34409e1f9e7f7c3d193c5560/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAd8AAAAUCAMAAAD7hsepAAAANlBMVEX///8oKCgNDQ3MzMxUVFR2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADtE0dfAAAAAXRSTlMAQObYZgAA
+A6dJREFUaN7VWtGWoyAMZRdEQQX9/59dUCkEAoNg94w8TDptTO5NIEGUEEI2Td48pu2GsuPawfmW
+v/vIHouHk2ol7x6sPuCOaxdn9o0EP5gFh++Sy/by/KqlWtVx7eJ8wx+5jezBeJxSz+TtYxCVio5r
+J+fE3yTumoiveDQLDt8h5fb6/Kox84OIuDmunZwTf/35fTQLDp+VmyTvHwvPRBGuCse1m3Psrzu/
+D2fB4TNSXCFQQrCNi0H0zJuyDSVm+8s2qnYHuIXB5xFuU2DYHNcbnHGPw/xwfu9noRhMh8/I9dyW
+q8H0ACmIPHoybdrMQRuIV8Jt4RB7s4fQAuheSyajE3Bzcb3DGcesl4fziyJqCgXAZ6ScTnUzDYZd
+EW76AJ3npnIR2sBu8CYyW7/r2uohsBBFS2byS8QazO+L68+c1Q+YJ/lwfhFEmTX0UygAPiNH/rnO
+6/Km/KqsP/fzaFntotUDsBAO6mfx3z8LGPvue+XF9UfOal/KmL2/4XAix0OwqlWAXYEiwiLgkGVD
+AfAZOXr6Xpc3t/u9NJO5mZrGJ233EFjI5FfCfsRlsBWK8pvnLFkZM90fXr8oImx4ZJlQxPl1NQvo
+Nuf3Y0PPmgoRbUOOiiLGDg8fC9A+z9VnuiiSrc9VnFHM/Ev1GYug2XHRqlAEig6fkVdnn9TZqoVq
+j35oQ/PRGB5hH1mZ+9Oa348FaD+7v4KnQtH+qoozivlb+yskgsx8xWpCESoG+6tzK833iaz755Db
+MfHlvuJDaGNTwpqwJSToZjOzWrrZg7cQ2rdfD37rCKrznLttyHOOl0mKGfjDslWkgF6RInIMeeoN
+D0Wo6D4YeYJWTAhzR6V1VH+ka2efuo98uHSgDWYI8BEasRrzvjV7CC0E9s0ypZlyTqNmHMoc52hH
+g2BO/CWnUXku+BUYIsuQjqB448BSRYfPSuxkzDOZVFVdTsdIj+lDY4V56fVwWgjtq9piXzqfLHSM
+GHPi7yvnk5ahMJvpbSe0CCxRdPgOiZ1s+/u7oerUAblVtW1E8okGCmyxhYp3ePAWoP0nni9MaH5R
+zIk/dftELr4iRXQwtEtTr1iMolAARfB8gazx1NlmuTNxnYLVHBpiNzK2HolBhwrS/LeKHg/eArBf
+/7zOcS1xhusKwfyV54MJooOh3R9ubFAlYIkifD5YfLJc806BrlXgpmHQLg+ohTQ0hZly9/k+5nH9
+Dc/38VCgk/jl7+fo//x+jv7l7+c4fIf8B2OQNwjgoVWaAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Relabeling-with-an-indeterminant-number-of-parameters-(alpha-conversion)">Relabeling with an indeterminant number of parameters (alpha conversion)<a class="anchor-link" href="#Relabeling-with-an-indeterminant-number-of-parameters-(alpha-conversion)">&#182;</a></h2><p>When a parameter variable occurs in the <strong>Lambda</strong> body only within ranges that match the range of the parameter entry, relabeling is straightforward.  For example, with</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/13b626523c6438b9954ae5bd60934a0c4145fdfe0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAAUCAMAAAAHk+xjAAAANlBMVEX///8oKCgNDQ3MzMxUVFR2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADtE0dfAAAAAXRSTlMAQObYZgAA
+A4xJREFUaN7VWuGitRoQda9SVNT7v+ylIsOQaN/vy4+z55TWrDWjIUUIIasiX27jWt7XSm2R/MQf
+eU6tlZU15EK+3briOFupbZK7X+S1OQuO1WnM68fTKufSnlZqm+Ryfw9acxYcq8NQE/l663lZPyu1
+VXLob+RPEaIrXsiCY7UbYv18WuWAH+eBNCu1VXLo74W0vpAFx8oYqyDfbzPDgwdvASu1XXLgrz2t
+r2TBsdIGP6VLzruV8Z43DJcbCMknc2odZLWDBEDv8gcXHjBYVuoDyQmP/fRyWh9lIRUGx0oby7Gu
+lr2u74ITsc+3tGZZBiGw4k+YqRN8q/XgA8CZacYTOQIvp9QnkhOU1fxyWlFKT8PgWGlDjEdXnfl+
+k4TpGk+nqaYm+BDog9lIJuN4WSo9eABhlASeVsIXb0SfUgskyxvKo3g5rQil+La5C4NjpY2BuWuu
+fqwmrRKNODg/GDUbr/QAAECjbuD++88M2rZd0+Ap9V6y3OY8Zeev352IYf/pigY/egVKKVCPkkKj
+oI3hkn31Y7Uz+JYdt0wPRO2TVnvwABJpFXC+YcJb3ARpzUgWXZ4y3V6+W1FK4WK5uwmDn1ZbmUC/
+2rQ6CDUpynn4LLbXDj7Ue3AAAT5LFGE6S5IswkWSccrsR0X4PoS5MDhW2jgn61EeUzCX1UH3IRQb
+NO4QTBFLZ/9UptUBBPipJRPcugmWTEWSccq/WjLdhzAXBn/JdKyK2TaSZXP7zaeCq5xHRnzIh1gl
+NwimVniXkKkz3VSthwvAx9+P9y7goARP6ANATnJ0Y0SUoT8sSTktibTGlEKJGKmgj2OljYOs7DjX
+j0NKwdtZ2KnK1fWrwF+Hjk4QotO82QBB9i7TttZ68AE8fHNXUjwnNJho/d+E5HChElOO/UUlNaMF
+vwKjBCXipEAfx8oY2LaVUzDKsuobtYHug4ZG56e50cMB4OMTWVjRc5uHmVkhpBz5+83mIZCYIOX3
+cax2A9tkdk9AfdkuQfyIaWYIwUbqn+9mU41YvYcLAOC/stU/omlFKUf+5ONts+iKmBKUiJOCYQZb
+/WQJB8o6ia3jxzZV0ZYeMvZNzeG9AueF/nfhDR4uAB//wYsyKzUjObiJEMq/eTEXUQISE6RAmOGL
+udwL3KIX9qr0PNMzAm3xgAFgEUmPj6ev0VGPyx9+jY6HwbGyxsc/elH/80cv6q/86MWx2o3/ACqj
+NcomKa7uAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>both $x$ and $y$ have consistent $1$ to $n$ ranges in the body and the parameters.  So we can relabel with</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda_relabeled</span> <span class="o">=</span> <span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">relabeled</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">b</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="dot_prod_lambda_relabeled">dot_prod_lambda_relabeled:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/5e9429320e37d0ea0e979a50c6f9f4cf4fd0e9db0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAc0AAAAUCAMAAADY3ZZ8AAAANlBMVEX///8oKCgNDQ1UVFTMzMx2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADzUGF5AAAAAXRSTlMAQObYZgAA
+A49JREFUaN7VWuGarCAIdbey1LJ6/5e9ZuGIYqnVfHfnx9K3CpwDig4NY4wtM/urn2HJnws06+mW
+eGPlwG5hAqmnrwReT718Xr9Z8vXL6FL+muWVwNwKAWA65Lh8aSON6nl9PWZrL6yQbuwv31sJreVW
+CADTLmf1pWSydXhBvxN5ykCzgC7hL/Q2iFISkUZR/KkQACYr5be2Jl/1C/q6p2eLgBbQzKdL+Qu9
+PZDNkviTIQBMm1zkt7ZmJ1/RHzkdNbzkgWYBXdJf4O1+NoviT4cAMBkpgPWiOiX6W9vn3MTYCKFu
+FNuEfufShm8TmDjQLKBL+uvUw9ksij8dAsBk5HRcj3lvdvy42ue27pbrmyAKwjpq82epte/p43Nn
+pPM3ICdAM58ujXceH84mBagwBIDJSDkcRXezqjbYrVJVNdEzQdKwNX8Vtfadfvh/SWeTiclb6AfN
+a7r6HO8gH85mDCgO7EUIAJOR/V50lZ0o94m8KpvIBDE82tXV1dr39NGndev592dEn3X9HHIHzUu6
+Zvmf4nXeOutC9lY0WYceqUEBinbkeQgAk5GHtX6yE9sb2UQmEl+VuL1iV9n39BPZlPjQ4dK7sQTZ
+TNOVzSnedn14b1KAwltvcx4CL5v7Tt8TPqysPpu+iVnNrRD4wrDObglW2Xf6gXGeqLTtqFmq0ubQ
+pfHydyrtVfBOQwCYjNxPYW0T3ox7u68ymx8TM9+OgR4d11vZ20+HymyCfmA8dQvCLRZ8C8qhS+N9
+6RZ0FbzTEHi3oON6Oxkns9nSnYf+U7Dd08mDZ2LRYrNg17Ubb4z/SbFq+6DvG7eHiTtGUPOaq9Qt
+PkU37H9GeLE3Kjdn4UlkMwIU8iMgBVMAk5EQWfNNpl0awX300p1ErnQTDzDJN9GI7c6NxrUS3YxL
+Q5H9j75nfNuD9EGt2uAQRZKkG9SaGG/sLaqbaR4JDQIQ5kdCQlMA0yaJzpJDP+Q0E6hJfWuXSkuP
+37TvG2c6s2qfdPYuC/9nQujtlc4e4pe4cXpTAJOVRNfXfanqsm7eRFNoO84lH1p6/J59ZPyJrvtw
+lc3PhNCbLu6dRRoRIMyPbrqh+PpddzYtYX9Oro0d0TmRoibxrbwcVSEav2vfN17wjgpopukm+5Vu
+witvxEJAiF+iWPjxRW/ETt6WZr0Tn+vHH7A/vfa2+p63kt06PbIYQP7hX5LMX/0lyfwf/pIEMFn5
+D9tYNhN6+XKfAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">dot_prod_lambda_relabeled</span> <span class="o">==</span> <span class="n">dot_prod_lambda</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When they do not match, a <code>DisallowedParameterRelabeling</code> exception is raised whenever relabeling is attempted.  The attempt may be direct:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">DisallowedParameterRelabeling</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">inconsistent_dot_prod</span><span class="o">.</span><span class="n">relabeled</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">b</span><span class="p">})</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expected an DisallowedParameterRelabeling error.&quot;</span>
+<span class="k">except</span> <span class="n">DisallowedParameterRelabeling</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Cannot relabel x in (x_{1}, ..x_{_a}.., x_{n}, y_{1}, ..y_{_a}.., y_{n}) -&gt; ((x_{1} * y_{1}) + ..(x_{a} * y_{a}).. + (x_{m} * y_{m})); relabeling is only allowed when all occurrences of a range of parameters matches the exact range appearing as parameters (otherwise, the bound verses free portions of the range may be ambiguous).
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Or relabeling may be indirect when the system tries to automaticically avoid a variable collision:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">try_this</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">),</span> <span class="n">Add</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+                                                                        <span class="n">IndexedVar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">))))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="try_this">try_this:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/cfbe8aefdeb74559eecc045893cf5872ef5007060/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkYAAAAUCAMAAABf2gKLAAAANlBMVEX///8oKCgNDQ3MzMyYmJjc
+3NyIiIhUVFR2dna6urqqqqpmZmYyMjIiIiIQEBBERETu7u4AAADFAwRaAAAAAXRSTlMAQObYZgAA
+BIxJREFUaN7dWtuypCgQZAZBEFD8/58dAUEuhQ20RmwvDweiT1lkpslNRai9UCmxbZAJ/XJZSHus
+p/oG5R4cqB/y6/KdjUkqjpDeVtV2PeOu1hv67TI33z9P1dbtSj2Oo6O8AxWE7RvOGFL02UiSH7eR
+lq2RnupZtyr1OI6O8g5UELZvOGPsS5eNJoF+vTDaFuep+rpVqWEcC+3MUFzwFlQQ9tmwxuC7ru6G
+CGAjRX7eRnptIhyonvWNUg/h+N5Gb0EFYZ8NawxWX0UXUdqIKPT7RfIWwp6qr5l6G8fXNnoPKgjb
+Nawx5EypCFNgun1WpY3oqbSmdCacMvqFqz+k0FSYf5FVD3dQScAuu9wQ9lR9nSrVzqOOhImHbfQA
+1AbxA2zXMMbQu9THHwLpiJatsNHmzpOaHeuwokiNbxM/pmCIm1mT7sOLeC3BJGHjpIRPqoFyqlQ7
+jzqSST5sowegNogfYLuGMcZiV9GdgqoiuunMRsp5nB2/s+NSbqHikWcAaQrgAciChIG5bYM9JAlS
+9VXFRgnhk6qvM6U0zCMBqj9QWdTDNuqCCg3tz9rFsF3DGMMG652d//j7RyZl33lqo5WH/nwXWIiR
+pVjXUF7/X6lTY6yHKEFW8DXGbgifVH2dKnUMeIBHCjTE1KhcOJjtXK22mlsGIXhBB1RQsTiyol0M
+2zWMMewDBh7OhypdCrniCLQRSrrgozu6/Xb42fMG3vFwD1GCmo1uCGc2ypWaQR4J0CsGpoL3h2ej
+LqhAiSJr2sE22s1qKsL5ML1bWGoEL2oo6WLURjDKUOygout4D1GCzCyVRS0hnC1qmVIVHhWgMBX+
+0qLWBnVMuxg2D4uamcP1OsGqJg+sky32ot3ui+rhmxynmMSEKc0fbG6z/zNoo5Agy1/dYieEsy12
+phTIowoUpvLWFrsFqpfkOLvhJu2uQGCLPR+dbdf9S7rmwHMjd8YzE+a2h/eApzLXXuBaY4uffCNJ
+MXFDeiXpxWI2YdNoD1GCOL/5nTURFkmdKXVN/pAUxdguqGQ4AFfccazYqAPqKcl8OGu+RVwGBtiu
+YQ/8grLaO2GBSxs5EfRMqaZimtJZTvmdxrXGhtbVcEFxCqKpyXDOwiGLCRHu2DrSw5UgzX9MOriF
+sO/TWxhWqiIFEJVRAXBkrrjjCNuoHaqXhJdmhrWLAgNs12C864BefxkSlFl022pWlPnQg69AgJBf
+9uASJPl14wqZvQxp29Wr+91GHFHgeOxlSEsxkuA12e7CiPPAAPtsDNkIejUblGFtTwXLsmJrdhwH
+zNLM4ny8hyhBmn/w1ey4jUAqJQ7d+7y+uKADqpGEHqd/siN8izgPBF/N9toIbaT6PEq33B8oiJiN
+n+ILjgOUWeHpFz1cCdL8zU/ePdWtfYwvoI0gKu98KNIM1UpiJpppg8Zmpl0UWPlQpNdGxWdrRKh9
+psV+tTrGoTFslny/nvsAfizO+JsergRJ/m3ss7WmexOAZvwAKj3m7JifWqFaSczJlMxM3yHOAwPs
+jYzYiKr/x0e003/kI9rpNz+iDbDPBpWK/wPP6kMU5zKlBQAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">try_this</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># SHOULD NOT BE ALLOWED!</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expected an DisallowedParameterRelabeling error.&quot;</span>
+<span class="k">except</span> <span class="n">DisallowedParameterRelabeling</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Cannot relabel x in (x_{1}, ..x_{_a}.., x_{n}, y_{1}, ..y_{_a}.., y_{n}) -&gt; ((b * x_{1} * y_{1}) + ..(b * x_{a} * y_{a}).. + (b * x_{m} * y_{m})); relabeling is only allowed when all occurrences of a range of parameters matches the exact range appearing as parameters (otherwise, the bound verses free portions of the range may be ambiguous). Thus, a collision of variable names induced by the following replacement map could not be avoided: {b: x}.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is, however, possible to perform an internal relabeling in such cases in the process of performing an lambda application.  We will show an example of this in the next section.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Application-with-an-indeterminant-number-of-parameters-(beta-reduction)">Application with an indeterminant number of parameters (beta reduction)<a class="anchor-link" href="#Application-with-an-indeterminant-number-of-parameters-(beta-reduction)">&#182;</a></h2><p>Starting with a simple case, let us call the <code>apply</code> method on our <code>dot_prod_labmda</code> example to perform beta reduction.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dot_prod_lambda</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/13b626523c6438b9954ae5bd60934a0c4145fdfe0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAAUCAMAAAAHk+xjAAAANlBMVEX///8oKCgNDQ3MzMxUVFR2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADtE0dfAAAAAXRSTlMAQObYZgAA
+A4xJREFUaN7VWuGitRoQda9SVNT7v+ylIsOQaN/vy4+z55TWrDWjIUUIIasiX27jWt7XSm2R/MQf
+eU6tlZU15EK+3briOFupbZK7X+S1OQuO1WnM68fTKufSnlZqm+Ryfw9acxYcq8NQE/l663lZPyu1
+VXLob+RPEaIrXsiCY7UbYv18WuWAH+eBNCu1VXLo74W0vpAFx8oYqyDfbzPDgwdvASu1XXLgrz2t
+r2TBsdIGP6VLzruV8Z43DJcbCMknc2odZLWDBEDv8gcXHjBYVuoDyQmP/fRyWh9lIRUGx0oby7Gu
+lr2u74ITsc+3tGZZBiGw4k+YqRN8q/XgA8CZacYTOQIvp9QnkhOU1fxyWlFKT8PgWGlDjEdXnfl+
+k4TpGk+nqaYm+BDog9lIJuN4WSo9eABhlASeVsIXb0SfUgskyxvKo3g5rQil+La5C4NjpY2BuWuu
+fqwmrRKNODg/GDUbr/QAAECjbuD++88M2rZd0+Ap9V6y3OY8Zeev352IYf/pigY/egVKKVCPkkKj
+oI3hkn31Y7Uz+JYdt0wPRO2TVnvwABJpFXC+YcJb3ARpzUgWXZ4y3V6+W1FK4WK5uwmDn1ZbmUC/
+2rQ6CDUpynn4LLbXDj7Ue3AAAT5LFGE6S5IswkWSccrsR0X4PoS5MDhW2jgn61EeUzCX1UH3IRQb
+NO4QTBFLZ/9UptUBBPipJRPcugmWTEWSccq/WjLdhzAXBn/JdKyK2TaSZXP7zaeCq5xHRnzIh1gl
+NwimVniXkKkz3VSthwvAx9+P9y7goARP6ANATnJ0Y0SUoT8sSTktibTGlEKJGKmgj2OljYOs7DjX
+j0NKwdtZ2KnK1fWrwF+Hjk4QotO82QBB9i7TttZ68AE8fHNXUjwnNJho/d+E5HChElOO/UUlNaMF
+vwKjBCXipEAfx8oY2LaVUzDKsuobtYHug4ZG56e50cMB4OMTWVjRc5uHmVkhpBz5+83mIZCYIOX3
+cax2A9tkdk9AfdkuQfyIaWYIwUbqn+9mU41YvYcLAOC/stU/omlFKUf+5ONts+iKmBKUiJOCYQZb
+/WQJB8o6ia3jxzZV0ZYeMvZNzeG9AueF/nfhDR4uAB//wYsyKzUjObiJEMq/eTEXUQISE6RAmOGL
+udwL3KIX9qr0PNMzAm3xgAFgEUmPj6ev0VGPyx9+jY6HwbGyxsc/elH/80cv6q/86MWx2o3/ACqj
+NcomKa7uAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's apply this to some operands for the simple case where they are composed of two expression ranges that have the same start and end indices as the corresponding parameters.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">operands</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="operands">operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/c991f026d078666988df78ca14e768987d6f4b310/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOkAAAAUBAMAAACaFQcXAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAaFJREFU
+SMdjYOC7wEBfkAciTtPZUgamB0BiHRCnHiBKPVsMugiRGlEAzwIGBt4JDDzK+kRpPmT0B2Z9AUQ/
+kRqhymHAnIGBA+Tf+8Q5mfcPujH3ybH1KAPDCwa628rlwFBJQLOz3vPKAnJsRdIIUw4VYp7AsJeA
+ZoPdBTz/yLEVSSNMOVSIdwFDG37NjAldDHwfybAVWSNUOUyIrYEhBL9mHp4vDLwfUGxlXrVqRdSq
+VQpEakQohwkxfiBkKwPbBwamBeSEMJJGmHKoENBWAiHMwLmAgf/CATJsRdIIUw4VYmkgmJpYDRjy
+DxiQYSuSRphyqBAwNVmCuPUHGHh+gSIDRJxfwIDEe+/AYMUrcB4cVuwYthLUiKIcKsRpwOAB5E2K
+X3mBoQPk7CYg5lCAMsBCQPlH1xg4ekABpPprLqqthDWiKIcKcQlASkSwFGZgIQnl4C5s8GvEUjad
+AJf+EMCMGTVIQgao2eIAdlU4hHgOoJf+DPug7OOYmhFCPAW4S9njRAmh1nTwWh1LkwIhxIvHlAtE
+CSEANyhO6d6CucfAAADNRrhViRekwwAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="p">[</span><span class="n">InSet</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Natural</span><span class="p">)],</span>
+                     <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ff46f5ef8fb513a566c646ab2e155eef7db00a9b0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAR0AAAAUBAMAAABCPPQ0AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAmxJREFU
+SMe1Vj9oE2EU/7XXxjT57szkasFNsAYXsVPAxVHQycUsopPtJpk8CmZwKEEHwekUh3qDuDlIwy2C
+2ELqItTBHi66aCN0EhXv+3Pf3/byieTBO5Lfe/m93333Lu8B0Q5Mc4DSajl3X/vmgejcuE0/bdmh
+rSN/tCTcz8jLyYjJPUtFvSj8RqZFHIAZRd6Bu5818smIMspLEiAcgJw6q5U3gZvizhgSrHLXI+7J
+lwm7Tmj38ERmjPc8UKea9zQ9JiCrUoRc5u6nZ90JrVfoYbxvgK+w9JiAoQfPhPvoiWI7YiGmHsbb
+6KBn6+lV6Lkg3EfPsQFwcelLT1W1EJE4d+77nUeCNxhg09azWaHno3AfPc3ib6P9epX8kRELEYlB
+8xVGOecNE/RVecLi/Qo9t4T76Kl3MdO9j+gH/ZI5iEw8UU+w3+K8tRhXVflRQq8asJym99L0qdJz
+UrgRMd6SNN24lqaLxcf5Dgg5QDimd/oTFqISs1EHe4J3ZqyXry9aepzzkXo8zqeojtoYs+wm1xxE
+Ja4Ap5Wevt0/Vc/rknDP54WFBMd3JLeFlImPgd+E887F0+3n+TZWsrbezxpSJl5B7Vcg+5m9vnc1
+PSYgqzLkoXAtwpqOXniPqDLFu4v9DpbDlmwuExGJ0QGC5D3nXWizY3pw/bma6SZQ6uHIE3DXIqzp
+2GXN1FOcPeX6/EEyW0j5/xMjOtPlvI0WHw+6mYDxVEjMfSrzgvK+ZePTNBPYtmeenKfbR60Zmec8
+Jdlh8xRD+1fDyp3Af99o5pMRd9/4l31sWKn2//axYanXf18Nc+7T2FcZ7yfgLwenAb7sRWucAAAA
+AElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that this time we supplied assumptions, specifically that $n \in \mathbb{N}$, and made a list to pass back requirements.  In order to make this step, we need to prove that the lengths of the operands match lengths of corresponding parameters.  In order to prove it in this case, we need to know that $n$ is in the set of natural numbers (otherwise, this lambda expression does not make sense and should not apply to anything anyways).  The requirements that are passed back are precisely the judgments that prove that the lengths match as is necessary in order to assure that this beta reduction is valid.  This will get used when beta reduction is employed to perform the <strong>instantiation</strong> derivation rule.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="../packages/proveit/numbers/number_sets/natural_numbers/__pv_it/theorems/ba5849e6de22ec92714c647d41d92ef0cc8fb69d0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAAPBAMAAAC2KZqIAAAAMFBMVEX///8QEBCYmJgyMjIiIiKq
+qqrMzMzu7u5ERERmZmaIiIjc3NxUVFR2dna6uroAAABXsXCEAAAAAXRSTlMAQObYZgAAAN5JREFU
+GNNjYMAExT+aCxgufnzAgA00sR1gYP+AVYrhSMIqBgYBVDENFxcDEH2unSeBwQFFKmM5lHE6h90c
+JMd3Z/eqWWARIB8mx7ogByTHy9HFUL8BJMKzAS7HcI9pAVAulcWAYX8CSISDASHHU3AMKFdQ/4BB
+HyySaAwEBhA59gPMIHfGMzAcBsvtQNLHkMsGkpvMwPCJHSTCiCzHFNAAZMgysH7nBYlwLoDJHQPi
+20A57n8MvAZqYCFXmJwpSCXQZj4HBu5DAWChmr4CMJ3yEaiH3QA1zN62uCCLAADDBTVfYPhN3gAA
+AABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/2dbce4fe01c5ef2d42307ae1be34bffdacff2c190/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ff5ab531c2b798616ac04e575aeb64243760276c0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAAAVBAMAAABPgOQBAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAiNJREFU
+SMellj1II0EUx/+ajdmNO55ccZwgaK+iiI3FYUQ5uELINSJisY2CHIidH1VAFGxMBAu1MU0ai9wW
+llckhVeczd4hCjYJWIupRJHIzY4xmcy6MyMuZGby9s377Xvz5s3gBm98bpQCxdPh4YwNrJRaOZJh
+3Zkofxbsa+BGWWu7tSmXOp/YJYGSZQ0DLZkm6CL9DXuKORcSaBu1FxlQGCAODzWTIN09KqidDYdu
+An+LVZWrf3io4fudVkFJbzj0m//pSug/HroHHSh+hEKthBa0zeWgOTm0vXhwPEv701BoPCmH/uo6
+zNHFsZMcdFUOtWPrKNEV2KpD7QX2JF8EsZQcWljJkgeq4XDQCTn02nBwVAZGQj01hqTQjqGvsJ5o
+fic4aJ8c6pVcpGl/GwptdaVQQh5hVii8og/FGPDpPVBEKmhxBKgivJgG7glwIq5pp2Z4EXXwIeWh
+PaGfSOhHpGrziSR6qkqk1gLGvEJzIrG98NMDuaN9ib5hg/o/6xG2swPMhULZXohXX5vMBkcufptl
+RAsc1I/b98H5FCapt4YftHHUGmMKflSszzSAS6FQP27Rj3czTJ2b7JvybVLA7gYtDmWxDLIFD4b4
+SyMHE/IyKKgjaPNcKPi1MvDKvtYt+KI6gjabCj7WatKr4BbLah1tsUxAHQGbzUdb/RAPXiDMxnBN
+4xA3g6Fq2Iy9HOJ57euK+exMXpTnta8r26yNl/8DiLbK5bt59RoAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="../packages/proveit/numbers/number_sets/natural_numbers/__pv_it/theorems/ba5849e6de22ec92714c647d41d92ef0cc8fb69d0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAAPBAMAAAC2KZqIAAAAMFBMVEX///8QEBCYmJgyMjIiIiKq
+qqrMzMzu7u5ERERmZmaIiIjc3NxUVFR2dna6uroAAABXsXCEAAAAAXRSTlMAQObYZgAAAN5JREFU
+GNNjYMAExT+aCxgufnzAgA00sR1gYP+AVYrhSMIqBgYBVDENFxcDEH2unSeBwQFFKmM5lHE6h90c
+JMd3Z/eqWWARIB8mx7ogByTHy9HFUL8BJMKzAS7HcI9pAVAulcWAYX8CSISDASHHU3AMKFdQ/4BB
+HyySaAwEBhA59gPMIHfGMzAcBsvtQNLHkMsGkpvMwPCJHSTCiCzHFNAAZMgysH7nBYlwLoDJHQPi
+20A57n8MvAZqYCFXmJwpSCXQZj4HBu5DAWChmr4CMJ3yEaiH3QA1zN62uCCLAADDBTVfYPhN3gAA
+AABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/db22c6937cf272f20f845666a212764e61b92aee0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/83c323bf5a4ce2ff4dcbc7647993fa7388349e360/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATAAAAAVBAMAAAAzw6/xAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAmxJREFU
+SMe1lj1oFEEUx1+y97Gb7JyHhRgQtLLRYBAbi5ATRbAInI2IWGyhByKIncZqQQzYmBNSqE22SWNx
+bmFpsSm00GYUiWBzB9bBq4ISIs7Ozt7s272Z3Y3nwu3s/nnz3u/mvX0zsAP/4WrQlFA6yg584uOL
+SSGd53fbT8lRFMvNd2B0xQQ+hdyfFNhUVwP2rYiHuSRYjbkz5jPw8+XBiKMBu8N+Z2mOh+0k2BOA
+z1v7MY8XjVLRr72HXj+qwcw2kGPH88BsLwF2JZyWBpNKGbAvarBKmOa1PDByQoJZrcmB1Xwl2DoU
+AYO7EmymXRbs3dyrTQ+bC8luK8E29WCzWy9f32DjewlWd8uCBQ888hubC8l0YjC7w6/2COyhHsyu
+P4I+y/aqBKsslARrLFwG6w8yjyWjpVyxi3qwHxUHNgYA5yTYtD/CYH/z1slOp6kHI2QPzCEyj6XG
+UAl2Sg9G+z6ssfHnWLCCqTSGMOVgcyEdHAyWAI5gsNKphKoDh1yKzIU020rVWLNoKuEawC8C8PZf
+in86gCUaIHMhyeLPrFhO8cNpMPZtVPz8E5/JgIVKn8UhuxA9yLcNHz6YA2QupGqgBON94A2V/vjD
+6M3aA9t5BnBTgoXLXz28ex2DcaWyzJ4uhOluxrdLlC/388fYXEi1gRIszNHVM7dd7oG7Ch1H3pc5
+hXWUFdW91JakaOWL2cKnus7/NWdLGuMBhyEtvIknegGaFmQbYap10BKb+FgPOAzaxOtdZcfyMtL3
+Ax97VpQeEmG2ix0UzaykPYbWixwUXV2YFTGhN9mj9dPoex6k5F7ho7UZJa/3F36sAnD+VnSGAAAA
+AElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also perform <code>apply</code> such that multiple operand entries correspond to a given parameter entry as long as we can meet the length-matching requirements under the provided assumptions.  In such cases, expression ranges containing these parameters will expand to accommodate the different operand entries.  Also, it doesn't matter what the start and end indices are, as long as we meet the length matching requirements.  Consider the following operands for an application of <code>dot_prod_lambda</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">k</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">Equals</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">zero</span>
+<span class="n">operands</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">zero</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span>
+            <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> 
+            <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">zero</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span>
+            <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="operands">operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/3e6a27b023161a14933b94e28c64854180c1a0190/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAesAAAAUBAMAAABfbgjqAAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAAA5FJREFU
+WMPlmM1rE0EUwF+TdJM0u23RQw9CLfgPBC9VEQx40JPJwYOezEUGodrtKQSjxoNFiodUEKEHXRGE
+5iD1oB6KsiIlhVaaox7UHPy6NbQhAangzG52Z2Znkt1tjp3DZt/HvF/eZt6byQKM1uGAjRvksgEQ
+vXWcKjnBMzYuMYL6ujwIXOT0I4uw/eOHGvjyEuAFrDdcJSd4xzIrjFQkHlfNgHCR05cswvaNVw0A
+rQJaDqKGo+MEYbRZYSwvRjx8NGDaDAcFIVMYGhg/DZBoQGoclD1HxQneEeMsWRnie8C0GQ4KQGZg
+aGD8GsAf/NjGIeb+jJwg1CNXTidggLQZDgpAZmBoYPxIBooAWxWIdRwVJ4jlpHxpMIV+/Ym9tgqT
+56b9uWcnf8/px+YyXg4KQKYwN22KL+rw0wyBj1bgHcB2GiIujxO8Yyt/O+vud2o7/uOfdfcRPusL
+/mmnV3W1k1FyXg4KQKYwx51qorEc3AmD1wyYx7wKRHZJIAveFaRjtmZ+Ip9WbGWvpNrP4DScMS/4
+ciP5BRjdBa0JHo6Tdj8yhTnuVPMracBqGLxShot0dW0Zfkvtkb1nqH/JNXnZUZsutR9XVVukZw2t
+cEv6VLV6r1p95kd2YNSdwQ/r0AmDjzRJ2riXKKSXJMaBCtJx96Zuf5JLYuKta+gE6SlKE5JlGNad
+BqYILa03mYEhQZM1Izth8DhtvMhTK6DRDYwVvA+sNdpiCj2znXEW0E6QtPFaTKQh2zA9HORPZmFI
+0CxBPBcGHyuTlhb4uKI11XaUJog7XNq6m4k3oeTPHU7j7wpLo/l9HFcozHFnNK/Inh8Cj1vaSayY
+h7Up10oEq3jtUje6pUxucF3s0LSPwNhUmthi7VQT/6Gx/OGOaftLQuBfZxbgedRWUyjykt25NIgF
+49xtjWVchGxPPJVcPCTTcJ5sQIVD9KFYwn2zW+rWhZRy4gFehnkollzHNxB/bBJPdaJU/Gp7wOKV
+5bo1257khiAqjMKnhGvfbE8KRV4yneuQuzDW3dZYxg+Fp42eeKsPcXgYmSKHU1n5i2tlpkejMEUP
+yWxexcdC4chIYlwKhV+3/orITqGS3b7HeVXiEfULyMfaDEfe9BqHDLUVCk9OlO9lydTELq7L065J
+PGo+AXvFCkd2jYl6Sg+FN+zXDOIQ37hoPbh1iUfdJ6DWJ4/gZNcYKzwMhU+Ruj54L5VwU/sPro6X
+BssLrEwAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">assumption1</span> <span class="o">=</span> <span class="n">Equals</span><span class="p">(</span><span class="n">Len</span><span class="p">(</span><span class="n">operands</span><span class="p">[:</span><span class="mi">3</span><span class="p">]),</span>
+                     <span class="n">Len</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="assumption1">assumption1:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/cabef9376a645b30bbd66a46f69bdac20a4af7290/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAAVBAMAAABWAp/LAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA3FJREFU
+SMfFl01oE1EQx/9t0uwm2U2DF2kV7cGTn6F48VCSoBQEhVVEevAQkAoiSD3VegpqRUFoRA/qpfEQ
+1EprDl4UoemhPaSosRQrpZCAZ2mktNBPnN3tJrubfbuvCPZddmbfzuz83pt5H/iNXW3230dKO3RA
+BtOaEEz/79h9Ge0xbXst5bXHcw4PpwwD3cccyW++1ruLjytM07lDLGVHrc0FQe7jcNCUsSBcB65i
+NmP0BmLyWbZtL1MxWidHOvxwQQhQJL5jHg7klBlBVCB2QEoZvXeBKbbtElPZ9r3/IAeClGUjDALf
+Jza9PBTNCP4MhCh8NaNbQJwZRXiTpdTaEAeC3MFGUFNA9ESYMSM8A1qjCNdG9A8wHmMOX4Kl7AgB
+N5gIwQQXQiBvQsgBZQXhNWOAlgkhy7RUfIOZRkUeaftU9EQIT7wYaY8U95E4yUQIKe4In9te5ig8
+STEh3AaGC4gYCMENYJGJUI69HU83Kgu4n+32RJCEOyi/QyeJD2oI0jWtKQaCkHZHKPRn5VX6ImVC
+OE0ICiIb6mCqCDQLiwWWg/h86af6LJkV4Au+lT56Ivzyp9TRGiLxJHMW/DFXhEisG8EtWrMSJoQj
+9UQqp7wS6aKiJ86KSdGI+jlqoVTOqyvFXhIXmQjNeVcEWV6HWCWUqhWBytmnlrM/qpdznFnOydc6
+XdKsqG2Np5zjwCXg8L8gwFdFU8qGQIkk9JmM+l2ikNeD645KZIsH4TJwDuFVytcP9lqIciYSWlJo
+TZcQTljLmXtrE6vykuSgdIWqGPVGOErYFMNTcznbZ8GrnJsLlIwFazlPajMxUzsX+WPyca0q9NJY
+MQtNfdiqIeiK2hdeEqp0WNSM8L5UN7K6oEmjNAgUaLG4wkTQVsvQpsnUGsJwHlNiBS0FE4I6pwsj
+B+r5UXxVgf+8URpJQzhDoyvEkDNGe1tRv5TbR3MPoRtdONGb1r7VjOouqI8mn1Z9Xw/tJTeZCGqG
+tOxZ6dG9JWEPgcJ9co/2pIr1gOHQuhrriJEgXQ6iw7cWh3LC/YDhHcKs7ZjntIM0bkysvcZBlDwc
+ehzzOEKwHPMw4LT0NO4M84xFKusgzns4dDtsCxmOEKyHbfXK07j0NL5i3O1EJzHt4XCA48rjGoJg
+XHnGduniKeoDPWZ7HapwXzwfbRv8BTw9TYKFhtUFAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">assumption2</span> <span class="o">=</span> <span class="n">Equals</span><span class="p">(</span><span class="n">Len</span><span class="p">(</span><span class="n">operands</span><span class="p">[</span><span class="mi">3</span><span class="p">:]),</span>
+                     <span class="n">Len</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="assumption2">assumption2:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/809a8f7ac69ea9a5e4d7b6fad16080cf1dc54d140/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZcAAAAVBAMAAAB4R75ZAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA75JREFU
+WMPNl01oE0EUgF+6SfOz2bR4Ka2iOagHfzAUD1qQpiqCoJCKlCqiKZqACBL1UNtTQCp4arQe/Dl0
+L0WNtM3Bo9At2B5akG0pVoqSgGcxECi2NcW3u/mZ2b/Z1kOdQ/LyMu/NfG/evJmBn/CfNP1EQvIW
+HaDBvCr40ztHwWXUr3mdOphTv1448HCyaqD5WEb57We9O4Om3pb36zXC/eg2aVptYISUAweuDAVz
+G+AmLGXoPkYN0RIGTWPMpFu7g2T5YgPTiDPgjjIcCHESxhcDXxiCce2/Du2L0Ji0Ui1LxIrQFDGO
+smefA5igaA0zBLAwXWZ5mCNh3BnwNgNXpmAIjbHxZQPMlNm8hx3ACGFrmPNKVJkwiyTMc4xrM/Al
+CobQmEQzaoD5BNuEgTuWMP6oI5jGHAEzBpCPAb9OwRAaE/MYN5ShYRJw4ooW6TERnsksGH76ZbYt
+NLcbxRlLmEDMHuZj6yscDIIxAuYhwKgEIRqG0BhbPvJuKk3BCKXA69/aNPgwTDJXJugdhPx7aEfx
+cQ1mNqm0RA3Gm7aHkfpFYQ17xAmYMzj1GIT+0DB1jbF1rshf6TTjyuOChjfiiUM/E+aHO67EaxjF
+45Yr447YwoQi58C/iWNHCZjD9aTC2JxOJvtYaXZJq8PBZPLWwWSyGUXPgep/coMI60wYOZ+DThla
+UPxlCdOQs4URhA3wFRGqSMPgducMBYCzLABdb0RdAXC3DUKtroU22QWgE+AywKF/gQGuCK64DgbT
+zJuqGVVLc8rajbDh39DB5HOjuYqqBwJhNkwPwAXg1wSAD7o90+c0zQATuiktAx+lC8DWDk1fUSgF
+aZhhLAqSJt5TzigmzBEMCc5mhCwA+pVhFYAGCVNVogvAjLo6iwUKRtUIq0rQsa8q1H65UrCpg2mB
+poKkdoBumEprEkzKdaO6H0XApcUkaZQwANcsYdSaGyjrTOu/MBlmfQXwSASMss7fsnuBhlE1ZzG0
+biXOXVD5cF/EiEVgbJyGeQCBq7LaHRayNzKa1H0ska67qPlRXGBq4CnC9eJpddcSRskfz67VXtVC
+M605UtzixJ8+wlOvQF9niNZBbTFjnpyi96Bo0r2HNGS5EKL21xmTQXVul3QXTaJ9p3yanFR0LZD1
+3V1x3AyEIcsF46JpNqjOLXXRhAHLLbZirGSizS1J6e5Oe0XSkOXC7gngzVgOumLxBFAeZxbN+AT1
+2V35lO589jplyHIx4OBx5rObmbf6OJvY8WezTwv+hE4dKDh+Nj+pGPwF5Ehb5kn6D80AAAAASUVO
+RK5CYII=
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="p">[</span><span class="n">InSet</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Natural</span><span class="p">),</span>
+                                             <span class="n">assumption1</span><span class="p">,</span>
+                                             <span class="n">assumption2</span><span class="p">],</span>
+                     <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7d5f9e2d339cbcd18c2656d8be9fe0b5a82861de0/expr.html"><img src="data:image/png;base64,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
+rkJggg==
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/cabef9376a645b30bbd66a46f69bdac20a4af7290/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAAVBAMAAABWAp/LAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA3FJREFU
+SMfFl01oE1EQx/9t0uwm2U2DF2kV7cGTn6F48VCSoBQEhVVEevAQkAoiSD3VegpqRUFoRA/qpfEQ
+1EprDl4UoemhPaSosRQrpZCAZ2mktNBPnN3tJrubfbuvCPZddmbfzuz83pt5H/iNXW3230dKO3RA
+BtOaEEz/79h9Ge0xbXst5bXHcw4PpwwD3cccyW++1ruLjytM07lDLGVHrc0FQe7jcNCUsSBcB65i
+NmP0BmLyWbZtL1MxWidHOvxwQQhQJL5jHg7klBlBVCB2QEoZvXeBKbbtElPZ9r3/IAeClGUjDALf
+Jza9PBTNCP4MhCh8NaNbQJwZRXiTpdTaEAeC3MFGUFNA9ESYMSM8A1qjCNdG9A8wHmMOX4Kl7AgB
+N5gIwQQXQiBvQsgBZQXhNWOAlgkhy7RUfIOZRkUeaftU9EQIT7wYaY8U95E4yUQIKe4In9te5ig8
+STEh3AaGC4gYCMENYJGJUI69HU83Kgu4n+32RJCEOyi/QyeJD2oI0jWtKQaCkHZHKPRn5VX6ImVC
+OE0ICiIb6mCqCDQLiwWWg/h86af6LJkV4Au+lT56Ivzyp9TRGiLxJHMW/DFXhEisG8EtWrMSJoQj
+9UQqp7wS6aKiJ86KSdGI+jlqoVTOqyvFXhIXmQjNeVcEWV6HWCWUqhWBytmnlrM/qpdznFnOydc6
+XdKsqG2Np5zjwCXg8L8gwFdFU8qGQIkk9JmM+l2ikNeD645KZIsH4TJwDuFVytcP9lqIciYSWlJo
+TZcQTljLmXtrE6vykuSgdIWqGPVGOErYFMNTcznbZ8GrnJsLlIwFazlPajMxUzsX+WPyca0q9NJY
+MQtNfdiqIeiK2hdeEqp0WNSM8L5UN7K6oEmjNAgUaLG4wkTQVsvQpsnUGsJwHlNiBS0FE4I6pwsj
+B+r5UXxVgf+8URpJQzhDoyvEkDNGe1tRv5TbR3MPoRtdONGb1r7VjOouqI8mn1Z9Xw/tJTeZCGqG
+tOxZ6dG9JWEPgcJ9co/2pIr1gOHQuhrriJEgXQ6iw7cWh3LC/YDhHcKs7ZjntIM0bkysvcZBlDwc
+ehzzOEKwHPMw4LT0NO4M84xFKusgzns4dDtsCxmOEKyHbfXK07j0NL5i3O1EJzHt4XCA48rjGoJg
+XHnGduniKeoDPWZ7HapwXzwfbRv8BTw9TYKFhtUFAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/d073b39e0d87b8aaa569fbca1843f8ba8c718e040/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/cabef9376a645b30bbd66a46f69bdac20a4af7290/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAAVBAMAAABWAp/LAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA3FJREFU
+SMfFl01oE1EQx/9t0uwm2U2DF2kV7cGTn6F48VCSoBQEhVVEevAQkAoiSD3VegpqRUFoRA/qpfEQ
+1EprDl4UoemhPaSosRQrpZCAZ2mktNBPnN3tJrubfbuvCPZddmbfzuz83pt5H/iNXW3230dKO3RA
+BtOaEEz/79h9Ge0xbXst5bXHcw4PpwwD3cccyW++1ruLjytM07lDLGVHrc0FQe7jcNCUsSBcB65i
+NmP0BmLyWbZtL1MxWidHOvxwQQhQJL5jHg7klBlBVCB2QEoZvXeBKbbtElPZ9r3/IAeClGUjDALf
+Jza9PBTNCP4MhCh8NaNbQJwZRXiTpdTaEAeC3MFGUFNA9ESYMSM8A1qjCNdG9A8wHmMOX4Kl7AgB
+N5gIwQQXQiBvQsgBZQXhNWOAlgkhy7RUfIOZRkUeaftU9EQIT7wYaY8U95E4yUQIKe4In9te5ig8
+STEh3AaGC4gYCMENYJGJUI69HU83Kgu4n+32RJCEOyi/QyeJD2oI0jWtKQaCkHZHKPRn5VX6ImVC
+OE0ICiIb6mCqCDQLiwWWg/h86af6LJkV4Au+lT56Ivzyp9TRGiLxJHMW/DFXhEisG8EtWrMSJoQj
+9UQqp7wS6aKiJ86KSdGI+jlqoVTOqyvFXhIXmQjNeVcEWV6HWCWUqhWBytmnlrM/qpdznFnOydc6
+XdKsqG2Np5zjwCXg8L8gwFdFU8qGQIkk9JmM+l2ikNeD645KZIsH4TJwDuFVytcP9lqIciYSWlJo
+TZcQTljLmXtrE6vykuSgdIWqGPVGOErYFMNTcznbZ8GrnJsLlIwFazlPajMxUzsX+WPyca0q9NJY
+MQtNfdiqIeiK2hdeEqp0WNSM8L5UN7K6oEmjNAgUaLG4wkTQVsvQpsnUGsJwHlNiBS0FE4I6pwsj
+B+r5UXxVgf+8URpJQzhDoyvEkDNGe1tRv5TbR3MPoRtdONGb1r7VjOouqI8mn1Z9Xw/tJTeZCGqG
+tOxZ6dG9JWEPgcJ9co/2pIr1gOHQuhrriJEgXQ6iw7cWh3LC/YDhHcKs7ZjntIM0bkysvcZBlDwc
+ehzzOEKwHPMw4LT0NO4M84xFKusgzns4dDtsCxmOEKyHbfXK07j0NL5i3O1EJzHt4XCA48rjGoJg
+XHnGduniKeoDPWZ7HapwXzwfbRv8BTw9TYKFhtUFAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/809a8f7ac69ea9a5e4d7b6fad16080cf1dc54d140/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZcAAAAVBAMAAAB4R75ZAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA75JREFU
+WMPNl01oE0EUgF+6SfOz2bR4Ka2iOagHfzAUD1qQpiqCoJCKlCqiKZqACBL1UNtTQCp4arQe/Dl0
+L0WNtM3Bo9At2B5akG0pVoqSgGcxECi2NcW3u/mZ2b/Z1kOdQ/LyMu/NfG/evJmBn/CfNP1EQvIW
+HaDBvCr40ztHwWXUr3mdOphTv1448HCyaqD5WEb57We9O4Om3pb36zXC/eg2aVptYISUAweuDAVz
+G+AmLGXoPkYN0RIGTWPMpFu7g2T5YgPTiDPgjjIcCHESxhcDXxiCce2/Du2L0Ji0Ui1LxIrQFDGO
+smefA5igaA0zBLAwXWZ5mCNh3BnwNgNXpmAIjbHxZQPMlNm8hx3ACGFrmPNKVJkwiyTMc4xrM/Al
+CobQmEQzaoD5BNuEgTuWMP6oI5jGHAEzBpCPAb9OwRAaE/MYN5ShYRJw4ooW6TERnsksGH76ZbYt
+NLcbxRlLmEDMHuZj6yscDIIxAuYhwKgEIRqG0BhbPvJuKk3BCKXA69/aNPgwTDJXJugdhPx7aEfx
+cQ1mNqm0RA3Gm7aHkfpFYQ17xAmYMzj1GIT+0DB1jbF1rshf6TTjyuOChjfiiUM/E+aHO67EaxjF
+45Yr447YwoQi58C/iWNHCZjD9aTC2JxOJvtYaXZJq8PBZPLWwWSyGUXPgep/coMI60wYOZ+DThla
+UPxlCdOQs4URhA3wFRGqSMPgducMBYCzLABdb0RdAXC3DUKtroU22QWgE+AywKF/gQGuCK64DgbT
+zJuqGVVLc8rajbDh39DB5HOjuYqqBwJhNkwPwAXg1wSAD7o90+c0zQATuiktAx+lC8DWDk1fUSgF
+aZhhLAqSJt5TzigmzBEMCc5mhCwA+pVhFYAGCVNVogvAjLo6iwUKRtUIq0rQsa8q1H65UrCpg2mB
+poKkdoBumEprEkzKdaO6H0XApcUkaZQwANcsYdSaGyjrTOu/MBlmfQXwSASMss7fsnuBhlE1ZzG0
+biXOXVD5cF/EiEVgbJyGeQCBq7LaHRayNzKa1H0ska67qPlRXGBq4CnC9eJpddcSRskfz67VXtVC
+M605UtzixJ8+wlOvQF9niNZBbTFjnpyi96Bo0r2HNGS5EKL21xmTQXVul3QXTaJ9p3yanFR0LZD1
+3V1x3AyEIcsF46JpNqjOLXXRhAHLLbZirGSizS1J6e5Oe0XSkOXC7gngzVgOumLxBFAeZxbN+AT1
+2V35lO589jplyHIx4OBx5rObmbf6OJvY8WezTwv+hE4dKDh+Nj+pGPwF5Ehb5kn6D80AAAAASUVO
+RK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/9371309446f87dc15a8601d608b142894c32a21b0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/809a8f7ac69ea9a5e4d7b6fad16080cf1dc54d140/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZcAAAAVBAMAAAB4R75ZAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA75JREFU
+WMPNl01oE0EUgF+6SfOz2bR4Ka2iOagHfzAUD1qQpiqCoJCKlCqiKZqACBL1UNtTQCp4arQe/Dl0
+L0WNtM3Bo9At2B5akG0pVoqSgGcxECi2NcW3u/mZ2b/Z1kOdQ/LyMu/NfG/evJmBn/CfNP1EQvIW
+HaDBvCr40ztHwWXUr3mdOphTv1448HCyaqD5WEb57We9O4Om3pb36zXC/eg2aVptYISUAweuDAVz
+G+AmLGXoPkYN0RIGTWPMpFu7g2T5YgPTiDPgjjIcCHESxhcDXxiCce2/Du2L0Ji0Ui1LxIrQFDGO
+smefA5igaA0zBLAwXWZ5mCNh3BnwNgNXpmAIjbHxZQPMlNm8hx3ACGFrmPNKVJkwiyTMc4xrM/Al
+CobQmEQzaoD5BNuEgTuWMP6oI5jGHAEzBpCPAb9OwRAaE/MYN5ShYRJw4ooW6TERnsksGH76ZbYt
+NLcbxRlLmEDMHuZj6yscDIIxAuYhwKgEIRqG0BhbPvJuKk3BCKXA69/aNPgwTDJXJugdhPx7aEfx
+cQ1mNqm0RA3Gm7aHkfpFYQ17xAmYMzj1GIT+0DB1jbF1rshf6TTjyuOChjfiiUM/E+aHO67EaxjF
+45Yr447YwoQi58C/iWNHCZjD9aTC2JxOJvtYaXZJq8PBZPLWwWSyGUXPgep/coMI60wYOZ+DThla
+UPxlCdOQs4URhA3wFRGqSMPgducMBYCzLABdb0RdAXC3DUKtroU22QWgE+AywKF/gQGuCK64DgbT
+zJuqGVVLc8rajbDh39DB5HOjuYqqBwJhNkwPwAXg1wSAD7o90+c0zQATuiktAx+lC8DWDk1fUSgF
+aZhhLAqSJt5TzigmzBEMCc5mhCwA+pVhFYAGCVNVogvAjLo6iwUKRtUIq0rQsa8q1H65UrCpg2mB
+poKkdoBumEprEkzKdaO6H0XApcUkaZQwANcsYdSaGyjrTOu/MBlmfQXwSASMss7fsnuBhlE1ZzG0
+biXOXVD5cF/EiEVgbJyGeQCBq7LaHRayNzKa1H0ska67qPlRXGBq4CnC9eJpddcSRskfz67VXtVC
+M605UtzixJ8+wlOvQF9niNZBbTFjnpyi96Bo0r2HNGS5EKL21xmTQXVul3QXTaJ9p3yanFR0LZD1
+3V1x3AyEIcsF46JpNqjOLXXRhAHLLbZirGSizS1J6e5Oe0XSkOXC7gngzVgOumLxBFAeZxbN+AT1
+2V35lO589jplyHIx4OBx5rObmbf6OJvY8WezTwv+hE4dKDh+Nj+pGPwF5Ehb5kn6D80AAAAASUVO
+RK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To ensure unambiguous and straightforward behavior when different parameter ranges are involved in the same expression range (as in the dot product case), their operands must be in exact correspondence with respect to range start and end indices (and whether or not an entry is a range).  Otherwise, a <code>LambdaApplicationError</code> exception will be raised as in the following demonstration.  In this example, <code>assumption1</code> is used again so there is a proper alignment of lengths with $n$ elements for $x$ and $n$ elements for $y$.  However, the internal structures of $x$ and $y$ are not aligned to each other.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">k</span>
+<span class="n">new_operands</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">operands</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> 
+                <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="new_operands">new_operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/8e7630651fb3a75f06239398e11684d5cd4653430/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYUAAAAUBAMAAACQQDwpAAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAAAz1JREFU
+SMfVV89rE0EU/ppNNz+6mwZFehBqwH9g9VItggEPerI9eFARzEWKUO32VIJR04NFiod4EEFQVgSx
+e5Be1ENRVqSkUKU5iR6sEQS9NbQlBYnizO5md2d32t3k1L7DZN43782bb/LezCyQqWEvy3XaLAPC
+zaMuyCg+WT7vUaRX5V3AoadOmpfAcyzVHZBR/DLnVdIVjoV4KWr0K0Y4Ei6SBsgVyKMQtDbGKAFp
+epX+QtDg/ZFWxNj7D7VXPBZAdhRRZdQhIFlHXxaiE5lR/BJnRkZ4IeVW1B387uPgQTrhsAj8JvuZ
+RdzZYEbxi8BUwDHsBg7pPIrASgXxrTbEKH5JV8SvdU9xXHtiZcHU4OmhcA6nBn9Nqocn891wIL5F
+leVgQ0IFb4E1BTFn2Yzil5XCrRHnKJaaiZ9/zd4HfFFnwzkoC6q0lRdHu+FAff+xHGxI1jBDll1B
+bIMuyuRgK1yZqBqf6K8ZS2yVJIvQCZw0zoZyiBVmkdmA3OiCg+m7znBoQ2IZ59z0WdHCcumBdZpK
+f2ibutCGDSxEqAdJ2qTHRc88s+JhXb+j609DOFBfk7yg6y8u6nrWhWINyoGUsUjLOJmFq3Bl+oa1
+B9O0SQ68cQa2otS02ECqjF61m1wivj0am0s2RDiQXOqb90RmFP9ubGY2PcWRX2uXZ2w9CoeUhqSC
+kbrRBQfi218zGA42FC/Tmo58x8kNqSm4ZyMpccXsjScaKIVz6FUIbzzKFLrgQHwnDIXhYEOkpo8T
+bQaLOceaKmbCW+Wh2elPOySV110OB9GfU+hYvNnXIC9H0x6Jls/J1cjfNgE8E2zL2wEOBDENHV93
+EuI7LOcYDjaUUnCGno1T+1zGpnLXsMvDbGj6J++RPCugWHIMXyPx0KCW0kCp+M2yQOrAn8dWbxre
+KeiEJBS5ja6uWuP3L8/VWA4mQg1d33Zk6vvjM1sPNpTO0bcGr4SC/+r4NsVmcCzGQyZkx8c6i+y7
+p5fMNx/vUcG5ZbZ5fvAslJAJ2fGPnUWWDP+bD+94K6sGzySVz6HKseDYVqPM1Vlk9+1Nv4GCEvy2
+k7eZo8axkEMmlHdYU/TI9l1Aa2GPf4uuAv8Bea8128J2JhcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">LambdaApplicationError</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">dot_prod_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">new_operands</span><span class="p">,</span> 
+                          <span class="n">assumptions</span><span class="o">=</span><span class="p">[</span><span class="n">InSet</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Natural</span><span class="p">),</span> 
+                                       <span class="n">assumption1</span><span class="p">],</span>
+                         <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expecting LambdaApplicationError&quot;</span>
+<span class="k">except</span> <span class="n">LambdaApplicationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Failure to apply (x_{1}, ..x_{_a}.., x_{n}, y_{1}, ..y_{_a}.., y_{n}) -&gt; ((x_{1} * y_{1}) + ..(x_{a} * y_{a}).. + (x_{n} * y_{n})) to ((0 * 0), ..(a * a).., (k * k), x, 1, ..a.., m, (1 + 1), ..(a + a).., (n + n)) assuming (n in Natural, |(0 * 0, ..a * a.., k * k, x, 1, ..a.., m)| = |(1, ..a.., n)|):
+Improper replacement: Improper replacement of (x_{1} * y_{1}), ..(x_{a} * y_{a}).., (x_{n} * y_{n}) via {(x_{1}, ..x_{_a}.., x_{n}): (0 * 0, ..a * a.., k * k, x, 1, ..a.., m), (y_{1}, ..y_{_a}.., y_{n}): (1 + 1, ..a + a.., n + n), x: {(x_{1}, ..x_{_a}.., x_{n})}, y: {(y_{1}, ..y_{_a}.., y_{n})}}:
+When expanding IndexedVar&#39;s within an ExprRange whose parameter is the index, their expansion ExprRange indices must all match. ((1 + 1), ..(a + a).., (n + n),) vs ((0 * 0), ..(a * a).., (k * k), x, 1, ..a.., m) do not match as respected expansions for y_{a} and x_{a}. 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course, when parameter ranges are not involved in the same expression range, this restriction does not apply.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add2n_lambda</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">((</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">),</span> 
+                       <span class="n">Add</span><span class="p">(</span><span class="n">x_1_to_n</span><span class="p">,</span> <span class="n">y_1_to_n</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="add2n_lambda">add2n_lambda:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/3bc2ee055945b9502c7f7e5b2d81e00cb8b82de90/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfwAAAAUCAMAAABf7H96AAAANlBMVEX///8oKCgNDQ3MzMxUVFR2
+dna6uroQEBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAADtE0dfAAAAAXRSTlMAQObYZgAA
+AyFJREFUaN7tWtu2nCAMpUXBoIL8/89WdEYJQmSAWav2lIdzEbKT7AAJKGOMLYY9uQ1L/tiHu9qe
+ND0/3JEuO/qPd7U5adPycD/0lDvy8a62Js2Mj3ekh7xxea4O8KH67wp8C30jTT1/NWgZfw6Ba3mu
+/pDgO9IW9Q/sYZOI04BXeqarPyT4jjR4EaQBukVADxUL8AZCw+i6FqmLFSQA+iPKuKLD0c50tZrt
+WyoDAZqXWnMo0ub98KP7NSUqYGqrA3hJVYwhYlmGCbc/gy3V4APgZD7Fwz0gLZmuVrN9x0MoQPNS
+aw5Fmhr2Ieu86K1mYk2LfBxLcoEPET1jD2x0fMxzoQYPIPRXxYPPYPbme6ar1Wzf8BAK3PBSaQ5J
+mtzTpUb9oiT4OqoC9Utnl4VCDQgANX5M69+/JtSsPcuBW1f7TUTJ7VeXM99jAhQPMYEkL03MIUmT
+JzlnvyitAi05TcW6HladvFiDB5AIvsKZTSivFMx0tUWFRfMQCpC8VJtDkPbaCxnqLw3+AWFGwwHC
+Y/W2/4As13AABPgise3zyZ8Lma42CP4ND6EAyUu1OQRprypo0HtJALo4ND6EEXLFlUHWm7v3j8Lg
+HwABfqrgwzd6ma7Wsn3PQ6iB5KU6+ARp+ylJ2IHN9njx8TJB2xep1z+uj3yIRYNDcPuNJ8LGzg0z
+pRpOAB9/e94fJSza8MbIgTDuKlG8EybGBFI8UGvzwks7c0jSdm26A1gPhMbgvVC9U6h61xvHH96j
+fRCG6FYLhMQg25DRLqUafAAP361wHs8SPCgACFfT5F0tUx0hkOSBuBi48tLMHJq02J3nYcKg8/b7
+S5N8m1r80j9OlRp2AB+f6cwcQrr6nSs1ZCclEPLS1pwUabG3Hce5uc+7e7keyV3SU2Lgfn83uT1K
+lGs4ARB+1Yud4cK2/vQCkhDAdiYEorw0M4cmbQ7XwzIq28F+NZh16RpZT24ngt6gfrX+O0OFhhPA
+x//glS7h6ncasjO5IUV4addo0ogvHLK+ezG5/WLNPbxGQwwgFtL0LPorP+ZIuPVd9DdpD/+2yfz/
+jKuQtD8EAjNXbmgklgAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">add2n_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">new_operands</span><span class="p">,</span>
+                   <span class="n">assumptions</span><span class="o">=</span><span class="p">[</span><span class="n">InSet</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Natural</span><span class="p">),</span> <span class="n">assumption1</span><span class="p">],</span>
+                   <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a684b138cb5ea956e0e75b27461f60fe8e7086250/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjsAAAAUBAMAAACZneGiAAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAABERJREFU
+WMO9WE1oE0EUfk3STZps0uIPPRQ0J69ZvVR7KnjxVtGCKIK5iF60WxRKQTEiVvBQIh4UoRJFxOYg
+9aA9FOuKFEtbSEAU6sFGEPXib0vFUotvdnY2O5PsOrtpHQj0vdd57/u+mXm7swCpMtSM0yA/vtRz
++kkQeNRDbg6l0iB8B4lZgPD5XVVn56s0NMnnV8dAfZxz2KbhI0HwMesa2eYHvuswSTwEuA/TNp14
+Vh0GtSCdP44z43mngxgyCZSjDcqDyOG4IXqJZ8YXfFfpkEQyD8n9ELbpvAbowi3EKOhu3FhgHn+t
+WUeEGizBCdeZz3euShfhBkuJyNXN2w3eSz1h3bW8EJj3KogkYhVItIHCoMIjgD4DpqSRD+Ovx7mE
+1Jj6pzyQbFCeGFn4BUMsRDzqfll5hr0KIonPuN5tEFlmrh9IMAvxbknkKdJpdjsj1GAJNlCez+Aq
+D9yTlCeV8yqIJAYBSnmI/GLn7TfKo0M4L4k8Sv5xFE7dtiPUYAkYvpf9H87oAeWJ7Pw60B7q3CJQ
+HvSQZ4+kPAT+3m2fBnUeieVCEk8BvmkQYvKkFgEyOiQLkvIk8OGqLkc//LH7GTVYAtYStOSVWCGg
+POHEOJTOwnGB8lMPed5KykPgaxO6usYjsVxIYgjlyUNokXAg8uDuyWig5CTliWEjVlbPqWVrPjNY
+AgtG2AivRioB5dmBwuISLgiUhzzkOSkpD8IPZa9C6idXkLmQRG/1cJUK9uEKfSecisUHR4rFtprc
+jkAz9piWw9RN5jPDTNBVLF4uFu+YyiXGhJmWPBJFjFI3eVx0AJeSIGfyOLzUkxG93KgGEL6qLkGS
+p8tcSKLXbM0Kac2xNtqa+7KUnczuIfLE2sfpUpD5lsES2MvXqgdvzX0ANwEOCTui12P3ZCR3D4Gv
+fIcmoZdYLiSBWxQX1oYKE2aBiJ/DVer+1m0HLCOSE/Bl0sHluQVwCSJrqvzh2id/uKClAK1lgyto
+uZAENrg6r4W+WvMClLKajY4aQmtWjAsQNYLKcxBwt7cUPm5Ma27W8Ohq/JmgLiSxx1yHKba2qKd6
+AOXTeIBmW1ph/cURIA/wDmhN2/JYBktgwejJPmOXP1uMqCiPW5HUEtntcY1PSR/eF2rkMT3XhXfp
+FWd65yMD4eNu70qmOSSWC0mQbfhiYFP1otHZj/8aTwtniLSVi+wPR4AcoicQvWG/N1sGS2DBeD7w
+cqTMz2zZujIiVwRr4PuJMlLhhSDIrx0bLfNe6rkriHbRmd4RIPAxz/s3PBLLhSRide9k074uFR4J
+Tki8Cjdyqajx0jXOrculYtq82NUZ7EapGm63WaPuna4mwZz7TA+PZ2CueiWt46VnRnctLwTmvQoS
+EpMuV3nJkahAYwmCj0nXyEyD8B0kZn1Okvqe5CPBRnwOm1yXz2EmiXqfJN81+jH13X9Qx/1janJ9
+PqYiib8q/LDGLtFCkwAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Furthermore, to ensure unambiguous and straightforward lambda application, we do not allow a single operand entry to correspond with multiple parameter entries or crossing boundaries in any way.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">operands</span> <span class="o">=</span> <span class="p">[</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">one</span><span class="p">,</span> <span class="n">Mult</span><span class="p">(</span><span class="n">two</span><span class="p">,</span> <span class="n">n</span><span class="p">))]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="operands">operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/be117f96880cbb4e5e92c9cac1173100c75aeb940/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANkAAAAUBAMAAADy5oUvAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAoJJREFU
+SMelVj1oFEEYfbm929zP7nkg2BqwEcHcYgqJTQ5s7BRUsDONoCAmnVyjh0IQEV1iEaIWK9jYJFpZ
+BMMiiH/FxUbQwjtsTGMS8QqR0/Obb/dmd+fmOBcH3uzOt2/2zb5vfhYob+Dfi5ZstuOtb7p+l0Lg
+XQoxQX5z/6kanYzdW09gLa9VFEamHQArhHN+7EmioZQVWBOYqSnRt7H7YhsvYHQUhuUFsF1Y+6qR
+QKKhFiIXfOROKGFjPrr/CDwATqs9DwfIi+9rxQVaw9WInGsg80cdeUz+NnAGqLYVyssAm0ihRuRi
+F5nvavxRNI0awKqPqpq4Yo1RT6NWD76w229nD21dXqLrtGSMu3y5I99xdPJrnYw2XMbzNGpMxnFH
+Jqz0DE0y7ZNklHiJZH/IgLM2b5HztsdYiASskWpMxjVJ3pP3sE2mnZeR/CzXE6IW7xmbvYkyOW82
+GKcigaY3So3JBVeS/WYNLbrulZEcr45lVv8lKqsDe4dUA8TUghGNVAuTx+Q54EBfjSOsFiaPPTB3
+kPGk2kKavAmy6WJLBu4Bv8nBY9EaEU5eQFmugIKHXRs+suQkIfUs2Q1ckYGTMLuGOkvGHIxLtZyD
+Od/pzxKevFfjAtRgyzkPoopaRC5fn1psyNXVgeG9B+5G2wqZuDk1vV8Gtms4YldQoHlMECYsnn0c
+7e3cuOGHeeBKJCB/C+xYsdfrSTXypnyQvHuIWASrvd5PGaAuXz5Qtwoj39ZZZg66eREYQobVSOxc
+uvI6gO3qHhqDIQfDyOqurCvhrox13cNXg+PnN2rJiROnpP38/omjP00Hj2gbw4/e9eRpqiliDDyO
+//9TsEf/KXwO8BdaecxcC4Gi1QAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">assumption</span> <span class="o">=</span> <span class="n">Equals</span><span class="p">(</span><span class="n">Len</span><span class="p">(</span><span class="n">operands</span><span class="p">),</span>
+                    <span class="n">Len</span><span class="p">([</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> 
+                         <span class="n">ExprRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">n</span><span class="p">)]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="assumption">assumption:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/0cda16bd9bfb5f802f5d66aa76773e9e262675b50/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb0AAAAVBAMAAAAgOC1AAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA7BJREFU
+WMPFWE9IVEEc/tbddXd1n0lEJARKdLNIog4ewpUiEIrWgxVRsB0MIkhvaocQwsBLbuAhu+hlD3Ww
+PXQMWg96SKFnWEEXha5FHkIK27Z5M2/mzZud92bXNhr48d6bP9/3+9785vdmHr7iPxSVtM3+NzwE
+d5XepCbrGPVEV9krP2jhonlmpKwqTeliMPDeSi/HZVQf6xhqjQLvr9xXaiN56YHAWUNjW0qXDteC
+9DnAjSrMHaHvNrGTUpBEjwcPbc7DasfboqI6Jz0QuHWkd5WBH1wL0tecDydGbf5J7nB9ySysw52e
+vvWlcvDQKSBuo6lLqX7j3RI43ACOqCoWmAXpmzIQozb/JHe4vpgzmzPS/CVDxg8ATRlEfirV77xb
+B+4o0JlX3mkXsyB9AwZi1Oaf5A7XN4va9aUyJJLKiPxWw9YLWAduxEanugDvuKbX5wA3Th91h+sr
+1KGvJcvmSPR41fG04EReVnQpsMslDti6NPf8Grkuu6bXR4FDiF0ek3+yO1zfeB36Eiz3vy7xitLY
+gkWCNeklmHGm6pdwP3EPmyRYH4IZI1255ZRhoY8ChxC7PCb/ZHe4vrOePss0PtZDL/28c1vPeaRI
+sEad8IIt4BBr53CfYznMk2A9BWb6+aPAwcScx+Cfzx2ur9vTt5kz6Gui6yye5Z0taxfJbQK87cjZ
+EXAYEnD2ZhEz5PrNNb0+ChxMzHkM+nzuaPTRt27WV/CmKLqNSM4FZNPa7a1TBtcHHPxbfZzHFF+y
+O5r4RE3xGc1ijlfEc9g3aaM1I7pQuNNIie/DZeAHidSXYCavv5u1xifnMfknu7Pn/PIFeCYmtIQ+
+u6Tml7YSWoS+Y4iW02p+UefPlF9cHpN/sjtcH03aLyR9LWV36dAVtiPfOIk3dWFtUEzXfBEryS3E
+RUKlcLNrywfEJ3MX6dwj4DqY6fXRjM6JBaf3xHhYfvB18/snu8P1OUEzeGJY7Prj+3euInaRr59+
+fnOOvAJn4psrlYrQRwY/fkDqvK+5AzdSqXznz2RI6hCJvrtgptfnAHvEglMQMx7a6O/m9092x7c/
+qypnqteu7W6jNGXDvz/TpbYMs7D9WRix2hjabUPZX+u+lFU1aXcbHLih9fbXmlLD/jqUWG0M7ebb
+X2NC97oXqqo+0QSTDz6QuGVCq890PuLAQcRKY3i3nPF8m6yumgw+hiaU862mTAjl4efbIGKlMbRb
+gp9vFxv0f2La+H8imWdGyqK6Z99q9P+JaRf3D+S3cqItxADfAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">add2n_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="p">[</span><span class="n">assumption</span><span class="p">],</span>
+                       <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Expecting LambdaApplicationError&quot;</span>
+<span class="k">except</span> <span class="n">LambdaApplicationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expected error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Expected error: Failure to apply (x_{1}, ..x_{_a}.., x_{n}, y_{1}, ..y_{_a}.., y_{n}) -&gt; (x_{1} + ..x_{_a}.. + x_{n} + y_{1} + ..y_{_a}.. + y_{n}) to ((1 * 1), ..(a * a).., ((2 * n) * (2 * n)),) assuming (|(1 * 1, ..a * a.., (2 * n) * (2 * n))| = |(1, ..a.., n, 1, ..a.., n)|,):
+Parameter/argument length mismatch or unproven length equality for correspondence with x_{1}, ..x_{_a}.., x_{n}.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Providing-alternative-expansions">Providing alternative expansions<a class="anchor-link" href="#Providing-alternative-expansions">&#182;</a></h3><p>A variable may occur in an expression in various forms, indexed over different ranges.  In order to treat the various forms that a range of parameters may occur in an unambiguous and versatile manner, you may pass an optional <code>equiv_alt_expansions</code> dictionary to the <code>apply</code> method for specifying various expansions for the different alternative forms.  The rule in doing this is fairly simple and straightforward, but allows for a lot of versatility.  Basically, if $x_i, ..., x_j$ is a range of parameters of the lambda expression, an <code>equiv_alt_expansions</code> may have various keys that are alternative ways of representing $(x_i, ..., x_j)$, such as $(x_i, x_{i+1}, ..., x_{j-1}, x_j)$ assuming $j-i \geq 1$, and the corresponding values of the dictionary are alternative ways of representing the <strong>ExprTuple</strong> of operands supplied for the $x_i, ..., x_j$ parameters.  These alternative expansions can provide the information needed to expand the variable in its various forms.  The requirements to allow for these alternative expansions is straightforward.  The alternative ways of representing $(x_i, ..., x_j)$ must be equal to $(x_i, ..., x_j)$ and the corresponding values of the <code>equiv_alt_expansions</code> dictionary must be equal to the <strong>ExprTuple</strong> of operands supplied for $x_i, ..., x_j$.</p>
+<p>The following is an example that demonstrates the versatility of this feature and even includes some partial masking of a range of parameters to make it interesting.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">var_range</span>
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span>
+<span class="kn">from</span> <span class="nn">proveit.core_expr_types</span> <span class="k">import</span> <span class="n">A_1_to_m</span><span class="p">,</span> <span class="n">A_i_to_j</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">Not</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">Forall</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">one</span><span class="p">,</span> <span class="n">Neg</span><span class="p">,</span> <span class="n">subtract</span><span class="p">,</span> <span class="n">NaturalPos</span>
+<span class="n">A_1_to_j</span><span class="p">,</span> <span class="n">A_m</span> <span class="o">=</span> <span class="n">var_range</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[32]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="A_1_to_j">A_1_to_j:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/da5d9dd5488f5885f7ec5718323b802fa4714a200/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF4AAAAUBAMAAAD2P5dXAAAAMFBMVEX///92dnYiIiIQEBBERERU
+VFS6urqIiIjc3NxmZmaqqqru7u6YmJgyMjLMzMwAAADiRdoGAAAAAXRSTlMAQObYZgAAARlJREFU
+KM9jYACBtwwEAd8FJM59wup5PyDYPPc3EFR/9jeCvWt+AyHl3Ct/IDgH6hMIqedh/wZns21Yf4CQ
++myuP3D2Nob3BcAAcMDnnAS+7yD6HohIYOifwMA3UwGPejYGjp8gegEoZCNnxgPNZsOn/unMqV8Q
+ehmYLxBQDwwPWxgbaAeTAX71XECsDPRFJVAtxwJI5OFT3wVJA5xsQHc0AdksPyDq9wP53H8ZIAwE
+jwNklH8Dww7GAIYt/28zcPl/mgBWz6QNlFAFYqYAGKG0gYHb/+8GhiX/NYHmIsUT2D2rMZ2OnLT4
+kdINF0i9AIZ6RmTOYwSTY9LXAgbuAgz125E5JeipCjNoUFKWOwMpgDXDmjT1og0MAJlYRLF+To2a
+AAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+<strong id="A_m">A_m:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/b5d697a35ba78b55c48e8ac2ef7f021e5544272e0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAARBAMAAAA4SAFEAAAAMFBMVEX///92dnYiIiIQEBBERERU
+VFS6urqIiIjc3NxmZmaqqqru7u6YmJgyMjLMzMwAAADiRdoGAAAAAXRSTlMAQObYZgAAAJZJREFU
+GNNjYACBtwyo4D4ql+f+BhT+rvkNKPwD9QnIXLYN6w8g87cxvC9A5icw9E9A4vJFzox3QNbOwMB8
+AYm/gIGByYCBZ87zSvbSBwwMHEA+7wcGnuQDzNHsAQwMTUAlLD8YuosY+BM4BRi2/L/NwOX/aQJD
+OMNjBqYFCGPsGEoY+vngXI4PQBVHGBG2BjDcYGiVBgDBWiVJMk2CgQAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">partially_masked_lambda</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">A_1_to_m</span><span class="p">,</span> <span class="n">And</span><span class="p">(</span><span class="n">A_1_to_j</span><span class="p">,</span> <span class="n">Forall</span><span class="p">(</span><span class="n">A_i_to_j</span><span class="p">,</span> <span class="n">Or</span><span class="p">(</span><span class="n">A_i_to_j</span><span class="p">)),</span> <span class="n">A_m</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="partially_masked_lambda">partially_masked_lambda:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/bdf5c4ec1475341fd7227cbe2c53fc3b5778829d0/expr.html"><img src="data:image/png;base64,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
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On its own, this <strong>Lambda</strong> expression is ambiguous.  There are different interpretations depending upon the order of the $1$, $i$, $j$, and $m$ indices.  The <code>assumptions</code> and the <code>equiv_alt_expansions</code> supplied when calling the <code>apply</code> must resolve any ambiguity.  So let's set this up for some unambiguous interpretation when we apply this lambda expression to some <code>operands</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">operands</span> <span class="o">=</span> <span class="n">ExprTuple</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Not</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">k</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">subtract</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">one</span><span class="p">)),</span> 
+                    <span class="n">var_range</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                    <span class="n">Or</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[34]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="operands">operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/0b9e1f524e291512d1122eca1b168dca2582bb880/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAAAUBAMAAAAKIynxAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAA2JJREFU
+SMfNV01oE0EUftukSdrsbktPimCjCKJVm6sX6UUMKLSIB7EW4q3VgrmJeEioWCoUDFGhRbEV9OLB
+xqJSqNpVqJV6aOilUBCDguhJDbXV/ljfm9mfSfYn660DmUzefN/s996+eTMBUAuwdVuoiN176/f8
+5r7cZJsfptJaGm556jw3M54rfPam2yDSaAVifnO8ZRzlHcLxY8HeCVD305dztXmAkUanmXAXQE+X
+J9kOqf9BPVtP4pZVDMMywCx+ZQVPNgCCf3wpbMbcaM86TMgTGrr514vrAFlcp34XdQtcygp2twEC
+KYgUBd+Qpaz4UphG2seUw0T9WeyCHV5cO0TuYXqbqBvkUuhVthdA7oCvAjCKrOlBXwqf4bKnNYeJ
+kSRFIOvFtUOU8BKTjm4HuT1Kr/17HOABXBaADTGQ+jRfCksA2w442NXfLCZFD6oD5ERog+1cVBfl
+9oY8xTAGcBheisl1cGEC/ZPyVQVKpQ9X+vHb9M/gBIwk2eHKNSEmWW6TuC1j8popg9IYw0XA59QN
+UIuz5JJPgjSccV19iJBXecZOo4c7DYEGJ6KXgu1DrmsYEJMMQVD5/rwEsEfPc9rXrVj5uuGUEfsY
+Sy5IJyGY8Q7gJ56x4WXBZnBq2aaUARLuhcqAmK1pOLfGBu9A1gvjFHW/KJhlCkukMOVHIWYshFcc
+FEZYYTvnpdCEmA1DdYYN6pKBJDeRYmWDKey3FFI5pMj6UEjlsGYJjsUqFfIyF/dSaEBMcgg/17iI
+0QhY5XCacjth7hRUSMklrYEfhVQOm/MQX69UqNLSAc1LoQExyV/wM8aHTxbALIfyI1bLcTfrrRHq
+MbmOvuBPm8N8kPHksQasA/1ceoioTk19mxEVEhQuFiB0l/nuxBcgRGY2lRaZ4kWmadA6BROsMt4U
+fK0Zw9vAc/1pEYL2UdbE9AEMWJVyP10xMGOiKTg+iU2zOPKd3beAK2QMi89WEyBIJoQ8tarBhc3r
+XFnWkJJruceG98tOPfGN9dpvQvZaPvfalZNwZvSWkysRaiVDzpTdHAwpGZ7slZXWnlLnA66cbmdG
+vJwcqHY04M0BXtkyeaiUAtl+K5ix898cceN8u7HXiSFCiDxTTeFs+Q1WPMvtpqp3caU6Q/nfNSl+
+W/pfgFKEf6KyCqEhDNaJAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This gives us the replacement that should be used when encountering the range $A_1, ..., A_m$, but we really need to know what to do when we encounter $A_1, ..., A_j$, $A_i, ..., A_j$, and $A_m$.  First, we will need some assumptions for our arbitrary (for demonstration purposes) scenario.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">assumptions</span> <span class="o">=</span> <span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">Add</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">one</span><span class="p">)),</span> <span class="n">InSet</span><span class="p">(</span><span class="n">subtract</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">one</span><span class="p">),</span> <span class="n">Natural</span><span class="p">),</span> <span class="n">InSet</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">NaturalPos</span><span class="p">),</span> 
+               <span class="n">InSet</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">NaturalPos</span><span class="p">),</span> <span class="c1">#InSet(Add(j, Neg(i), one), Natural),</span>
+               <span class="n">Equals</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">subtract</span><span class="p">(</span><span class="n">Mult</span><span class="p">(</span><span class="n">two</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">one</span><span class="p">)),</span>
+               <span class="n">Equals</span><span class="p">(</span><span class="n">Add</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">Neg</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">one</span><span class="p">),</span> <span class="n">i</span><span class="p">),</span>
+               <span class="n">Equals</span><span class="p">(</span><span class="n">Add</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">one</span><span class="p">),</span> <span class="n">Add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="assumptions">assumptions:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ecb3fba65b3a1c16f5817ea5df8bd04152922c380/expr.html"><img src="data:image/png;base64,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
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The last two assumptions are redundant so we don't have to bother proving them for this demonstration.  They were chosen to give us precisely what we need for proving the requirements needed for our lambda application demonstration.  Now let's make some needed alternatives to $(A_1, ..., A_m)$ and prove they are equivalent to it by calling the <code>ExprTuple.merger</code> method which will automatically apply some theorems.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt_A_form1</span> <span class="o">=</span> <span class="n">ExprTuple</span><span class="p">(</span><span class="n">var_range</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">subtract</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">one</span><span class="p">)),</span> <span class="n">A_i_to_j</span><span class="p">,</span> <span class="n">A_m</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="alt_A_form1">alt_A_form1:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/d44bc65279f79dea01bb975e3c1a52a6c36fba450/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ0AAAAVBAMAAACuzqZ5AAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAAAoFJREFU
+SMfFlj+IE0EUxr/s7m1yl80mYCGCYCwO4QqNlQgiaURBERErsUjpPzTXGa4wFh4KFmtnCjFYi7G7
+QjSr6CkIXmoFWRuxEC6CoJ7xzsnM/nvZzM6lOQd292Xm+718mczOG8Du4X+3K8PbOxHPqeVaWzo0
+NzkcQzIeuz0WcUftY6YvHepMDscQi3ksODwsdFxlqg8D2cgm6FGYIAeAnMej5QeeKpN1YV02pKYT
+MEFeA19F1LteVfkoZH/IhtR0AibITBUNHhjuVeVrc8L8KxnZBD0KU0R38IwHr7Cvztb0k7SZrWo/
+2aMRvgCRWNBZRwnjIUXC2WpjkQdVrDrQWs0UHwbs3+yxN7ARE3MamqeEUaNI0MwmzvCkO1q72M8z
+0nzsbt39Q1KHYp/GBPAIovWFDwOYait8sGV1drwPn8YkMEWYj0V/unKn0n2Y7LoJHC0lfQjamFfC
+VqNGkML9PY3sfJnnGq5Tuyb2uzQfX8QWWBkkfPi0XnRV8LTRJkjhSG9qZ7bE1+lBiD0kvy5SrzCp
+tQYRRJ/s4bd2PXu5GffBNT797bxQhnCUxYfxXi9R5BqK1ekKM1jBMVbpNh7B7P5yeOrcHaa5wa5c
+KbjdcmF111xc2riNfB3Hn7LmhuKQXuLKGMwDpghh5HsU2Y5Z5IZzUw729WiqLyf/3diEr7yUia1B
+mSj9RtIVPdpxGgtY1YC3YZ0LXmO2AhKp9Fh8UZeJzXaFKP1G0s3SDrvPZuSjzuscnkfd977XYdUT
+qd7E4heHZWJrm0eUfi9Jt0A7jBI7dXw+xOt+cA4Kt9gxVUxevZRKqlgamx/54drYunNh5uS58QOf
+tvYYmtkvr0D/AMUV244igyExAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># And maybe we&#39;ll have a simpler way to do this:</span>
+<span class="n">assumptions</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">sub_left_side_into</span><span class="p">(</span><span class="n">assumptions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">prove</span><span class="p">(</span><span class="n">assumptions</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/58e0af91e58c5ac3fd08ff2f5b9290c14072c3280/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/318e7d65a06fff6827680dcdfd918f74e2d982ce0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAAAYBAMAAADni2k+AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAcVJREFU
+OMtjYBhUQIFaBm2gqkF8F4hUnUfAoNMgIvUAqgwTFscyPUDl86zfvYaBOT4EZtA6EHEJXROaM9li
+gBoXoCniviDEwHCegWnVqqhVaxl4J+DzTjqEOmT0B0iao9vWyF7AwArzGscDIgxi4AUZdBTKud3R
+AXYck/cBRQYOmEEvGIg2iMsBzJaugbnoocKpA3CDKkHBVo4WtsenYzOIGRwKPGsQoZ/OqAA3aC8Q
+czLEohpk4IrNIN4FqJHH9IDZ4TrcoDYgvsfwDcUcvoRZ2AxiawDHFXJ60GGSALFAZoOSwQEWkDqe
+VWAgAGQxfAdJW61a1bpq1SK4QYwfQExRkCKY2w4xLIUZCzKIgbkBLdn8weYiiEGvkV3EaCAK44G8
+xsCFlpi4FbAZxAK2jhUlqV+D+xQU2AznE1ANOp9ggDOwOQvgBgFDgRnuQEsQkY+W1fxhORlmEDvI
+IE4DhB/A/gBZD4sWBg8QMQM98d9F9Rqn6q+5QI0CkPyyBWItY380kDwF0wPOIp2EUjYYnIDSzjs6
+FmAqBWZaGb6PuAw6g8wxx19e7eP7zD2BmIKNZwF++dMM6nOJKiG5H+CXJ7qovYdXFgAZEn2oISNI
+ZQAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt_A_form1</span><span class="o">.</span><span class="n">merger</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7b900d4820c998e36a3a3959fb0030650f8b73c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAXBAMAAABOjoq3AAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAPFJREFU
+KM9jYKAEcBFSwEE1BXx3UIQP/Wg6wOD7NwChgHsBqsZuxgUMPB8YFinpKiltwGbyYoGZDAwXMN3A
+3WxsBGYs7eESYDDAUMDYeQDKWibFo4Os4OQMiNtg8gzL+CZIISso4AW7ZBncrGUMrtwTEAq4E/gf
+gOgGJAVcBxaCFLCBuTwM8SDDGS8pAQFUAc8CpgtIznMGEWzIJjCIMCIrUAeTF5AVcD9AqGfg+Qem
+KuECC4HYDUkB3x8wxfwAJqAHxOwKCAXsBhCDVsRA+MJ/gbp5kBQwF0BoVg9oUKMCxgP5AngTRb5D
+O4GEOX0DXnkAlk40w+eMZI8AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/24e708762360f9f1349996c9db6b1a59a1c3fff70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAAAUBAMAAAB1+65sAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAYFJREFU
+OMtjYOC7wIAbsD3AKXWaAR/QQ+Of+r3rAIPpVwcGhnU49aQeAKpDF9zLqMDA84GBgXcCDl08yvpA
+fcwFaMIaAuUMDAEMDBy4fXAfqI8nAMLm3dHRBWao7GESYGhgYHjBgFcfwxIwk3H7AZiHhXjWgPRV
+AtnOes+LCoSLHLDps4QExwF4QLEVCIH07QWyDXYX8Hx3YAvApu8WWrDqMZjwFgD1tQEdkdDFwPeZ
+gfcDNn0ZYOYGJH1MBxSB+kKAfuf5wsD2h4EJJHlqFQgsROiTB3svCiQK1cejwBUA1sfA9oGBs4GB
+tQCbfWB9fMj2MQgzBoDdycC5gIHDgMH/wQEs+jzAzABkfbwJGyDhwmrAcN6BYRZfAs5wmQ4XVARi
+uw2QcH7vwJDPwLCYGc2d9SB9k8FMDriRyyDuA7vDAxyNmfdQtU2KXwnMKpAg4tH2gQhKfAXaxbMA
+bzoDa2iA0CzW0HQGAzjTNQRgpGs42IdX3yky8y1uU/GWE7y4fA8Ah1NqapvVMbwAAAAASUVORK5C
+YII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ad31a550cc38d0f0c81350c069d3d46d56af0be20/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/447317a09981c0b4531db43fc633f41822b9871d0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZ8AAAAVBAMAAABrkP6tAAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAAAzRJREFU
+WMPFWE1oE0EUfm5+TTbbQIUiiNaDiBU0nkQRyUUM6qFIT556rD9oejP0YDwoCqLrRZqDGI+KmNw8
+iCaKtkIPzVWFsh4UBaUVBLXG1NmZ2ez87MwUkTqQ5PHm+743b2b2zU4AnA7873Y2wvflr4XmiD1i
+hlt1ZZeZPaJxrPMkuN00hVQKPSR2w8zMLCm7zOyGxmHLw854ppAqoZyLzVyjbWS+6ap6zGwJwTn2
+SvjXppBKoTSZipk7nolpn+ypusxsCcE5Xkr466aQSqGPxOpcKBqnIvVN1WVmSwjOkRHpTtUUUilU
+wUa8fc5Y7I4lfyt6zGwJwTtiroBPuYaQaqEn2HgBu8uopjR1O65ofUc/lX7NC8GEnXLVZIKAzLDg
+CBYfV4X99/12zzezHSbkTl1CktBlbBRh0QWrVtVNBTg/0c+uIB8GjNlgaZ4jgoCk6KAtKQZOj4ch
+d0zrEpKExvDoNta2oAmP6xLaWrv5i0uwD6Zs3QkmIgSHJVbnRJEJWVq9MhIaI1MBibohIRTiRHRC
+lK1dXQEhOBQJ0ZCl1SsjIbzl0AKnR/UJ+bvlEsDhvJwQYccn1WSqP3uLd+Rub6+kJocDLfIM3e1v
+ORpSm5As5BcFZ5ycybqEPpAzudCVEqLs2IDycA303SO8I3eok9iUygdFgWm4KNCQuoQihPYBOYuy
+PTLGeaRtLwNj4C98MLQ8Z6bKJuRjAvbnCQbOqQQI29sjUM7DQHF9AcD/cM2v4zQkTihiRCohhJ5b
+eQDJ1g8XjzF9DWEu+quepwZcaYPdWm7D6ZWrkC3D0ceotfvgPvsRRgpkDuFvB84xBNvw7grLeThb
+/ZB4hXzlcESSMiOU9oTn/Iz8+DB7af65Cmx3hzkkbZxcT3AchylYtABeKV59SCsJY4hQZoRy4nFQ
+kJgxxj4VU4GT9QKHpI2Vs0Z5h7OEpvZtTPNyituEMAZZmRN6Grqnv5bBLkvMWcZ+dlAFtgc9Dkm9
+rFyqyTvieXR5eXcg6vqQDTfOpxtDYFDmhOaEV9CI1z/1+6oRySHQAxilz45euOCtVpkVWrsr+Ib3
+isK+8K+u4Atr+9fB4OY1CPIHDctGy3aBKlkAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we employ a trick using an <code>InnerExpr</code> object.  We'll discuss how that works in a later chapter.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt_A_form2</span> <span class="o">=</span> <span class="n">alt_A_form1</span><span class="o">.</span><span class="n">inner_expr</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">merged</span><span class="p">(</span><span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="alt_A_form2">alt_A_form2:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/82ff5bc0713a1dd9f3c419079df37b483adcd7f60/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAAAVBAMAAABS/tqaAAAAMFBMVEX///9UVFTMzMx2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAAC+aOQFAAAAAXRSTlMAQObYZgAAAeVJREFU
+OMtjYOC7wEAFwPYASJyGsLUIK2dagCaArEcOiNdBmOsJG8X1AU0AWc8pBgbeCWAW7/oDBI269QeV
+j6KHuYCB4wGYdWz+A0Im8WT+QxVA0cMTwPACwrpQ70DIKF72L6gCqHqWMFSCaZYD+QQj0oftLwof
+TY8lw14wfYRBvwAYRRvw+c+B6TuIXgQTgOhBhCRDG5h2YHg/gYFpZgMeo1gY+H6C6ASYAFgPAmQw
+hIBTjORMeaCLWPAZpThz4m+UVAbRAwf6EKNYGBhYFxAwChjEUaiuBOtBMqoN6miOAPxGsQFxKzDE
+KmEehOjhnateyV6oAOR7gIOdLwGSlPEZ9QySujlZoC6B6uF1vcAqwy4ADnZLIAlKW9z/IEadByrl
++cWAxAATfCBb9j9gOMcsAJaB6XlTwcDvwGkA5EwGuovh9P81DGz7f0wAG8XRAxRuBGIOASiDoeMA
+A8/+XwcYsv93ArVfACuB6xFnUGXgSAAnEg6kxA/2YA5mMCFnT/4HqEqCGKoZ3jMB3d4Ay84QPSCj
+DDCMYkbmqKIq4fsAdNdtZnB2ZtiHEJ7xsYCBpwDDqOPInGoGFCUsAsBS6qENuJCBFX3wTIsZeSi5
+cztWJRAXkVQgM/rF4Cg2HpBahDMa4tYCABtZhMP5LRUbAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">extract_var_tuple_indices</span>
+<span class="n">extract_var_tuple_indices</span><span class="p">(</span><span class="n">alt_A_form1</span><span class="p">)</span><span class="o">.</span><span class="n">merger</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7b900d4820c998e36a3a3959fb0030650f8b73c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAXBAMAAABOjoq3AAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAPFJREFU
+KM9jYKAEcBFSwEE1BXx3UIQP/Wg6wOD7NwChgHsBqsZuxgUMPB8YFinpKiltwGbyYoGZDAwXMN3A
+3WxsBGYs7eESYDDAUMDYeQDKWibFo4Os4OQMiNtg8gzL+CZIISso4AW7ZBncrGUMrtwTEAq4E/gf
+gOgGJAVcBxaCFLCBuTwM8SDDGS8pAQFUAc8CpgtIznMGEWzIJjCIMCIrUAeTF5AVcD9AqGfg+Qem
+KuECC4HYDUkB3x8wxfwAJqAHxOwKCAXsBhCDVsRA+MJ/gbp5kBQwF0BoVg9oUKMCxgP5AngTRb5D
+O4GEOX0DXnkAlk40w+eMZI8AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/24e708762360f9f1349996c9db6b1a59a1c3fff70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAAAUBAMAAAB1+65sAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAYFJREFU
+OMtjYOC7wIAbsD3AKXWaAR/QQ+Of+r3rAIPpVwcGhnU49aQeAKpDF9zLqMDA84GBgXcCDl08yvpA
+fcwFaMIaAuUMDAEMDBy4fXAfqI8nAMLm3dHRBWao7GESYGhgYHjBgFcfwxIwk3H7AZiHhXjWgPRV
+AtnOes+LCoSLHLDps4QExwF4QLEVCIH07QWyDXYX8Hx3YAvApu8WWrDqMZjwFgD1tQEdkdDFwPeZ
+gfcDNn0ZYOYGJH1MBxSB+kKAfuf5wsD2h4EJJHlqFQgsROiTB3svCiQK1cejwBUA1sfA9oGBs4GB
+tQCbfWB9fMj2MQgzBoDdycC5gIHDgMH/wQEs+jzAzABkfbwJGyDhwmrAcN6BYRZfAs5wmQ4XVARi
+uw2QcH7vwJDPwLCYGc2d9SB9k8FMDriRyyDuA7vDAxyNmfdQtU2KXwnMKpAg4tH2gQhKfAXaxbMA
+bzoDa2iA0CzW0HQGAzjTNQRgpGs42IdX3yky8y1uU/GWE7y4fA8Ah1NqapvVMbwAAAAASUVORK5C
+YII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/07fd5317ed5c717ebe1bc6b6b5a512bd47996cae0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/19d14f06eca97ef0cee94e6b44ad3f7105655bc40/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUkAAAAUBAMAAADyw9IGAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAArpJREFU
+SMe9Vz1oFEEU/u4nm7vc7iIIVoIHKimEuKQJdgsipIugYKN4TUBBzBKEkMpFQTRYLFoogYMN2mgh
+dhZiWARRTHGHpWBylVqZkwQD4ZDMz97d3uzOzuaCvmL+3rfz3sz7mbeA2cS/J60VX8sq+CZt1hSg
+/Ov9c4DZYHA+EYesZTxhnp7wVcKeAyDhyNplGSdKX4T55zhEJbhLug8YHvTjp4PMtns/2RnG5AVH
+XMkueAoo0fvcyK4ljKG01M+LK9kFfwB+4r9oiefiQnbBYzYWFeCPT2RaxjiRm1vggVWc/LUwnps6
+QYZnRIxK8NmJH/PO4XmbeIuHdwqwdU6mZYzTpzKucG+svEHjFmbJ8Cubv2Tk0bFS8FtH37E14imG
+j3vpYLO2LNEyzunTOv6w/kjJx6aFDTK8JmIUgnO1JZhbMNokq7i4mA7WscMSCbuDlaiWISeRgiIH
+BQ0bcwFOkeExEaMSrG9D67CcnGurwBQpsbiWEkYFl/dzwFPg0hBaQmuj7GLEYVoqLh6VqkzLGCca
+lh7viVPcRfGvDkxH/LKaweIo+yhZmGkFKLpKJ27ULImWMc7AV7y/AGK4sv89jJ4oqQSPWCD+smzW
+aPSwDHE7gL5LnYE2DT9s2GxGLApGOyGEcBLwbEadkQ7MbWq4MYsc57GoRbLg/h6bNvWXZwVyqxaz
+xKOrL5q4T491hz4K1W5Dl/LfBEOc3K2j9BCcQxF9PPuasqgz0gGx1agHrU6emRVRS4ng3h7TLKVe
+Xyfuc4g/VMxb45evSe1xQ45grAcRDA9ZN/GFTNujR5/Yox+GZUKkylOuHEFYR83fEYy82kjbY7Da
+wGr3wUt4HaXJzJEiCMvcqngRjKxyW03bQ6jcesVoQrEorR8NOYKyxutRzIBKCVVwU749z3itfRT2
+ByLjAH8UJH72AGDT8rBR3w0iAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we are ready to demonstrate this lambda application using multiple alternative expansions via <code>equiv_alt_expansions</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m_eq</span> <span class="o">=</span> <span class="n">assumptions</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">sub_right_side_into</span><span class="p">(</span><span class="n">assumptions</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[41]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="m_eq">m_eq:</strong> <span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/dd566ab41f764eb1276ee0823e3887d6ae37a7950/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAAAUBAMAAACkMGhZAAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAa5JREFU
+OMt9VDFLw1AQvqZpK2madnC3Ctq1g5ODFBRKJwv+gAYEF8FmcJBuLhV0cbJudhAROigOroY6qIPY
+xU1QENzEujiV1nsvadJcLh58SXj38b3vLu8dABfJKwckPjmuYTqvV5p4cHC/uzexeAGayamcy2e6
+TdcXJPQ2rFX9xQ7oeUr8sgG6bDGQtiRSNmR6gUQlyNPPLlFEPWJF4qZEpgjabyDxRJm3KKL3WJEN
+B8oAtJ9AQqkyIjCPeDyhIi0X6GfgWW+ha9XiRMoIKyN+pjonQ7IOXQDUSmO6mkDX6Twnco0JM/tO
+UssuAJakCfHYTqGAUeREPgSlZpPUiwtISWPPYn87i+XE+vjVlZZnfZEZ8bUCUSJuY+Q5+rZdkZAT
+KVIAvyftyXIMCzY9/gEiwZazLkoeUifjxk4DHHt/Z6j+01gwBlSk7CC5uNrwtk70t7BHJcI8FSI7
+onvUo/SHUEajkZ/r4EFQckFi462Aq6LHcSvi2IfjjjvfehFidj0XcQHDUeFE8ALWS/vh9aYLumee
+E8FRoLXCE2w8lGhMsUOpyc+TqPF4ww4fE/4A7RxrBm/XdtcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/138973ac27f75e76ffeccd4310d61a8f133684710/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/3bd1bcd342d7a3484f6c3c5118f7fbcd40bc71560/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMMAAAAUBAMAAADCapQOAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAj1JREFU
+OMuVlTFoE1EYx/+XSy5pcwmhOoi0EO3o0JObiiK36KKFboKgZmgXHXoSRREhxU2zOLlJdVXQIOLS
+wSyCKOoVt1IxQ51bcAhaaPzey7vc3bvvQvvB/yX5vvve733vvXwHZNlbUrk+VNKsDvc8772JbCuu
+0nBvqFvHHkUBexVf2AzWa3eyEaaInZEqdvGrFyXV0Uw9vewj7bUu00qdbMQJUq4mZfgoLMZjleda
+xV+/+zHvjeHHg60+jZvZiIukfEeq4MHeS0y5qD8958e8CoGcQNzJJJQ9Gt4NZfZh/01Ez3GIkTeB
+MHuobq2//Dyx+U3LmaQ9wgslqqUfBu4fp2GDRWxwiEoNldJjtF5jWe6xK03MXhJX9aESsBOEkwW/
+aZhlEbMcIufgad7BhwBzWk6+QcMFJeCSPAKxgY0jNC6xiCUOYXnwWz2s+Pik5RTELb2mBEMUhpYj
+MP/o25r42ZQlz0cI6f3huudd9+wIMbELrABHgStjEepAumJV/XCyVBVrXBUCQYUvoLpXjM6iq2+U
+VcN6OFlJRLdZxDaHqNLVvIriPgznfTIncdzPgFdhoNUIDnvc5X1YuzCDIJlTqalbSCov/Jz2wsCO
+aIszOuKNQMxoiEmBMAJRCP0HrCmtXYn6ZOUkczAYjBD2SRrmNcL09dP1yKsQxsc/U5T85CANJN2F
+PbY3e1oV0m4fqA2mTG+Dmvdu3DumDZbE6ttKmjXZDNY7rpnHX0m6tdmMduZKD/9izbFpvPcU8B8C
+XZDOZ1W0rgAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m_eq</span><span class="o">.</span><span class="n">inner_expr</span><span class="p">()</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[42]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/dd566ab41f764eb1276ee0823e3887d6ae37a7950/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAAAUBAMAAACkMGhZAAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAa5JREFU
+OMt9VDFLw1AQvqZpK2madnC3Ctq1g5ODFBRKJwv+gAYEF8FmcJBuLhV0cbJudhAROigOroY6qIPY
+xU1QENzEujiV1nsvadJcLh58SXj38b3vLu8dABfJKwckPjmuYTqvV5p4cHC/uzexeAGayamcy2e6
+TdcXJPQ2rFX9xQ7oeUr8sgG6bDGQtiRSNmR6gUQlyNPPLlFEPWJF4qZEpgjabyDxRJm3KKL3WJEN
+B8oAtJ9AQqkyIjCPeDyhIi0X6GfgWW+ha9XiRMoIKyN+pjonQ7IOXQDUSmO6mkDX6Twnco0JM/tO
+UssuAJakCfHYTqGAUeREPgSlZpPUiwtISWPPYn87i+XE+vjVlZZnfZEZ8bUCUSJuY+Q5+rZdkZAT
+KVIAvyftyXIMCzY9/gEiwZazLkoeUifjxk4DHHt/Z6j+01gwBlSk7CC5uNrwtk70t7BHJcI8FSI7
+onvUo/SHUEajkZ/r4EFQckFi462Aq6LHcSvi2IfjjjvfehFidj0XcQHDUeFE8ALWS/vh9aYLumee
+E8FRoLXCE2w8lGhMsUOpyc+TqPF4ww4fE/4A7RxrBm/XdtcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/b527b43e9220e1f6b36d790dbe44cf6bc319b73f0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/94dcafa161042492c55482515668053087bc29120/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAAUBAMAAAAdCCxUAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAVpJREFU
+KM99Uz1Iw0AYfWnaXGuTGNTBwcHdwYCjSyYnC86Cbk4OjaDgFnDzZ3ByE+yqIEWkS4cGJ3GQuBbF
+DO5mskih8e40jbk09yAfd4/H95d3QBHqizlqFxIcAnvzx/+IR+htiX4VxMd7mBIPIHaxvGRBcVHZ
+yJD9Yn25jYoDfZghD4r194A6gP6dIdUQ5mv3+qnWfxb1rd8qg+ROWleAYcGonsC7xQ7jjBUOi52P
+uOozSPSGSUcp2bgo2+gFWBbzr/G4zlOz0FHocjQHrhei6dLlCthmQeGlPLZGd5r2U4uAJjAHbE7U
+/w3hs0iTcv0s0IA5JGn/ftKPZqE7TnBGP9MBtkBGUOyOkJ/NewncjPfzZfB56yNoEdQgEPQv1HGN
+twUnuZvRHZ0nYCWmLGgzopU+6N+J49hJ7UP9qp7L/JDHvtRveUj8htM8JfMzey8iqrL3MuE9LgE/
+XldLEFsQSTcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">partially_masked_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span> <span class="n">requirements</span><span class="o">=</span><span class="n">requirements</span><span class="p">,</span>
+                              <span class="n">equiv_alt_expansions</span><span class="o">=</span><span class="p">{</span><span class="n">alt_A_form1</span><span class="p">:</span><span class="n">operands</span><span class="p">,</span> <span class="n">alt_A_form2</span><span class="p">:</span><span class="n">operands</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[43]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/0740465a3a91edeb96298021ef0091e12a6ee2cb0/expr.html"><img src="data:image/png;base64,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
+VgcGAVPSAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And these were the requirements to make that happen, making sure that lengths match properly as well as certain index ranges.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requirements</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[44]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/dd566ab41f764eb1276ee0823e3887d6ae37a7950/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAAAUBAMAAACkMGhZAAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAa5JREFU
+OMt9VDFLw1AQvqZpK2madnC3Ctq1g5ODFBRKJwv+gAYEF8FmcJBuLhV0cbJudhAROigOroY6qIPY
+xU1QENzEujiV1nsvadJcLh58SXj38b3vLu8dABfJKwckPjmuYTqvV5p4cHC/uzexeAGayamcy2e6
+TdcXJPQ2rFX9xQ7oeUr8sgG6bDGQtiRSNmR6gUQlyNPPLlFEPWJF4qZEpgjabyDxRJm3KKL3WJEN
+B8oAtJ9AQqkyIjCPeDyhIi0X6GfgWW+ha9XiRMoIKyN+pjonQ7IOXQDUSmO6mkDX6Twnco0JM/tO
+UssuAJakCfHYTqGAUeREPgSlZpPUiwtISWPPYn87i+XE+vjVlZZnfZEZ8bUCUSJuY+Q5+rZdkZAT
+KVIAvyftyXIMCzY9/gEiwZazLkoeUifjxk4DHHt/Z6j+01gwBlSk7CC5uNrwtk70t7BHJcI8FSI7
+onvUo/SHUEajkZ/r4EFQckFi462Aq6LHcSvi2IfjjjvfehFidj0XcQHDUeFE8ALWS/vh9aYLumee
+E8FRoLXCE2w8lGhMsUOpyc+TqPF4ww4fE/4A7RxrBm/XdtcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7b900d4820c998e36a3a3959fb0030650f8b73c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAXBAMAAABOjoq3AAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAPFJREFU
+KM9jYKAEcBFSwEE1BXx3UIQP/Wg6wOD7NwChgHsBqsZuxgUMPB8YFinpKiltwGbyYoGZDAwXMN3A
+3WxsBGYs7eESYDDAUMDYeQDKWibFo4Os4OQMiNtg8gzL+CZIISso4AW7ZBncrGUMrtwTEAq4E/gf
+gOgGJAVcBxaCFLCBuTwM8SDDGS8pAQFUAc8CpgtIznMGEWzIJjCIMCIrUAeTF5AVcD9AqGfg+Qem
+KuECC4HYDUkB3x8wxfwAJqAHxOwKCAXsBhCDVsRA+MJ/gbp5kBQwF0BoVg9oUKMCxgP5AngTRb5D
+O4GEOX0DXnkAlk40w+eMZI8AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ed3d67f1e8ae4bb9cd32f9f887401234c98d8ef80/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/df004b27c84994136f65498c222846e49b3c14ca0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAd4AAAAVBAMAAAAa6JIzAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAABNBJREFU
+WMPVWF1oXEUUPsndv7v3ZzdC7J+aCMUUUVwkUXzQbDV9EBqSSGILWrL0wRfBtloJVmrWB0Xzki1F
+UFCyClKo0C7FJ0HcPvhgRbyNtaIPZkNbig8lWdSkbYz1zMydvXN/ZvZGX+rAzs6euefc75vzMzML
+1+B/0mwnIPg3yK/Bt/T7/duZ6WO0N2sB8YaQaxVXh2pZB1sTmZ7mxKbXY9l481b32FQtcso60b1Z
+r6vVfzk0Vv7Q58GS/4FMz2rX1BaAjoqcr4Bc3baIfFMVb6ITLUw2YtnoA0j+HTnzSRm0Z8pK5ewO
+gIEdoiS1THr6apsKcrgAswWwSnK+BLn2YAysF0W+bwkTSwjzq9FYGXUdwPgzauanYewmKypl6zDm
+Y/KGKHp7nfT3kG6GQaniI70A5+R8Efn5s+sxwJpVge/TwsRphDlbjcM3i2gzN6Nm9pPackapnCJO
+MXrFFRig7BdJN8ygoK8NXNR5OV+CPBOHr9Xr8dWLwsTLOLfdicM3jSbmhyMmkr+T/opSebJAIkSM
+o0x2jUeoweTTBNtfKKrJ+FLksfjCix7frPjaJsDlu2Olby4P9s6olZmj6/ezSlf/gy66GPJfatdp
+JUUwaSZfJSGAeMxRGV+KXMHXOPvBya32uW04/NrjmxYqi91858RT+H21Pd+lzTOHC+JqcZ3v3XSw
+5cXT5HnwaSvgajaTFbkh+juL/s2UOF/zBdpGOV+KXMHXTB+Bhc/gYVIdPL4JRD0+hG03S8r5PFwZ
+l9pIkieH6jTTrXsRFndSS2eElXd7oig1kuB1/beWK0Bnte8kwDZWH8gzHRjkWlHmX4JcxfdSogRz
+dZjFYb/Ht5ObOsaSMov597nat3qeZjqcLghCrvMQDXIHDDnfTorREiSLE2OrdHDB3YAgTfanHOKx
+l2V8KXIFX2ehBoMObCLRGM0XkxKyN2PxbRK+1Qi+IzQPGyq+CbrXPiFIEMN9LH4KJlvEHEmH2fJ/
+4QuDGLkA9/v5JgoeX7L9khhqz5dsv9BTMz4O8aU7rwkqvmznrcMXeX7gw8+TzHQpAa3t1+oD146Y
+v/m48QzPAuwG44blggvUq2Ns+106GIcvyXR7FcycE+Q7R5z+nZKvTmqR6UCdYz2OnwNs+MYMtLbf
+iyS0vXoV9G+7egUPgLUGydJxX70yeYXFY9x+hNnnUOzWCrjdQkkYsNaAFGbWmaPwUb/oX/oU2VgG
+HMY3rE8HMIgnzn2g/1BkNulGOs0q36K7pyN9YxcNhrqML0WeXXeB+WGSTl8DbRlSdTTwvMdX8MOd
+5A5QcH01RDy3k4RNng+840XHAbxYvIKDI2BMYTsq6Px4qLvG7RKBp5/nj1h7up4jDqpSm9b0igOP
+3trFjl6jHErXq3QFUg0ZX/KG5B0rexkw/2uICOdxu9T2opmXJOdJITa18GHi8fBBbb0h06F8w0ZE
+ycKvYZt6UOOC+jwpAeYXWUXJfcFt/azkBFv4jqeV6jIdtm+GDwHC+BEzymagqe8LMmB+ke++kA5d
+Zd4b2Yo31LAzwxcJ666KREcfb1ajjIiS899E2Qy8QXEf5MijgFWl90HJrTl8gc20PWSW2xspb9Bm
+OsZ9P8KIX/Saq3Pq9v8/5112ugz+B7Eh5BkWB6f+AdF8hl4/h4mmAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7b900d4820c998e36a3a3959fb0030650f8b73c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAXBAMAAABOjoq3AAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAPFJREFU
+KM9jYKAEcBFSwEE1BXx3UIQP/Wg6wOD7NwChgHsBqsZuxgUMPB8YFinpKiltwGbyYoGZDAwXMN3A
+3WxsBGYs7eESYDDAUMDYeQDKWibFo4Os4OQMiNtg8gzL+CZIISso4AW7ZBncrGUMrtwTEAq4E/gf
+gOgGJAVcBxaCFLCBuTwM8SDDGS8pAQFUAc8CpgtIznMGEWzIJjCIMCIrUAeTF5AVcD9AqGfg+Qem
+KuECC4HYDUkB3x8wxfwAJqAHxOwKCAXsBhCDVsRA+MJ/gbp5kBQwF0BoVg9oUKMCxgP5AngTRb5D
+O4GEOX0DXnkAlk40w+eMZI8AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/24e708762360f9f1349996c9db6b1a59a1c3fff70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAAAUBAMAAAB1+65sAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAYFJREFU
+OMtjYOC7wIAbsD3AKXWaAR/QQ+Of+r3rAIPpVwcGhnU49aQeAKpDF9zLqMDA84GBgXcCDl08yvpA
+fcwFaMIaAuUMDAEMDBy4fXAfqI8nAMLm3dHRBWao7GESYGhgYHjBgFcfwxIwk3H7AZiHhXjWgPRV
+AtnOes+LCoSLHLDps4QExwF4QLEVCIH07QWyDXYX8Hx3YAvApu8WWrDqMZjwFgD1tQEdkdDFwPeZ
+gfcDNn0ZYOYGJH1MBxSB+kKAfuf5wsD2h4EJJHlqFQgsROiTB3svCiQK1cejwBUA1sfA9oGBs4GB
+tQCbfWB9fMj2MQgzBoDdycC5gIHDgMH/wQEs+jzAzABkfbwJGyDhwmrAcN6BYRZfAs5wmQ4XVARi
+uw2QcH7vwJDPwLCYGc2d9SB9k8FMDriRyyDuA7vDAxyNmfdQtU2KXwnMKpAg4tH2gQhKfAXaxbMA
+bzoDa2iA0CzW0HQGAzjTNQRgpGs42IdX3yky8y1uU/GWE7y4fA8Ah1NqapvVMbwAAAAASUVORK5C
+YII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/07fd5317ed5c717ebe1bc6b6b5a512bd47996cae0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/19d14f06eca97ef0cee94e6b44ad3f7105655bc40/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUkAAAAUBAMAAADyw9IGAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAArpJREFU
+SMe9Vz1oFEEU/u4nm7vc7iIIVoIHKimEuKQJdgsipIugYKN4TUBBzBKEkMpFQTRYLFoogYMN2mgh
+dhZiWARRTHGHpWBylVqZkwQD4ZDMz97d3uzOzuaCvmL+3rfz3sz7mbeA2cS/J60VX8sq+CZt1hSg
+/Ov9c4DZYHA+EYesZTxhnp7wVcKeAyDhyNplGSdKX4T55zhEJbhLug8YHvTjp4PMtns/2RnG5AVH
+XMkueAoo0fvcyK4ljKG01M+LK9kFfwB+4r9oiefiQnbBYzYWFeCPT2RaxjiRm1vggVWc/LUwnps6
+QYZnRIxK8NmJH/PO4XmbeIuHdwqwdU6mZYzTpzKucG+svEHjFmbJ8Cubv2Tk0bFS8FtH37E14imG
+j3vpYLO2LNEyzunTOv6w/kjJx6aFDTK8JmIUgnO1JZhbMNokq7i4mA7WscMSCbuDlaiWISeRgiIH
+BQ0bcwFOkeExEaMSrG9D67CcnGurwBQpsbiWEkYFl/dzwFPg0hBaQmuj7GLEYVoqLh6VqkzLGCca
+lh7viVPcRfGvDkxH/LKaweIo+yhZmGkFKLpKJ27ULImWMc7AV7y/AGK4sv89jJ4oqQSPWCD+smzW
+aPSwDHE7gL5LnYE2DT9s2GxGLApGOyGEcBLwbEadkQ7MbWq4MYsc57GoRbLg/h6bNvWXZwVyqxaz
+xKOrL5q4T491hz4K1W5Dl/LfBEOc3K2j9BCcQxF9PPuasqgz0gGx1agHrU6emRVRS4ng3h7TLKVe
+Xyfuc4g/VMxb45evSe1xQ45grAcRDA9ZN/GFTNujR5/Yox+GZUKkylOuHEFYR83fEYy82kjbY7Da
+wGr3wUt4HaXJzJEiCMvcqngRjKxyW03bQ6jcesVoQrEorR8NOYKyxutRzIBKCVVwU749z3itfRT2
+ByLjAH8UJH72AGDT8rBR3w0iAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a2647fd5222baf12c5d771d443cad3a679df45050/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/83e74f1311af776889fb472909b4597f8091e6850/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU8AAAAVBAMAAAA0gXHkAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAvlJREFU
+SMe1l01oE0EUx1+aptlss3ER/CgoURB6EDFI8SaktBdBwUIrIoIfUEGEGlSoRYR6MBQvjeDB417E
+WxNKQfDSeKggvWwrRMjB5uDFgyxBrFpZdWZ2Nzs7O7M7xjiHzebNvv/+Mu/Nmxf4DP9jsKo589/0
+kP86uXnWK8JkhXysM+ZsDV8z890KIn8iqZX8mYe/90zM1mQ0lHx7at99xjgUAfo+RjBR4hiHaNCB
+CjUzDJD6JfVr+5Dw5VbQ1ogAvYFX6FgEKLviJ0xX0AN9RKfDd4DBr1KgFhJePccgGUJQBT268dqW
+jrp2IG+6gh7oaWpa/YEkd6SUqigQiwajfkgI2o/jpth/kaCLpivogmaK1GQaTWyeldK5jWSOsPv5
+phD0KXQDSgRdUJUO3y4dcqNy1aQN8PEga1wTgj6PAW1e5IKu+aBpOomt/Y/vFlCqluKLW3vhxZgH
+QAzYp9wBfXMdj+kO6L0Y0PoyF7Tsg/YjsNQ4HnWSeNphyE0VhYKT+MkzTjZv6gCfPE7iMyJc0bFo
+0EzhPBd0xAft88pmRieJB9UCDBajl/OJk83qF8pGfCwh6NFoUA3IFm6QOMz4oJYAtI1BDRlQlM2g
+7vQMFJI2d0WtYOg9UFxGIV+TAcVlNPETXukB0BUmR6/Khh7SOhd0hbOZEChOvNw3kAHFZdQqQd0O
+gJaFKxq3mbYK9ZjNlO2UpxYMoMRbfkBeqm3jzMGXrSvUjbtzAK6hp4bNzLtiAPSSEJQULtVm5Trf
+VkNNS9V0BV1QavUSt1Cjcce1jePnRnFu6N4NdRLsxd0LSpq0AS9n0TAdnRkhKI5havf2BUelo0su
++FWJBcZr4vj0vCPIO0Kp1UmG6/4pTsQ+0D5aMfoIFagkhUcMEeQ1JZ4nms9yinLYdDIb8IluSkQq
+WWHmBpqSdCVUfSfbBjTDP88IK228pX2i2rw5sUpTCNoQNc7UCDfkSuy5OifROCsyrwoIIv+l3v4V
+UZzYLDFmtdXtXxFHUG39AWcSB5FmaAJxAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ea9cb275a42390f00a3ec7d82a1b18d63a37600e0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/d895006878bab1aa6d500eb96c7fee465d78f5c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPgAAAAVBAMAAACZJT5kAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAnNJREFU
+SMedlrFrFEEUxt9mL7lbs5NcE1Cw8B8IucIUKQIXsEkRcohaiOAhJI0QYpEiVtckaLdlmnCnIOnC
+IfbZQhtFXEQjXnPbWIYogogQ8L252d25nbzZSxZ2bm/43vfbnXnzZuAELn9NRbmOi5mdwAf5u3dB
+7IJs/W6ue0QzN1BqqReb1BzMXPVCa1QqcQIeTmbOpgU9C9d0+AR5vWyBe7tlhacS0eThZOZYfCpV
+ONbhO3h/W8HmYWBja5L3PHyneNb8jgZfxvsRZc9ra4wm+czDl4vh4kYG9+oA47/p/w9biC6Z6HJw
+Miu8HmfwKw2Atoz5bovQJX6Dg5NZ7z7v0jvA5l0GL2N6fOqotcvnaSIh+0ozgfvr8mokcDILLdPX
+GEPBbgYv1QBW4wH7Lj9qSgJTmHJunftyNPNq9/hcD6aRdjODj6HJnKxWEUzy8EQiX+AnB0czAf/4
+XIMjdDgdhq/K9R/b4ImkEA7umSV13sIQnIZdLl8fbHAlmXwBSqbPeVUbdihXLfA1vN8MJ1ybsumj
+Fa4k/nSkJ1z+y8msX+PLtKAFqyUcrRv3L8B8NID30Vn8AdWk/5Rkn7JlPOTgZHbktc6J78uaLKfk
+QQaXX/v1yUxXPZeojC6Bako0hreiTPKUikzMwcnAeaYi0nj5sCJLFcE2cuVVXfJFFs2tKNu6xRmC
+vxSWVzcyTKRtCUdG1HMbS0KhfnPGfE3RDEfZWHxzukM6f7Tj3MZSTjcz786vDoiOWRS1jLkeWLdU
+ZdYzUw1t2+EWPh0bhwmtCpkvndufywWHCTNC2TqvqH9bqQ8vdYx6Pijyca57RLPKYGwO/wMUTNvs
+gxLVAAAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/24e708762360f9f1349996c9db6b1a59a1c3fff70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAAAUBAMAAAB1+65sAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAYFJREFU
+OMtjYOC7wIAbsD3AKXWaAR/QQ+Of+r3rAIPpVwcGhnU49aQeAKpDF9zLqMDA84GBgXcCDl08yvpA
+fcwFaMIaAuUMDAEMDBy4fXAfqI8nAMLm3dHRBWao7GESYGhgYHjBgFcfwxIwk3H7AZiHhXjWgPRV
+AtnOes+LCoSLHLDps4QExwF4QLEVCIH07QWyDXYX8Hx3YAvApu8WWrDqMZjwFgD1tQEdkdDFwPeZ
+gfcDNn0ZYOYGJH1MBxSB+kKAfuf5wsD2h4EJJHlqFQgsROiTB3svCiQK1cejwBUA1sfA9oGBs4GB
+tQCbfWB9fMj2MQgzBoDdycC5gIHDgMH/wQEs+jzAzABkfbwJGyDhwmrAcN6BYRZfAs5wmQ4XVARi
+uw2QcH7vwJDPwLCYGc2d9SB9k8FMDriRyyDuA7vDAxyNmfdQtU2KXwnMKpAg4tH2gQhKfAXaxbMA
+bzoDa2iA0CzW0HQGAzjTNQRgpGs42IdX3yky8y1uU/GWE7y4fA8Ah1NqapvVMbwAAAAASUVORK5C
+YII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/57e24ca2844fbdc194ec6d22f81d4c49446a49f30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAUBAMAAAB8EA4WAAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAU1JREFU
+OMtjYMAFuBVwSGQz4AEVICK1AFOCZwMeXdYgQgdNkC2cgYHdALcmJgFkxQsgdM2d70DyFm5dLBuw
+6GJgAukqxa1rCwNOXcwPGPju7F51ivPWOXRdC4GYfVUDNl28Agy8HF0M9esYUkFivMZgAPZRExAz
+MgRh08VkwDCNxYBh/wUGfXS73IBYm+EbNl1sDgwF9Q8Y8gsYTqDrigPiAr7vEBeYBBsbH4Dr4vzA
+wJDPwCDCwBCFTRcDrwM2u0C6hBkYfBn4frMj/HUA5kIGZgFsuviAZsUysP9jYDTYhmYXKDQY6hNw
+hAb3Pwa2DwzMFy6g6boIIvIL0HRxgXQxXgBZxyXAwCaEniSfgAgRtFhmPPpZCOjuCfhTlCN62gCD
+Erypdzr3TyiHHSXD4Em9DN3cfzkEsEngyynAXHlKCKsEB75cibME0GZgAAA78FC+pqOxggAAAABJ
+RU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/2078e3e429681f0dbf0315497408e4e625b9baaa0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/1f57b6b5d34e07e923bcf41f41987ff8b1de43ad0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN8AAAAUBAMAAAD/+PVoAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAlZJREFU
+SMedVkFoE0EUfW2SbdLOxoLg1YKKB6EuvdR6WvDSWwULXgRzKSiIDUWQ4MFFIUjxsNSLFApr6yUe
+ijcRaVkEUewhOXuwOaknE7AolCD+mTHb7MyS2e3A7rydnXlv5s/fNwuUW8hUrLbelpbjLr/tGRVu
+xJ+n9S57KSc7yie7TddSOKSXPRV//qx32U6YV1JhAdH5YGcuhhlimqtqU/KB9zO9FGNngSJf5X4W
+QXZVbREcdhrBD8APZBXES7VBcKQSHHdRMwl+fCCq/MzP++dHZs8SnFO71AyCV6a/r1RPrri0HT52
+TIJ+QeR8buINmvewRPCLaL/8ipcGhzsGQeddlf1xLdoKO0DdIGi3T1R4faoYoONgn+AttU99uOBI
+ZRXlX7C7lMoeFg2CDAviZdh0sRziAsHTap/F4YKMHcDqYfQ1aXeNgsAlWS0Dz4HrxxCE1UXJQ6Eq
+BOtGwYas1oHHyP9lwPzAHm6mCClKAYoOFtoh8p45adhvWV8DRaYUfOsnzUAxJU3BAW3IernCk0bk
++MMQ7JCT81szGADg0eegfMAjM+44wDOVUHCM9dSh0VPH5RuylaO1OiI+azcbLTzhq3zEfWOqD56K
+eHgCUDDGfFgbZCovVEHOUTp3uCFHRBzixmnnxad6+yt9+JPSlsRK9LDeEb7l/wdRjL1EazsaEU+Y
+GO0nabzSkxM+WEqrsDMpgMm8oxGq1avmjd2+henpQswd560EQ4+n3YERqjOqx1N0eOqHts2PzFpL
+Ap094QC29Vcx2ol2ht+DI687/i8Gpc0/8zGzUq7Lud4AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/dd566ab41f764eb1276ee0823e3887d6ae37a7950/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAAAUBAMAAACkMGhZAAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAa5JREFU
+OMt9VDFLw1AQvqZpK2madnC3Ctq1g5ODFBRKJwv+gAYEF8FmcJBuLhV0cbJudhAROigOroY6qIPY
+xU1QENzEujiV1nsvadJcLh58SXj38b3vLu8dABfJKwckPjmuYTqvV5p4cHC/uzexeAGayamcy2e6
+TdcXJPQ2rFX9xQ7oeUr8sgG6bDGQtiRSNmR6gUQlyNPPLlFEPWJF4qZEpgjabyDxRJm3KKL3WJEN
+B8oAtJ9AQqkyIjCPeDyhIi0X6GfgWW+ha9XiRMoIKyN+pjonQ7IOXQDUSmO6mkDX6Twnco0JM/tO
+UssuAJakCfHYTqGAUeREPgSlZpPUiwtISWPPYn87i+XE+vjVlZZnfZEZ8bUCUSJuY+Q5+rZdkZAT
+KVIAvyftyXIMCzY9/gEiwZazLkoeUifjxk4DHHt/Z6j+01gwBlSk7CC5uNrwtk70t7BHJcI8FSI7
+onvUo/SHUEajkZ/r4EFQckFi462Aq6LHcSvi2IfjjjvfehFidj0XcQHDUeFE8ALWS/vh9aYLumee
+E8FRoLXCE2w8lGhMsUOpyc+TqPF4ww4fE/4A7RxrBm/XdtcAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/7b900d4820c998e36a3a3959fb0030650f8b73c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAAXBAMAAABOjoq3AAAAMFBMVEX////MzMwyMjIiIiJ2dna6
+urrc3NxmZmZERESIiIhUVFSYmJju7u4QEBCqqqoAAACA8xhiAAAAAXRSTlMAQObYZgAAAPFJREFU
+KM9jYKAEcBFSwEE1BXx3UIQP/Wg6wOD7NwChgHsBqsZuxgUMPB8YFinpKiltwGbyYoGZDAwXMN3A
+3WxsBGYs7eESYDDAUMDYeQDKWibFo4Os4OQMiNtg8gzL+CZIISso4AW7ZBncrGUMrtwTEAq4E/gf
+gOgGJAVcBxaCFLCBuTwM8SDDGS8pAQFUAc8CpgtIznMGEWzIJjCIMCIrUAeTF5AVcD9AqGfg+Qem
+KuECC4HYDUkB3x8wxfwAJqAHxOwKCAXsBhCDVsRA+MJ/gbp5kBQwF0BoVg9oUKMCxgP5AngTRb5D
+O4GEOX0DXnkAlk40w+eMZI8AAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/51025a1c84ddd56dd25b71c9f2f69fa3d480f3e80/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/9349f8b5e27a6875e498356032ad5cf6f8d6ad400/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZMAAAAVBAMAAABxrB4jAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAA8xJREFU
+WMPNl09IVEEYwD/dv2/3vXU7WCaGBoFChEto0KFc0Q5B4hpKQYVbYBBBaQn2B2E7FNnFFQo6FG5B
+CB10kU5d2otBRfSyUuqQe0iig2xL/y2t+bNv3/jem3kvOtgc3hvmm2/m+83MN983sAD/RwmphoaF
+v9Z/QirXVxFiO/nKaUMzNUxK2Oq7kgV9oqH0FgX+6nzXuvOObLjwu7xjIG0pUsbKK6SMWP1NX0fi
+BvqXJAUos3ZGbFVhPYviTeqyUoTVnXXEUgvgWbaU3E6Aa694QQN1AI11GDsuQDlGrRWsJ8AMi3KR
+keWQBQ9ijo7nd4DgFyvJbBv6dCdFyko/MtDzA1cf81H8MVCqqlWxHXKKQdnNCCaQBcMpJygBZIh/
+0UpyBE8+KVT2bkGfYA2uTvNR3Hg5hm1QlBodRYoyglNItkl1guJDQ0y3WQg8n/B3XqjcHcH7Snbf
+m+aiXAUHKHBcRwmw5ykP8G6DI1cpC0Oo2WqaUbI0r0W60meyntTjY1yUOzYoyl18YU3pKD7GQUP5
+y2Mt6P/eHiVXcaU/wi6EpvOscD5DvfzzrR1MZKw/XkR5eBSXniLKGRsUD+CL45KO4kYGdbaisoc6
+wHQY5jv56rhna4Z4lbIRGay5d1GnnV6Aoa4odxC3dvN9QIEhyt2VFhuUIcBnuUFHKdWGGaEOEEDy
+e+IdkcLEq2AiwjRqOvVkbhWCfJTSJXI+KPJHLspmGxQ1iMfJWaMgB4DAoiOUPEZJWaC0kyCcFaG4
+sfmw819RQI6uRHFHdBQcVkp+OkHBYQWq08FbJhQSUWQQodCIkoH74UI31lcOOz5g4I0V5jW6/QgN
+K7leJyjYq0LfQC5TjSijeKueClEk7PayCpmlFW5v3BU7t4e5yEq3l7U7KISiG7KgViVmKV+h8JmL
+MxVasuBFXjU5CDcb2F0hvVxovxpVimLWJxVoQqnNIZBeoC6eDBdligRtlZncYEoTxjyoozCrtxan
+iJHCCrfifs34BIa1ih4RS06ivPM0qpyD4AAqg4zOq77ytDYubtD1w1oXZd+aA/hAoA30ZrkoeMSO
++p6EPorBFHJpnuAkLsxhcZl3doc5Si1leToExTwI2zL3FuClTeICAlN2YQuinHSyUBqo5xqLOXF3
+xTM8HRowzLcOU98m26WTZh3dlAVp2ZhO+kxJ7LX2SvSiMG+BOc9UqpIcHakzn7IahG15/kic5J+1
+0CmaIv3yYdQZztOLLeYHh982m0nYD2Jo8Tl5elmbUrm/iIv0x1f9QTxEXwzG19640wexP0n1/wC4
+X0cpIyyU+gAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a2647fd5222baf12c5d771d443cad3a679df45050/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/83e74f1311af776889fb472909b4597f8091e6850/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU8AAAAVBAMAAAA0gXHkAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAvlJREFU
+SMe1l01oE0EUx1+aptlss3ER/CgoURB6EDFI8SaktBdBwUIrIoIfUEGEGlSoRYR6MBQvjeDB417E
+WxNKQfDSeKggvWwrRMjB5uDFgyxBrFpZdWZ2Nzs7O7M7xjiHzebNvv/+Mu/Nmxf4DP9jsKo589/0
+kP86uXnWK8JkhXysM+ZsDV8z890KIn8iqZX8mYe/90zM1mQ0lHx7at99xjgUAfo+RjBR4hiHaNCB
+CjUzDJD6JfVr+5Dw5VbQ1ogAvYFX6FgEKLviJ0xX0AN9RKfDd4DBr1KgFhJePccgGUJQBT268dqW
+jrp2IG+6gh7oaWpa/YEkd6SUqigQiwajfkgI2o/jpth/kaCLpivogmaK1GQaTWyeldK5jWSOsPv5
+phD0KXQDSgRdUJUO3y4dcqNy1aQN8PEga1wTgj6PAW1e5IKu+aBpOomt/Y/vFlCqluKLW3vhxZgH
+QAzYp9wBfXMdj+kO6L0Y0PoyF7Tsg/YjsNQ4HnWSeNphyE0VhYKT+MkzTjZv6gCfPE7iMyJc0bFo
+0EzhPBd0xAft88pmRieJB9UCDBajl/OJk83qF8pGfCwh6NFoUA3IFm6QOMz4oJYAtI1BDRlQlM2g
+7vQMFJI2d0WtYOg9UFxGIV+TAcVlNPETXukB0BUmR6/Khh7SOhd0hbOZEChOvNw3kAHFZdQqQd0O
+gJaFKxq3mbYK9ZjNlO2UpxYMoMRbfkBeqm3jzMGXrSvUjbtzAK6hp4bNzLtiAPSSEJQULtVm5Trf
+VkNNS9V0BV1QavUSt1Cjcce1jePnRnFu6N4NdRLsxd0LSpq0AS9n0TAdnRkhKI5havf2BUelo0su
++FWJBcZr4vj0vCPIO0Kp1UmG6/4pTsQ+0D5aMfoIFagkhUcMEeQ1JZ4nms9yinLYdDIb8IluSkQq
+WWHmBpqSdCVUfSfbBjTDP88IK228pX2i2rw5sUpTCNoQNc7UCDfkSuy5OifROCsyrwoIIv+l3v4V
+UZzYLDFmtdXtXxFHUG39AWcSB5FmaAJxAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></span><br>
+<span style="font-size:20px;"><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/a6e4340e3d13dd168f03465324dd79cc7a1cd6610/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX////MzMwiIiIyMjKqqqrc
+3NwQEBC6urp2dnZmZmaIiIju7u6YmJhERERUVFQAAAAbNDIbAAAAAXRSTlMAQObYZgAAANdJREFU
+KM9jYCAbPMAvfYEK0m9RxLjt71ozcOSnw6XfoOrhPSDHwLCfgc/YONnYBtNIPkWuBQxsGHafVVIy
+AEvXbnjIwIQuLbsapjvwweYNcGnulQvALrKGGx7gxfgALs3BngARREhzFJyCS4dwgm3kRTgtgOE1
+nxCIBdKxgR9suJgxEBhApfcxmMFV+28AkbHIuhkbxODce2CSDVma4QjcLu4vHCCKcwFcWgDoXrhh
+7B9iwLQKTIDZAUhMhhv25gCY2ncd7AYGRv1cILkZI6wrLkECFQUAAB5SMk/O1CSZAAAAAElFTkSu
+QmCC
+" style="display:inline;vertical-align:middle;" /></a>, <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/fab68c328a8ad60313a9268bc77fd292823205be0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAUBAMAAABWoP+5AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAVdJREFU
+OMtjYOC7wEAcYHuAXfw0iEg9gCrItAGLSj1MIW0gXgdiXEKTYEJ3FsiGU5gG6DIw8E7A5+x0CMWj
+rA80gLkAmxKOB0QYwMBwH2gATwA2JS8YiDaAYQk2JZUgF5ajhdnx6VgNsETTy1MJ9NReIIOTIRZV
+xsAVqwG3QCzmVWAACjpmFqCn2oCMewzfUPTzJczCakAGmguecS5gYAgBMg6w/AHxT4GNXgh0GsN3
+EN9q1arWVasWIQyQRzPgAH8BxAAG5ga0RPcHqwvQDWDIPwDxAgMXWmLgVsBqgAdSGIBVbGKABCLD
++QRUA84nGOAMRORY+MYMjZp8tKzgD8thcAPqQSomoxnA8uEt1Fkz0LPCXTQvTIpfCTRyIUZWuABN
+yp0EUyLYxQ3YlAAzkwzfR1wGnEHmYM9MDPv4PnNPIKpEOYWrQFGfS1yRtA+7MNFFGi/WjA8A6Adm
+r5GoUisAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/ea9cb275a42390f00a3ec7d82a1b18d63a37600e0/proof.html" style="text-decoration: none">&nbsp;&#x22A2;&nbsp;&nbsp;</a><a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/d895006878bab1aa6d500eb96c7fee465d78f5c70/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPgAAAAVBAMAAACZJT5kAAAAMFBMVEX///9UVFQQEBCqqqoiIiJm
+ZmYyMjJERESYmJjc3NyIiIi6urp2dnbu7u7MzMwAAAADGpxCAAAAAXRSTlMAQObYZgAAAnNJREFU
+SMedlrFrFEEUxt9mL7lbs5NcE1Cw8B8IucIUKQIXsEkRcohaiOAhJI0QYpEiVtckaLdlmnCnIOnC
+IfbZQhtFXEQjXnPbWIYogogQ8L252d25nbzZSxZ2bm/43vfbnXnzZuAELn9NRbmOi5mdwAf5u3dB
+7IJs/W6ue0QzN1BqqReb1BzMXPVCa1QqcQIeTmbOpgU9C9d0+AR5vWyBe7tlhacS0eThZOZYfCpV
+ONbhO3h/W8HmYWBja5L3PHyneNb8jgZfxvsRZc9ra4wm+czDl4vh4kYG9+oA47/p/w9biC6Z6HJw
+Miu8HmfwKw2Atoz5bovQJX6Dg5NZ7z7v0jvA5l0GL2N6fOqotcvnaSIh+0ozgfvr8mokcDILLdPX
+GEPBbgYv1QBW4wH7Lj9qSgJTmHJunftyNPNq9/hcD6aRdjODj6HJnKxWEUzy8EQiX+AnB0czAf/4
+XIMjdDgdhq/K9R/b4ImkEA7umSV13sIQnIZdLl8fbHAlmXwBSqbPeVUbdihXLfA1vN8MJ1ybsumj
+Fa4k/nSkJ1z+y8msX+PLtKAFqyUcrRv3L8B8NID30Vn8AdWk/5Rkn7JlPOTgZHbktc6J78uaLKfk
+QQaXX/v1yUxXPZeojC6Bako0hreiTPKUikzMwcnAeaYi0nj5sCJLFcE2cuVVXfJFFs2tKNu6xRmC
+vxSWVzcyTKRtCUdG1HMbS0KhfnPGfE3RDEfZWHxzukM6f7Tj3MZSTjcz786vDoiOWRS1jLkeWLdU
+ZdYzUw1t2+EWPh0bhwmtCpkvndufywWHCTNC2TqvqH9bqQ8vdYx6Pijyca57RLPKYGwO/wMUTNvs
+gxLVAAAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice how the inner $\forall_{A_i, .., A_j}$ masks a certain range of the $A$ variables and remains unchanged.  If we turn on the <code>allow_relabeling</code> flag, we can propagate changes as long as the replacement yields proper parameters.  In this case, it does:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">partially_masked_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span>
+                              <span class="n">equiv_alt_expansions</span><span class="o">=</span><span class="p">{</span><span class="n">alt_A_form1</span><span class="p">:</span><span class="n">operands</span><span class="p">,</span> <span class="n">alt_A_form2</span><span class="p">:</span><span class="n">operands</span><span class="p">},</span>
+                             <span class="n">allow_relabeling</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/086b24ee92f76c355ff98287c30d18cc00f847ce0/expr.html"><img src="data:image/png;base64,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
+T471nQsAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But of we change our <code>operands</code> such that it does not provide proper relabeling, then no relabeling will occur either way (whether <code>allow_relabeling</code> on or off).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">operands</span> <span class="o">=</span> <span class="n">ExprTuple</span><span class="p">(</span><span class="n">ExprRange</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Not</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">k</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">subtract</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">one</span><span class="p">)),</span> 
+                     <span class="n">ExprRange</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">Not</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">)),</span> <span class="n">one</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">Or</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[46]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="operands">operands:</strong> <a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/6c22218553235193fbc9ef578f19215c0d419e830/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV0AAAAUBAMAAADchvOUAAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAA3hJREFU
+SMfVV01oE0EU/rZJkzTZbEtPimCjCKJVmpt4kVzEgkJFPIi1UG9Wi+Ym4qGhYqlQMASFFsXm4sWD
+jUWlUGujEFvw0NBLQVCDgujJGmqr/bHOm8n+JLvbnWsHdnby5nvffDP75s0E0IrYLuUqVe/N3/Ob
+BzKTCRnPaFt5pPX5lpCZ8Uzxq5QMG1LJ1iDmN8dbx0uoK7H2U4u9E2j4JTVGfQ4YbdoCEOwCerpk
+qOzI8CLVnF0RllW2RMtQ2Tyiacu8NgD/Xym9LSyKOtLu/epEns39nwSTA/LDOtV7qFoQwlZYdR84
+AoRKlpkyr+iKlN4+5vY56d4fvsAq/2kJJjtS7eHqm6kaEsLoo3cUUQC+W4AR5lUYktL7gtGey7v3
+j3bTsqQlmOzIaHCJT4QtiV/YIxQgP+MIJ3DDAmyMQenPS+ktAzsOuXdrf/hClbyJHJCnAhv0CjCt
+EWFvzNH6xuBLY8oalIcXJthslZznKEr5480B9jZmW+Pj06NqlxeTgTSo1IQibCnDvYUiry+OaBZs
+1IZBKnEelOoZKCMpV/ZhQt4SkV6IAbt1ubpPhStUyTI7h12papAGFfzQxJ6/Duyr7BbKFW0JBFI4
+q3+XGA9K9HXDn9p6Sb6ISA8uW2xVPlqsnu9wFWj3iAYTaZTmkcwab8zyBEZlmqrfbFkWq/SWSW9S
+Ri+LdARX3PWGeAa9KKHXQBqFHVjnxRfo9nULE+mPbnC9A6ZeSr+06hJ6Kf3WLeFEzEWvyKdxCb06
+0qAKsOe26MyGYKbfQo6PMmXqpaBU1iCjl9JvSw7xdRe9Go3gy0vo1ZEG1Tf2jInmswUY6Vd9Qmuc
+xVHdtQlhFpTHX4mx51jkqOwU5A3zFypn5GOG6sxr71JWvXNZk+taEYGH4HoNGt4wSauQRMW7NKKc
+Fmmsecg8n9spEzfELQtQN8buMC8rY4cI2s+eUEyvBs3MfJAuRiy2IkmcnGQlb/roSenB3nsQerkj
+ZyA+QWpHMioCqtOreVzZvCN0pnVhmdZH3NBUdR5bv22vzRywnyRzbzx8uF4Hx15HqlqgVus4W33f
+0YWlxF6pzex2NZd9Hj645OwYd6TyeR0u7L6D17Y9MFxOQrXfZWbs/m+Pefj8uLvfydEBSVQzXle5
+bPV93XrnsJs8/4dEXexFWaTXCPw2sY3+D30C/gMd7xMQSJSzvQAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">partially_masked_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span>
+                              <span class="n">equiv_alt_expansions</span><span class="o">=</span><span class="p">{</span><span class="n">alt_A_form1</span><span class="p">:</span><span class="n">operands</span><span class="p">,</span> <span class="n">alt_A_form2</span><span class="p">:</span><span class="n">operands</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[47]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/69b49d754cc20acb9379303d1c61334911b2cb130/expr.html"><img src="data:image/png;base64,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
+AElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">partially_masked_lambda</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">operands</span><span class="o">.</span><span class="n">entries</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="n">assumptions</span><span class="p">,</span>
+                              <span class="n">equiv_alt_expansions</span><span class="o">=</span><span class="p">{</span><span class="n">alt_A_form1</span><span class="p">:</span><span class="n">operands</span><span class="p">,</span> <span class="n">alt_A_form2</span><span class="p">:</span><span class="n">operands</span><span class="p">},</span>
+                             <span class="n">allow_relabeling</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<a class="ProveItLink" href="__pv_it/lambda_indeterminate_params/69b49d754cc20acb9379303d1c61334911b2cb130/expr.html"><img src="data:image/png;base64,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
+AElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will discuss these features and its limitations in more detail in a later chapter (ExprRange/IndexedVar expansions in ExprTuples).  Here we demonstrated some of the versatility of using <code>equiv_alt_expansions</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">end</span> lambda_indeterminate_params
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Next-chapter:-ToDo">Next chapter: <a href="tutorial04_relabeling.ipynb">ToDo</a><a class="anchor-link" href="#Next-chapter:-ToDo">&#182;</a></h1><h2 id="Table-of-Contents"><a href="tutorial00_introduction.ipynb#contents">Table of Contents</a><a class="anchor-link" href="#Table-of-Contents">&#182;</a></h2>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

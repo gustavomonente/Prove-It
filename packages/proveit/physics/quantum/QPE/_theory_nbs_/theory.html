@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Theory of proveit.physics.quantum.QPE</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../index.html"><img src="../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Theory-of-proveit.physics.quantum.QPE">Theory of <a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../_theory_nbs_/theory.html">physics</a>.<a class="ProveItLink" href="../../_theory_nbs_/theory.html">quantum</a>.QPE<a class="anchor-link" href="#Theory-of-proveit.physics.quantum.QPE">&#182;</a></h1><p>Provide description here.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="o">%</span><span class="k">theory</span> # toggles between interactive and static modes
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>Local content of this theory</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table><tr>
+<th><a class="ProveItLink" href="common.html">common expressions</a></th>
+<th><a class="ProveItLink" href="axioms.html">axioms</a></th>
+<th><a class="ProveItLink" href="theorems.html">theorems</a></th>
+<th><a class="ProveItLink" href="demonstrations.html">demonstrations</a></th>
+</tr></table>
+<h3>Sub-theories</h3>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<h3>All axioms contained within this theory</h3>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#n_in_nat_pos">proveit.physics.quantum.QPE.n_in_nat_pos</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/4d078fa9dd6a0e25d1fac16bbada635a6ca7d6780/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAUBAMAAAAgmk0yAAAAMFBMVEX///8QEBCYmJgyMjIiIiKq
+qqrMzMzu7u5ERERmZmaIiIjc3NxUVFR2dna6uroAAABXsXCEAAAAAXRSTlMAQObYZgAAAO5JREFU
+KM9jYKAM8BBUwUFDFcU/mgsYLn58gMeMJrYDDOwfGA4bGxobK2BVcSRhFQODADZbNFxcDED0uXae
+BAYHLCoylkMZp3PYzREq+O7sXjULLA4UhalgXZCDUMHL0cVQvwEcgBvgKhjuMS2Aq0hlMWDYn4Dq
++dMMPAXHQCq4QbyC+gcM+mDxRGMgMICoYD/ALADXEM/AcBjM2IFkBkMuG0LFZAaGT+wgBiOyCqaA
+BjhXloH1Oy+IwbkAJnQMiG/DVXD/Y+A1UAMzXWFipiD1BjAenwMD96EAMLOmrwBMp3wE6mc3wBYf
+b1tcMMUBZP03a848vAYAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#unitary_u">proveit.physics.quantum.QPE.unitary_u</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/36a82cf03df6fa21d294df2123b90ba412b62c680/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGsAAAAVBAMAAACzuQ2OAAAAMFBMVEX///+YmJjMzMzu7u5mZma6
+urp2dnaIiIgyMjKqqqpEREQQEBAiIiJUVFTc3NwAAACfk0VHAAAAAXRSTlMAQObYZgAAAgBJREFU
+OMuVVDtII0EY/uImu3muIncgFrJcqYWx8QoNWVC8RjGVYqGJIAlYqGBhu6BwdklhJ2gsrji5w7v2
+FEkrBg1yzaHoWh2Iwaj4wAfrP7s7qwkKceDP/PM/Zr7vm9kA7xkf6mfU99QfW9PH39gElsgr7v7J
+YO12qqLO15N0jRzcf4ff+AoIWQjdq4r8OYdLIKRTwWQMkCq7sAJhDeIVeTNkXh0RtgpNeX7RJhqF
+0mTucEWXmyg0wFsit4txMqd1BBR3QgFSFLojC9nVjfm8ZjpRSg6iNktugWwH2ACO9DMEhyjTAXhu
+KNxudTVP89PidcAnxAm7kADkHIEK40gZhjTKMMcgXjCFzFph1gEZvVYYbfpxMeqW6ruciqgiSBxh
+hU2FrCEZxiGwzViS+etYzHPNsy4N0YKNn7IvNGnbvw8LjzbtYIaFggXndnJYpp1kS/+WeRoaz/Vn
+fOc0/ScLxFig29mzpmTiFy10J05cZPQyJu0J3iapZW3P+geceISsNSyWbPwmyAXInLuHQJI8h/Yd
+O29lkawHPv6QmCQ1CUj6syReFUXFXm7xtl4VIh0zB3nPFhynybED5w3RXY7/dQ6JfLNvRh3u+8fK
+f37hoJA2jAde51XKn+LAj7z22nezU77srPbzLF+mqmzz6y9XglZlm5B9e5Mq/hSs0QQ8AS/0eZK5
+gawlAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#u_ket_register">proveit.physics.quantum.QPE.u_ket_register</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/8f129d9e5bc4c251c523b20b9796ab27b93e168a0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAAeBAMAAAAP2ycoAAAAMFBMVEX///+qqqpUVFQiIiJEREQy
+MjKYmJjc3NwQEBBmZmaIiIi6urp2dnbu7u7MzMwAAAAIy0x7AAAAAXRSTlMAQObYZgAAAlhJREFU
+OMutlD1oFEEUx/93l+ztuh85KwslnBAQUoigKYIYjhgQReEULCyEw0oL9YogFkrS2KTQJRALTWRB
+FGMSDVanqBlQEE2EVQioiAY7P4mNCnLGN7uzHzebO3IhAzP73s78Zt78580ATZZ3cy+wumIxmM+a
+Ip7vdX3DGIM5B+Xyl/EVkkY5XfStKc19b5aUSkktNyS+BkambP2Gwy0H1xic89fR5jbcVz5Ep7N/
+cc9Hz7rUdKICfBe9qSTaGps4VYVR4miWvST0IkYtzIo+bTqBXonZGQp3F33bz0H7kMsuYmd7iEbR
+BSVb5e2Nrj87bJKYTC6qwYBR6HlMlkIU2xKyEoEfP/H2lw2F2wNUzVnoU2JAiN6UUTUHKGkK9LSN
+h3hMQdMP6JMTkNF58VV2b+/yjAFS6ZRKTdq2Dq4/QHIUaucO0Rb/jK19ga7Hqdr9PEhHXVpaBNYN
+yqg57uCNixTzFw9PZISg/OfYUL0qo5o+iLuhTlvCnj4SmT2Ip8g/GT2jFfkwXPX8aD+HCLXjKGWU
+hLqqgyGyPnkzXzhMxevppoAL32JDzQSKGdcLZZM3c7TqEapH0w1XxRNfuz2eH6nYS/WEhwrl6PbI
+aC9aCieD9aLE7eAnNkEpoRfrKYxhVGwGI+fneS7oueWd0H73VZ9YVUmcK17f3tC5gIzQouOR6Jnh
+hDVyqXshuFz1sul+cPBPRSKq8jVsdeqgW+X015j046O7PGoWE++LtDUcw/Ko4iReic2S3yP5d4KL
+k3zh5mtdha383U7ZNW5/M2/+xhpvDGtW/gOV0pxJGXesSwAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#phase_in_interval">proveit.physics.quantum.QPE.phase_in_interval</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/e192f41cdf162a066477428eeee89b3ce297d2580/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAUBAMAAADo9qfkAAAAMFBMVEX///8QEBAiIiKIiIjc3Nxm
+ZmZUVFSYmJh2dnbu7u5EREQyMjK6urrMzMyqqqoAAABb/SrcAAAAAXRSTlMAQObYZgAAAU5JREFU
+KM9jYMACrPeiCfA5MGAFPQwMHOa9yCIpOBXuY5gEM+XhBAaG2bgUsgswcGwAszkz8oEKOQxQFFQp
+KW2AKORKYOD7CRWtByrkFEBWd8sSbiJ/AgPPPySFDHsY+C4w8OxfCbZkJ8Lq+QEMPJ+RFbYycDAw
+3K5JBQmwOSAU+jcw8KIorGYoYWBIYGADCXAhecY/gIH3B7LCRwwBDOwTGFhBAhd3A8EGHFbfZ2hg
+YGZgmAwS8EIyEegZvn+oCgMYzjIwRIIEGJEUci1gYEcOHoZDDO1ApdMugARYDbAFONwz3Nv3PtWB
+iOghRaEew8QLnL/BPHuQwggGhqL/GlD5aWsmwBXOMM5lYFAC8cPktxYwMADTE2sB3G0nFsGiEJq6
+JsBkOBWAfriALfWAAQdcBJQozjPgVDgZLgJKZma4FSIctQR7ejRCzwrsDgwAoGNaF5LpImwAAAAA
+SUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#eigen_uu">proveit.physics.quantum.QPE.eigen_uu</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/9fd17865e013ee27bd5f25ce86c875541c2562370/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL8AAAAcBAMAAADCTHN1AAAAMFBMVEX////MzMxUVFR2dna6uroQ
+EBCqqqqIiIgiIiJmZmYyMjJERETu7u6YmJjc3NwAAACgK8IjAAAAAXRSTlMAQObYZgAAAv9JREFU
+SMe1Vk1oE0EU/rZp/trNGsXiRWiKVgVB9uDBCmpUBD2loNCDIEFFPJV4KKUHtSAKgsL6R8V6iEUt
+etDQgyD+sAgFWwUDpQjFQw6CWrWNfwiSGt+b7Dab2TVNpL4wf/tmvm/mvTdvAvyTdDw0ywO/jsUW
+X64hXR4F44sIvVzUoZzyu4bJwfrxlViJIK59r2F2Y8z1aaXVBv6ypMk2faBA1XSxWIzSx6zYrXIr
+KSNs4UrLOgA2Wm2YzBrIuQkG7E4oRdWFFWMvYRF04+PSfgkBId7PC2jrfjxAc3HYoRam2ODC1wrz
+YQTVUHEiDIwRgWogRT9dRggaVN2joGCD9jpPAN7MuDt6DKsTMaAcADIfgJZcU5b6upqsIBAIWl5M
+RRO1uF5BcJzhUjKBP2l1dmI7r8/sgG2iWBCRpIyAMxxxwJIMz6gg4N2rnTLBrOVj5faRx2znbMs8
+wdTBt6tcCBgE3lOToK2qeoW6mT18UyaYZNr2U/AXi3nhQ+FFQdB4f3/cjdAD9FGzjWItYqnVvhRG
+TQR04UlJrlEZPd8T84rg13YcOhESJp5Qc5qPa6nDjZ04afloij9tvstyR6gfUWk3y7HklNXwQGiN
+shvUr9RtsNSfw2mBc5nKURlkiMpPiE255Bw8EGbj2Ec3ao667yy16U+hi3rLmF8GOUv+pdv7rUp6
+qER4JQh8X6i71b7JCVPh8SEvAjKUMjcz86kqgROBTkAm8uXtKGX1JgQ5PJ9S2V32wZBQj5RMhOoE
+DoTWHNuTE1dDzlaPoDnzhu6Q7WSnrKdyxYRWncCBQFHUIU6utc2rL2KXocPHt/KSvJrCGs/3TnRV
+J3AgTJbM4BsZKKuf9XavjSLEoxvy6gTfq6u/stUJHAiDpVThTtfYw3e235WLFn4cKxAwXEp2Huo2
+z2QX1msnYAS1YDnbpVbTnula6ayZQCBEYuLB8VBHUjJ1SdbUTCAQQlH5yTxmp0LyZsTjyRxfkMCJ
+gIm6/1UEjHpmi6tQpxyuZ3LYxP+XP+Tqz6Og0YdLAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#t_in_natural_pos">proveit.physics.quantum.QPE.t_in_natural_pos</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/1a13c30d572c85563c805c8bd9d78589517d2c170/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAUBAMAAAAjLUMaAAAAMFBMVEX///8QEBCYmJhUVFTMzMzu
+7u6IiIhERES6urp2dnYyMjJmZmaqqqrc3NwiIiIAAACerFpgAAAAAXRSTlMAQObYZgAAANxJREFU
+KM9jYCAbGOCXLqC6NOv68qUMnPIScOm3qPLsCs4MDPEMzKtWSa1axMDA8wFVmvkJWwIDI9xw7gUQ
+YfV378As5vYAEwY+uDTfBLCseypM9xWDqAC4dHd9dQLIRUvhhl84xmKA0H0eKoiQ5mxQQ0jvgrgX
+4bQLDKbMfiAWWMdLsKDjKiBYAJUOZlgID4YfYOo6sm6WCY4wHscHhgAgxYgszaADt4tzAY8DyPcJ
+cGkglxNuGLdBGJh+AxPgOgB3LxDwFimA6eCKADDN8l4cSEZhRFVn3bsFGIIATsw2Igf3W/cAAAAA
+SUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#psi_kets_in_q_reg_space">proveit.physics.quantum.QPE.psi_kets_in_q_reg_space</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/15cd824275614082634e3dae3fb2bbe52b0463b30/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAAAmBAMAAABUlki3AAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAABE5JREFU
+WMOtV2uIVFUc/82989i5987usFCRfeguYahEDG6RbFHDiggROVvRaivtYClBEEMPJOzDYGGjJoz4
+QUFhbgUWy9YMtB+MBC8qhKvCpATSi/FBD6GS7OVm2Pmfe+/cxxmno7MH7pkz5/7P/3f+r985F5Bp
+mSZ6aMogoBWlxe9FT+1V9jwuKxxfcJMo2j0nTNbPkXmypr1buEmwtcB0FfESjX+WXLPhxiCMZSPu
+6IiFaRtG7glm1k5LanHiyo2BHcNLbmZYI5r9Efq/fpQ5Minnx345sae8weuYrCocDOpa1g2s51ue
+k9JSq0rZX/STr5aPFzlYegHrxhY1aPqcFNjD1D0Tmmp0sD8Qk0MWTnKwfYalYFEiS9v9QgpskLqj
+zvbdqftEqaWB8ctAimHra2yMTGBzomSSg/Jo0ctvu2Gl//DBDHfuaVGKF9MPv972JpPKsSF7cAJQ
+bfyEdVQ7MRvHSfJiV666JIKlxHxnyhOTDe2R08BpAqdV03mMtr2bbGEPvSh3A1NLPthej+4Esoyx
+MDbXsa1dRtyOM0s20ezo4bxPkZd4XI1GN7BU2Qf7yuOhljs4s3GjM6xZyBSI1p7Ds58dYEqXRfXo
+V5CZnZra3TU/BnI+mO1NbnV+Vi/xJliuqdxD7+HOa9fY75BQG/8Af1cqb3SgnACY6YBpd5mwlZIz
+edAx8GKwPvYncgENq6L0pP0LrG9vMxQof1hvOmCGnk03lDkMme0MSfrlXgH2xc2AhkmBvX8DlvMA
+DJnXBau5YHvVUsZCFimKucoD3+dLfQ/sCoHV8lGwq7RHSq2U92r8obxyawhssuGAWTGTOTeHutUm
+p7FfWHMS5BXgw4QdUF0XwC6z6DTJJVyDdnC4qZdnMWIMPzD8YBQMq6oGNBMreWpxvXt8TeeJsIpd
+LWNg6RbRAddw5tMp6KdUyrkObsTnmIBh4UjibuZAHq2YL7WFlViOwDRvj1H61q5SFj9PxxzTEKdk
+0ifWmGGwupuNrHKWYIYduTPMDY5Nqh+kF9izeTRw2RCyMc2yEZ9QNpOGfu6fwuyXYbABu+1GO8N8
+8yel2XHn3aa2FJWV+uOsdmCbX3hinTl1RBred8AMorkAWKzogunv7FjM1gxuZ3/dctv/lhU05Mmz
+f93vLRMYJP47Ea3lahivVCqmXkg3S/5ZQvnd8hgkQamilMfSjsepPfa2S1exaD4IZ2XGO6q5hqRj
+GVaEa87IemAK7b7PHFeQFCpWtSPpINwCHD2eBoM0sKhkwuv0OQ+Mc1h/NbkQH4u3gmzEjuJ1rzJc
+AygYKy8ARYHTXMvac6dEgnsxclYIttfDx5LCYtaB9rdQtzA0tU2Uihj7jSBwSOreJHdT0XOhoip3
+vjf9b6s3pMRmQvki3n/vkPvkaWEempKVk7tlPsBikt94380HmOw3Xp/ZO1b6dtlvutd6B/ugISu5
+u9oz2A55HxR6xdKIp/8DNvIKios0+BgAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#PsiKetInQRegSpace">proveit.physics.quantum.QPE.PsiKetInQRegSpace</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/671210829eb355e4a6081371e10e599a3bf30c070/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAAfBAMAAADEh/SNAAAAMFBMVEX///9ERESYmJjc3Nyqqqoi
+IiIQEBBUVFQyMjJmZmaIiIi6urp2dnbu7u7MzMwAAACxEeIOAAAAAXRSTlMAQObYZgAAAmxJREFU
+OMutlU1oE0EUx//ZzWSbJrukiAdFpTfxYpOLIBS6Bz0IfqwHJR6UHHoQVIx4Uyg5FPFSuseibVk8
+KbWSW6n4sSII2ooLFqkiNidFUJFGtBBjfbPf2U1tGxzYyX/mzW/mzXuPCdBh66p1AL2bf0H9Ugek
+YkJ+ChzcOPF8m+WI7ATkeewvTm6UzOaliqOm09Z7uRfD63pXdQXLK3UYXBmYNKmrr4d+8gSrig3M
+OOg+C4ZSAr76y5Jt0JFAJpvI9nJUNF/C6C6/xpxvS1djZNoINCN9mn6P9iP9QU0bpo3Ojq5cpXuV
+Y+gAj+rt4s/jOoWY5B0eMBMYh3Kl5pya0nivxTNC37cfeLusQ9D5VvTJc8hM21YSR8A0LKi4FUMH
+AUEiR/t0PMAjclqlyczdKbiofJKj1/JYdAFh64miLcQmsDdFTku6MnxgJ909F96YHH5VY5r8C0jk
+nVxut7w9KAN6gTtppFZXvwPdpQjaV2Wa+JvCb9ozi5Yf4Ark8ufQ4kwzgh5TmZZZ9uN02bclchDN
+++Hi+hNBB0ymCQ3SN+2Z4D5dZYh6GBUbEZRVmJYoeWWnnL1OzakCHXLuS2ixHEWVQaY95qV02N45
+dCrlckT616koPDu/i+st9kwQxQTV1x4bdSOn1KMo3lwInXfDt0k0kZiikshU1oiwV4hZ1bmh6tns
+NI7tsBZ6rCDRrejM6AoPLnNjcelhOI3K2MVT3usXqyavzXrEE7cQcS76ghproEOx8h+PjJes9qhc
+iaEfI+PdaI8KRgyV1NbxmZbRvSCLVgyNOCKYm3jqD7WMCpv5l0i2PHUT+E/tL8QHopuyyumiAAAA
+AElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#first_q_p_e">proveit.physics.quantum.QPE.first_q_p_e</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/3a52b2843ef7e7626f1815d826751be86ba874700/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMkAAABEBAMAAADZxgwwAAAAMFBMVEX///9mZmZUVFREREQQEBDc
+3NwiIiKqqqoyMjKYmJiIiIi6urp2dnbu7u7MzMwAAAADxdujAAAAAXRSTlMAQObYZgAAA6RJREFU
+WMPtmM9LVFEUx7/Pccb58d7MmCBiBNOizSxqUNwEotFOqEwX0W42redBP1aC/gXlopUlvSKKgnQC
+ceuAkOEQvqKFSNBki1bhlBRS6nTer/tsvO+Nb3ojEnNh3rx7hO9n7j33HO85gPOoVI0yGjHKNeZH
+jhJXjW/ZR4qlaSuLeeP9uI8UU7NkK2uW5fslrPtPKRizdcMSlqVrCDWMEjIsd4HXiE7yKZEzm8nI
+ma0T3ilB09WaMll6gHFVmnBYS4L+kMjWsZaIeQY0ZbJ8BxZk9DlQFhRgI1kHRbSmfZpF+qZLjTlQ
+VuiozMo8yttLtx0pa91EeWJMxzRLcJt+rMJxv6F6hz4DKo+Sq1TyTpTCDVzBrIrPhvuJQmvZKEDI
+8ymb9PnJO2MipbasAyUod2IarfjUSVNSZjsWT1XnSF01ttXe3rHNzZ6cUTYpEoboIAvAvJYKUqb3
+x2W0FbhrEXfpLP7mrSVMqjtOOxb7QZQ1g0LKZOkFHqgIDHMpYXoGdrzuGMRsXMYbg0LKVlRilO/9
+RMYIGb73S04UIRNV2/IGZVS3hGTpIrDEp+jhUuBShFwfnHdMxD0YlCXdIi0/ot+U5VP0cMnz81jC
+JSqvL04Nm5SsnfljST4lx8LFGwVf9Nd5Q9mitJR4FKmrkkZH5WwdlBf66y1D2aKs1pH5XSm6Ly/n
+0rqyRZnym6JYM005au5Uv4+U6F+73/+Pd5jEodyUfKHUvFv6Qqk5mpQmpUlpUpqUI0Cp+pfQIEr5
+UJbkmfLV/G7zkcK6CqxVUbQuvXn/KNbty25VWBSrSPKVsl5NQbYBlNA+yjOPlJHceRkDW4obhbUq
+GGXV61pWSCuquK6FtSoYZX/FV4OileiC6kphrYoipIcK3quc6rUGRSvRW5z8stYN6QJYq6IIITaI
+WW/u1yixX/T44ERJziFatt1fxFVhQiuTeX04N4pWouulI48SnOxCIGNHYRFqq4Ih+3BXDtg8CA3S
+Qy8TE/yuAsmyKCTvL6jxXYDT7nFdy0dNIOW0Y7EdbJTAnE2UV4gO7jkPB6SMUywEFSeKmMXjPQeX
+KD20hdMIZrxRtBJdHHaiBFLojaisVUGUY5hLFiDKHinWQeZShFTsnGi3Kojy7vnNdInXHnXfMQrI
+U44UKf10ZMaODhb7Lz1SwkmMlGpkS9aqYJTTXvPY4kmlVk5mrYpidWLzM/OvVmf+iNIACmtVzFgp
+WfWPwroK/f/jTelQ7pZ/AOy15uIplK+9AAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#mid_q_p_e">proveit.physics.quantum.QPE.mid_q_p_e</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/d650a05c72d187d0addd9f539ac2d5440d46e66e0/expr.html"><img src="data:image/png;base64,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
+P0IjVVOpJGKBAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#Psi_1_def">proveit.physics.quantum.QPE.Psi_1_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/67143242e32925552509aa5a4c185bc0dbb776b60/expr.html"><img src="data:image/png;base64,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
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#m_def">proveit.physics.quantum.QPE.m_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/240c9838111c4d35defa58d661e39ab7498d1fea0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHMAAAAWBAMAAAABVL48AAAAMFBMVEX///9mZmaYmJgyMjIiIiIQ
+EBCqqqru7u5ERETMzMyIiIjc3NxUVFR2dna6uroAAAAPJcEmAAAAAXRSTlMAQObYZgAAAgFJREFU
+OMulkz9II0EUxr/8ud0kmyyLWmtstTCH2FkEzkbCwXFq4z/SnI1IAqd1bERQhG28ysJaQUL0jgML
+AzZiIVuJiJAUYmGjJyoYveS+mc0lq4FNwAezb5mZ37yZ770HtGjBdO032XSzNmx7gyOHSLG20Mkx
+64pG7qQLLwLqokT19sog3YaYzbqh4RfpCozqy1ajjoqPn0ONuaGeAfH1VqJANwR6lcYQ1BmEOINz
+NzRXEMpcFkwgIdH5L0R9E3bEBTd0O0Upg4kuChaXaOSJaCYPrHLVV4R+sb91HDw/aUTzGQvYM3nt
+kCFRb5noASfnhIgGIoEVZHbwTWraL82QpGr549CmMQIEohJVHoneRG2dvDH88MfESX0NQb2m5xk/
+k6DO/qREtb9E+6i0h0OJI50pIpXGUaPA0EvaV6h/gA9FieIT0SVRWXxv8BZIAR3AeAN6zSzuRaGV
+6uh6ckgvc0mxbLQd+Az9Wa2/NS/RZVYDD9TvaheGtjZ2xlQhwFLSqfoU1DI8sV9vXqpTrIVNRijV
+ZKJ0Y7IJftsyaWUot/BZ1ms09cBN4ibKvSES4SxEnAopLBGYaVPa3pTz7vT//pnMysvJ8j+sfBQn
+xEVJmK01awLOphNvwXyLfd79Cg2bzcrfYYGsE/3etOkcVm31qvVU89Oa5RCqy8KMoxfvsX858oYg
+hzN1TAAAAABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#phase_m_def">proveit.physics.quantum.QPE.phase_m_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/7d0a3fbeee273c38f8b0f2e12e58093b02865daf0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE0AAAAlBAMAAAD1gHm0AAAAMFBMVEX///8QEBAiIiKIiIjc3Nxm
+ZmZUVFSYmJh2dnbu7u5EREQyMjK6urrMzMyqqqoAAABb/SrcAAAAAXRSTlMAQObYZgAAAWZJREFU
+OMvd0z9IAmEYx/GveeefTkUIqtEphCIEq6nBwdY8GvpLIEgQURBRm9FBUG0dWK0KTQ2BW0NUTm3h
+jUEQFDTr4CIYdiqBHOn7zv2Gh5f3/fBw7/G80C+Bk2Q8EzzeRhDf4DX5WT5E7n2gSMrgSOTMfImK
+yZbIUYEFGBK6NYgSqPlFbhR/A7U4L2BKg1AVzTAELhDBrRNaSvBvErIIPN2InQ/eshvdG/ft6A63
+D2k84n46XhO1x2HzN1UM3JCT6fcCKxwcxvX4Ttf3pR3u1JZXFtkRhs2ZPv20u4evCZRchAbLPYjV
+qnvNqF09sWCYyb9dvl3V3VZ1We6CUrWc5HL1Fj7piFZN2R29Bec8+tOcl+bG11vrcnvnGS2hbJoO
+p5q4wjy21/0u6YrgqVET/lytjufbvqBEBuru9IWEKxtqzJBwYwQzlpiputy4T0u+Cp2kjHuFKQmm
+RM8WIxJOs0e+434A2VZePFzNLUQAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#best_def">proveit.physics.quantum.QPE.best_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/266deeec3c8dbd23963ba269665d56ad7894726f0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGIAAAAYBAMAAADzMjWaAAAAMFBMVEX////MzMyYmJjc3NyIiIhU
+VFR2dna6urqqqqpmZmYyMjIiIiIQEBBERETu7u4AAACIO4EmAAAAAXRSTlMAQObYZgAAAVBJREFU
+OMtjYCAecAkwkAjek6qBoRu31COsopa7JgJJFqxyptgNWgH2DAPfnQ1E6Hg59yIDw2eIDgauCYR1
+8AUw5BcwHoDq4G8grIPzAQPPAZaAxxAd9Q8I6+DZwMD6mdMhAaIjmwifc/1jYP3IGCIA0bHUZQY2
+HY0MDFV/kazn/gfVzMD368F7AyAraxUIrITrSGBgXFSKFCj1CTAdHP8Y+B0w7WAyYGBlYAgAcqD2
+bIU5kIFzAcP7BEwdnAwMegwMQDv4fkFCawJcBzA66hswdbAxMDgw8DnADfeEBwIDvwLD/AdwfyxF
+2MEuAIoGKOCYwGAM11HAdwhLWLEpcDLwBcJFxBgYnGE6WBV4J2AL3VVaErMLYALM29KmboCH7pQk
+rDHItP83IkC4/v//D9eBM7VPwpF1ces4SKoO9g+k6mAJIEXHm91bcZQAVrv3AgCw0VI/fCItEAAA
+AABJRU5ErkJggg==
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#delta_def">proveit.physics.quantum.QPE.delta_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/c043e869e38a5b7b1d2331dcace0926a638841770/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAAyBAMAAACDoMmvAAAAMFBMVEX///9mZmYQEBAiIiIyMjLc
+3Nx2dnbu7u5UVFRERESYmJjMzMyqqqqIiIi6uroAAABeGh1sAAAAAXRSTlMAQObYZgAAAqBJREFU
+SMell89r02AYx7/p0qZr0zYHwYmgBS+KIBHGmBeZIAhO8Ad478nDQJsNhXmQxqswrPMg6MHB9CCI
+y0G8ts4/wO6geFDcVTx0HrbCum4med+sXZLnSdH3kDfkeT/J+z7P836fNwDV7oBv87w5U0ngi1Os
++RtpuX9C9K84XC/TtguiG+VmOLdO23ZEp51h+CfMwjvyZpWZfofxrClvRugFjBg0ry6sNcVHNskx
+K9dovnZJk+BZcsw5xjWfLfTkVyxiSH6X4Q9B25IzaRFDFCb6bviLMoIqlYIpm+G3ocjoFCgHNpYY
+fhdz0pzeJob8ZNyPR/3kOunn03cnPGSR2xqzX/dn99S7vP3VDQ85heFa1bvYCIdR+zMkv+LNfCYa
+/t6QfMNLgHbEWfrOkHzN2yaqGX6c6w7Jl9w80X5shR/LvNAdFK8+Y/k68N566e/qi37z921G5FfG
+Nb57yPGpKWinhRcPpL/gX3uxybK8CaWORpjPbvidgZwFxb25609t2nu2FzQhM2WkltCw4vkKCsAD
+7vsuX3OwPLB+e2D+Bn4Dh1neRMnB84hCCv/PuG+YdxL8l2kV65H4ifirl6c/no+XUKevE7fXIuac
+lK/lvQki74L4x8u0LnklRkZmj7wAPgXvia8AeakrqejiNRvV9evjRwf2T0yT+7cdo6wWUmVcCaS8
+Gc+PkzXczbjsJgLdrBI6d5wuXh1ku/lA3h9TumJxSdMp2Pd4nWs0Gb5dUVrC7+nev9SPSeQXHL5+
+KBs0rvRzZtSkjhhM/RxI1xJVP5nKrhu4uV+mSDfTAfgAfDlQvuIdSB1t0hO3xoJVM+cX8vykutIV
+8KqReEZk2yqTZTecRJw9P+pmIp81OOtYIv+Gf3vr/87vOJb0/+B77y+l9qNACslXcQAAAABJRU5E
+rkJggg==
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#success_def">proveit.physics.quantum.QPE.success_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/f83b2793ae90bff0587a8665bb30216311f93be10/expr.html"><img src="data:image/png;base64,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
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#fail_def">proveit.physics.quantum.QPE.fail_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/5cb8d5d880c6e6ff8a592ed8392fe9ba496f4edc0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAAUBAMAAADrSDygAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAABAlJREFU
+SMetVl1oHFUUPu7O/s3OJLUULMWHMfqgsG2X9ElsSECKfbA65KEgCMbEFIuBLOShEUtJY5VEKR36
+ogTabFutS0KaQFl/isqw2xaqUUKjYukPqbWCFtOlCY2G2njOnZ2Zu3PvTlvogXPnzrlzz/nm/Nxz
+Ae5JqRmp+JDz+Kr+0gNS1U7a8nmOBJfDNhWQf1l5f8e1PC9VB5xn3BI2uEu1JKqQ2CHa6fP39P5X
+GLg/abgLkFzHSxuqoNQ5YQMtpdcJYkGFzA7SCZ8/JocOhOzRszjE7qC9W7x41p2UhB24dPzsclAq
+qpDYIdIMjxvQ09pUCLgEuSiyiHyHF7/tTo4IO2hJF8CJKiR2WCxWeax/Nzb2UVhU2WKygtm1yGdv
+zgtiWzCxc1JwggqZHUa/+/zP0NBu8VPbmz1JQyNm1miW9wO9/ProPnR7NuiirBScoCJAZEffuxZ/
+tQwedwMMi5/6WvbT8JoN6d2xLip2Pae+iX7AafRn2IbvrCJ+nCe6xlw0IwXHVIREiOy0mApuvgIe
+Py8rOA7cOzRs7Jluzic+wTQFpQNexgzBNN3inEu5YPJMScExFSHg0I5istkXPicgwp2ysb7T8EQH
+D24NDQdI7aQrwskj6P7xAivkSsAKLVXBqcyf86anIoTQjnrqXeZjn7WZhLs+Xm6BL7V8NF/e1Ldp
+ige35NelarngxpzfCQHH05JbjKY6Ug+cg58Dl5rb7p40H47k4RsjqwlhjS3Q0FpSfmiBQoXAYexU
+JwhKzs+5P+qHlamApktGoaKvBm36WZguW8cyBoki60vMzqfOpy9wPPwGDt/uymL2IRWLBzWhICKL
+TjQjRkObysBh1qcRnOUWBH9mSAuCqVDslJGqwCD0QE/cjtt/w1skehEOMjtFdBXUFAScxF9PT4Hp
+tNmiNvFqDTgq6oblaqq1bzAccHiApK7DBDopagdgsLMlEgTHVKQWTuVxf2cKX0bzEFuGz0k0+twY
+s3PYVC/iV5s5bsQajGRsUBmgItjlGnDo3OjN2wYDp30Qr4KjYL702Htk1QzAoKXo63dbaoRVFVtX
+yPOdCuYplrz+3+UMiZQDi8yOcrWflF3nWMc0jDQbEOsfGhpEcIeoQEyxrSCmRiv5lAPOb1+fSduX
+nGJWOof7B1P/oucsVkskeoWdGl77yvnMaIKGDsdzSru8ISOmSTPRVAUX3vjrUDoLA7CsPg5dcDSe
+VY39oJPoJCTljd+hdlDycIZmPwFcqtXo9g+1t1vvfOa34wtqL/5Gsv6VKWnVBVfKWDB7vnVGw0iV
+m0Ar2ST6uukcZ4e7MlXds+sGKsX0Vva0QVx+CZTfKJP3e9m8JxU4ZwyD0FSfxpx70Gv6hYd9Tdct
+j/8Hv3RSWCdOFVUAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#mod_add_def">proveit.physics.quantum.QPE.mod_add_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/1087947a5a49b6001afe2bba0535bcdd73c945fb0/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUUAAAAbBAMAAAAZqYBdAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAABOdJREFU
+WMPVV12IG1UU/jbJbHZm87NS0Soo2dYuPuxD2EWUstr4gz6J2VK2+FATFqvWql2UitaCawuSRZQR
+wRZl6bQLpexDE2xFC4UOzZM11qhYi6gEo63Wkl3DLrW7lfWcOzPJTDITE1DQQ+7MnTv3u/Odc885
+9wT4j8rPHc7fhH8b0CTKPBCju6/N+VK6ww90DGiW3gngQboH2lwqonX4gY4BTSLfWU4iVKTeZ+0B
+hhhU9FJYdQdgugOAub+b6rpFcnTZRS1IYyUe+b6lTkt0OeL25siNdNnmDlAm2wdY7OcSgupwJoko
+a7KWHTIOfMrDl1pxDNEs/Or6qkztqDsgorYPsOSA4HgYoQWMimdWmIJnP98nW3HsIrOH47aB8Ej5
+DqO3zIxibgB85bCQNccdYElUcFwPXIcBhXQM8kKvGP4dyrXieIBmBG1WkbZBNzgHxKb2uQHwshtH
+D4CTI/nDDnUoRD0/2+4uMsqZ2dl9LUPmC2r2GRsBHTNiUyf4+pMbQJ5w4+gBcHKc07AjObaOfZG1
+6af2RyazuyXHe0zvlUeGbubnOHOU+auR8bW0A3k3ALs63sn3aw6ODsBjqzYOxO67PQHl9CCRUwpr
+UglzhVe1utkfof5WYMpaPVBx4Zih9ia1e9XIPHujyhz5h+wl5SrwA086W2Ep1wA9lKsCN2HOaUcb
+gOSlmFxNhPuwWcUe4GAOn5scA9dMr1qkSyoJ3A+lVONj2aR7dX6vFSYXDMdVbjH8ww9B8AG6ndJQ
+BT5qVIoB7O4Hi+xMdo5OwGu0iZCuYrcg8pYV1wQ2Dxd5wQz2IHz1/Pwb+/TJ4WJQDR2yEuoL1K4n
+bksI8qe6C4XC5ULhtNhUhTRONXJkQBetvEHD8+yElcrFWyuVdBOAWF2DvChRsEd1fpE1OQ5bSZ05
+8mCoGKwvTzuB8ydm0Yst0/acRhy7JpFN1u04Ld4Ell04lk2Oq6EsOu3oBJBPVIljLzGJTkrVGkef
+tYM1O8qlMerNDHAxJFUHtIAxI65bn3zd2OusjlOoc/yabn+ycfFQ3R8v1AC012SZ3nknRxugzlHY
+Ma7UOR6DbKQ6iU2W4v7U42TVnRLHkG+XLx4x8vT7SYvjU0bMZHN4js/aQE5wZE0W2OVqIQA7gGJG
+WUZ36YSDoxNgcsQqIpLAL5Y/Sjp8qjOucYySlj8ucerqiYVLIvPhUKj2yX4jlujdi2LwaeYY5rT/
+LPbSdaSRY795Hu7BN2ndwdEJEBwpdkeTuAy8ncAGMW1fIf+keaD1mdkW0RgfX7608CJ/enMmk4lB
+P4P3zKVYEdoeZXzdu7fx84xGHE+K3mDRrWJmQIBUPrzm0fGEg6MDMLay9ePf02ev6PJInvPjyJep
+G0QOX1m5YsywzhliS0tm1Z5v6RbVunLdwsofFvGJdfwmnGchhlR9rJ4KlImm8zrhdRZ6ADzrUIb9
+WFtWTT2M/VpQO4+QCF6/sIShjd5QU8iDw7YDvrlEYICzplDsRa93TdEoWYIpS7UDZvyDuzGak56h
+5d+g53NPFC5aVbrEXjHluVBzqSUAPWr7AC85x7vc8GfBsI6P/dEu271qXCEu7Ld71bheAA/ZyUks
+2VYVf7TVf4Ww6mGp6Q4AHjPZZ75rGPOq4eOd/qnrFOAuf19+2+R4p6sf/0c4ruf40/C/kL8Ak11x
+pY/WtwkAAAAASUVORK5CYII=
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<dt><a class="ProveItLink" href="axioms.html#alpha_def">proveit.physics.quantum.QPE.alpha_def</a></dt><dd><a class="ProveItLink" href="../__pv_it/axioms/18ea63c93cf88554b3a09d3a2ea679b7ea32ea200/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMUAAAAWBAMAAACCvEVCAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAAA0hJREFU
+SMe9lU9o01AYwL82bddkSbsJojsIQfHPQaFsigfHDCgIelgVnCehBxX1oL0NQWRzl84/kNuGIosb
+ONhhC4iH4Q7ZJqgzuqAoehgbFCuISA8buCnO73svS7s0triDj5a8vLz3/b7/D2DjwwlcjRre1Kwt
+40H1z9FM4LKsedP9+B/H/wK9zAVtlrqqMwRN6s761nYvMUakbbWAjw5ciekAr+jT1yAZCb06ow63
+pHxrStG1Y4u7AyQ0oh+fYqDG72q4cgIg6Xpcac0f4LZ1EeOEAZ0gPYUwRWwKVcEQyYHBuVaD0QvQ
+zuMbvQSWwkwKqcQYbkBGoonZAA9RhZmRkb4gEWK2OkJEAc/59BSABUM0G0gTQ15CxliGqQEJ9N2P
+XO56kIwwU2xqh/YXhoyOKGw/RNMUMUQVZ/Msr5RFZAxYzJ0g49fzhJOuVsiIkzP7NKlJMh8VaeHN
+dxr5spBLv40xTAxFJwb94CJj1P9ERrvDg66gvUeY247xg7Gt0z1urtRRkNDCnrARqXDbZzoH9SuQ
+RO0FYICj+NjEGOIvZMxrlN64KUssCv80ajXR4tTp8qBbpyHaswLQJjNz15cOGoaJJCzAGAqP2bb9
+zbYxgaLLvAZvIKPbLdNokfxKFt0F+Dg+AvVwdq26iRHCpJ6c4W4rH6TbPlYe7aZnBx4MN3DGSbMz
+skj7LM4QF6gclyHClU1ZUPIVaTlrQlIvxaNAKXUwn4ZRLA8HDhse4z3GMGMwhnin8UWaYooHmaN7
+zyGsARK8mu6ny2KOQmAS1apoASY7n9SkbfgWMRkjRfstXudSI/N4vxtzeIygcBfPbxiUvdzEM0IG
+lNko7PEzyDD0Q8yJM+MvE0NBUvK4Wt5LWKMSyDGUGnEVzuRyORWsGbjH5TAb7TlHmIKbfgYzLAtS
+82v2OmQgY4L1FB6PyJXVvMa2oM3kGAXNCp2GGBP8xIGXFb1kc9rH2CXpvHO7o1m3OpzK3s5CPOwZ
+HwaZBAkCeMVQ6olF1cdoll1nr/WVvS1mwP0RS/Oe6N4FzwBu4/PDBfvL2tUT93p7q7+fdOwE3k2r
+31Gjbm8va1AUj3+4oxS1FuPtOk03cteu17Ckail4t/D/Cf7L+AO3Pt+wGGgXMwAAAABJRU5ErkJg
+gg==
+" style="display:inline;vertical-align:middle;" /></a></dd>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

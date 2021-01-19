@@ -1,0 +1,1 @@
+|\left(f_{1}(i_{1}), \ldots, f_{1}(j_{1}), \ldots\ldots, f_{n}(i_{n}), \ldots, f_{n}(j_{n}), x\right)| = \left(\left(j_{1} - i_{1} + 1\right) + \ldots + \left(j_{n} - i_{n} + 1\right) + \left(1 - 1 + 1\right)\right)

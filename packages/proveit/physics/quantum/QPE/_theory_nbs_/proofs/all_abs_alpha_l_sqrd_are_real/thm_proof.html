@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Proof of proveit.physics.quantum.QPE.all_abs_alpha_l_sqrd_are_real theorem</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../../index.html"><img src="../../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Proof-of-proveit.physics.quantum.QPE.all_abs_alpha_l_sqrd_are_real-theorem">Proof of <a class="ProveItLink" href="../../../../../../_theory_nbs_/theory.html">proveit</a>.<a class="ProveItLink" href="../../../../../_theory_nbs_/theory.html">physics</a>.<a class="ProveItLink" href="../../../../_theory_nbs_/theory.html">quantum</a>.<a class="ProveItLink" href="../../theory.html">QPE</a>.<a class="ProveItLink" href="../../theorems.html#all_abs_alpha_l_sqrd_are_real">all_abs_alpha_l_sqrd_are_real</a> theorem<a class="anchor-link" href="#Proof-of-proveit.physics.quantum.QPE.all_abs_alpha_l_sqrd_are_real-theorem">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="n">theory</span> <span class="o">=</span> <span class="n">proveit</span><span class="o">.</span><span class="n">Theory</span><span class="p">()</span> <span class="c1"># the theorem&#39;s theory</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">proving</span> all_abs_alpha_l_sqrd_are_real
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+Under these <a href="presumptions.txt">presumptions</a>, we begin our proof of<br><strong id="all_abs_alpha_l_sqrd_are_real">all_abs_alpha_l_sqrd_are_real:</strong> <a class="ProveItLink" href="../../../__pv_it/theorems/5b8a7360996bf4708b971d54bd270430105bc8e90/expr.html"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJgAAAAmBAMAAADKLE8XAAAAMFBMVEX///8QEBCIiIhmZma6urrM
+zMxUVFQiIiJERETc3Nzu7u6qqqp2dnaYmJgyMjIAAAAcRTyBAAAAAXRSTlMAQObYZgAAAw5JREFU
+SMeVlk9IFFEcx787M/tvHN0lELSgFiLoFFKXiFgWJIIOsR2yCEoPKXUpiUKCkEGh1kIaT0YZbgYG
+HtqBiIoCV+1QJjgWlBdjCSIIsqU/kJbYe7sz7pvdNzO7v8PM8N7vfeb3970HuEm9gSpF7vBU2YWq
+5bCXgrS5YkjZu4+vK3iZdi9ZMfQa5xyUv3nAuiqHLqNd4ysPpV1Z/pXKsYsYTfC1A+5+NnCnJx0s
+8K+6wka5Dl1wUv/kCovTxwn258QopcVJfcEVtok+XrJ1QcL1ztmRBHL0vcSbDP/mwKSsZK+XD003
+l5sKjeLL4g19f+X2Up4DO/X8aVkCcuM4vkjHAjncojaoPJjYzYFtW18vU1NHEArTvAt5NNCg6jxY
+UOXFbMPuaz29FkzUaLDqVlA/OzExzA1opMUF5u9LlywTNfpf/1/gTyp1hQ+LWbDp7Yly2MM042ZA
+om7Ka0AnMAD5fCUsY5iw4YTcLOvjeRZ2lo3Zk3gB/QNohUw8Pmg2WNNMv1WVoxaMGN4vpKVuFlZK
+mTrU01uM+T8SZwhk1Qwx88UeI6gpY5YD7XoRJpKmiyu09Esw/9ZlIqZlraHikp8kEEaQfAwCi88m
+UIeTd1EG8xErpmYRMhgYU0zqiHhAtWDhXBv5WIFUdK8lizI3M2RkXkdEY92MsjG7/rZwDBA3MXCa
+mB1FQ7F87mx0S8bMZoRAp4AjtmzuZmFtIl0UJtnEI1Lpgor7hakxpVQaWTNmHaif92OnDRbUmXZS
+9E6zzgr1FIrhWCqViiE7i9umlq/DzObckiFOo88Gk88c2mj0z0h9J2zpF/WM5MJ3FIHCefTYIGdG
+UUI5Wwc0Jm3tJL0y26nUYNZWGxGgUL9FEVK31TxRGywfs8EqRbGSIpI1N8j7fdfcF2vnr1u1wfYn
+PGC2I0OgMWNP/DW3XcOp/ZzkKn3sYH+XdFOf1NxmF1CTxF1nM3pNsC2us0KuFpYQdZ9vrAXm87jL
+fawF5nWXC8WqZ4Wbve6Wl6qHPfDM1rBWNWzQ2/Zk1Rdk2hz/AQxo0pLSlBKiAAAAAElFTkSuQmCC
+" style="display:inline;vertical-align:middle;" /></a><br>(see <a class="ProveItLink" href="../../../__pv_it/theorems/23aa52599eabdead8ca7ab43c9dae4fd573d17cd0/dependencies.html">dependencies</a>)<br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

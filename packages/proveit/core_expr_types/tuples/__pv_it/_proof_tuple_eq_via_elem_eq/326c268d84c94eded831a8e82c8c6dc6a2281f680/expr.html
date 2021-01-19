@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Expression of type Forall</title>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+</style>
+
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
+<link rel="stylesheet" href="notebook.css">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script></head>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+    <a href="../../../../../../../index.html"><img src="../../../../../../../pv_it.png" alt="logo" style="width:50px;float:left;position:absolute"></a> 
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Expression-of-type-Forall">Expression of type <a class="ProveItLink" href="../../../../../../../doc/html/api/proveit.logic.Forall.html">Forall</a><a class="anchor-link" href="#Expression-of-type-Forall">&#182;</a></h1><h1 id="from-the-theory-of-proveit.core_expr_types.tuples">from the theory of <a class="ProveItLink" href="../../../_theory_nbs_/theory.html">proveit.core_expr_types.tuples</a><a class="anchor-link" href="#from-the-theory-of-proveit.core_expr_types.tuples">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">proveit</span>
+<span class="c1"># Automation is not needed when building an expression:</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">automation</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># This will speed things up.</span>
+<span class="n">proveit</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">inline_pngs</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Makes files smaller.</span>
+<span class="o">%</span><span class="k">load_expr</span> # Load the stored expression as &#39;stored_expr&#39;
+<span class="c1"># import Expression classes needed to build the expression</span>
+<span class="kn">from</span> <span class="nn">proveit</span> <span class="k">import</span> <span class="n">ExprRange</span><span class="p">,</span> <span class="n">IndexedVar</span><span class="p">,</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span>
+<span class="kn">from</span> <span class="nn">proveit.logic</span> <span class="k">import</span> <span class="n">Equals</span><span class="p">,</span> <span class="n">Forall</span>
+<span class="kn">from</span> <span class="nn">proveit.numbers</span> <span class="k">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">NaturalPos</span><span class="p">,</span> <span class="n">one</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># build up the expression from sub-expressions</span>
+<span class="n">sub_expr1</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;_a&quot;</span><span class="p">,</span> <span class="n">latex_format</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;{_{-}a}&quot;</span><span class="p">)</span>
+<span class="n">sub_expr2</span> <span class="o">=</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">sub_expr1</span><span class="p">)</span>
+<span class="n">sub_expr3</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">one</span><span class="p">)</span>
+<span class="n">sub_expr4</span> <span class="o">=</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">sub_expr1</span><span class="p">)</span>
+<span class="n">sub_expr5</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">sub_expr1</span><span class="p">,</span> <span class="n">sub_expr2</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">sub_expr3</span><span class="p">)</span>
+<span class="n">sub_expr6</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">sub_expr1</span><span class="p">,</span> <span class="n">sub_expr4</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">sub_expr3</span><span class="p">)</span>
+<span class="n">sub_expr7</span> <span class="o">=</span> <span class="n">Equals</span><span class="p">(</span><span class="n">IndexedVar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">IndexedVar</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+<span class="n">sub_expr8</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">sub_expr1</span><span class="p">,</span> <span class="n">sub_expr2</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">sub_expr9</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">sub_expr1</span><span class="p">,</span> <span class="n">sub_expr4</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">Forall</span><span class="p">([</span><span class="n">m</span><span class="p">],</span> <span class="n">Forall</span><span class="p">([</span><span class="n">sub_expr5</span><span class="p">,</span> <span class="n">sub_expr6</span><span class="p">],</span> <span class="n">Equals</span><span class="p">([</span><span class="n">sub_expr5</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_expr6</span><span class="p">]),</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">sub_expr7</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">sub_expr3</span><span class="p">)),</span> <span class="n">domains</span> <span class="o">=</span> <span class="p">[</span><span class="n">NaturalPos</span><span class="p">],</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">Forall</span><span class="p">([</span><span class="n">sub_expr8</span><span class="p">,</span> <span class="n">sub_expr9</span><span class="p">],</span> <span class="n">Equals</span><span class="p">([</span><span class="n">sub_expr8</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_expr9</span><span class="p">]),</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">ExprRange</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">sub_expr7</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">m</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<strong id="expr">expr:</strong> <a class="ProveItLink" href="expr.html"><img src="expr.png" style="display:inline;vertical-align:middle;" /></a><br>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check that the built expression is the same as the stored expression</span>
+<span class="k">assert</span> <span class="n">expr</span> <span class="o">==</span> <span class="n">stored_expr</span>
+<span class="k">assert</span> <span class="n">expr</span><span class="o">.</span><span class="n">_style_id</span> <span class="o">==</span> <span class="n">stored_expr</span><span class="o">.</span><span class="n">_style_id</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Passed sanity check: expr matches stored_expr&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Passed sanity check: expr matches stored_expr
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Show the LaTeX representation of the expression for convenience if you need it.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">latex</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>\forall_{m \in \mathbb{N}^+~|~\forall_{a_{1}, \ldots, a_{m}, b_{1}, \ldots, b_{m}~|~a_{1} = b_{1}, \ldots, a_{m} = b_{m}}~\left(\left(a_{1}, \ldots, a_{m}\right) = \left(b_{1}, \ldots, b_{m}\right)\right)}~\left[\forall_{a_{1}, \ldots, a_{m + 1}, b_{1}, \ldots, b_{m + 1}~|~a_{1} = b_{1}, \ldots, a_{m + 1} = b_{m + 1}}~\left(\left(a_{1}, \ldots, a_{m + 1}\right) = \left(b_{1}, \ldots, b_{m + 1}\right)\right)\right]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">expr</span><span class="o">.</span><span class="n">style_options</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<tr><th>name</th><th>description</th><th>default</th><th>current value</th><th>related methods</th></tr><tr><td>with_wrapping</td><td>If 'True', wrap the Expression after the parameters</td><td>None</td><td>None/False</td><td>('with_wrapping',)</td></tr>
+<tr><td>wrap_params</td><td>If 'True', wraps every two parameters AND wraps the Expression after the parameters</td><td>None</td><td>None/False</td><td>('with_params',)</td></tr>
+<tr><td>justification</td><td>justify to the 'left', 'center', or 'right' in the array cells</td><td>center</td><td>center</td><td>('with_justification',)</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># display the expression information</span>
+<span class="n">expr</span><span class="o">.</span><span class="n">expr_info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table><tr><th>&nbsp;</th><th>core type</th><th>sub-expressions</th><th>expression</th></tr>
+<tr><td>0</td><td>Operation</td><td>operator:&nbsp;15<br>operand:&nbsp;2<br></td><td><a class="ProveItLink" href="expr.html"><img src="expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>1</td><td>ExprTuple</td><td>2</td><td><a class="ProveItLink" href="../89259361743d80801feacc4e5fd91c1efd1842260/expr.html"><img src="../89259361743d80801feacc4e5fd91c1efd1842260/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>2</td><td>Lambda</td><td>parameter:&nbsp;47<br>body:&nbsp;3<br></td><td><a class="ProveItLink" href="../a2bfd3889491e51ff79ac669cda0103e9357dbe60/expr.html"><img src="../a2bfd3889491e51ff79ac669cda0103e9357dbe60/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>3</td><td>Conditional</td><td>value:&nbsp;4<br>condition:&nbsp;5<br></td><td><a class="ProveItLink" href="../d9049685149d8459af0e88abacea05e7914d73a30/expr.html"><img src="../d9049685149d8459af0e88abacea05e7914d73a30/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>4</td><td>Operation</td><td>operator:&nbsp;15<br>operand:&nbsp;8<br></td><td><a class="ProveItLink" href="../2b83b3652fc4909e433f2fd416842608c1fd3d890/expr.html"><img src="../2b83b3652fc4909e433f2fd416842608c1fd3d890/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>5</td><td>Operation</td><td>operator:&nbsp;33<br>operands:&nbsp;7<br></td><td><a class="ProveItLink" href="../3b62d652846f36829afd86375140d5e538623bff0/expr.html"><img src="../3b62d652846f36829afd86375140d5e538623bff0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>6</td><td>ExprTuple</td><td>8</td><td><a class="ProveItLink" href="../187fdf1771fd349fe12cd50668574f71099aacd80/expr.html"><img src="../187fdf1771fd349fe12cd50668574f71099aacd80/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>7</td><td>ExprTuple</td><td>9, 10</td><td><a class="ProveItLink" href="../06a085e53aaf96aec56deca8a0d04cb38b8f99aa0/expr.html"><img src="../06a085e53aaf96aec56deca8a0d04cb38b8f99aa0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>8</td><td>Lambda</td><td>parameters:&nbsp;11<br>body:&nbsp;12<br></td><td><a class="ProveItLink" href="../4feb80016ebe0483548ce5b8abaa2680d2513ccd0/expr.html"><img src="../4feb80016ebe0483548ce5b8abaa2680d2513ccd0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>9</td><td>Operation</td><td>operator:&nbsp;13<br>operands:&nbsp;14<br></td><td><a class="ProveItLink" href="../../../../../numbers/number_sets/natural_numbers/__pv_it/theorems/3b21f44c33a0a353db2d1dd5dc2aa7f39934f4730/expr.html"><img src="../../../../../numbers/number_sets/natural_numbers/__pv_it/theorems/3b21f44c33a0a353db2d1dd5dc2aa7f39934f4730/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>10</td><td>Operation</td><td>operator:&nbsp;15<br>operand:&nbsp;20<br></td><td><a class="ProveItLink" href="../7648908ba4f1c24ac6d0beaa34f900d0e9b6b1550/expr.html"><img src="../7648908ba4f1c24ac6d0beaa34f900d0e9b6b1550/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>11</td><td>ExprTuple</td><td>30, 31</td><td><a class="ProveItLink" href="../a57037eb00a438df4dc1b79a91cbd8fc3e95d1a80/expr.html"><img src="../a57037eb00a438df4dc1b79a91cbd8fc3e95d1a80/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>12</td><td>Conditional</td><td>value:&nbsp;17<br>condition:&nbsp;18<br></td><td><a class="ProveItLink" href="../faa5b1e0de19d120d212f11e2ff9e516c4751a3c0/expr.html"><img src="../faa5b1e0de19d120d212f11e2ff9e516c4751a3c0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>13</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../logic/sets/membership/__pv_it/common/7171deca84f71f47a6ec7696972d1632274a12880/expr.html"><img src="../../../../../logic/sets/membership/__pv_it/common/7171deca84f71f47a6ec7696972d1632274a12880/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>14</td><td>ExprTuple</td><td>47, 19</td><td><a class="ProveItLink" href="../../../../../numbers/number_sets/natural_numbers/__pv_it/theorems/2ef0539d68697845682d6e019421ae2d6c28df770/expr.html"><img src="../../../../../numbers/number_sets/natural_numbers/__pv_it/theorems/2ef0539d68697845682d6e019421ae2d6c28df770/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>15</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../logic/booleans/quantification/universality/__pv_it/common/684d35ba98fcbf8ca5011f865e530a51e77730630/expr.html"><img src="../../../../../logic/booleans/quantification/universality/__pv_it/common/684d35ba98fcbf8ca5011f865e530a51e77730630/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>16</td><td>ExprTuple</td><td>20</td><td><a class="ProveItLink" href="../ee8f58668e2f59e8f0ec6d6419d3d48c4856cbfa0/expr.html"><img src="../ee8f58668e2f59e8f0ec6d6419d3d48c4856cbfa0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>17</td><td>Operation</td><td>operator:&nbsp;51<br>operands:&nbsp;21<br></td><td><a class="ProveItLink" href="../a67df6369697857ba18462dc764cd9a42ed4cc2a0/expr.html"><img src="../a67df6369697857ba18462dc764cd9a42ed4cc2a0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>18</td><td>Operation</td><td>operator:&nbsp;33<br>operands:&nbsp;22<br></td><td><a class="ProveItLink" href="../8f188ca93d124bb54662f5f2a7797d05115d8fb70/expr.html"><img src="../8f188ca93d124bb54662f5f2a7797d05115d8fb70/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>19</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../numbers/number_sets/natural_numbers/__pv_it/common/a2a7252783c385c028dad802e97575c19e456b990/expr.html"><img src="../../../../../numbers/number_sets/natural_numbers/__pv_it/common/a2a7252783c385c028dad802e97575c19e456b990/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>20</td><td>Lambda</td><td>parameters:&nbsp;23<br>body:&nbsp;24<br></td><td><a class="ProveItLink" href="../7738213ef9720651702f5b43d4d27e49469e81ab0/expr.html"><img src="../7738213ef9720651702f5b43d4d27e49469e81ab0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>21</td><td>ExprTuple</td><td>25, 26</td><td><a class="ProveItLink" href="../706abe9b8661fc10d4a679fb1019f65dfd2d6a010/expr.html"><img src="../706abe9b8661fc10d4a679fb1019f65dfd2d6a010/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>22</td><td>ExprTuple</td><td>27</td><td><a class="ProveItLink" href="../51cb2a67ca6668298dee738af4a01f0d5591ecc50/expr.html"><img src="../51cb2a67ca6668298dee738af4a01f0d5591ecc50/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>23</td><td>ExprTuple</td><td>41, 42</td><td><a class="ProveItLink" href="../5b0ab8c18fd2962668e15f2b31090572cc9d61470/expr.html"><img src="../5b0ab8c18fd2962668e15f2b31090572cc9d61470/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>24</td><td>Conditional</td><td>value:&nbsp;28<br>condition:&nbsp;29<br></td><td><a class="ProveItLink" href="../3aca2fc3efafaf283e9024a75228db38a217ef540/expr.html"><img src="../3aca2fc3efafaf283e9024a75228db38a217ef540/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>25</td><td>ExprTuple</td><td>30</td><td><a class="ProveItLink" href="../2db5f20076f74a5ce7b72bb00e844f72ddefdaf20/expr.html"><img src="../2db5f20076f74a5ce7b72bb00e844f72ddefdaf20/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>26</td><td>ExprTuple</td><td>31</td><td><a class="ProveItLink" href="../d83271af321b31ab224a76530d003b8ea7046f540/expr.html"><img src="../d83271af321b31ab224a76530d003b8ea7046f540/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>27</td><td>ExprRange</td><td>lambda_map:&nbsp;43<br>start_index:&nbsp;46<br>end_index:&nbsp;35<br></td><td><a class="ProveItLink" href="../ed976b5429f5ad4fb980364e712cd0b9fa7abe7f0/expr.html"><img src="../ed976b5429f5ad4fb980364e712cd0b9fa7abe7f0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>28</td><td>Operation</td><td>operator:&nbsp;51<br>operands:&nbsp;32<br></td><td><a class="ProveItLink" href="../df03324aabdada4cfc8d8a0e62365709c51f789d0/expr.html"><img src="../df03324aabdada4cfc8d8a0e62365709c51f789d0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>29</td><td>Operation</td><td>operator:&nbsp;33<br>operands:&nbsp;34<br></td><td><a class="ProveItLink" href="../11aa8b847aca6890e850170e9a45915ad3f7b5290/expr.html"><img src="../11aa8b847aca6890e850170e9a45915ad3f7b5290/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>30</td><td>ExprRange</td><td>lambda_map:&nbsp;44<br>start_index:&nbsp;46<br>end_index:&nbsp;35<br></td><td><a class="ProveItLink" href="../3cf9919b408203ce613e60283a380738b26df0090/expr.html"><img src="../3cf9919b408203ce613e60283a380738b26df0090/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>31</td><td>ExprRange</td><td>lambda_map:&nbsp;45<br>start_index:&nbsp;46<br>end_index:&nbsp;35<br></td><td><a class="ProveItLink" href="../a8a77995795fd8e8c77da90f934a4b8860d6ecb10/expr.html"><img src="../a8a77995795fd8e8c77da90f934a4b8860d6ecb10/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>32</td><td>ExprTuple</td><td>36, 37</td><td><a class="ProveItLink" href="../d40d91f837373610c0b1c80a1256a636c4eefcd70/expr.html"><img src="../d40d91f837373610c0b1c80a1256a636c4eefcd70/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>33</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../logic/booleans/conjunction/__pv_it/common/26b94b53e70b1d77b70f0d9d4236347db37731060/expr.html"><img src="../../../../../logic/booleans/conjunction/__pv_it/common/26b94b53e70b1d77b70f0d9d4236347db37731060/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>34</td><td>ExprTuple</td><td>38</td><td><a class="ProveItLink" href="../7900359c5c5645be51fc82a621caedaa1e39cce80/expr.html"><img src="../7900359c5c5645be51fc82a621caedaa1e39cce80/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>35</td><td>Operation</td><td>operator:&nbsp;39<br>operands:&nbsp;40<br></td><td><a class="ProveItLink" href="../../../../../numbers/__pv_it/common/efd1d07d2fb8417de5db55be233e5799d8cec0b20/expr.html"><img src="../../../../../numbers/__pv_it/common/efd1d07d2fb8417de5db55be233e5799d8cec0b20/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>36</td><td>ExprTuple</td><td>41</td><td><a class="ProveItLink" href="../19a260442f940bd9dbf6b9c6e82a0a7f9372a2cc0/expr.html"><img src="../19a260442f940bd9dbf6b9c6e82a0a7f9372a2cc0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>37</td><td>ExprTuple</td><td>42</td><td><a class="ProveItLink" href="../9da07ab1dddb81465fc0d0534621c106e82d74550/expr.html"><img src="../9da07ab1dddb81465fc0d0534621c106e82d74550/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>38</td><td>ExprRange</td><td>lambda_map:&nbsp;43<br>start_index:&nbsp;46<br>end_index:&nbsp;47<br></td><td><a class="ProveItLink" href="../19b1d7c8b871cf0e0da433b4c35cb840d510e7540/expr.html"><img src="../19b1d7c8b871cf0e0da433b4c35cb840d510e7540/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>39</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../numbers/addition/__pv_it/common/1f38fe5cce441387feef296e2c0a2eac260bb4f30/expr.html"><img src="../../../../../numbers/addition/__pv_it/common/1f38fe5cce441387feef296e2c0a2eac260bb4f30/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>40</td><td>ExprTuple</td><td>47, 46</td><td><a class="ProveItLink" href="../../../../../numbers/__pv_it/common/03a40d63027ce00fe578e986fa3bc5aefc3f8df10/expr.html"><img src="../../../../../numbers/__pv_it/common/03a40d63027ce00fe578e986fa3bc5aefc3f8df10/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>41</td><td>ExprRange</td><td>lambda_map:&nbsp;44<br>start_index:&nbsp;46<br>end_index:&nbsp;47<br></td><td><a class="ProveItLink" href="../e99ac57c59c7f7613c8b4a245e8497111bd08a340/expr.html"><img src="../e99ac57c59c7f7613c8b4a245e8497111bd08a340/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>42</td><td>ExprRange</td><td>lambda_map:&nbsp;45<br>start_index:&nbsp;46<br>end_index:&nbsp;47<br></td><td><a class="ProveItLink" href="../1438b2829c8dfbf08336c477d1d282f878df9b510/expr.html"><img src="../1438b2829c8dfbf08336c477d1d282f878df9b510/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>43</td><td>Lambda</td><td>parameter:&nbsp;60<br>body:&nbsp;48<br></td><td><a class="ProveItLink" href="../../theorems/b04e7ae0d584458df77a9670fcb97b08821dcd7e0/expr.html"><img src="../../theorems/b04e7ae0d584458df77a9670fcb97b08821dcd7e0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>44</td><td>Lambda</td><td>parameter:&nbsp;56<br>body:&nbsp;49<br></td><td><a class="ProveItLink" href="../../../../__pv_it/common/99ea59f1b92e70eddeee736182b1abeb9f49c91b0/expr.html"><img src="../../../../__pv_it/common/99ea59f1b92e70eddeee736182b1abeb9f49c91b0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>45</td><td>Lambda</td><td>parameter:&nbsp;56<br>body:&nbsp;50<br></td><td><a class="ProveItLink" href="../../../../__pv_it/common/ba19487284205e8bd037599d68730451639874da0/expr.html"><img src="../../../../__pv_it/common/ba19487284205e8bd037599d68730451639874da0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>46</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../numbers/numerals/__pv_it/common/d278e359da0695d9652dd541d45264f93703e2e40/expr.html"><img src="../../../../../numbers/numerals/__pv_it/common/d278e359da0695d9652dd541d45264f93703e2e40/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>47</td><td>Variable</td><td></td><td><a class="ProveItLink" href="../../../../../__pv_it/common/2dc4f15b3407a25e8d70754a86bf74f1871f92650/expr.html"><img src="../../../../../__pv_it/common/2dc4f15b3407a25e8d70754a86bf74f1871f92650/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>48</td><td>Operation</td><td>operator:&nbsp;51<br>operands:&nbsp;52<br></td><td><a class="ProveItLink" href="../../theorems/538e3f3073dc08355f808961ffcfcc264ef680870/expr.html"><img src="../../theorems/538e3f3073dc08355f808961ffcfcc264ef680870/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>49</td><td>IndexedVar</td><td>variable:&nbsp;57<br>index:&nbsp;56<br></td><td><a class="ProveItLink" href="../../../../__pv_it/common/d8d3053e77ba1db68c0cd106952422881db586670/expr.html"><img src="../../../../__pv_it/common/d8d3053e77ba1db68c0cd106952422881db586670/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>50</td><td>IndexedVar</td><td>variable:&nbsp;58<br>index:&nbsp;56<br></td><td><a class="ProveItLink" href="../../../../__pv_it/common/d970eb18e3a42edf466b1db01e5cbdd3ba6971b60/expr.html"><img src="../../../../__pv_it/common/d970eb18e3a42edf466b1db01e5cbdd3ba6971b60/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>51</td><td>Literal</td><td></td><td><a class="ProveItLink" href="../../../../../logic/equality/__pv_it/common/731dd3955b346c1320ed5c0ba7a618bcda61457d0/expr.html"><img src="../../../../../logic/equality/__pv_it/common/731dd3955b346c1320ed5c0ba7a618bcda61457d0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>52</td><td>ExprTuple</td><td>54, 55</td><td><a class="ProveItLink" href="../../theorems/1bf610de2bf90455fd08382f5a92eb1a7717192a0/expr.html"><img src="../../theorems/1bf610de2bf90455fd08382f5a92eb1a7717192a0/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>53</td><td>ExprTuple</td><td>56</td><td><a class="ProveItLink" href="../../../../__pv_it/common/ecf50ade416ab41c42c9f4e777b4c862cd9469670/expr.html"><img src="../../../../__pv_it/common/ecf50ade416ab41c42c9f4e777b4c862cd9469670/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>54</td><td>IndexedVar</td><td>variable:&nbsp;57<br>index:&nbsp;60<br></td><td><a class="ProveItLink" href="../../theorems/910ff783c5bd10af92c87a24c4fec49ec6529c750/expr.html"><img src="../../theorems/910ff783c5bd10af92c87a24c4fec49ec6529c750/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>55</td><td>IndexedVar</td><td>variable:&nbsp;58<br>index:&nbsp;60<br></td><td><a class="ProveItLink" href="../../theorems/86fb57b637165fa2afe38a1b6ce0ed70d732e5e60/expr.html"><img src="../../theorems/86fb57b637165fa2afe38a1b6ce0ed70d732e5e60/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>56</td><td>Variable</td><td></td><td><a class="ProveItLink" href="../../../../__pv_it/common/9e6d9d5d7eeb0342cf5bca68def0eb165a1a9bb10/expr.html"><img src="../../../../__pv_it/common/9e6d9d5d7eeb0342cf5bca68def0eb165a1a9bb10/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>57</td><td>Variable</td><td></td><td><a class="ProveItLink" href="../../../../../__pv_it/common/66c90e66682f107a881f2d666959f64e2e72ad750/expr.html"><img src="../../../../../__pv_it/common/66c90e66682f107a881f2d666959f64e2e72ad750/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>58</td><td>Variable</td><td></td><td><a class="ProveItLink" href="../../../../../__pv_it/common/4a5db8cc5c67969ec864bd3ea598be37cb6f5e550/expr.html"><img src="../../../../../__pv_it/common/4a5db8cc5c67969ec864bd3ea598be37cb6f5e550/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>59</td><td>ExprTuple</td><td>60</td><td><a class="ProveItLink" href="../../../../../__pv_it/common/797070a9ef2f9957a44157444d93fbe100e2d7430/expr.html"><img src="../../../../../__pv_it/common/797070a9ef2f9957a44157444d93fbe100e2d7430/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+<tr><td>60</td><td>Variable</td><td></td><td><a class="ProveItLink" href="../../../../../__pv_it/common/b9fd37fc619babc74a6203459f110251586df6970/expr.html"><img src="../../../../../__pv_it/common/b9fd37fc619babc74a6203459f110251586df6970/expr.png" style="display:inline;vertical-align:middle;" /></a></td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+<footer>
+  <p>These web pages were generated on 2021-01-19 by <a href="https://github.com/PyProveIt/Prove-It">Prove-It</a> Beta Version 0.3, licensed under the GNU Public License by Sandia Corporation.</p>
+  <p>Presented proofs are not absolutely guaranteed.  For assurance, it is important to check the structure 
+  of the statement being proven, independently verify the derivation steps, track dependencies, and ensure that 
+  employed axioms are valid and properly structured.  Inconsistencies may exist, unknowingly, in this system.
+  </p>
+  <p>
+  This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Advanced Scientific Computing Research, under the Quantum Computing Application Teams program. Sandia National Labs is managed and operated by National Technology and Engineering Solutions of Sandia, LLC, a subsidiary of Honeywell International, Inc., for the U.S. Dept. of Energy's NNSA under contract DE-NA0003525. The views expressed above do not necessarily represent the views of the DOE or the U.S. Government.
+  </p>
+  <br>
+  <p>Please send questions/comments to: <a href="mailto:wwitzel@sandia.gov">
+  wwitzel@sandia.gov</a>.</p>
+</footer> 
+</body>
+
+ 
+
+
+</html>

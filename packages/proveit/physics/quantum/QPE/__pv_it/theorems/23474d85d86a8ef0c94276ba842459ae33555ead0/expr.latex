@@ -1,0 +1,1 @@
+\varepsilon \mapsto \left\{\{\varepsilon + 1 \ldots 2^{t - 1}\} \subseteq \{-2^{t - 1} + 1 \ldots 2^{t - 1}\} \textrm{ if } \varepsilon \in \mathbb{N}^+\right..

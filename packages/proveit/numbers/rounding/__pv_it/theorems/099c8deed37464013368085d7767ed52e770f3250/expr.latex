@@ -1,0 +1,1 @@
+\left(\left(\lceil x\rceil + \lceil y\rceil\right) - 1, \lceil x + y\rceil\right)
